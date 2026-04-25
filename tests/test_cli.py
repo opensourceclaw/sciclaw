@@ -18,7 +18,7 @@ Tests for CLI
 
 import pytest
 from click.testing import CliRunner
-from deepclaw.cli.main import cli, research, search, init
+from researchclaw.cli.main import cli, research, search, init
 
 
 class TestCLI:
@@ -32,7 +32,7 @@ class TestCLI:
         """Test CLI help output"""
         result = runner.invoke(cli, ["--help"])
         assert result.exit_code == 0
-        assert "DeepClaw" in result.output
+        assert "ResearchClaw" in result.output
 
     def test_research_command(self, runner):
         """Test research command"""
