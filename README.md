@@ -14,10 +14,6 @@ pip install deepclaw
 deepclaw "your research topic"
 ```
 
-## Documentation
-
-See [docs/](docs/) for detailed documentation.
-
 ## License
 
 Apache License 2.0
