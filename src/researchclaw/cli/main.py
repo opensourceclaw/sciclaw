@@ -239,10 +239,14 @@ def search(query, limit, engine, output):
         # Get API key if needed
         provider_class = SearchProviderRegistry.get(engine)
         api_key = None
-        if provider_class and provider_class.requires_api_key:
-            api_key = get_api_key_for_engine(engine)
-            if not api_key:
-                console.print(f"[yellow]Warning: {engine} requires API key[/yellow]")
+        # Check if provider requires API key (must instantiate or check property value)
+        if provider_class:
+            # Create temporary instance to check requires_api_key
+            temp_provider = provider_class()
+            if temp_provider.requires_api_key:
+                api_key = get_api_key_for_engine(engine)
+                if not api_key:
+                    console.print(f"[yellow]Warning: {engine} requires API key - set in config.json[/yellow]")
 
         engine_obj = SearchEngine(provider=engine, api_key=api_key)
         results = engine_obj.search(query, limit=limit)
