@@ -54,7 +54,7 @@ class StorageManager:
             storage_path: Path to storage directory
         """
         if storage_path is None:
-            storage_path = Path.home() / ".deepclaw" / "projects"
+            storage_path = Path.home() / ".researchclaw" / "projects"
 
         self.storage_path = storage_path
         self.storage_path.mkdir(parents=True, exist_ok=True)

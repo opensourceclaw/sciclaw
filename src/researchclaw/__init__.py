@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-DeepClaw - Open-source Deep Research Framework
+ResearchClaw - Open-source Deep Research Framework
 
 A framework for conducting deep research on any topic.
 """

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 """
-DeepClaw CLI - Command Line Interface
+ResearchClaw CLI - Command Line Interface
 """
 
 import click
@@ -26,7 +26,7 @@ console = Console()
 @click.group()
 @click.version_option(version="0.1.0")
 def cli():
-    """DeepClaw - Open-source Deep Research Framework
+    """ResearchClaw - Open-source Deep Research Framework
 
     A powerful tool for conducting in-depth research on any topic.
     """
@@ -43,10 +43,10 @@ def research(topic, depth, output):
     TOPIC: The topic to research.
 
     Examples:
-        deepclaw research "AI ethics"
-        deepclaw research "quantum computing" --depth 5
+        researchclaw research "AI ethics"
+        researchclaw research "quantum computing" --depth 5
     """
-    console.print(f"[bold blue]DeepClaw[/bold blue] - Researching: {topic}")
+    console.print(f"[bold blue]ResearchClaw[/bold blue] - Researching: {topic}")
     console.print(f"Depth level: {depth}")
 
     if output:
@@ -65,8 +65,8 @@ def search(query, limit):
     QUERY: Search query.
 
     Examples:
-        deepclaw search "machine learning"
-        deepclaw search "neural networks" --limit 20
+        researchclaw search "machine learning"
+        researchclaw search "neural networks" --limit 20
     """
     console.print(f"[bold blue]Searching[/bold blue] for: {query}")
     console.print(f"Limit: {limit} results")
@@ -77,12 +77,12 @@ def search(query, limit):
 
 @cli.command()
 def init():
-    """Initialize a new DeepClaw project.
+    """Initialize a new ResearchClaw project.
 
     Examples:
-        deepclaw init
+        researchclaw init
     """
-    console.print("[bold blue]Initializing[/bold blue] DeepClaw project...")
+    console.print("[bold blue]Initializing[/bold blue] ResearchClaw project...")
     console.print("[green]Project initialized successfully![/green]")
 
 

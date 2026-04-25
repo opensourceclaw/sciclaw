@@ -3,4 +3,4 @@
 Tools Module
 """
 
-__all__ = ["web_search"]
+__all__ = ["web_search", "content_extraction"]

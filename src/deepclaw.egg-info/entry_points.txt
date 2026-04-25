@@ -1,2 +1,2 @@
 [console_scripts]
-deepclaw = deepclaw.cli.main:main
+researchclaw = researchclaw.cli.main:main

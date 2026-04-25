@@ -20,6 +20,9 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 
+# Import real web search tool
+from researchclaw.tools.web_search import WebSearchTool as RealSearchTool
+
 
 @dataclass
 class SearchResult:
@@ -45,6 +48,7 @@ class SearchEngine:
 
     def __init__(self):
         self.results_cache: Dict[str, List[SearchResult]] = {}
+        self._real_tool = RealSearchTool()
 
     def search(self, query: str, limit: int = 10) -> List[SearchResult]:
         """Search for results
@@ -60,8 +64,22 @@ class SearchEngine:
         if query in self.results_cache:
             return self.results_cache[query][:limit]
 
-        # Placeholder: Return mock results
-        results = self._mock_search(query, limit)
+        # Use real search tool
+        try:
+            real_results = self._real_tool.search(query, num_results=limit)
+            results = [
+                SearchResult(
+                    title=r.title,
+                    url=r.url,
+                    snippet=r.snippet,
+                    score=1.0 - (i * 0.1),
+                )
+                for i, r in enumerate(real_results)
+            ]
+        except Exception:
+            # Fallback to mock on error
+            results = self._mock_search(query, limit)
+
         self.results_cache[query] = results
         return results
 

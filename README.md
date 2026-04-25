@@ -1,17 +1,17 @@
-# DeepClaw
+# ResearchClaw
 
 Open-source Deep Research framework based on OpenClaw.
 
 ## Installation
 
 ```bash
-pip install deepclaw
+pip install researchclaw
 ```
 
 ## Quick Start
 
 ```bash
-deepclaw "your research topic"
+researchclaw "your research topic"
 ```
 
 ## License

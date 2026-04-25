@@ -20,6 +20,12 @@ from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
+try:
+    from ddgs import DDGS
+    DDG_AVAILABLE = True
+except ImportError:
+    DDG_AVAILABLE = False
+
 
 @dataclass
 class WebSearchResult:
@@ -53,8 +59,42 @@ class WebSearchTool:
         Returns:
             List[WebSearchResult]: Search results
         """
-        # Placeholder implementation
+        if DDG_AVAILABLE:
+            return self._ddg_search(query, num_results, language)
         return self._mock_search(query, num_results)
+
+    def _ddg_search(
+        self,
+        query: str,
+        num_results: int,
+        language: str
+    ) -> List[WebSearchResult]:
+        """DuckDuckGo search implementation
+
+        Args:
+            query: Search query
+            num_results: Number of results
+            language: Language code
+
+        Returns:
+            List[WebSearchResult]: Real search results
+        """
+        results = []
+        try:
+            with DDGS() as ddgs:
+                for r in ddgs.text(query, max_results=num_results, region=language):
+                    results.append(WebSearchResult(
+                        title=r.get("title", ""),
+                        url=r.get("href", ""),
+                        snippet=r.get("body", ""),
+                        source=r.get("source", "DuckDuckGo"),
+                        published_date=r.get("date", None),
+                    ))
+        except Exception as e:
+            # Fallback to mock on error
+            print(f"DuckDuckGo search failed: {e}, using mock results")
+            return self._mock_search(query, num_results)
+        return results
 
     def _mock_search(
         self,
