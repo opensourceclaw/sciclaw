@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright 2026 OpenClaw
+# Copyright 2026 Peter Cheng
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,13 +20,18 @@ ResearchClaw CLI - Command Line Interface
 import click
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.table import Table
 from pathlib import Path
 
 from researchclaw.research.runner import ResearchRunner
 from researchclaw.research.synthesizer import ResearchReport
-from researchclaw.storage.manager import StorageManager
+from researchclaw.research.search import SearchEngine
+from researchclaw.search.providers import SearchProviderRegistry
 
 console = Console()
+
+# Default engine
+DEFAULT_ENGINE = "duckduckgo"
 
 
 def format_report_markdown(report: ResearchReport) -> str:
@@ -85,8 +90,50 @@ def save_report_to_file(report: ResearchReport, output_path: str) -> str:
     return str(output_file)
 
 
+def validate_engine(ctx, param, value):
+    """Validate engine name
+
+    Args:
+        ctx: Click context
+        param: Parameter
+        value: Engine name
+
+    Returns:
+        str: Validated engine name
+    """
+    if value is None:
+        return DEFAULT_ENGINE
+
+    available = SearchProviderRegistry.list_providers()
+    if value.lower() not in available:
+        raise click.BadParameter(
+            f"Invalid engine '{value}'. Available: {', '.join(available)}"
+        )
+    return value.lower()
+
+
+def get_api_key_for_engine(engine: str) -> str:
+    """Get API key for engine from config
+
+    Args:
+        engine: Engine name
+
+    Returns:
+        str: API key or None
+    """
+    # Try to load from config
+    try:
+        from researchclaw.config import get_config
+        config = get_config()
+        providers = config.search.get("providers", {}) if hasattr(config, "search") else {}
+        engine_config = providers.get(engine, {})
+        return engine_config.get("api_key")
+    except Exception:
+        return None
+
+
 @click.group()
-@click.version_option(version="0.1.0")
+@click.version_option(version="0.2.0")
 def cli():
     """ResearchClaw - Open-source Deep Research Framework
 
@@ -99,8 +146,10 @@ def cli():
 @click.argument("topic")
 @click.option("--depth", "-d", default=3, help="Research depth level")
 @click.option("--output", "-o", default=None, help="Output file path (Markdown)")
+@click.option("--engine", "-e", default=DEFAULT_ENGINE, help="Search engine to use",
+              callback=validate_engine, is_eager=True)
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
-def research(topic, depth, output, verbose):
+def research(topic, depth, output, engine, verbose):
     """Research a topic deeply.
 
     TOPIC: The topic to research.
@@ -108,10 +157,12 @@ def research(topic, depth, output, verbose):
     Examples:
         researchclaw research "AI ethics"
         researchclaw research "quantum computing" --depth 5
-        researchclaw research "AI" --output ./reports/ai.md
+        researchclaw research "AI" --output ./reports/ai.md --engine duckduckgo
+        researchclaw research "AI" --engine bing
     """
     console.print(f"[bold blue]ResearchClaw[/bold blue] - Researching: {topic}")
     console.print(f"Depth level: {depth}")
+    console.print(f"Search engine: {engine}")
 
     if output:
         console.print(f"Output will be saved to: {output}")
@@ -125,6 +176,14 @@ def research(topic, depth, output, verbose):
         task = progress.add_task("Researching...", total=None)
 
         try:
+            # Get API key if needed
+            provider_class = SearchProviderRegistry.get(engine)
+            api_key = None
+            if provider_class and provider_class.requires_api_key:
+                api_key = get_api_key_for_engine(engine)
+                if not api_key:
+                    console.print(f"[yellow]Warning: {engine} requires API key[/yellow]")
+
             runner = ResearchRunner()
             report = runner.run(topic, depth=depth)
             progress.update(task, completed=True)
@@ -159,8 +218,10 @@ def research(topic, depth, output, verbose):
 @cli.command()
 @click.argument("query")
 @click.option("--limit", "-n", default=10, help="Number of results")
+@click.option("--engine", "-e", default=DEFAULT_ENGINE, help="Search engine to use",
+              callback=validate_engine, is_eager=True)
 @click.option("--output", "-o", default=None, help="Output file path")
-def search(query, limit, output):
+def search(query, limit, engine, output):
     """Search for information.
 
     QUERY: Search query.
@@ -168,15 +229,23 @@ def search(query, limit, output):
     Examples:
         researchclaw search "machine learning"
         researchclaw search "neural networks" --limit 20
+        researchclaw search "AI" --engine bing
     """
     console.print(f"[bold blue]Searching[/bold blue] for: {query}")
+    console.print(f"Engine: {engine}")
     console.print(f"Limit: {limit} results")
 
-    from researchclaw.research.search import SearchEngine
-
     try:
-        engine = SearchEngine()
-        results = engine.search(query, limit=limit)
+        # Get API key if needed
+        provider_class = SearchProviderRegistry.get(engine)
+        api_key = None
+        if provider_class and provider_class.requires_api_key:
+            api_key = get_api_key_for_engine(engine)
+            if not api_key:
+                console.print(f"[yellow]Warning: {engine} requires API key[/yellow]")
+
+        engine_obj = SearchEngine(provider=engine, api_key=api_key)
+        results = engine_obj.search(query, limit=limit)
 
         console.print(f"[bold green]Found {len(results)} results[/bold green]")
 
@@ -190,7 +259,7 @@ def search(query, limit, output):
             output_file = Path(output)
             output_file.parent.mkdir(parents=True, exist_ok=True)
 
-            lines = [f"# Search Results: {query}\n"]
+            lines = [f"# Search Results: {query}\n", f"**Engine**: {engine}\n"]
             for i, result in enumerate(results, 1):
                 lines.append(f"## {i}. {result.title}")
                 lines.append(f"URL: {result.url}")
@@ -202,6 +271,29 @@ def search(query, limit, output):
 
     except Exception as e:
         console.print(f"[bold red]Error:[/bold red] {str(e)}")
+
+
+@cli.command("engines")
+def list_engines():
+    """List available search engines.
+
+    Examples:
+        researchclaw engines
+    """
+    providers = SearchProviderRegistry.list_providers()
+
+    table = Table(title="Available Search Engines")
+    table.add_column("Engine", style="cyan")
+    table.add_column("Requires API Key", style="yellow")
+
+    for name in providers:
+        provider_class = SearchProviderRegistry.get(name)
+        if provider_class:
+            requires_key = "Yes" if provider_class.requires_api_key else "No"
+            table.add_row(name, requires_key)
+
+    console.print(table)
+    console.print("\n[bold]Note:[/bold] Set API keys in config.json")
 
 
 @cli.command()

@@ -13,14 +13,20 @@
 # limitations under the License.
 
 """
-Search Module - Web search functionality
+Search Module - Web search functionality with multi-provider support
 """
 
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 
-# Import real web search tool
+# Import provider system
+from researchclaw.search.providers import (
+    SearchResult as ProviderSearchResult,
+    SearchProviderRegistry,
+)
+
+# Import real web search tool (for backward compatibility)
 from researchclaw.tools.web_search import WebSearchTool as RealSearchTool
 
 
@@ -32,6 +38,7 @@ class SearchResult:
     snippet: str
     score: float = 0.0
     timestamp: datetime = field(default_factory=datetime.now)
+    source: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -39,16 +46,46 @@ class SearchResult:
             "url": self.url,
             "snippet": self.snippet,
             "score": self.score,
+            "source": self.source,
             "timestamp": self.timestamp.isoformat(),
         }
 
 
 class SearchEngine:
-    """Search engine interface"""
+    """Search engine interface with multi-provider support"""
 
-    def __init__(self):
+    def __init__(self, provider: Optional[str] = None, api_key: Optional[str] = None):
+        """Initialize search engine
+
+        Args:
+            provider: Provider name (default: duckduckgo)
+            api_key: API key for the provider
+        """
         self.results_cache: Dict[str, List[SearchResult]] = {}
-        self._real_tool = RealSearchTool()
+        self._provider_name = provider or "duckduckgo"
+        self._api_key = api_key
+        self._provider = None
+
+    @property
+    def provider(self):
+        """Get the current provider"""
+        if self._provider is None:
+            self._provider = SearchProviderRegistry.create(
+                self._provider_name,
+                api_key=self._api_key
+            )
+        return self._provider
+
+    def set_provider(self, name: str, api_key: Optional[str] = None) -> None:
+        """Set the search provider
+
+        Args:
+            name: Provider name
+            api_key: API key for the provider
+        """
+        self._provider_name = name
+        self._api_key = api_key
+        self._provider = None  # Reset to force re-creation
 
     def search(self, query: str, limit: int = 10) -> List[SearchResult]:
         """Search for results
@@ -61,26 +98,60 @@ class SearchEngine:
             List[SearchResult]: Search results
         """
         # Check cache
-        if query in self.results_cache:
-            return self.results_cache[query][:limit]
+        cache_key = f"{self._provider_name}:{query}"
+        if cache_key in self.results_cache:
+            return self.results_cache[cache_key][:limit]
 
-        # Use real search tool
+        # Try provider-based search
         try:
-            real_results = self._real_tool.search(query, num_results=limit)
+            if self.provider:
+                provider_results = self.provider.search(query, limit=limit)
+                results = [
+                    SearchResult(
+                        title=r.title,
+                        url=r.url,
+                        snippet=r.snippet,
+                        score=r.score,
+                        source=r.source,
+                    )
+                    for r in provider_results
+                ]
+            else:
+                raise Exception("No provider available")
+        except Exception:
+            # Fallback to legacy tool
+            results = self._legacy_search(query, limit)
+
+        self.results_cache[cache_key] = results
+        return results
+
+    def _legacy_search(self, query: str, limit: int) -> List[SearchResult]:
+        """Legacy search using real search tool
+
+        Args:
+            query: Search query
+            limit: Result limit
+
+        Returns:
+            List[SearchResult]: Search results
+        """
+        try:
+            real_tool = RealSearchTool()
+            real_results = real_tool.search(query, num_results=limit)
             results = [
                 SearchResult(
                     title=r.title,
                     url=r.url,
                     snippet=r.snippet,
                     score=1.0 - (i * 0.1),
+                    source="legacy",
                 )
                 for i, r in enumerate(real_results)
             ]
         except Exception:
-            # Fallback to mock on error
+            # Fallback to mock
             results = self._mock_search(query, limit)
 
-        self.results_cache[query] = results
         return results
 
     def _mock_search(self, query: str, limit: int) -> List[SearchResult]:
@@ -100,6 +171,7 @@ class SearchEngine:
                 url=f"https://example.com/{i+1}",
                 snippet=f"This is a sample result for the query: {query}",
                 score=1.0 - (i * 0.2),
+                source="mock",
             ))
         return results
 
@@ -107,9 +179,18 @@ class SearchEngine:
         """Clear the results cache"""
         self.results_cache.clear()
 
+    @staticmethod
+    def list_providers() -> List[str]:
+        """List available providers
+
+        Returns:
+            List[str]: List of provider names
+        """
+        return SearchProviderRegistry.list_providers()
+
 
 def search(query: str, limit: int = 10) -> List[SearchResult]:
-    """Search for results
+    """Search for results (legacy function)
 
     Args:
         query: Search query
