@@ -116,6 +116,28 @@ deepclaw/
 | `ContentExtractor` | Parse web pages |
 | `ReportSynthesizer` | Generate final report |
 | `CLIClient` | User interface |
+| `StorageManager` | Hybrid JSON + Markdown storage |
+
+### 4.3 Storage Structure
+
+```
+~/.deepclaw/
+├── cache/
+│   └── search_*.json      # Search result cache
+├── data/
+│   └── research/
+│       └── YYYY-MM-DD_topic.md    # Research reports (Markdown)
+├── metadata/
+│   └── research_*.json    # Research metadata (sources, timestamps)
+└── config.json            # User configuration
+```
+
+| Data Type | Format | Rationale |
+|-----------|--------|----------|
+| **Research Reports** | `.md` | Human readable, version control friendly |
+| **Metadata** | `.json` | Structured, easy for programs |
+| **Configuration** | `.json` | Standard format |
+| **Cache** | `.json` | Fast read/write |
 
 ---
 
