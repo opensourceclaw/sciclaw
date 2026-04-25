@@ -1,0 +1,20 @@
+{
+  "research": {
+    "default_depth": 3,
+    "max_results": 10,
+    "max_content": 5,
+    "timeout": 30
+  },
+  "search": {
+    "cache_enabled": true,
+    "cache_ttl": 3600,
+    "default_language": "en"
+  },
+  "output": {
+    "default_format": "markdown",
+    "default_dir": "./reports"
+  },
+  "storage": {
+    "default_path": "./data"
+  }
+}
