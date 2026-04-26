@@ -18,6 +18,7 @@ ResearchClaw CLI - Command Line Interface
 """
 
 import sys
+import os
 import logging
 import click
 from rich.console import Console
@@ -36,6 +37,9 @@ from researchclaw.research.runner import ResearchRunner
 from researchclaw.research.synthesizer import ResearchReport
 from researchclaw.research.search import SearchEngine
 from researchclaw.search.providers import SearchProviderRegistry
+from researchclaw.llm.base import LLMProviderRegistry
+from researchclaw.llm.engine import LLMEngine
+from researchclaw.llm import ChatMessage, MessageRole
 
 console = Console()
 
@@ -443,6 +447,113 @@ researchclaw research "{topic or 'your topic'}"
 """)
 
     console.print("[bold green]Project initialized successfully![/bold green]")
+
+
+def validate_llm_provider(ctx, param, value):
+    """Validate LLM provider name
+    
+    Args:
+        ctx: Click context
+        param: Parameter
+        value: Provider name
+        
+    Returns:
+        str: Validated provider name
+    """
+    if value is None:
+        return "deepseek"
+    
+    available = LLMProviderRegistry.list_providers()
+    if value.lower() not in available:
+        raise click.BadParameter(
+            f"Invalid provider '{value}'. Available: {', '.join(available)}"
+        )
+    return value.lower()
+
+
+@cli.command()
+@click.argument("prompt")
+@click.option("--model", "-m", default=None, help="Model name (uses provider default if not specified)")
+@click.option("--provider", "-p", default="deepseek", help="LLM provider to use",
+              callback=validate_llm_provider, is_eager=True)
+@click.option("--system", "-s", default=None, help="System prompt")
+@click.option("--temperature", "-t", default=0.7, type=float, help="Temperature (0.0-2.0)")
+@click.option("--max-tokens", default=None, type=int, help="Maximum tokens to generate")
+@click.option("--verbose", "-v", is_flag=True, help="Verbose output")
+def llm(prompt, model, provider, system, temperature, max_tokens, verbose):
+    """Chat with an LLM.
+    
+    PROMPT: The message to send to the LLM.
+    
+    Examples:
+        researchclaw llm "What is Python?"
+        researchclaw llm "Explain quantum computing" --provider glm
+        researchclaw llm "Write a function" --model deepseek-coder --temperature 0.3
+    """
+    setup_logging(verbose, quiet=False)
+    
+    try:
+        api_key = None
+        provider_class = LLMProviderRegistry.get(provider)
+        if provider_class and provider_class.requires_api_key:
+            api_key = os.environ.get(f"{provider.upper()}_API_KEY")
+            if not api_key:
+                console.print(f"[yellow]Warning: {provider} requires API key[/yellow]")
+                console.print(f"[dim]Set {provider.upper()}_API_KEY environment variable[/dim]")
+
+        engine = LLMEngine(provider=provider, model=model, api_key=api_key)
+        
+        if verbose:
+            console.print(f"[dim]Provider:[/dim] {provider}")
+            console.print(f"[dim]Model:[/dim] {engine.model}")
+            console.print()
+        
+        messages = []
+        if system:
+            messages.append(ChatMessage(role=MessageRole.SYSTEM, content=system))
+        messages.append(ChatMessage(role=MessageRole.USER, content=prompt))
+        
+        response = engine.chat(
+            messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+        
+        console.print(Panel(response.content, title=f"[bold]{provider}: {engine.model}[/bold]", 
+                           border_style="cyan", expand=False))
+        
+    except Exception as e:
+        console.print(f"[bold red]Error:[/bold red] {str(e)}")
+        if verbose:
+            raise
+        sys.exit(1)
+
+
+@cli.command("llms")
+def list_llms():
+    """List available LLM providers and models."""
+    providers = LLMProviderRegistry.list_providers()
+
+    table = Table(title="Available LLM Providers")
+    table.add_column("Provider", style="cyan", width=12)
+    table.add_column("Default Model", style="yellow", width=20)
+    table.add_column("Requires API Key", style="red", width=15)
+    table.add_column("Status", style="green", width=10)
+
+    for name in providers:
+        provider_class = LLMProviderRegistry.get(name)
+        if provider_class:
+            try:
+                temp_provider = provider_class()
+                default_model = temp_provider.default_model
+                requires_key = "Yes" if temp_provider.requires_api_key else "No"
+            except Exception:
+                default_model = "(error)"
+                requires_key = "?"
+            table.add_row(name, default_model, requires_key, "✓ Available")
+
+    console.print(table)
+    console.print("\n[bold]Note:[/bold] Set API keys via environment variables (e.g., DEEPSEEK_API_KEY)")
 
 
 def main():
