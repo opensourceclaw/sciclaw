@@ -17,11 +17,20 @@
 ResearchClaw CLI - Command Line Interface
 """
 
+import sys
+import logging
 import click
 from rich.console import Console
-from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.progress import (
+    Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn,
+    TimeRemainingColumn, TimeElapsedColumn
+)
+from rich.progress import ProgressColumn
 from rich.table import Table
+from rich.panel import Panel
+from rich.text import Text
 from pathlib import Path
+from datetime import datetime
 
 from researchclaw.research.runner import ResearchRunner
 from researchclaw.research.synthesizer import ResearchReport
@@ -34,6 +43,50 @@ console = Console()
 DEFAULT_ENGINE = "duckduckgo"
 
 
+class QueryColumn(ProgressColumn):
+    """Custom column showing current query"""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._query = ""
+    
+    def update(self, task):
+        return Text(f"[cyan]{task.fields.get('query', 'Searching...')[:40]}[/cyan]")
+    
+    def get_fraction(self):
+        return None
+
+
+def setup_logging(verbose: bool = False, quiet: bool = False):
+    """Setup logging configuration
+    
+    Args:
+        verbose: Enable verbose logging
+        quiet: Suppress all output
+    """
+    if quiet:
+        logging.basicConfig(level=logging.CRITICAL)
+    elif verbose:
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    else:
+        logging.basicConfig(level=logging.WARNING)
+
+
+def print_banner():
+    """Print ResearchClaw banner"""
+    banner = Text("""
+╔═══════════════════════════════════════════════════════════╗
+║   ███████╗ █████╗ ██████╗ ██╗     ███████╗███████╗██╗     ║
+║   ██╔════╝██╔══██╗██╔══██╗██║     ██╔════╝██╔════╝██║     ║
+║   █████╗  ███████║██████╔╝██║     █████╗  █████╗  ██║     ║
+║   ██╔══╝  ██╔══██║██╔══██╗██║     ██╔══╝  ██╔══╝  ██║     ║
+║   ██║     ██║  ██║██████╔╝███████╗███████╗██║     ███████╗
+║   ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝     ╚══════╝
+║              Deep Research Framework v0.2.0              ║
+╚═══════════════════════════════════════════════════════════╝
+""", style="bold cyan")
+    console.print(banner)
+
+
 def format_report_markdown(report: ResearchReport) -> str:
     """Format research report as Markdown
 
@@ -43,40 +96,16 @@ def format_report_markdown(report: ResearchReport) -> str:
     Returns:
         str: Markdown formatted report
     """
-    lines = [
-        f"# Research Report: {report.topic}",
-        "",
-        f"**Generated**: {report.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
-        f"**Version**: {report.version}",
-        "",
-        "---",
-        "",
-    ]
-
-    for section in report.sections:
-        lines.append(f"## {section.title}")
-        lines.append("")
-        lines.append(section.content)
-        lines.append("")
-        if section.sources:
-            lines.append("### Sources")
-            for source in section.sources:
-                lines.append(f"- {source}")
-            lines.append("")
-        lines.append(f"**Confidence**: {section.confidence:.2f}")
-        lines.append("")
-        lines.append("---")
-        lines.append("")
-
-    return "\n".join(lines)
+    return report.format_markdown(include_toc=True, include_summary=True)
 
 
-def save_report_to_file(report: ResearchReport, output_path: str) -> str:
+def save_report_to_file(report: ResearchReport, output_path: str, output_format: str = "markdown") -> str:
     """Save report to file
 
     Args:
         report: Research report
         output_path: Output file path
+        output_format: Output format (markdown, html, json)
 
     Returns:
         str: Path to saved file
@@ -84,9 +113,14 @@ def save_report_to_file(report: ResearchReport, output_path: str) -> str:
     output_file = Path(output_path)
     output_file.parent.mkdir(parents=True, exist_ok=True)
 
-    markdown = format_report_markdown(report)
-    output_file.write_text(markdown)
-
+    if output_format == "json":
+        content = report.to_json()
+    elif output_format == "html":
+        content = report.format_html()
+    else:
+        content = report.format_markdown()
+    
+    output_file.write_text(content)
     return str(output_file)
 
 
@@ -121,7 +155,6 @@ def get_api_key_for_engine(engine: str) -> str:
     Returns:
         str: API key or None
     """
-    # Try to load from config
     try:
         from researchclaw.config import get_config
         config = get_config()
@@ -145,11 +178,14 @@ def cli():
 @cli.command()
 @click.argument("topic")
 @click.option("--depth", "-d", default=3, help="Research depth level")
-@click.option("--output", "-o", default=None, help="Output file path (Markdown)")
+@click.option("--output", "-o", default=None, help="Output file path")
+@click.option("--format", "-f", type=click.Choice(["markdown", "html", "json"]), 
+              default="markdown", help="Output format")
 @click.option("--engine", "-e", default=DEFAULT_ENGINE, help="Search engine to use",
               callback=validate_engine, is_eager=True)
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
-def research(topic, depth, output, engine, verbose):
+@click.option("--quiet", "-q", is_flag=True, help="Suppress all output except errors")
+def research(topic, depth, output, format, engine, verbose, quiet):
     """Research a topic deeply.
 
     TOPIC: The topic to research.
@@ -157,62 +193,111 @@ def research(topic, depth, output, engine, verbose):
     Examples:
         researchclaw research "AI ethics"
         researchclaw research "quantum computing" --depth 5
-        researchclaw research "AI" --output ./reports/ai.md --engine duckduckgo
-        researchclaw research "AI" --engine bing
+        researchclaw research "AI" --output ./reports/ai.md
+        researchclaw research "AI" --format html
     """
-    console.print(f"[bold blue]ResearchClaw[/bold blue] - Researching: {topic}")
-    console.print(f"Depth level: {depth}")
-    console.print(f"Search engine: {engine}")
+    setup_logging(verbose, quiet)
+    
+    if not quiet:
+        print_banner()
+        console.print(f"[bold]Topic:[/bold] {topic}")
+        console.print(f"[bold]Depth:[/bold] {depth}")
+        console.print(f"[bold]Engine:[/bold] {engine}")
+        if output:
+            console.print(f"[bold]Output:[/bold] {output} ({format})")
+        console.print()
 
-    if output:
-        console.print(f"Output will be saved to: {output}")
-
-    # Run research
+    start_time = datetime.now()
+    
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
-        console=console,
+        BarColumn(bar_width=40),
+        TaskProgressColumn(),
+        TimeElapsedColumn(),
+        TimeRemainingColumn(),
+        console=console if not quiet else None,
+        transient=quiet,
     ) as progress:
-        task = progress.add_task("Researching...", total=None)
+        if not quiet:
+            task = progress.add_task("[cyan]Researching...", total=depth * 10)
+        else:
+            task = None
 
         try:
-            # Get API key if needed
             provider_class = SearchProviderRegistry.get(engine)
             api_key = None
             if provider_class and provider_class.requires_api_key:
                 api_key = get_api_key_for_engine(engine)
-                if not api_key:
+                if not api_key and not quiet:
                     console.print(f"[yellow]Warning: {engine} requires API key[/yellow]")
 
             runner = ResearchRunner()
+            
+            if task:
+                progress.update(task, description=f"[cyan]Researching: {topic[:30]}...")
+                progress.advance(task, 2)
+            
             report = runner.run(topic, depth=depth)
-            progress.update(task, completed=True)
-
-            # Display summary
-            console.print("")
-            console.print(f"[bold green]Research complete![/bold green]")
-            console.print(f"Topic: {report.topic}")
-            console.print(f"Sections: {len(report.sections)}")
-
-            for section in report.sections:
-                sources_count = len(section.sources) if section.sources else 0
-                console.print(f"  - {section.title}: {sources_count} sources (confidence: {section.confidence:.2f})")
-
-            # Save to file if output specified
-            if output:
-                saved_path = save_report_to_file(report, output)
-                console.print(f"[bold]Report saved to:[/bold] {saved_path}")
-            elif verbose:
-                # Display full report
-                console.print("")
-                console.print("[bold]Report Preview:[/bold]")
-                console.print(format_report_markdown(report)[:1000] + "...")
+            
+            if task:
+                progress.update(task, completed=depth * 10)
 
         except Exception as e:
-            progress.update(task, completed=True)
-            console.print(f"[bold red]Error:[/bold red] {str(e)}")
+            if quiet:
+                print(f"Error: {str(e)}", file=sys.stderr)
+            else:
+                console.print(f"[bold red]Error:[/bold red] {str(e)}")
             if verbose:
                 raise
+            sys.exit(1)
+
+    end_time = datetime.now()
+    duration = (end_time - start_time).total_seconds()
+
+    if not quiet:
+        console.print()
+        
+        # Result panel
+        result_text = Text()
+        result_text.append(f"✓ Research Complete\n\n", style="bold green")
+        result_text.append(f"Topic: {report.topic}\n", style="bold")
+        result_text.append(f"Sections: {len(report.sections)}\n")
+        result_text.append(f"Duration: {duration:.1f}s\n")
+        
+        console.print(Panel(result_text, title="[bold green]✓ Success[/bold green]", 
+                           border_style="green", expand=False))
+
+        # Sections table
+        table = Table(title="Research Sections", show_header=True, header_style="bold cyan")
+        table.add_column("#", style="cyan", width=3)
+        table.add_column("Title", style="white")
+        table.add_column("Sources", style="yellow", justify="right")
+        table.add_column("Confidence", style="green", justify="right")
+        
+        for i, section in enumerate(report.sections, 1):
+            sources_count = len(section.sources) if section.sources else 0
+            conf_color = "green" if section.confidence >= 0.7 else "yellow" if section.confidence >= 0.4 else "red"
+            table.add_row(
+                str(i),
+                section.title,
+                str(sources_count),
+                f"[{conf_color}]{section.confidence:.2f}[/{conf_color}]"
+            )
+        
+        console.print(table)
+        console.print()
+
+        if output:
+            saved_path = save_report_to_file(report, output, format)
+            console.print(f"[bold]Report saved to:[/bold] [link]{saved_path}[/link]")
+        elif verbose:
+            console.print("[bold]Report Preview:[/bold]")
+            console.print(format_report_markdown(report)[:2000] + "...")
+    else:
+        if output:
+            saved_path = save_report_to_file(report, output, format)
+            print(saved_path)
 
 
 @cli.command()
@@ -221,7 +306,11 @@ def research(topic, depth, output, engine, verbose):
 @click.option("--engine", "-e", default=DEFAULT_ENGINE, help="Search engine to use",
               callback=validate_engine, is_eager=True)
 @click.option("--output", "-o", default=None, help="Output file path")
-def search(query, limit, engine, output):
+@click.option("--format", "-f", type=click.Choice(["markdown", "json"]), 
+              default="markdown", help="Output format")
+@click.option("--verbose", "-v", is_flag=True, help="Verbose output")
+@click.option("--quiet", "-q", is_flag=True, help="Suppress all output except errors")
+def search(query, limit, engine, output, format, verbose, quiet):
     """Search for information.
 
     QUERY: Search query.
@@ -229,72 +318,86 @@ def search(query, limit, engine, output):
     Examples:
         researchclaw search "machine learning"
         researchclaw search "neural networks" --limit 20
-        researchclaw search "AI" --engine bing
     """
-    console.print(f"[bold blue]Searching[/bold blue] for: {query}")
-    console.print(f"Engine: {engine}")
-    console.print(f"Limit: {limit} results")
+    setup_logging(verbose, quiet)
+    
+    if not quiet:
+        console.print(f"[bold cyan]🔍 Searching[/bold cyan] for: [bold]{query}[/bold]")
+        console.print(f"Engine: {engine} | Limit: {limit}")
 
     try:
-        # Get API key if needed
         provider_class = SearchProviderRegistry.get(engine)
         api_key = None
-        # Check if provider requires API key (must instantiate or check property value)
         if provider_class:
-            # Create temporary instance to check requires_api_key
             temp_provider = provider_class()
             if temp_provider.requires_api_key:
                 api_key = get_api_key_for_engine(engine)
-                if not api_key:
-                    console.print(f"[yellow]Warning: {engine} requires API key - set in config.json[/yellow]")
+                if not api_key and not quiet:
+                    console.print(f"[yellow]Warning: {engine} requires API key[/yellow]")
 
         engine_obj = SearchEngine(provider=engine, api_key=api_key)
         results = engine_obj.search(query, limit=limit)
 
-        console.print(f"[bold green]Found {len(results)} results[/bold green]")
+        if not quiet:
+            console.print(f"[bold green]✓ Found {len(results)} results[/bold green]")
+            console.print()
+            
+            for i, result in enumerate(results, 1):
+                console.print(f"[bold cyan]{i}.[/bold cyan] [bold]{result.title}[/bold]")
+                console.print(f"   [link]{result.url}[/link]")
+                snippet = result.snippet[:150] + "..." if len(result.snippet) > 150 else result.snippet
+                console.print(f"   [dim]{snippet}[/dim]")
+                console.print()
 
-        for i, result in enumerate(results, 1):
-            console.print(f"\n[bold]{i}. {result.title}[/bold]")
-            console.print(f"   {result.url}")
-            console.print(f"   {result.snippet[:150]}...")
-
-        # Save to file if output specified
         if output:
             output_file = Path(output)
             output_file.parent.mkdir(parents=True, exist_ok=True)
 
-            lines = [f"# Search Results: {query}\n", f"**Engine**: {engine}\n"]
-            for i, result in enumerate(results, 1):
-                lines.append(f"## {i}. {result.title}")
-                lines.append(f"URL: {result.url}")
-                lines.append(f"Score: {result.score}")
-                lines.append(f"\n{result.snippet}\n")
-
-            output_file.write_text("\n".join(lines))
-            console.print(f"[bold]Results saved to:[/bold] {output}")
+            if format == "json":
+                import json
+                data = {
+                    "query": query,
+                    "engine": engine,
+                    "results": [r.to_dict() for r in results]
+                }
+                output_file.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+            else:
+                lines = [f"# Search Results: {query}", f"**Engine**: {engine}", ""]
+                for i, result in enumerate(results, 1):
+                    lines.append(f"## {i}. {result.title}")
+                    lines.append(f"URL: {result.url}")
+                    lines.append(f"Score: {result.score}")
+                    lines.append(f"\n{result.snippet}\n")
+                output_file.write_text("\n".join(lines))
+            
+            if not quiet:
+                console.print(f"[bold]Results saved to:[/bold] [link]{output}[/link]")
 
     except Exception as e:
-        console.print(f"[bold red]Error:[/bold red] {str(e)}")
+        if quiet:
+            print(f"Error: {str(e)}", file=sys.stderr)
+        else:
+            console.print(f"[bold red]Error:[/bold red] {str(e)}")
+        if verbose:
+            raise
+        sys.exit(1)
 
 
 @cli.command("engines")
 def list_engines():
-    """List available search engines.
-
-    Examples:
-        researchclaw engines
-    """
+    """List available search engines."""
     providers = SearchProviderRegistry.list_providers()
 
     table = Table(title="Available Search Engines")
-    table.add_column("Engine", style="cyan")
-    table.add_column("Requires API Key", style="yellow")
+    table.add_column("Engine", style="cyan", width=15)
+    table.add_column("Requires API Key", style="yellow", width=15)
+    table.add_column("Status", style="green", width=10)
 
     for name in providers:
         provider_class = SearchProviderRegistry.get(name)
         if provider_class:
             requires_key = "Yes" if provider_class.requires_api_key else "No"
-            table.add_row(name, requires_key)
+            table.add_row(name, requires_key, "✓ Available")
 
     console.print(table)
     console.print("\n[bold]Note:[/bold] Set API keys in config.json")
@@ -320,10 +423,8 @@ def init(name, topic):
 
     console.print(f"[bold blue]Initializing[/bold blue] ResearchClaw project: {name}")
 
-    # Create project structure
     project_path.mkdir(parents=True, exist_ok=True)
 
-    # Create basic files
     (project_path / "pyproject.toml").write_text("""[project]
 name = "research-project"
 version = "0.1.0"

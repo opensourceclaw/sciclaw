@@ -14,13 +14,29 @@
 
 """
 Site-Specific Content Parsers
+
+Features:
+- Extensible parser registry with dynamic registration
+- Support for 20+ popular sites
+- Domain pattern matching with subdomain support
+- Custom extraction rules per site
 """
 
 import re
 from abc import ABC, abstractmethod
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List, Type
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+from dataclasses import dataclass, field
+
+
+@dataclass
+class SiteParserConfig:
+    """Configuration for a site parser"""
+    domains: List[str] = field(default_factory=list)
+    selectors: Dict[str, str] = field(default_factory=dict)
+    requires_js: bool = False
+    priority: int = 100  # Higher = more specific
 
 
 class SiteParser(ABC):
@@ -28,6 +44,15 @@ class SiteParser(ABC):
 
     # Site domains this parser handles
     DOMAINS: list[str] = []
+    
+    # CSS selectors for content extraction
+    SELECTORS: Dict[str, str] = {}
+    
+    # Priority for matching (higher = more specific)
+    PRIORITY: int = 100
+    
+    # Whether this site requires JavaScript rendering
+    REQUIRES_JS: bool = False
 
     @abstractmethod
     def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
@@ -45,9 +70,23 @@ class SiteParser(ABC):
     @classmethod
     def can_handle(cls, url: str) -> bool:
         """Check if this parser can handle the URL"""
+        if not cls.DOMAINS:
+            return False
         parsed = urlparse(url)
         domain = parsed.netloc.lower()
+        # Remove www. prefix for matching
+        domain = re.sub(r'^www\.', '', domain)
         return any(d in domain for d in cls.DOMAINS)
+    
+    @classmethod
+    def get_config(cls) -> SiteParserConfig:
+        """Get parser configuration"""
+        return SiteParserConfig(
+            domains=cls.DOMAINS,
+            selectors=cls.SELECTORS,
+            requires_js=cls.REQUIRES_JS,
+            priority=cls.PRIORITY,
+        )
 
 
 class GitHubParser(SiteParser):
@@ -301,6 +340,11 @@ class RedditParser(SiteParser):
     """Parser for Reddit"""
 
     DOMAINS = ["reddit.com", "old.reddit.com"]
+    SELECTORS = {
+        "title": "[data-testid='post-title'], .title",
+        "content": ".post-content, [data-testid='post-content']",
+    }
+    PRIORITY = 120
 
     def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
         """Extract Reddit content"""
@@ -330,6 +374,407 @@ class RedditParser(SiteParser):
         post = soup.select_one('[class*="Post"], [class*="shreddit"], .entry')
         if post:
             result["content"] = post.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class HackerNewsParser(SiteParser):
+    """Parser for Hacker News"""
+
+    DOMAINS = [
+        "news.ycombinator.com",
+        "hn.firechat.co",
+    ]
+    SELECTORS = {
+        "title": "title, .titleline a",
+        "content": ".comment",
+        "author": ".hnuser",
+    }
+    PRIORITY = 200
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Hacker News content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        title_elem = soup.select_one(".titleline a")
+        if title_elem:
+            result["title"] = title_elem.get_text(strip=True)
+
+        # Author
+        author_elem = soup.select_one(".hnuser")
+        if author_elem:
+            result["author"] = author_elem.get_text(strip=True)
+
+        # Date
+        time_elem = soup.select_one(".age")
+        if time_elem and time_elem.get("title"):
+            result["date"] = time_elem["title"]
+
+        # Content (for comments)
+        comment = soup.select_one(".comment")
+        if comment:
+            result["content"] = comment.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class TechCrunchParser(SiteParser):
+    """Parser for TechCrunch"""
+
+    DOMAINS = [
+        "techcrunch.com",
+        "techcrunch.jp",
+    ]
+    SELECTORS = {
+        "title": "article h1, .article-title",
+        "content": ".article-content, .article-body",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract TechCrunch article content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        if not result["title"]:
+            title_elem = soup.select_one("article h1, .article-title")
+            if title_elem:
+                result["title"] = title_elem.get_text(strip=True)
+
+        # Author
+        author = soup.find("meta", attrs={"name": "author"})
+        if author and author.get("content"):
+            result["author"] = author["content"]
+
+        # Date
+        date = soup.find("meta", property="article:published_time")
+        if date and date.get("content"):
+            result["date"] = date["content"]
+
+        # Content
+        article = soup.select_one(".article-content, .article-body, article")
+        if article:
+            for elem in article.select(".ad, .newsletter, .share"):
+                elem.decompose()
+            result["content"] = article.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class VergeParser(SiteParser):
+    """Parser for The Verge"""
+
+    DOMAINS = ["theverge.com", "www.theverge.com"]
+    SELECTORS = {
+        "title": "h1, [data-testid='title']",
+        "content": ".article-body, .c-entry-content",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract The Verge article content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        # Author
+        author = soup.find("meta", attrs={"name": "author"})
+        if author and author.get("content"):
+            result["author"] = author["content"]
+
+        # Date
+        date = soup.find("meta", property="article:published_time")
+        if date and date.get("content"):
+            result["date"] = date["content"]
+
+        # Content
+        article = soup.select_one(".article-body, .c-entry-content, article")
+        if article:
+            result["content"] = article.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class ArsTechnicaParser(SiteParser):
+    """Parser for Ars Technica"""
+
+    DOMAINS = ["arstechnica.com"]
+    SELECTORS = {
+        "title": "h1, .article-title",
+        "content": ".article-content, .post-content",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Ars Technica article content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        # Author
+        author = soup.find("meta", attrs={"name": "author"})
+        if author and author.get("content"):
+            result["author"] = author["content"]
+
+        # Date
+        date = soup.find("meta", property="article:published_time")
+        if date and date.get("content"):
+            result["date"] = date["content"]
+
+        # Content
+        article = soup.select_one(".article-content, .post-content, article")
+        if article:
+            result["content"] = article.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class V2exParser(SiteParser):
+    """Parser for V2EX"""
+
+    DOMAINS = ["v2ex.com", "www.v2ex.com"]
+    SELECTORS = {
+        "title": ".header .topic",
+        "content": ".topic_content",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract V2EX content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        title_elem = soup.select_one(".header .topic")
+        if title_elem:
+            result["title"] = title_elem.get_text(strip=True)
+
+        # Author
+        author_elem = soup.select_one(".header a.username")
+        if author_elem:
+            result["author"] = author_elem.get_text(strip=True)
+
+        # Content
+        content_elem = soup.select_one(".topic_content")
+        if content_elem:
+            result["content"] = content_elem.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class ProductHuntParser(SiteParser):
+    """Parser for Product Hunt"""
+
+    DOMAINS = ["producthunt.com", "www.producthunt.com"]
+    SELECTORS = {
+        "title": "h1, .productName",
+        "content": ".productDescription",
+    }
+    PRIORITY = 150
+    REQUIRES_JS = True  # Requires JS rendering
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Product Hunt content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        # Description
+        desc = soup.find("meta", property="og:description")
+        if desc and desc.get("content"):
+            result["content"] = desc["content"]
+
+        return result
+
+
+class BiliBiliParser(SiteParser):
+    """Parser for Bilibili"""
+
+    DOMAINS = ["bilibili.com", "www.bilibili.com"]
+    SELECTORS = {
+        "title": "h1, .video-title",
+        "content": ".video-desc",
+    }
+    PRIORITY = 150
+    REQUIRES_JS = True
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Bilibili video info"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title from og
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        # Description
+        desc = soup.find("meta", property="og:description")
+        if desc and desc.get("content"):
+            result["content"] = desc["content"]
+
+        return result
+
+
+class CSDNParser(SiteParser):
+    """Parser for CSDN"""
+
+    DOMAINS = ["blog.csdn.net", "csdn.net"]
+    SELECTORS = {
+        "title": "h1, .title-article",
+        "content": ".article_content",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract CSDN blog content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        if not result["title"]:
+            title_elem = soup.select_one("h1, .title-article")
+            if title_elem:
+                result["title"] = title_elem.get_text(strip=True)
+
+        # Author
+        author_elem = soup.select_one("[class*='author'], .username")
+        if author_elem:
+            result["author"] = author_elem.get_text(strip=True)
+
+        # Content
+        content_elem = soup.select_one(".article_content, .blog-content")
+        if content_elem:
+            result["content"] = content_elem.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class JianShuParser(SiteParser):
+    """Parser for 简书 (JianShu)"""
+
+    DOMAINS = ["jianshu.com", "www.jianshu.com"]
+    SELECTORS = {
+        "title": "h1, .title",
+        "content": ".content, .article",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract JianShu article content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        # Author
+        author_elem = soup.select_one("[class*='author'], a[rel='author']")
+        if author_elem:
+            result["author"] = author_elem.get_text(strip=True)
+
+        # Content
+        content_elem = soup.select_one(".content, .article, article")
+        if content_elem:
+            result["content"] = content_elem.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class SegmentFaultParser(SiteParser):
+    """Parser for SegmentFault"""
+
+    DOMAINS = ["segmentfault.com", "www.segmentfault.com"]
+    SELECTORS = {
+        "title": "h1, .article-title",
+        "content": ".article-content",
+    }
+    PRIORITY = 150
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract SegmentFault content"""
+        result = {
+            "title": "",
+            "content": "",
+            "author": None,
+            "date": None,
+        }
+
+        # Title
+        og_title = soup.find("meta", property="og:title")
+        if og_title and og_title.get("content"):
+            result["title"] = og_title["content"]
+
+        # Author
+        author_elem = soup.select_one("[class*='author']")
+        if author_elem:
+            result["author"] = author_elem.get_text(strip=True)
+
+        # Content
+        content_elem = soup.select_one(".article-content, .post-content")
+        if content_elem:
+            result["content"] = content_elem.get_text(separator="\n", strip=True)
 
         return result
 
@@ -470,8 +915,20 @@ class NewsSiteParser(SiteParser):
         return result
 
 
-# Registry of all parsers
+# Registry of all parsers (ordered by priority for matching)
 SITE_PARSERS: list[type[SiteParser]] = [
+    # High-priority specific parsers
+    HackerNewsParser,      # 200
+    ProductHuntParser,    # 150 (requires JS)
+    BiliBiliParser,       # 150 (requires JS)
+    V2exParser,           # 150
+    CSDNParser,           # 150
+    JianShuParser,        # 150
+    SegmentFaultParser,   # 150
+    TechCrunchParser,     # 150
+    VergeParser,          # 150
+    ArsTechnicaParser,    # 150
+    # Standard parsers
     GitHubParser,
     MediumParser,
     ZhihuParser,
@@ -484,6 +941,33 @@ SITE_PARSERS: list[type[SiteParser]] = [
     NewsSiteParser,
 ]
 
+# Parser registry for dynamic registration
+_PARSER_REGISTRY: dict[str, type[SiteParser]] = {}
+
+
+def register_parser(parser_class: type[SiteParser]) -> None:
+    """Register a new parser dynamically
+    
+    Args:
+        parser_class: SiteParser subclass to register
+    """
+    for domain in parser_class.DOMAINS:
+        _PARSER_REGISTRY[domain] = parser_class
+
+
+def unregister_parser(domain: str) -> None:
+    """Unregister a parser by domain
+    
+    Args:
+        domain: Domain to unregister
+    """
+    _PARSER_REGISTRY.pop(domain, None)
+
+
+def get_registered_domains() -> list[str]:
+    """Get list of all registered domains"""
+    return list(_PARSER_REGISTRY.keys())
+
 
 def get_parser(url: str) -> Optional[SiteParser]:
     """Get appropriate parser for URL
@@ -494,10 +978,41 @@ def get_parser(url: str) -> Optional[SiteParser]:
     Returns:
         SiteParser instance or None if no specific parser
     """
+    # Check registered parsers first
+    parsed = urlparse(url)
+    domain = parsed.netloc.lower()
+    domain = re.sub(r'^www\.', '', domain)
+    
+    if domain in _PARSER_REGISTRY:
+        return _PARSER_REGISTRY[domain]()
+    
+    # Fall back to built-in parsers
     for parser_class in SITE_PARSERS:
         if parser_class.can_handle(url):
             return parser_class()
     return None
+
+
+def get_parser_by_priority(url: str) -> Optional[SiteParser]:
+    """Get parser with highest priority matching the URL
+    
+    Args:
+        url: URL to parse
+        
+    Returns:
+        SiteParser instance or None
+    """
+    matching_parsers = []
+    
+    for parser_class in SITE_PARSERS:
+        if parser_class.can_handle(url):
+            matching_parsers.append(parser_class)
+    
+    if not matching_parsers:
+        return None
+    
+    # Return highest priority
+    return max(matching_parsers, key=lambda p: p.PRIORITY)()
 
 
 def can_handle(url: str) -> bool:
@@ -530,10 +1045,16 @@ def parse_site(url: str, soup: BeautifulSoup) -> Dict[str, Any]:
 
 __all__ = [
     "SiteParser",
+    "SiteParserConfig",
     "SITE_PARSERS",
     "get_parser",
+    "get_parser_by_priority",
     "can_handle",
     "parse_site",
+    "register_parser",
+    "unregister_parser",
+    "get_registered_domains",
+    # Parser classes
     "GitHubParser",
     "MediumParser",
     "ZhihuParser",
@@ -544,4 +1065,14 @@ __all__ = [
     "YouTubeParser",
     "TwitterParser",
     "NewsSiteParser",
+    "HackerNewsParser",
+    "TechCrunchParser",
+    "VergeParser",
+    "ArsTechnicaParser",
+    "V2exParser",
+    "ProductHuntParser",
+    "BiliBiliParser",
+    "CSDNParser",
+    "JianShuParser",
+    "SegmentFaultParser",
 ]
