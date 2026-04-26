@@ -13,7 +13,8 @@
 # limitations under the License.
 
 """
-Content Extraction Tool - Enhanced with text density analysis and readability
+Content Extraction Tool - Enhanced with text density analysis, readability,
+fallback selectors, and performance optimization.
 """
 
 from typing import Dict, List, Optional, Any, Tuple
@@ -24,6 +25,8 @@ import re
 import requests
 from bs4 import BeautifulSoup, Tag
 import html2text
+from functools import lru_cache
+import threading
 
 
 @dataclass
@@ -42,18 +45,30 @@ class ExtractedContent:
 # Noise patterns to remove
 NOISE_TAGS = [
     "script", "style", "nav", "header", "footer", "aside",
-    "form", "iframe", "noscript", "svg", "canvas", "video", "audio"
+    "form", "iframe", "noscript", "svg", "canvas", "video", "audio",
+    "button", "input", "select", "textarea", "menu", "menuitem"
 ]
 
 NOISE_CLASSES = [
     "advertisement", "ad", "ads", "sidebar", "comment", "comments",
     "social", "share", "sharing", "related", "recommended", "newsletter",
-    "subscribe", "popup", "modal", "banner", "promo", "promotion"
+    "subscribe", "popup", "modal", "banner", "promo", "promotion",
+    "cookie", "consent", "tracking", "analytics", "metric",
+    "footer", "header", "nav", "navigation", "menu",
+    "widget", "sidebar", "breadcrumb", "pagination", "loading",
+    "spinner", "skeleton", "placeholder", "hidden", "visually-hidden"
 ]
 
 NOISE_IDS = [
     "advertisement", "comments", "sidebar", "footer", "header",
-    "nav", "navigation", "social", "share", "related"
+    "nav", "navigation", "social", "share", "related", "cookies",
+    "tracking", "analytics", "menu", "widget", "loading"
+]
+
+# Additional noise patterns for inline styles and attributes
+NOISE_ATTRS = [
+    "data-ad", "data-analytics", "data-tracking", "data-gtm",
+    "aria-hidden", "hidden"
 ]
 
 
@@ -64,16 +79,21 @@ class ContentExtractor:
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
     }
 
-    # Extended content selectors (priority order)
+    # Extended content selectors (priority order) - includes fallbacks
     CONTENT_SELECTORS = [
         # Semantic HTML5
         "article",
         "main",
         "[role='main']",
         "[role='article']",
-        # Common class names
+        "[role='content']",
+        "[itemprop='articleBody']",
+        # Blog platforms
         ".post-content",
         ".article-content",
         ".entry-content",
@@ -82,6 +102,19 @@ class ContentExtractor:
         ".story-body",
         ".post-body",
         ".node-content",
+        ".blog-post",
+        ".blog-content",
+        ".single-post",
+        # News sites
+        ".news-content",
+        ".news-body",
+        ".article__body",
+        ".story__content",
+        ".headline-body",
+        # CMS platforms
+        ".wp-block-columns",
+        ".elementor-widget",
+        ".fl-builder-content",
         # Common IDs
         "#content",
         "#main-content",
@@ -90,6 +123,18 @@ class ContentExtractor:
         "#page-content",
         ".content",
         "#content-area",
+        "#main",
+        "#primary",
+    ]
+
+    # Fallback selectors for stubborn pages
+    FALLBACK_SELECTORS = [
+        ".container main",
+        ".wrapper main",
+        "div[class*='container']",
+        "div[class*='main']",
+        "div[class*='content']",
+        "section[class*='content']",
     ]
 
     # Minimum text length to consider a block as content
@@ -97,6 +142,9 @@ class ContentExtractor:
 
     # Minimum text density ratio
     MIN_TEXT_DENSITY = 0.25
+
+    # Thread-local session storage
+    _local = threading.local()
 
     def __init__(self, timeout: int = 30):
         """Initialize content extractor
@@ -111,6 +159,14 @@ class ContentExtractor:
         self.converter.ignore_emphasis = True
         self.converter.body_width = 0  # No line wrapping
 
+    @classmethod
+    def _get_session(cls) -> requests.Session:
+        """Get or create a thread-local session for connection reuse"""
+        if not hasattr(cls._local, 'session'):
+            cls._local.session = requests.Session()
+            cls._local.session.headers.update(cls.DEFAULT_HEADERS)
+        return cls._local.session
+
     def extract(self, url: str) -> Optional[ExtractedContent]:
         """Extract content from a URL
 
@@ -121,10 +177,11 @@ class ContentExtractor:
             ExtractedContent: Extracted content or None on failure
         """
         try:
-            response = requests.get(
+            # Use session for connection reuse (performance optimization)
+            session = self._get_session()
+            response = session.get(
                 url,
                 timeout=self.timeout,
-                headers=self.DEFAULT_HEADERS,
                 allow_redirects=True,
             )
             response.raise_for_status()
@@ -168,10 +225,13 @@ class ContentExtractor:
         for tag in soup(NOISE_TAGS):
             tag.decompose()
 
-        # Remove elements with noise classes
+        # Remove elements with noise classes (batch processing)
         for tag in soup.find_all(class_=True):
             classes = tag.get("class", [])
+            if isinstance(classes, str):
+                classes = classes.split()
             class_str = " ".join(classes).lower()
+            
             if any(noise in class_str for noise in NOISE_CLASSES):
                 # Keep the element but remove if it's purely noise
                 if not tag.find_all(string=True, recursive=False):
@@ -187,6 +247,20 @@ class ContentExtractor:
             tag_id = tag.get("id", "").lower()
             if any(noise in tag_id for noise in NOISE_IDS):
                 if not tag.find_all(string=True, recursive=False):
+                    tag.decompose()
+
+        # Remove hidden elements
+        for tag in soup.find_all(style=True):
+            style = tag.get("style", "").lower()
+            if "display:none" in style or "visibility:hidden" in style:
+                tag.decompose()
+
+        # Remove empty elements (except needed containers)
+        for tag in soup.find_all():
+            if tag.name in ["br", "hr", "img", "input"]:
+                continue
+            if not tag.get_text(strip=True) and not tag.find("img") and not tag.find("input"):
+                if not tag.attrs or (len(tag.attrs) == 1 and tag.name == "div"):
                     tag.decompose()
 
     def _extract_title(self, soup: BeautifulSoup) -> str:
@@ -224,12 +298,17 @@ class ContentExtractor:
         if html and len(html) > self.MIN_TEXT_LENGTH * 10:
             return html
 
-        # Strategy 2: Text density analysis
+        # Strategy 2: Try fallback selectors
+        html = self._extract_by_fallback_selectors(soup)
+        if html and len(html) > self.MIN_TEXT_LENGTH * 10:
+            return html
+
+        # Strategy 3: Text density analysis
         html = self._extract_by_text_density(soup)
         if html and len(html) > self.MIN_TEXT_LENGTH * 10:
             return html
 
-        # Strategy 3: Readability-style extraction
+        # Strategy 4: Readability-style extraction
         html = self._extract_by_readability(soup)
         if html:
             return html
@@ -250,6 +329,19 @@ class ContentExtractor:
                     text = content.get_text(strip=True)
                     if len(text) >= self.MIN_TEXT_LENGTH:
                         return str(content)
+            except Exception:
+                continue
+        return ""
+
+    def _extract_by_fallback_selectors(self, soup: BeautifulSoup) -> str:
+        """Extract content using fallback selectors for stubborn pages"""
+        for selector in self.FALLBACK_SELECTORS:
+            try:
+                elements = soup.select(selector)
+                for element in elements:
+                    text = element.get_text(strip=True)
+                    if len(text) >= self.MIN_TEXT_LENGTH * 2:
+                        return str(element)
             except Exception:
                 continue
         return ""

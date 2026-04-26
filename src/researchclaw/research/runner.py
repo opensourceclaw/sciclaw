@@ -19,6 +19,7 @@ Research Runner - Coordinates the full research workflow
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from researchclaw.research.search import SearchEngine, SearchResult
 from researchclaw.research.planner import ResearchPlan, ResearchPlanner
@@ -47,22 +48,24 @@ class ResearchFinding:
 
 
 class ResearchRunner:
-    """Coordinates the full research workflow"""
+    """Coordinates the full research workflow with parallel processing"""
 
-    def __init__(self, max_content: int = 5):
+    def __init__(self, max_content: int = 5, max_workers: int = 5):
         """Initialize research runner
 
         Args:
             max_content: Maximum URLs to extract content from
+            max_workers: Maximum parallel workers for content extraction
         """
         self.search_engine = SearchEngine()
         self.planner = ResearchPlanner()
         self.synthesizer = ResearchSynthesizer()
         self.content_extractor = ContentExtractor()
         self.max_content = max_content
+        self.max_workers = max_workers
 
     def run(self, topic: str, depth: int = 3) -> ResearchReport:
-        """Run full research workflow
+        """Run full research workflow with parallel processing
 
         Args:
             topic: Research topic
@@ -74,16 +77,40 @@ class ResearchRunner:
         # Create research plan
         plan = self.planner.create_plan(topic, depth)
 
-        # Execute searches and extract content
-        findings = []
-        for query in plan.queries:
-            finding = self._research_query(query)
-            findings.append(finding)
+        # Collect all queries to research
+        all_queries = list(plan.queries) + list(plan.subtopics)
 
-        # Also research subtopics
-        for subtopic in plan.subtopics:
-            finding = self._research_query(subtopic)
-            findings.append(finding)
+        # Execute searches first (sequential to avoid rate limiting)
+        search_results_by_query = {}
+        for query in all_queries:
+            search_results_by_query[query] = self.search_engine.search(query, limit=10)
+
+        # Extract content in parallel
+        findings = []
+        with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
+            # Submit all extraction tasks
+            future_to_query = {}
+            for query in all_queries:
+                results = search_results_by_query[query]
+                urls = [r.url for r in results[:self.max_content]]
+                if urls:
+                    future = executor.submit(self._extract_content_parallel, query, urls, search_results_by_query[query])
+                    future_to_query[future] = query
+
+            # Collect results as they complete
+            for future in as_completed(future_to_query):
+                query = future_to_query[future]
+                try:
+                    finding = future.result()
+                    findings.append(finding)
+                except Exception as e:
+                    # Log error but continue
+                    print(f"Error researching query '{query}': {e}")
+                    findings.append(ResearchFinding(
+                        query=query,
+                        search_results=search_results_by_query[query],
+                        extracted_content=[],
+                    ))
 
         # Convert findings to synthesizer format
         synth_findings = self._convert_findings(findings)
@@ -93,8 +120,42 @@ class ResearchRunner:
 
         return report
 
+    def _extract_content_parallel(self, query: str, urls: List[str], search_results: List[SearchResult]) -> ResearchFinding:
+        """Extract content from URLs in parallel
+
+        Args:
+            query: Search query
+            urls: URLs to extract from
+            search_results: Original search results
+
+        Returns:
+            ResearchFinding: Research findings
+        """
+        extracted_content = []
+        
+        # Use thread pool for content extraction
+        with ThreadPoolExecutor(max_workers=min(len(urls), 3)) as executor:
+            future_to_url = {
+                executor.submit(self.content_extractor.extract, url): url 
+                for url in urls
+            }
+            
+            for future in as_completed(future_to_url):
+                try:
+                    content = future.result()
+                    if content:
+                        extracted_content.append(content)
+                except Exception:
+                    pass
+
+        return ResearchFinding(
+            query=query,
+            search_results=search_results,
+            extracted_content=extracted_content,
+        )
+
     def _research_query(self, query: str) -> ResearchFinding:
-        """Research a single query
+        """Research a single query (sequential version)
 
         Args:
             query: Search query
@@ -131,7 +192,7 @@ class ResearchRunner:
 
         for finding in findings:
             # Use search result snippets as content
-            for i, sr in enumerate(finding.search_results):
+            for sr in finding.search_results:
                 result.append({
                     "theme": finding.query,
                     "content": f"{sr.title}\n{sr.snippet}",
