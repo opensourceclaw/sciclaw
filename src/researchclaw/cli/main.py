@@ -40,11 +40,13 @@ from researchclaw.search.providers import SearchProviderRegistry
 from researchclaw.llm.base import LLMProviderRegistry
 from researchclaw.llm.engine import LLMEngine
 from researchclaw.llm import ChatMessage, MessageRole
+from researchclaw.i18n import I18n, t
 
 console = Console()
 
-# Default engine
+# Default settings
 DEFAULT_ENGINE = "duckduckgo"
+DEFAULT_LANG = "en"
 
 
 class QueryColumn(ProgressColumn):
@@ -77,7 +79,10 @@ def setup_logging(verbose: bool = False, quiet: bool = False):
 
 def print_banner():
     """Print ResearchClaw banner"""
-    banner = Text("""
+    title = t("banner.title")
+    subtitle = t("banner.subtitle")
+    version = "v0.4.0"
+    banner = Text(f"""
 ╔═══════════════════════════════════════════════════════════╗
 ║   ███████╗ █████╗ ██████╗ ██╗     ███████╗███████╗██╗     ║
 ║   ██╔════╝██╔══██╗██╔══██╗██║     ██╔════╝██╔════╝██║     ║
@@ -85,7 +90,7 @@ def print_banner():
 ║   ██╔══╝  ██╔══██║██╔══██╗██║     ██╔══╝  ██╔══╝  ██║     ║
 ║   ██║     ██║  ██║██████╔╝███████╗███████╗██║     ███████╗
 ║   ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝     ╚══════╝
-║              Deep Research Framework v0.2.0              ║
+║              {title} {version}              ║
 ╚═══════════════════════════════════════════════════════════╝
 """, style="bold cyan")
     console.print(banner)
@@ -170,13 +175,15 @@ def get_api_key_for_engine(engine: str) -> str:
 
 
 @click.group()
-@click.version_option(version="0.2.0")
-def cli():
+@click.version_option(version="0.4.0")
+@click.option("--lang", "-l", default=DEFAULT_LANG, type=click.Choice(["en", "zh"]),
+              help="Language / 语言", is_eager=True)
+def cli(lang):
     """ResearchClaw - Open-source Deep Research Framework
 
     A powerful tool for conducting in-depth research on any topic.
     """
-    pass
+    I18n.set_language(lang)
 
 
 @cli.command()

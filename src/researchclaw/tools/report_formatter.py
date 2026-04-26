@@ -16,11 +16,12 @@
 Report Formatting Module
 
 Generates structured research reports in multiple formats.
+Supports APA 7th Edition, MLA, and Chicago citation styles.
 """
 
 import json
 import re
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -37,28 +38,244 @@ class Source:
     date: Optional[str] = None
     site_name: Optional[str] = None
     quality_score: int = 3
+    # Extended fields for citation support
+    publisher: Optional[str] = None
+    access_date: Optional[str] = None
+    doi: Optional[str] = None
+    volume: Optional[str] = None
+    issue: Optional[str] = None
+    pages: Optional[str] = None
+    edition: Optional[str] = None
+    
+    def _extract_last_name(self, author: str) -> str:
+        """Extract last name from author string"""
+        if not author:
+            return "Unknown"
+        # Handle "Last, First" format
+        if "," in author:
+            return author.split(",")[0].strip()
+        # Handle "First Last" format
+        parts = author.split()
+        return parts[-1] if parts else "Unknown"
+    
+    def _extract_year(self, date: str) -> str:
+        """Extract year from date string"""
+        if not date:
+            return "n.d."
+        # Try to extract year
+        year_match = re.search(r'(\d{4})', date)
+        if year_match:
+            return year_match.group(1)
+        return "n.d."
 
     def to_citation(self, style: str = "markdown") -> str:
         """Generate citation in specified style
 
         Args:
-            style: Citation style (markdown, apa, mla)
+            style: Citation style (markdown, apa, mla, chicago)
 
         Returns:
             Formatted citation string
         """
         if style == "apa":
-            author = self.author or "Unknown"
-            date = self.date or "n.d."
-            return f"{author} ({date}). {self.title}. {self.site_name or self.url}"
+            return self.to_apa_citation()
         elif style == "mla":
-            author = self.author or "Unknown"
-            date = self.date or "n.d."
-            return f'{author}. "{self.title}." {self.site_name or "Web"}. {date}.'
+            return self.to_mla_citation()
+        elif style == "chicago":
+            return self.to_chicago_citation()
         else:  # markdown
             author_part = f" by {self.author}" if self.author else ""
             date_part = f" ({self.date})" if self.date else ""
             return f"[{self.title}{author_part}{date_part}]({self.url})"
+    
+    def to_apa_citation(self) -> str:
+        """Generate APA 7th Edition citation
+        
+        Format: Author, A. A. (Year). Title of work. Site Name. URL
+        """
+        author = self.author or "Unknown"
+        date = self._extract_year(self.date)
+        
+        # Build citation
+        parts = [f"{author} ({date}). {self.title}."]
+        
+        if self.site_name:
+            parts.append(self.site_name)
+        elif self.publisher:
+            parts.append(self.publisher)
+        
+        parts.append(self.url)
+        
+        return " ".join(parts)
+    
+    def to_mla_citation(self) -> str:
+        """Generate MLA 9th Edition citation
+        
+        Format: Author. "Title." Site Name, Date, URL.
+        """
+        author = self.author or "Unknown"
+        date = self.date or "n.d."
+        
+        # Build citation
+        parts = [f'{author}. "{self.title}."']
+        
+        if self.site_name:
+            parts.append(self.site_name + ",")
+        
+        parts.append(f"{date}.")
+        parts.append(self.url + ".")
+        
+        return " ".join(parts)
+    
+    def to_chicago_citation(self) -> str:
+        """Generate Chicago 17th Edition citation (Notes-Bibliography)
+        
+        Format: Author. "Title." Site Name. Last modified Date. URL.
+        """
+        author = self.author or "Unknown"
+        date = self.date or "n.d."
+        
+        # Build citation
+        parts = [f'{author}. "{self.title}."']
+        
+        if self.site_name:
+            parts.append(self.site_name + ".")
+        
+        parts.append(f"Last modified {date}.")
+        parts.append(self.url + ".")
+        
+        return " ".join(parts)
+    
+    def to_intext_apa(self, position: str = "end") -> str:
+        """Generate APA in-text citation
+        
+        Args:
+            position: "end" for parenthetical, "nar" for narrative
+            
+        Returns:
+            In-text citation string
+        """
+        author = self._extract_last_name(self.author) if self.author else "Unknown"
+        year = self._extract_year(self.date)
+        
+        if position == "nar":
+            return f"{author} ({year})"
+        else:
+            return f"({author}, {year})"
+    
+    def to_intext_mla(self, position: str = "end") -> str:
+        """Generate MLA in-text citation
+        
+        Args:
+            position: "end" for parenthetical, "nar" for narrative
+            
+        Returns:
+            In-text citation string
+        """
+        author = self._extract_last_name(self.author) if self.author else "Unknown"
+        
+        if position == "nar":
+            return f"{author}"
+        else:
+            return f"({author})"
+    
+    def to_intext_chicago(self, position: str = "end", note_number: int = 1) -> str:
+        """Generate Chicago in-text citation
+        
+        Args:
+            position: "end" for footnote, "nar" for narrative
+            note_number: Footnote number
+            
+        Returns:
+            In-text citation string
+        """
+        author = self.author or "Unknown"
+        
+        if position == "nar":
+            return f"{author}"
+        else:
+            return f"Note {note_number}."
+
+
+@dataclass
+class CitationManager:
+    """Manages citations for a report"""
+    sources: List[Source] = field(default_factory=list)
+    _citation_map: Dict[str, Source] = field(default_factory=dict)
+    
+    def add_source(self, source: Source) -> int:
+        """Add a source and return its citation number
+        
+        Args:
+            source: Source to add
+            
+        Returns:
+            Citation number (1-based)
+        """
+        # Check for duplicates by URL
+        for i, existing in enumerate(self.sources):
+            if existing.url == source.url:
+                return i + 1
+        
+        self.sources.append(source)
+        return len(self.sources)
+    
+    def get_citation_number(self, url: str) -> Optional[int]:
+        """Get citation number for a URL
+        
+        Args:
+            url: Source URL
+            
+        Returns:
+            Citation number or None if not found
+        """
+        for i, source in enumerate(self.sources):
+            if source.url == url:
+                return i + 1
+        return None
+    
+    def get_reference_list(self, style: str = "apa") -> List[str]:
+        """Get formatted reference list
+        
+        Args:
+            style: Citation style
+            
+        Returns:
+            List of formatted citations
+        """
+        return [source.to_citation(style) for source in self.sources]
+    
+    def detect_duplicates(self) -> List[Tuple[int, int]]:
+        """Detect duplicate sources
+        
+        Returns:
+            List of (index1, index2) tuples for duplicates
+        """
+        duplicates = []
+        seen = {}
+        
+        for i, source in enumerate(self.sources):
+            # Use normalized URL as key
+            normalized = source.url.strip().lower()
+            if normalized in seen:
+                duplicates.append((seen[normalized], i))
+            else:
+                seen[normalized] = i
+        
+        return duplicates
+    
+    def renumber_citations(self) -> None:
+        """Remove duplicates and renumber citations"""
+        unique_sources = []
+        seen_urls = set()
+        
+        for source in self.sources:
+            normalized = source.url.strip().lower()
+            if normalized not in seen_urls:
+                unique_sources.append(source)
+                seen_urls.add(normalized)
+        
+        self.sources = unique_sources
 
 
 @dataclass
@@ -278,6 +495,133 @@ class ResearchReport:
 
         path_obj.write_text(content, encoding="utf-8")
 
+    def to_markdown_with_citations(self, style: str = "apa", include_toc: bool = True) -> str:
+        """Convert report to Markdown with specified citation style
+        
+        Args:
+            style: Citation style (apa, mla, chicago)
+            include_toc: Include table of contents
+            
+        Returns:
+            Markdown string with formatted citations
+        """
+        lines = []
+
+        # Title
+        lines.append(f"# {self.topic}\n")
+
+        # Metadata
+        lines.append(f"**Generated**: {self.created_at.strftime('%Y-%m-%d %H:%M:%S')}")
+        if self.metadata.get("query"):
+            lines.append(f"**Query**: {self.metadata['query']}")
+        lines.append("")
+
+        # Summary
+        if self.summary:
+            lines.append("## Summary\n")
+            lines.append(self.summary)
+            lines.append("")
+
+        # Table of contents
+        if include_toc and self.sections:
+            lines.append("## Table of Contents\n")
+            for i, section in enumerate(self.sections, 1):
+                indent = "  " * (section.level - 2)
+                lines.append(f"{indent}{i}. [{section.title}](#{self._slugify(section.title)})")
+            lines.append("")
+
+        # Sections
+        for section in self.sections:
+            slug = self._slugify(section.title)
+            lines.append(f"{'#' * section.level} {section.title} {{#{slug}}}\n")
+            lines.append(section.content)
+            lines.append("")
+
+        # Sources - with specified citation style
+        if self.sources:
+            lines.append("## References\n")
+            for i, source in enumerate(self.sources, 1):
+                if style == "apa":
+                    lines.append(f"{i}. {source.to_apa_citation()}")
+                elif style == "mla":
+                    lines.append(f"{i}. {source.to_mla_citation()}")
+                elif style == "chicago":
+                    lines.append(f"{i}. {source.to_chicago_citation()}")
+                else:
+                    lines.append(f"{i}. {source.to_citation()}")
+            lines.append("")
+
+        return "\n".join(lines)
+
+    def add_source(self, source: Source) -> int:
+        """Add a source and return citation number (dedupes automatically)
+        
+        Args:
+            source: Source to add
+            
+        Returns:
+            Citation number
+        """
+        # Check for duplicates - don't add if exists
+        for i, existing in enumerate(self.sources):
+            if existing.url.strip().lower() == source.url.strip().lower():
+                return i + 1
+        
+        self.sources.append(source)
+        return len(self.sources)
+
+    def get_citation(self, url: str, style: str = "apa") -> Optional[str]:
+        """Get citation for a URL
+        
+        Args:
+            url: Source URL
+            style: Citation style
+            
+        Returns:
+            Formatted citation or None
+        """
+        for source in self.sources:
+            if source.url == url:
+                return source.to_citation(style)
+        return None
+
+    def detect_duplicate_sources(self) -> List[Tuple[int, int]]:
+        """Detect duplicate sources
+        
+        Returns:
+            List of (index1, index2) tuples
+        """
+        duplicates = []
+        seen = {}
+        
+        for i, source in enumerate(self.sources):
+            normalized = source.url.strip().lower()
+            if normalized in seen:
+                duplicates.append((seen[normalized], i))
+            else:
+                seen[normalized] = i
+        
+        return duplicates
+
+    def dedupe_sources(self) -> int:
+        """Remove duplicate sources
+        
+        Returns:
+            Number of duplicates removed
+        """
+        unique_sources = []
+        seen_urls = set()
+        
+        for source in self.sources:
+            normalized = source.url.strip().lower()
+            if normalized not in seen_urls:
+                unique_sources.append(source)
+                seen_urls.add(normalized)
+        
+        removed = len(self.sources) - len(unique_sources)
+        self.sources = unique_sources
+        return removed
+
     @staticmethod
     def _slugify(text: str) -> str:
         """Convert text to URL-friendly slug"""
@@ -351,5 +695,6 @@ __all__ = [
     "Source",
     "ReportSection",
     "ResearchReport",
+    "CitationManager",
     "create_report",
 ]

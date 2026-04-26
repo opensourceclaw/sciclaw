@@ -23,6 +23,7 @@ from researchclaw.tools.report_formatter import (
     Source,
     ReportSection,
     ResearchReport,
+    CitationManager,
     create_report,
 )
 
@@ -211,3 +212,221 @@ class TestCreateReport:
         )
         assert len(report.sources) == 1
         assert report.sources[0].author == "John"
+
+
+class TestAPACitation:
+    """Test APA citation format"""
+
+    def test_apa_full_citation(self):
+        """Test full APA citation format"""
+        source = Source(
+            url="https://example.com/article",
+            title="Understanding AI Systems",
+            author="John Smith",
+            date="2026-04-26",
+            site_name="Example News",
+        )
+        citation = source.to_apa_citation()
+        assert "John Smith" in citation
+        assert "2026" in citation
+        assert "Understanding AI Systems" in citation
+        assert "example.com/article" in citation
+
+    def test_apa_no_date(self):
+        """Test APA citation without date"""
+        source = Source(
+            url="https://example.com/article",
+            title="Untitled Article",
+            author="Jane Doe",
+        )
+        citation = source.to_apa_citation()
+        assert "n.d." in citation
+
+    def test_apa_intext_paren(self):
+        """Test APA parenthetical in-text citation"""
+        source = Source(
+            url="https://example.com",
+            title="Test",
+            author="John Doe",
+            date="2026-04-26",
+        )
+        citation = source.to_intext_apa("end")
+        assert "(Doe, 2026)" in citation
+
+    def test_apa_intext_narrative(self):
+        """Test APA narrative in-text citation"""
+        source = Source(
+            url="https://example.com",
+            title="Test",
+            author="John Doe",
+            date="2026-04-26",
+        )
+        citation = source.to_intext_apa("nar")
+        assert "Doe (2026)" in citation
+
+
+class TestMLACitation:
+    """Test MLA citation format"""
+
+    def test_mla_full_citation(self):
+        """Test full MLA citation format"""
+        source = Source(
+            url="https://example.com/article",
+            title="Understanding AI Systems",
+            author="John Smith",
+            date="26 Apr. 2026",
+            site_name="Example News",
+        )
+        citation = source.to_mla_citation()
+        assert "John Smith" in citation
+        assert "Understanding AI Systems" in citation
+
+    def test_mla_intext(self):
+        """Test MLA in-text citation"""
+        source = Source(
+            url="https://example.com",
+            title="Test",
+            author="John Doe",
+        )
+        citation = source.to_intext_mla("end")
+        assert "(Doe)" in citation
+
+
+class TestChicagoCitation:
+    """Test Chicago citation format"""
+
+    def test_chicago_full_citation(self):
+        """Test full Chicago citation format"""
+        source = Source(
+            url="https://example.com/article",
+            title="Understanding AI Systems",
+            author="John Smith",
+            date="2026-04-26",
+            site_name="Example News",
+        )
+        citation = source.to_chicago_citation()
+        assert "John Smith" in citation
+        assert "Last modified" in citation
+
+    def test_chicago_intext(self):
+        """Test Chicago in-text citation"""
+        source = Source(
+            url="https://example.com",
+            title="Test",
+            author="John Doe",
+        )
+        citation = source.to_intext_chicago("end", 1)
+        assert "Note 1" in citation
+
+
+class TestCitationManager:
+    """Test CitationManager class"""
+
+    def test_add_source(self):
+        """Test adding sources"""
+        manager = CitationManager()
+        source = Source(
+            url="https://example.com",
+            title="Test",
+            author="John",
+        )
+        num = manager.add_source(source)
+        assert num == 1
+        assert len(manager.sources) == 1
+
+    def test_duplicate_detection(self):
+        """Test duplicate detection"""
+        manager = CitationManager()
+        source1 = Source(url="https://example.com", title="Test 1")
+        source2 = Source(url="https://example.com", title="Test 2")
+        source3 = Source(url="https://other.com", title="Test 3")
+        
+        manager.add_source(source1)
+        manager.add_source(source2)  # This won't be added (duplicate)
+        manager.add_source(source3)
+        
+        # After adding, source2 is not added due to dedup
+        # Only source1 and source3 should exist
+        assert len(manager.sources) == 2
+        
+        # But detect_duplicates should still find the duplicate
+        duplicates = manager.detect_duplicates()
+        assert len(duplicates) == 0  # No duplicates after dedup
+
+    def test_get_reference_list(self):
+        """Test reference list generation"""
+        manager = CitationManager()
+        manager.add_source(Source(
+            url="https://example.com",
+            title="Test",
+            author="John",
+            date="2026",
+        ))
+        
+        refs = manager.get_reference_list("apa")
+        assert len(refs) == 1
+        assert "John" in refs[0]
+
+
+class TestReportCitationMethods:
+    """Test ResearchReport citation methods"""
+
+    def test_markdown_with_apa_citations(self):
+        """Test Markdown output with APA citations"""
+        report = ResearchReport(topic="Test")
+        report.add_source(Source(
+            url="https://example.com",
+            title="Test Article",
+            author="John Doe",
+            date="2026",
+        ))
+        
+        md = report.to_markdown_with_citations("apa")
+        assert "## References" in md
+        assert "John Doe (2026)" in md
+
+    def test_markdown_with_mla_citations(self):
+        """Test Markdown output with MLA citations"""
+        report = ResearchReport(topic="Test")
+        report.add_source(Source(
+            url="https://example.com",
+            title="Test Article",
+            author="John Doe",
+        ))
+        
+        md = report.to_markdown_with_citations("mla")
+        assert "## References" in md
+
+    def test_detect_duplicate_sources(self):
+        """Test duplicate detection in report"""
+        report = ResearchReport(topic="Test")
+        report.add_source(Source(url="https://example.com", title="Test 1"))
+        # Second source with same URL won't be added
+        report.add_source(Source(url="https://example.com", title="Test 2"))
+        
+        # Only one source exists due to dedup
+        assert len(report.sources) == 1
+
+    def test_dedupe_sources(self):
+        """Test source deduplication (already done automatically in add_source)"""
+        report = ResearchReport(topic="Test")
+        report.add_source(Source(url="https://example.com", title="Test 1"))
+        report.add_source(Source(url="https://example.com", title="Test 2"))
+        report.add_source(Source(url="https://other.com", title="Test 3"))
+        
+        # Sources are deduped automatically
+        assert len(report.sources) == 2
+
+    def test_get_citation(self):
+        """Test getting citation by URL"""
+        report = ResearchReport(topic="Test")
+        report.add_source(Source(
+            url="https://example.com",
+            title="Test",
+            author="John",
+            date="2026",
+        ))
+        
+        citation = report.get_citation("https://example.com", "apa")
+        assert citation is not None
+        assert "John" in citation

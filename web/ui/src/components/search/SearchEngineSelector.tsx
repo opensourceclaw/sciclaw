@@ -3,22 +3,25 @@ import { Listbox, Transition } from '@headlessui/react';
 import { ChevronDown, Check } from 'lucide-react';
 import { clsx } from 'clsx';
 import type { SearchEngine } from '../../types';
+import { useTranslation } from '../../i18n';
 
 interface SearchEngineSelectorProps {
   selected: SearchEngine;
   onChange: (engine: SearchEngine) => void;
 }
 
-const engines: { id: SearchEngine; name: string; description: string }[] = [
-  { id: 'duckduckgo', name: 'DuckDuckGo', description: 'Privacy-focused search' },
-  { id: 'serpapi', name: 'SerpAPI', description: 'Google search results' },
-  { id: 'tavily', name: 'Tavily', description: 'AI-optimized search' },
+const getEngines = (t: (key: string) => string) => [
+  { id: 'duckduckgo' as SearchEngine, name: t('searchEngine.duckduckgo'), description: t('searchEngine.duckduckgoDesc') },
+  { id: 'serpapi' as SearchEngine, name: t('searchEngine.serpapi'), description: t('searchEngine.serpapiDesc') },
+  { id: 'tavily' as SearchEngine, name: t('searchEngine.tavily'), description: t('searchEngine.tavilyDesc') },
 ];
 
 export const SearchEngineSelector: React.FC<SearchEngineSelectorProps> = ({
   selected,
   onChange,
 }) => {
+  const { t } = useTranslation();
+  const engines = getEngines(t);
   const selectedEngine = engines.find((e) => e.id === selected);
   
   return (
@@ -26,7 +29,7 @@ export const SearchEngineSelector: React.FC<SearchEngineSelectorProps> = ({
       <Listbox value={selected} onChange={onChange}>
         <div className="relative">
           <Listbox.Label className="block text-sm font-medium text-gray-700 mb-1">
-            Search Engine
+            {t('searchEngine.label')}
           </Listbox.Label>
           <Listbox.Button
             className={clsx(
