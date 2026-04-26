@@ -4,15 +4,18 @@ import { SearchBar } from '../components/search/SearchBar';
 import { SearchEngineSelector } from '../components/search/SearchEngineSelector';
 import { SearchParamsPanel } from '../components/search/SearchParamsPanel';
 import { useResearchStore } from '../store/useResearchStore';
+import { useTranslation } from '../i18n';
+import { LanguageSwitcher } from '../components/common/LanguageSwitcher';
 
 export const SearchPage: React.FC = () => {
   const navigate = useNavigate();
-  const { 
+  const { t } = useTranslation();
+  const {
     setQuery,
-    engine, 
-    setEngine, 
-    executeSearch, 
-    isSearching 
+    engine,
+    setEngine,
+    executeSearch,
+    isSearching
   } = useResearchStore();
   
   const [maxResults, setMaxResults] = useState(20);
@@ -27,13 +30,16 @@ export const SearchPage: React.FC = () => {
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-8">
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
       <div className="w-full max-w-4xl space-y-8">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            ResearchClaw
+            {t('searchPage.title')}
           </h1>
           <p className="text-lg text-gray-600">
-            AI-Powered Research Assistant
+            {t('searchPage.subtitle')}
           </p>
         </div>
         

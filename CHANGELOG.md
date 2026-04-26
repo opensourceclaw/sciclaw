@@ -2,6 +2,27 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.4.0] - 2026-04-26
+
+### Added
+- **Web UI**: New React-based web interface
+  - SearchPage, ResultsPage, ReportPage
+  - Beautiful responsive design with Tailwind CSS
+- **i18n Support**: Multi-language web interface
+  - English (en) and Chinese (zh) support
+  - Language switcher with localStorage persistence
+  - Browser language detection
+
+### Improved
+- **Test Coverage**: 533+ tests with 100% pass rate
+- **Build Performance**: Optimized production builds
+- **UI/UX**: Enhanced user experience with loading states and animations
+
+### Fixed
+- TypeScript compilation errors in web UI
+- Component import paths
+- i18n integration with React components
+
 ## [0.3.0] - 2026-04-26
 
 ### Added

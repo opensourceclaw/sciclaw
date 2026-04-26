@@ -6,10 +6,13 @@ import { Pagination } from '../components/results/Pagination';
 import { FilterPanel } from '../components/results/FilterPanel';
 import { Button } from '../components/common/Button';
 import { useResearchStore } from '../store/useResearchStore';
+import { useTranslation } from '../i18n';
+import { LanguageSwitcher } from '../components/common/LanguageSwitcher';
 import type { SearchResult } from '../types';
 
 export const ResultsPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const {
     query,
     results,
@@ -66,15 +69,16 @@ export const ResultsPage: React.FC = () => {
           <div className="flex items-center gap-4">
             <Button variant="ghost" onClick={() => navigate('/')}>
               <ArrowLeft size={18} className="mr-2" />
-              New Search
+              {t('resultsPage.newSearch')}
             </Button>
             <div>
-              <h1 className="text-xl font-semibold text-gray-900">Search Results</h1>
+              <h1 className="text-xl font-semibold text-gray-900">{t('resultsPage.searchResults')}</h1>
               <p className="text-sm text-gray-500">
-                {filteredResults.length} results for "{query}"
+                {filteredResults.length} {t('resultsPage.resultsFor')} "{query}"
               </p>
             </div>
           </div>
+          <LanguageSwitcher />
         </div>
       </header>
       

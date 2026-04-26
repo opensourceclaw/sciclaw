@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "researchclaw"
-version = "0.3.0"
+version = "0.4.0"
 description = "Open-source Deep Research framework based on OpenClaw"
 readme = "README.md"
 license = {text = "Apache-2.0"}
@@ -21,6 +21,11 @@ dependencies = [
     "lxml>=4.9.0",
     "html2text>=2020.1.16",
     "ddgs>=9.0.0",
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "pydantic>=2.5.0",
+    "python-multipart>=0.0.6",
+    "weasyprint>=62.0.0",
 ]
 
 [project.optional-dependencies]
@@ -29,6 +34,11 @@ dev = [
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "ruff>=0.1.0",
+]
+api = [
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.scripts]

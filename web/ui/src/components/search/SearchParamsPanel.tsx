@@ -2,6 +2,7 @@ import React from 'react';
 import { SlidersHorizontal } from 'lucide-react';
 import { Input } from '../common/Input';
 import { Button } from '../common/Button';
+import { useTranslation } from '../../i18n';
 
 interface SearchParamsPanelProps {
   maxResults: number;
@@ -20,6 +21,7 @@ export const SearchParamsPanel: React.FC<SearchParamsPanelProps> = ({
   isExpanded,
   onToggle,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="w-full">
       <Button
@@ -28,23 +30,23 @@ export const SearchParamsPanel: React.FC<SearchParamsPanelProps> = ({
         className="flex items-center gap-2 text-gray-600"
       >
         <SlidersHorizontal size={18} />
-        {isExpanded ? 'Hide' : 'Show'} Search Options
+        {isExpanded ? t('searchParams.hideOptions') : t('searchParams.showOptions')}
       </Button>
-      
+
       {isExpanded && (
         <div className="mt-4 p-4 bg-gray-50 rounded-lg space-y-4">
           <div className="flex flex-wrap gap-4">
             <div className="w-40">
               <Input
                 type="number"
-                label="Max Results"
+                label={t('searchParams.maxResults')}
                 value={maxResults}
                 onChange={(e) => onMaxResultsChange(Number(e.target.value))}
                 min={5}
                 max={50}
               />
             </div>
-            
+
             <div className="flex items-center">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -53,7 +55,7 @@ export const SearchParamsPanel: React.FC<SearchParamsPanelProps> = ({
                   onChange={(e) => onIncludeMarkdownChange(e.target.checked)}
                   className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                 />
-                <span className="text-sm text-gray-700">Generate Markdown Report</span>
+                <span className="text-sm text-gray-700">{t('searchParams.includeMarkdown')}</span>
               </label>
             </div>
           </div>

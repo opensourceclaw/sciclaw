@@ -915,6 +915,172 @@ class NewsSiteParser(SiteParser):
         return result
 
 
+class JuejinParser(SiteParser):
+    """Parser for 掘金 (juejin.cn)"""
+
+    DOMAINS = ["juejin.cn", "juejin.im"]
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract juejin article content"""
+        result = {"title": "", "content": "", "author": None, "date": None}
+
+        # Title
+        title = soup.select_one("h1.title, .article-title")
+        if title:
+            result["title"] = title.get_text(strip=True)
+
+        if not result["title"]:
+            og_title = soup.find("meta", property="og:title")
+            if og_title and og_title.get("content"):
+                result["title"] = og_title["content"]
+
+        # Author
+        author = soup.select_one(".author-name, .user-name")
+        if author:
+            result["author"] = author.get_text(strip=True)
+
+        # Date
+        date = soup.select_one(".time, .publish-time")
+        if date:
+            result["date"] = date.get_text(strip=True)
+
+        # Content
+        content = soup.select_one(
+            ".article-content, .markdown-body, .content, article"
+        )
+        if content:
+            for elem in content.select(".code-block-wrapper, script, style"):
+                elem.decompose()
+            result["content"] = content.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class SubstackParser(SiteParser):
+    """Parser for Substack (substack.com)"""
+
+    DOMAINS = ["substack.com"]
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Substack article content"""
+        result = {"title": "", "content": "", "author": None, "date": None}
+
+        # Title
+        title = soup.select_one("h1.post-title, h1")
+        if title:
+            result["title"] = title.get_text(strip=True)
+
+        if not result["title"]:
+            og_title = soup.find("meta", property="og:title")
+            if og_title and og_title.get("content"):
+                result["title"] = og_title["content"]
+
+        # Author
+        author = soup.select_one(".author-name, .byline-name, [class*='author']")
+        if author:
+            result["author"] = author.get_text(strip=True)
+
+        # Date
+        date = soup.select_one("time, .date, .published-date")
+        if date:
+            result["date"] = date.get_text(strip=True)
+
+        # Content
+        content = soup.select_one(
+            ".post-body, .article-body, .article-content, .content-body, article"
+        )
+        if content:
+            for elem in content.select(".paywall, .subscribe-cta, script, style"):
+                elem.decompose()
+            result["content"] = content.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class HashnodeParser(SiteParser):
+    """Parser for Hashnode (hashnode.dev)"""
+
+    DOMAINS = ["hashnode.dev", "hashnode.io"]
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Hashnode article content"""
+        result = {"title": "", "content": "", "author": None, "date": None}
+
+        # Title
+        title = soup.select_one("h1, .article-title, .post-title")
+        if title:
+            result["title"] = title.get_text(strip=True)
+
+        if not result["title"]:
+            og_title = soup.find("meta", property="og:title")
+            if og_title and og_title.get("content"):
+                result["title"] = og_title["content"]
+
+        # Author
+        author = soup.select_one(
+            ".author-name, .user-info-name, [class*='author'] a"
+        )
+        if author:
+            result["author"] = author.get_text(strip=True)
+
+        # Date
+        date = soup.select_one("time, .published-date, .date")
+        if date:
+            result["date"] = date.get_text(strip=True)
+
+        # Content
+        content = soup.select_one(
+            ".article-content, .post-content, .prose, article, .content"
+        )
+        if content:
+            for elem in content.select(".code-block, pre, script, style"):
+                elem.decompose()
+            result["content"] = content.get_text(separator="\n", strip=True)
+
+        return result
+
+
+class BlogspotParser(SiteParser):
+    """Parser for Blogger/Blogspot (blogspot.com)"""
+
+    DOMAINS = ["blogspot.com", "blogspot.co.uk", "blogspot.jp"]
+
+    def parse(self, soup: BeautifulSoup, url: str) -> Dict[str, Any]:
+        """Extract Blogspot article content"""
+        result = {"title": "", "content": "", "author": None, "date": None}
+
+        # Title
+        title = soup.select_one("h3.post-title, h2.post-title, .post-title")
+        if title:
+            result["title"] = title.get_text(strip=True)
+
+        if not result["title"]:
+            og_title = soup.find("meta", property="og:title")
+            if og_title and og_title.get("content"):
+                result["title"] = og_title["content"]
+
+        # Author
+        author = soup.select_one(".post-author, .byline, [class*='author']")
+        if author:
+            result["author"] = author.get_text(strip=True)
+
+        # Date
+        date = soup.select_one(".date-header, .post-date, time")
+        if date:
+            result["date"] = date.get_text(strip=True)
+
+        # Content
+        content = soup.select_one(
+            ".post-body, .post-content, .entry-content, .blog-posts .post"
+        )
+        if content:
+            for elem in content.select(".share-buttons, .post-footer, script, style"):
+                elem.decompose()
+            result["content"] = content.get_text(separator="\n", strip=True)
+
+        return result
+
+
 # Registry of all parsers (ordered by priority for matching)
 SITE_PARSERS: list[type[SiteParser]] = [
     # High-priority specific parsers
@@ -925,9 +1091,13 @@ SITE_PARSERS: list[type[SiteParser]] = [
     CSDNParser,           # 150
     JianShuParser,        # 150
     SegmentFaultParser,   # 150
+    JuejinParser,         # 150 (掘金)
     TechCrunchParser,     # 150
     VergeParser,          # 150
     ArsTechnicaParser,    # 150
+    SubstackParser,       # 140
+    HashnodeParser,       # 140
+    BlogspotParser,       # 130
     # Standard parsers
     GitHubParser,
     MediumParser,

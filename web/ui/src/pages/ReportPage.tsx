@@ -6,10 +6,13 @@ import { TableOfContents } from '../components/report/TableOfContents';
 import { ExportPanel } from '../components/report/ExportPanel';
 import { Button } from '../components/common/Button';
 import { useResearchStore } from '../store/useResearchStore';
+import { useTranslation } from '../i18n';
+import { LanguageSwitcher } from '../components/common/LanguageSwitcher';
 
 export const ReportPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { currentReport, loadReport } = useResearchStore();
   const [activeHeading, setActiveHeading] = useState('');
   
@@ -31,16 +34,16 @@ export const ReportPage: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-500 mb-4">Loading report...</p>
+          <p className="text-gray-500 mb-4">{t('reportPage.loadingReport')}</p>
           <Button variant="outline" onClick={() => navigate('/')}>
             <ArrowLeft size={18} className="mr-2" />
-            Back to Search
+            {t('common.backToSearch')}
           </Button>
         </div>
       </div>
     );
   }
-  
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -49,7 +52,7 @@ export const ReportPage: React.FC = () => {
           <div className="flex items-center gap-4">
             <Button variant="ghost" onClick={() => navigate('/results')}>
               <ArrowLeft size={18} className="mr-2" />
-              Back
+              {t('common.back')}
             </Button>
             <div>
               <h1 className="text-xl font-semibold text-gray-900">
@@ -58,7 +61,7 @@ export const ReportPage: React.FC = () => {
               <div className="flex items-center gap-4 text-sm text-gray-500">
                 <span className="flex items-center gap-1">
                   <FileText size={14} />
-                  {currentReport.sources.length} sources
+                  {currentReport.sources.length} {t('reportPage.sources')}
                 </span>
                 <span className="flex items-center gap-1">
                   <Calendar size={14} />
@@ -67,7 +70,8 @@ export const ReportPage: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
+          <LanguageSwitcher />
           <ExportPanel report={currentReport} />
         </div>
       </header>

@@ -38,7 +38,7 @@ class ResearchReport:
     topic: str
     sections: List[ResearchSection] = field(default_factory=list)
     created_at: datetime = field(default_factory=datetime.now)
-    version: str = "0.2.0"
+    version: str = "0.3.0"
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:

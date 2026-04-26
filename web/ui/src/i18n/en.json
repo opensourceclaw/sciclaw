@@ -1,0 +1,45 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "back": "Back",
+    "backToSearch": "Back to Search",
+    "searching": "Searching...",
+    "language": "Language"
+  },
+  "searchPage": {
+    "title": "ResearchClaw",
+    "subtitle": "AI-Powered Research Assistant",
+    "searchPlaceholder": "Enter your research topic...",
+    "search": "Search",
+    "searchButton": "Search"
+  },
+  "resultsPage": {
+    "newSearch": "New Search",
+    "searchResults": "Search Results",
+    "resultsFor": "results for"
+  },
+  "reportPage": {
+    "loadingReport": "Loading report...",
+    "sources": "sources"
+  },
+  "searchBar": {
+    "placeholder": "Search...",
+    "search": "Search",
+    "searching": "Searching..."
+  },
+  "searchEngine": {
+    "label": "Search Engine",
+    "duckduckgo": "DuckDuckGo",
+    "duckduckgoDesc": "Privacy-focused search",
+    "serpapi": "SerpAPI",
+    "serpapiDesc": "Google search results",
+    "tavily": "Tavily",
+    "tavilyDesc": "AI-optimized search"
+  },
+  "searchParams": {
+    "showOptions": "Show Search Options",
+    "hideOptions": "Hide Search Options",
+    "maxResults": "Max Results",
+    "includeMarkdown": "Generate Markdown Report"
+  }
+}

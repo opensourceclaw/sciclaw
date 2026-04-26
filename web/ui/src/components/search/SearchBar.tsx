@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import { Button } from '../common/Button';
 import { Input } from '../common/Input';
+import { useTranslation } from '../../i18n';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -9,6 +10,7 @@ interface SearchBarProps {
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading = false }) => {
+  const { t } = useTranslation();
   const [query, setQuery] = useState('');
   
   const handleSubmit = (e: React.FormEvent) => {
@@ -26,7 +28,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading = fals
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Enter your research topic..."
+            placeholder={t('searchBar.placeholder')}
             disabled={isLoading}
             className="text-lg py-3"
           />
@@ -41,12 +43,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ onSearch, isLoading = fals
           {isLoading ? (
             <span className="flex items-center gap-2">
               <span className="animate-spin">⏳</span>
-              Searching...
+              {t('searchBar.searching')}
             </span>
           ) : (
             <span className="flex items-center gap-2">
               <Search size={20} />
-              Search
+              {t('searchBar.search')}
             </span>
           )}
         </Button>

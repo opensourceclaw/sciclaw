@@ -5,6 +5,7 @@ Open-source Deep Research framework based on OpenClaw. An intelligent research a
 ## Features
 
 - 🔍 **Multi-Engine Search**: DuckDuckGo, Bing, Microsoft Search
+- 🤖 **Multi-Provider LLM**: DeepSeek, GLM, MiniMax, Kimi, Qwen
 - 📄 **Smart Content Extraction**: Multiple strategies for robust extraction
 - ⚡ **Parallel Processing**: Fast concurrent content retrieval
 - 🎯 **Source Validation**: Quality scoring and filtering
@@ -30,6 +31,29 @@ researchclaw "quantum computing" --depth 5
 researchclaw "machine learning" --engine bing
 ```
 
+## LLM Integration
+
+```bash
+# Chat with LLM
+researchclaw llm "What is Python?"
+
+# Use specific provider
+researchclaw llm "Explain quantum computing" --provider glm
+
+# Use specific model
+researchclaw llm "Write a function" --model deepseek-coder --temperature 0.3
+```
+
+### Supported LLM Providers
+
+| Provider | Default Model | Environment Variable |
+|----------|---------------|---------------------|
+| DeepSeek | deepseek-chat | `DEEPSEEK_API_KEY` |
+| GLM | glm-4 | `GLM_API_KEY` |
+| MiniMax | abab6.5s-chat | `MINIMAX_API_KEY` |
+| Kimi | moonshot-v1-8k-chat | `KIMI_API_KEY` |
+| Qwen | qwen-turbo | `DASHSCOPE_API_KEY` |
+
 ## Configuration
 
 ```bash
@@ -38,6 +62,24 @@ researchclaw init
 
 # Edit config.json to add API keys
 ```
+
+## Supported Sites
+
+ResearchClaw supports 24+ site-specific parsers including:
+
+- **GitHub** - README, issues, PRs
+- **Medium** - Articles
+- **Hacker News** - Posts
+- **Reddit** - Posts and comments
+- **YouTube** - Video metadata
+- **Twitter/X** - Tweets
+- **Wikipedia** - Articles
+- **Zhihu** - Questions and answers
+- **V2EX** - Posts
+- **掘金 (Juejin)** - Articles
+- **Substack** - Newsletter articles
+- **Hashnode** - Blog posts
+- And more...
 
 ## Development
 
@@ -56,8 +98,9 @@ python -m researchclaw.cli.main research "your topic"
 
 ## Architecture
 
+- **LLM Providers**: Pluggable LLM adapters (DeepSeek, GLM, MiniMax, Kimi, Qwen)
 - **Search Providers**: Pluggable search engine adapters
-- **Content Extraction**: Multi-strategy content extraction
+- **Content Extraction**: Multi-strategy content extraction with site-specific parsers
 - **Report Synthesis**: AI-powered research synthesis
 - **Storage**: Project-based research management
 

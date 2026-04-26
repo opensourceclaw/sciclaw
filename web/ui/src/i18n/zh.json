@@ -1,0 +1,45 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "back": "返回",
+    "backToSearch": "返回搜索",
+    "searching": "搜索中...",
+    "language": "语言"
+  },
+  "searchPage": {
+    "title": "ResearchClaw",
+    "subtitle": "AI 驱动的研究助手",
+    "searchPlaceholder": "输入您的研究主题...",
+    "search": "搜索",
+    "searchButton": "搜索"
+  },
+  "resultsPage": {
+    "newSearch": "新搜索",
+    "searchResults": "搜索结果",
+    "resultsFor": "条结果"
+  },
+  "reportPage": {
+    "loadingReport": "加载报告中...",
+    "sources": "个来源"
+  },
+  "searchBar": {
+    "placeholder": "搜索...",
+    "search": "搜索",
+    "searching": "搜索中..."
+  },
+  "searchEngine": {
+    "label": "搜索引擎",
+    "duckduckgo": "DuckDuckGo",
+    "duckduckgoDesc": "注重隐私的搜索",
+    "serpapi": "SerpAPI",
+    "serpapiDesc": "谷歌搜索结果",
+    "tavily": "Tavily",
+    "tavilyDesc": "AI 优化的搜索"
+  },
+  "searchParams": {
+    "showOptions": "显示搜索选项",
+    "hideOptions": "隐藏搜索选项",
+    "maxResults": "最大结果数",
+    "includeMarkdown": "生成 Markdown 报告"
+  }
+}
