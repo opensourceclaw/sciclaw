@@ -2,6 +2,26 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.3.0] - 2026-04-26
+
+### Added
+- **LLM Integration Framework**: Multi-provider LLM support (DeepSeek, GLM, MiniMax, Kimi, Qwen)
+- **Synthesizer V2**: New synthesis engine with theme extraction and structured output
+- **Smart Sectioning**: Automatic report section organization
+- **Enhanced Report Generator**: Multi-format output (Markdown, HTML, JSON) with citation styles
+- **Summarization Module**: Key facts extraction, summarization engine
+- **Content Retry Logic**: Robust retry mechanism with exponential backoff
+
+### Improved
+- **E2E Research Flow**: Complete research pipeline from search to report
+- **Test Coverage**: 505+ tests with 99%+ pass rate
+- **Provider Flexibility**: Easy addition of new LLM providers
+
+### Fixed
+- Content extraction for various site types
+- Site-specific parser registration
+- Report generation edge cases
+
 ## [0.2.0] - 2026-04-26
 
 ### Added

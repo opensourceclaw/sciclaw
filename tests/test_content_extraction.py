@@ -297,9 +297,16 @@ class TestContentExtractor:
         result = extractor._extract_by_readability(soup)
         assert result != ""
 
-    @patch("researchclaw.tools.content_extraction.requests.get")
-    def test_extract_success(self, mock_get, extractor):
+    @patch("researchclaw.tools.content_extraction.requests.Session")
+    def test_extract_success(self, mock_session_class, extractor):
         """Test successful content extraction"""
+        # Clear thread-local session
+        if hasattr(ContentExtractor._local, 'session'):
+            delattr(ContentExtractor._local, 'session')
+        
+        mock_session = Mock()
+        mock_session_class.return_value = mock_session
+        
         mock_response = Mock()
         mock_response.content = b"""
         <html>
@@ -318,7 +325,7 @@ class TestContentExtractor:
         </html>
         """
         mock_response.raise_for_status = Mock()
-        mock_get.return_value = mock_response
+        mock_session.get.return_value = mock_response
 
         result = extractor.extract("https://example.com/article")
 
@@ -328,22 +335,37 @@ class TestContentExtractor:
         assert "Test description" in result.excerpt
         assert len(result.text) > 100
 
-    @patch("researchclaw.tools.content_extraction.requests.get")
-    def test_extract_network_error(self, mock_get, extractor):
+    @patch("researchclaw.tools.content_extraction.requests.Session")
+    def test_extract_network_error(self, mock_session_class, extractor):
         """Test extraction with network error"""
         import requests
-        mock_get.side_effect = requests.RequestException("Connection error")
+        
+        # Clear thread-local session
+        if hasattr(ContentExtractor._local, 'session'):
+            delattr(ContentExtractor._local, 'session')
+        
+        mock_session = Mock()
+        mock_session_class.return_value = mock_session
+        mock_session.get.side_effect = requests.RequestException("Connection error")
 
         result = extractor.extract("https://example.com/article")
         assert result is None
 
-    @patch("researchclaw.tools.content_extraction.requests.get")
-    def test_extract_http_error(self, mock_get, extractor):
+    @patch("researchclaw.tools.content_extraction.requests.Session")
+    def test_extract_http_error(self, mock_session_class, extractor):
         """Test extraction with HTTP error"""
         import requests
+        
+        # Clear thread-local session
+        if hasattr(ContentExtractor._local, 'session'):
+            delattr(ContentExtractor._local, 'session')
+        
+        mock_session = Mock()
+        mock_session_class.return_value = mock_session
+        
         mock_response = Mock()
         mock_response.raise_for_status = Mock(side_effect=requests.HTTPError("404"))
-        mock_get.return_value = mock_response
+        mock_session.get.return_value = mock_response
 
         result = extractor.extract("https://example.com/article")
         assert result is None
