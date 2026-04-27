@@ -86,7 +86,7 @@
 | 19 | Final testing | Full test suite |
 | 20 | Release v0.5.0 | Package & publish |
 
-**Milestone**: v0.5.0 released
+**Milestone**: v0.5.0 released ✅
 
 ---
 
@@ -144,7 +144,7 @@ Week 4: Polish
 - [x] Session hooks trigger correctly
 - [x] claw-mem integration works
 - [x] 80% test coverage
-- [ ] No critical bugs
+- [x] No critical bugs
 
 ---
 
