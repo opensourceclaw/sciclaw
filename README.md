@@ -17,7 +17,7 @@ Open-source Deep Research framework based on OpenClaw. An intelligent research a
 ## Installation
 
 ```bash
-pip install researchclaw
+pip3 install researchclaw
 ```
 
 ## Quick Start
@@ -47,10 +47,10 @@ researchclaw --lang zh research "机器学习"
 
 ```bash
 # Start API server
-python -m web.api.main
+python3 -m web.api.main
 
 # Or install and use
-pip install researchclaw
+pip3 install researchclaw
 researchclaw-api
 
 # Access API docs at http://localhost:8000/docs
