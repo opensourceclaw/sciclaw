@@ -23,6 +23,15 @@ import json
 import html
 
 
+def _get_version() -> str:
+    """Get ResearchClaw version dynamically"""
+    try:
+        from researchclaw import __version__
+        return __version__
+    except ImportError:
+        return "0.5.0"
+
+
 @dataclass
 class ResearchSection:
     """A section of synthesized research"""
@@ -38,7 +47,7 @@ class ResearchReport:
     topic: str
     sections: List[ResearchSection] = field(default_factory=list)
     created_at: datetime = field(default_factory=datetime.now)
-    version: str = "0.4.0"
+    version: str = field(default_factory=lambda: _get_version())
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
