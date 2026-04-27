@@ -11,6 +11,8 @@ Open-source Deep Research framework based on OpenClaw. An intelligent research a
 - 🎯 **Source Validation**: Quality scoring and filtering
 - 📊 **Rich Reports**: Markdown, HTML, JSON with citations
 - 🖥️ **Beautiful CLI**: Progress bars, tables, and rich output
+- 🌍 **Multi-Language Support**: English and Chinese (CLI + Web UI)
+- 🌐 **REST API**: FastAPI-based API server with WebSocket support
 
 ## Installation
 
@@ -29,6 +31,29 @@ researchclaw "quantum computing" --depth 5
 
 # Use specific search engine
 researchclaw "machine learning" --engine bing
+```
+
+### Multi-Language Support
+
+```bash
+# Use in English (default)
+researchclaw "machine learning"
+
+# Use in Chinese
+researchclaw --lang zh research "机器学习"
+```
+
+### REST API Server
+
+```bash
+# Start API server
+python -m web.api.main
+
+# Or install and use
+pip install researchclaw
+researchclaw-api
+
+# Access API docs at http://localhost:8000/docs
 ```
 
 ## LLM Integration

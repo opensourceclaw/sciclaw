@@ -2,6 +2,32 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.5.0] - 2026-04-27
+
+### Added
+- **OpenClaw Skill Integration**
+  - `skill/` directory with full OpenClaw Skill structure
+  - `skill/SKILL.md` - Complete usage documentation
+  - `skill/interface.py` - BaseResearchSkill and ResearchClawSkill classes
+  - `skill/commands.py` - Command parser and handler
+  - 7 example scripts in `skill/examples/`
+- **Hook Integration**
+  - `~/.openclaw/hooks/researchclaw/` - OpenClaw Hook
+  - `HOOK.md` - Hook documentation
+  - `handler.ts` - Event handler
+  - Python bridge layer (`lib/bridge.py`)
+
+### Improved
+- **Error Handling**: Input validation, boundary checking, graceful degradation
+- **Logging**: Added structured logging to skill methods
+- **Test Coverage**: 613 tests with 100% pass rate
+- **Documentation**: SKILL.md, HOOK.md, API.md all complete
+
+### Fixed
+- Empty topic/query/prompt handling
+- Parameter validation (depth, limit, temperature clamping)
+- Error messages for failed operations
+
 ## [0.4.0] - 2026-04-26
 
 ### Added
@@ -12,16 +38,25 @@ All notable changes to ResearchClaw will be documented in this file.
   - English (en) and Chinese (zh) support
   - Language switcher with localStorage persistence
   - Browser language detection
+- **REST API Server**: FastAPI-based API with:
+  - Search, research, and report endpoints
+  - WebSocket support for real-time updates
+  - API key authentication
+  - GZip response compression
+- **CLI i18n**: Command-line interface in English/Chinese
 
 ### Improved
 - **Test Coverage**: 533+ tests with 100% pass rate
 - **Build Performance**: Optimized production builds
 - **UI/UX**: Enhanced user experience with loading states and animations
+- **API Performance**: Search result caching, compression, optimized responses
+- **Cache System**: Configurable TTL for search and general caching
 
 ### Fixed
 - TypeScript compilation errors in web UI
 - Component import paths
 - i18n integration with React components
+- Version numbers across codebase
 
 ## [0.3.0] - 2026-04-26
 

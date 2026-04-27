@@ -1,0 +1,27 @@
+# ResearchClaw Skill Dependencies
+# Python 3.10+
+
+# Core dependencies
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0
+
+# CLI
+click>=8.1.0
+rich>=13.0.0
+
+# Search
+ddgs>=9.0.0
+
+# Research
+html2text>=2020.1.16
+weasyprint>=62.0.0
+
+# Optional: API server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+
+# Optional: LLM providers
+# DeepSeek: pip install openai
+# GLM: pip install zhipuai
+# etc.
