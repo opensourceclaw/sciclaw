@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: researchclaw
-Version: 0.2.0
+Version: 0.4.0
 Summary: Open-source Deep Research framework based on OpenClaw
 Author-email: Peter Cheng <peter@example.com>
 License: Apache-2.0
@@ -14,11 +14,20 @@ Requires-Dist: rich>=13.0.0
 Requires-Dist: lxml>=4.9.0
 Requires-Dist: html2text>=2020.1.16
 Requires-Dist: ddgs>=9.0.0
+Requires-Dist: fastapi>=0.109.0
+Requires-Dist: uvicorn[standard]>=0.27.0
+Requires-Dist: pydantic>=2.5.0
+Requires-Dist: python-multipart>=0.0.6
+Requires-Dist: weasyprint>=62.0.0
 Provides-Extra: dev
 Requires-Dist: pytest>=7.0.0; extra == "dev"
 Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
 Requires-Dist: black>=23.0.0; extra == "dev"
 Requires-Dist: ruff>=0.1.0; extra == "dev"
+Provides-Extra: api
+Requires-Dist: python-jose[cryptography]>=3.3.0; extra == "api"
+Requires-Dist: passlib[bcrypt]>=1.7.4; extra == "api"
+Requires-Dist: python-dotenv>=1.0.0; extra == "api"
 
 # ResearchClaw 🦁
 
@@ -27,11 +36,14 @@ Open-source Deep Research framework based on OpenClaw. An intelligent research a
 ## Features
 
 - 🔍 **Multi-Engine Search**: DuckDuckGo, Bing, Microsoft Search
+- 🤖 **Multi-Provider LLM**: DeepSeek, GLM, MiniMax, Kimi, Qwen
 - 📄 **Smart Content Extraction**: Multiple strategies for robust extraction
 - ⚡ **Parallel Processing**: Fast concurrent content retrieval
 - 🎯 **Source Validation**: Quality scoring and filtering
 - 📊 **Rich Reports**: Markdown, HTML, JSON with citations
 - 🖥️ **Beautiful CLI**: Progress bars, tables, and rich output
+- 🌍 **Multi-Language Support**: English and Chinese (CLI + Web UI)
+- 🌐 **REST API**: FastAPI-based API server with WebSocket support
 
 ## Installation
 
@@ -52,6 +64,52 @@ researchclaw "quantum computing" --depth 5
 researchclaw "machine learning" --engine bing
 ```
 
+### Multi-Language Support
+
+```bash
+# Use in English (default)
+researchclaw "machine learning"
+
+# Use in Chinese
+researchclaw --lang zh research "机器学习"
+```
+
+### REST API Server
+
+```bash
+# Start API server
+python -m web.api.main
+
+# Or install and use
+pip install researchclaw
+researchclaw-api
+
+# Access API docs at http://localhost:8000/docs
+```
+
+## LLM Integration
+
+```bash
+# Chat with LLM
+researchclaw llm "What is Python?"
+
+# Use specific provider
+researchclaw llm "Explain quantum computing" --provider glm
+
+# Use specific model
+researchclaw llm "Write a function" --model deepseek-coder --temperature 0.3
+```
+
+### Supported LLM Providers
+
+| Provider | Default Model | Environment Variable |
+|----------|---------------|---------------------|
+| DeepSeek | deepseek-chat | `DEEPSEEK_API_KEY` |
+| GLM | glm-4 | `GLM_API_KEY` |
+| MiniMax | abab6.5s-chat | `MINIMAX_API_KEY` |
+| Kimi | moonshot-v1-8k-chat | `KIMI_API_KEY` |
+| Qwen | qwen-turbo | `DASHSCOPE_API_KEY` |
+
 ## Configuration
 
 ```bash
@@ -60,6 +118,24 @@ researchclaw init
 
 # Edit config.json to add API keys
 ```
+
+## Supported Sites
+
+ResearchClaw supports 24+ site-specific parsers including:
+
+- **GitHub** - README, issues, PRs
+- **Medium** - Articles
+- **Hacker News** - Posts
+- **Reddit** - Posts and comments
+- **YouTube** - Video metadata
+- **Twitter/X** - Tweets
+- **Wikipedia** - Articles
+- **Zhihu** - Questions and answers
+- **V2EX** - Posts
+- **掘金 (Juejin)** - Articles
+- **Substack** - Newsletter articles
+- **Hashnode** - Blog posts
+- And more...
 
 ## Development
 
@@ -78,8 +154,9 @@ python -m researchclaw.cli.main research "your topic"
 
 ## Architecture
 
+- **LLM Providers**: Pluggable LLM adapters (DeepSeek, GLM, MiniMax, Kimi, Qwen)
 - **Search Providers**: Pluggable search engine adapters
-- **Content Extraction**: Multi-strategy content extraction
+- **Content Extraction**: Multi-strategy content extraction with site-specific parsers
 - **Report Synthesis**: AI-powered research synthesis
 - **Storage**: Project-based research management
 
