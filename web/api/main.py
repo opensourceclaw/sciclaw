@@ -7,6 +7,7 @@ from datetime import datetime
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.gzip import GZipMiddleware
 
 from web.api.config import settings
 from web.api.models import HealthResponse, APIKeyRequest, APIKeyResponse
@@ -42,6 +43,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Configure GZip compression for faster responses
+if settings.enable_response_compression:
+    app.add_middleware(GZipMiddleware, minimum_size=500)
 
 # Include routers
 app.include_router(search.router, prefix="/api/v1")

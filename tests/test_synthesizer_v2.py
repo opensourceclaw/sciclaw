@@ -101,7 +101,7 @@ class TestSynthesisResult:
         )
         assert result.topic == "Test"
         assert result.success is True
-        assert result.version == "0.3.0"
+        assert result.version == "0.4.0"
 
 
 class TestLLMSynthesizer:

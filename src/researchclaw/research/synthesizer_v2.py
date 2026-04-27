@@ -85,7 +85,7 @@ class SynthesisResult:
     sections: List[SynthesisSection] = field(default_factory=list)
     all_sources: List[Finding] = field(default_factory=list)
     created_at: datetime = field(default_factory=datetime.now)
-    version: str = "0.3.0"
+    version: str = "0.4.0"
     metadata: Dict[str, Any] = field(default_factory=dict)
     success: bool = True
     error_message: str = ""

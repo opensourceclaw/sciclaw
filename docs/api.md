@@ -279,3 +279,44 @@ response = requests.get(
 )
 print(response.json())
 ```
+
+---
+
+## Python Skill API
+
+For OpenClaw Skill integration, use the Python API directly.
+
+### Installation
+
+```bash
+pip install git+https://github.com/liantian-cn/researchclaw.git
+```
+
+### Basic Usage
+
+```python
+from skill import ResearchClawSkill, create_skill
+
+# Create skill instance
+skill = create_skill()
+
+# Load skill
+skill.on_load()
+
+# Research
+result = skill.research("artificial intelligence trends", depth=3)
+print(result.content)
+
+# Search
+results = skill.search("machine learning", limit=10)
+for r in results:
+    print(r.title, r.url)
+
+# LLM Chat
+response = skill.chat("What is Python?", provider="deepseek")
+print(response)
+```
+
+### Skill Interface
+
+See [SKILL.md](../skill/SKILL.md) for complete command reference.
