@@ -79,7 +79,7 @@ class TestKimiProvider:
                 {
                     "message": {
                         "role": "assistant",
-                        "content": "你好，我是Kimi。",
+                        "content": "你好,我是Kimi.",
                     },
                     "finish_reason": "stop",
                 }
@@ -101,7 +101,7 @@ class TestKimiProvider:
         response = provider.chat(request)
 
         assert response.id == "kimi-123"
-        assert response.content == "你好，我是Kimi。"
+        assert response.content == "你好,我是Kimi."
         assert response.usage["total_tokens"] == 30
 
     @patch("requests.post")

@@ -168,7 +168,7 @@ class I18n:
             # Init command
             "init.existing": "项目已存在于 {path}",
             "init.initializing": "初始化 ResearchClaw 项目",
-            "init.success": "项目初始化成功！",
+            "init.success": "项目初始化成功!",
 
             # LLM commands
             "llm.provider": "提供商",
@@ -183,8 +183,8 @@ class I18n:
 
             # Errors
             "error.api_key": "{engine} 需要 API 密钥",
-            "error.invalid_engine": "无效的引擎 '{engine}'。可用: {available}",
-            "error.invalid_provider": "无效的提供商 '{provider}'。可用: {available}",
+            "error.invalid_engine": "无效的引擎 '{engine}'.可用: {available}",
+            "error.invalid_provider": "无效的提供商 '{provider}'.可用: {available}",
 
             # CLI options
             "cli.verbose": "详细输出",

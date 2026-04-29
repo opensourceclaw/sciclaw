@@ -79,7 +79,7 @@ class TestGLMProvider:
                 {
                     "message": {
                         "role": "assistant",
-                        "content": "你好，我是智谱AI。",
+                        "content": "你好,我是智谱AI.",
                     },
                     "finish_reason": "stop",
                 }
@@ -101,7 +101,7 @@ class TestGLMProvider:
         response = provider.chat(request)
 
         assert response.id == "glm-123"
-        assert response.content == "你好，我是智谱AI。"
+        assert response.content == "你好,我是智谱AI."
         assert response.usage["total_tokens"] == 30
 
     @patch("requests.post")

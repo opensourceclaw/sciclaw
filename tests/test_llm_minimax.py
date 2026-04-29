@@ -79,7 +79,7 @@ class TestMiniMaxProvider:
                 {
                     "message": {
                         "role": "assistant",
-                        "content": "你好，我是MiniMax。",
+                        "content": "你好,我是MiniMax.",
                     },
                     "finish_reason": "stop",
                 }
@@ -101,7 +101,7 @@ class TestMiniMaxProvider:
         response = provider.chat(request)
 
         assert response.id == "minimax-123"
-        assert response.content == "你好，我是MiniMax。"
+        assert response.content == "你好,我是MiniMax."
         assert response.usage["total_tokens"] == 30
 
     @patch("requests.post")
