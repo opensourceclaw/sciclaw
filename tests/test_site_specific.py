@@ -127,7 +127,7 @@ class TestZhihuParser:
         <head><title>问题标题 - 知乎</title></head>
         <body>
             <div class="zm-item">
-                <p>这是问题的详细内容。</p>
+                <p>这是问题的详细内容.</p>
             </div>
         </body>
         </html>
