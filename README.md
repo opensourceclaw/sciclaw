@@ -1,4 +1,4 @@
-# DeepClaw 🦁
+# DeepClaw
 
 <div align="center">
 
