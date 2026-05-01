@@ -17,7 +17,7 @@ Tests for Search Module
 """
 
 import pytest
-from researchclaw.research.search import SearchEngine, SearchResult, search
+from deepclaw.research.search import SearchEngine, SearchResult, search
 
 
 class TestSearchResult:

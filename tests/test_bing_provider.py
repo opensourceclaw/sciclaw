@@ -17,8 +17,8 @@ Tests for Bing Provider
 """
 
 import pytest
-from researchclaw.search.providers.bing import BingSearchProvider, MicrosoftSearchProvider
-from researchclaw.search.providers import SearchProviderRegistry
+from deepclaw.search.providers.bing import BingSearchProvider, MicrosoftSearchProvider
+from deepclaw.search.providers import SearchProviderRegistry
 
 
 class TestBingSearchProvider:

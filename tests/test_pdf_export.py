@@ -18,8 +18,8 @@ Tests for PDF Export
 
 import pytest
 from pathlib import Path
-from researchclaw.tools.report_formatter import Source, ResearchReport
-from researchclaw.tools.pdf_export import (
+from deepclaw.tools.report_formatter import Source, ResearchReport
+from deepclaw.tools.pdf_export import (
     PDFStyleSettings,
     PDFHeaderSettings,
     PDFFooterSettings,

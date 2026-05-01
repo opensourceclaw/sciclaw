@@ -20,7 +20,7 @@ import pytest
 from unittest.mock import Mock, patch
 import requests
 
-from researchclaw.tools.source_validation import (
+from deepclaw.tools.source_validation import (
     ValidationStatus,
     QualityScore,
     ValidationResult,
@@ -136,7 +136,7 @@ class TestSourceValidator:
         score = validator._calculate_quality_score(100, 10.0, 200)
         assert score.value <= 2
 
-    @patch("researchclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.head")
     def test_validate_url_success(self, mock_head, validator):
         """Test successful URL validation"""
         mock_response = Mock()
@@ -144,7 +144,7 @@ class TestSourceValidator:
         mock_response.headers = {"Content-Type": "text/html"}
         mock_head.return_value = mock_response
 
-        with patch("researchclaw.tools.source_validation.requests.get") as mock_get:
+        with patch("deepclaw.tools.source_validation.requests.get") as mock_get:
             mock_get_response = Mock()
             mock_get_response.status_code = 200
             mock_get_response.content = b"x" * 5000  # 5KB content
@@ -155,7 +155,7 @@ class TestSourceValidator:
             assert result.is_valid is True
             assert result.status_code == 200
 
-    @patch("researchclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.head")
     def test_validate_url_404(self, mock_head, validator):
         """Test URL validation with 404"""
         mock_response = Mock()
@@ -168,7 +168,7 @@ class TestSourceValidator:
         assert result.is_valid is False
         assert result.status == ValidationStatus.UNREACHABLE
 
-    @patch("researchclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.head")
     def test_validate_url_invalid_format(self, mock_head, validator):
         """Test validation of invalid URL format"""
         result = validator.validate_url("not-a-valid-url")
@@ -176,7 +176,7 @@ class TestSourceValidator:
         assert result.is_valid is False
         assert result.status == ValidationStatus.INVALID_URL
 
-    @patch("researchclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.head")
     def test_validate_url_blocked(self, mock_head, validator):
         """Test validation of blocked domain"""
         result = validator.validate_url("http://localhost:8080")
@@ -188,8 +188,8 @@ class TestSourceValidator:
 class TestModuleFunctions:
     """Test module-level functions"""
 
-    @patch("researchclaw.tools.source_validation.requests.head")
-    @patch("researchclaw.tools.source_validation.requests.get")
+    @patch("deepclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.get")
     def test_validate_source(self, mock_get, mock_head):
         """Test validate_source function"""
         mock_head.return_value = Mock(
@@ -205,7 +205,7 @@ class TestModuleFunctions:
         assert result is not None
         assert result.url == "https://example.com"
 
-    @patch("researchclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.head")
     def test_validate_sources(self, mock_head):
         """Test validate_sources function"""
         mock_response = Mock()
@@ -221,7 +221,7 @@ class TestModuleFunctions:
 class TestFilterFunctions:
     """Test filtering functions"""
 
-    @patch("researchclaw.tools.source_validation.requests.head")
+    @patch("deepclaw.tools.source_validation.requests.head")
     def test_filter_valid_sources(self, mock_head):
         """Test filter_valid_sources function"""
         mock_response = Mock()
@@ -229,7 +229,7 @@ class TestFilterFunctions:
         mock_response.headers = {"Content-Type": "text/html"}
         mock_head.return_value = mock_response
 
-        with patch("researchclaw.tools.source_validation.requests.get") as mock_get:
+        with patch("deepclaw.tools.source_validation.requests.get") as mock_get:
             mock_get.return_value = Mock(
                 status_code=200,
                 content=b"x" * 5000,

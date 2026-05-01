@@ -10,8 +10,8 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 import argparse
-from researchclaw.llm.engine import LLMEngine
-from researchclaw.llm import ChatMessage, MessageRole
+from deepclaw.llm.engine import LLMEngine
+from deepclaw.llm import ChatMessage, MessageRole
 
 
 def main():

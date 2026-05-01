@@ -1,2 +1,0 @@
-[console_scripts]
-researchclaw = researchclaw.cli.main:main

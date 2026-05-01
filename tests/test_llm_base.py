@@ -17,7 +17,7 @@ Tests for LLM base classes
 """
 
 import pytest
-from researchclaw.llm.base import (
+from deepclaw.llm.base import (
     MessageRole,
     ChatMessage,
     ChatCompletion,
@@ -281,5 +281,5 @@ class TestRegisterLLMProvider:
 
     def test_decorator_exists(self):
         """Test that the register_llm_provider decorator is defined"""
-        from researchclaw.llm.base import register_llm_provider
+        from deepclaw.llm.base import register_llm_provider
         assert callable(register_llm_provider)

@@ -19,8 +19,8 @@ Tests for summarization module - Key Point Extractor
 import pytest
 from unittest.mock import Mock, patch
 import json
-from researchclaw.summarization.key_points import KeyPointExtractor, KeyPointExtractorConfig
-from researchclaw.summarization.data import KeyPoint, KeyPointsResult
+from deepclaw.summarization.key_points import KeyPointExtractor, KeyPointExtractorConfig
+from deepclaw.summarization.data import KeyPoint, KeyPointsResult
 
 
 class TestKeyPointExtractorConfig:
@@ -47,13 +47,13 @@ class TestKeyPointExtractorConfig:
 class TestKeyPointExtractor:
     """Test KeyPointExtractor class"""
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_init_with_defaults(self, mock_llm_engine):
         """Test initialization with defaults"""
         extractor = KeyPointExtractor()
         assert extractor.llm_engine is not None
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_empty_content(self, mock_llm_engine):
         """Test extracting from empty content"""
         extractor = KeyPointExtractor()
@@ -62,7 +62,7 @@ class TestKeyPointExtractor:
         assert result.success is False
         assert result.count == 0
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_success(self, mock_llm_engine):
         """Test successful key point extraction"""
         mock_engine = Mock()
@@ -84,7 +84,7 @@ class TestKeyPointExtractor:
         assert result.count == 2
         assert result.key_points[0].text == "Key point 1"
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_filters_low_importance(self, mock_llm_engine):
         """Test that low importance points are filtered"""
         mock_engine = Mock()
@@ -107,7 +107,7 @@ class TestKeyPointExtractor:
         assert result.count == 1
         assert result.key_points[0].text == "Important point"
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_sorted_by_importance(self, mock_llm_engine):
         """Test that results are sorted by importance"""
         mock_engine = Mock()
@@ -130,7 +130,7 @@ class TestKeyPointExtractor:
         assert result.key_points[1].importance == 0.7
         assert result.key_points[2].importance == 0.5
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_limits_count(self, mock_llm_engine):
         """Test that count is limited"""
         mock_engine = Mock()
@@ -150,7 +150,7 @@ class TestKeyPointExtractor:
 
         assert result.count == 3
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_fallback_parse(self, mock_llm_engine):
         """Test fallback parsing when JSON fails"""
         mock_engine = Mock()
@@ -172,7 +172,7 @@ class TestKeyPointExtractor:
         # Should fall back to line parsing
         assert result.count >= 0
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_extract_batch(self, mock_llm_engine):
         """Test batch extraction"""
         mock_engine = Mock()
@@ -193,7 +193,7 @@ class TestKeyPointExtractor:
 
         assert len(results) == 2
 
-    @patch('researchclaw.summarization.key_points.LLMEngine')
+    @patch('deepclaw.summarization.key_points.LLMEngine')
     def test_content_truncation(self, mock_llm_engine):
         """Test content truncation for long input"""
         mock_engine = Mock()

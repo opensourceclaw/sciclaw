@@ -17,7 +17,7 @@ Tests for Research Synthesizer v2
 """
 
 import pytest
-from researchclaw.research.synthesizer_v2 import (
+from deepclaw.research.synthesizer_v2 import (
     Finding,
     SynthesisRequest,
     SynthesisSection,

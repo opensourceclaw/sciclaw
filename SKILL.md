@@ -1,8 +1,8 @@
-# ResearchClaw Skill Specification
+# DeepClaw Skill Specification
 
 ## Overview
 
-ResearchClaw is an OpenClaw Skill that provides deep research capabilities powered by AI. It enables users to conduct comprehensive research on any topic with source validation, smart synthesis, and structured reporting.
+DeepClaw is an OpenClaw Skill that provides deep research capabilities powered by AI. It enables users to conduct comprehensive research on any topic with source validation, smart synthesis, and structured reporting.
 
 ## Capability
 

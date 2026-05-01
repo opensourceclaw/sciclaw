@@ -150,7 +150,7 @@ class TestConfigDefaults:
     def test_default_cache_dir(self):
         """Test default cache directory"""
         skill = ResearchClawSkill()
-        assert skill._cache_dir == ".researchclaw_cache"
+        assert skill._cache_dir == ".deepclaw_cache"
 
     def test_config_override_cache_dir(self):
         """Test configuring custom cache dir"""

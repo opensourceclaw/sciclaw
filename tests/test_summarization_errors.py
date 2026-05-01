@@ -17,7 +17,7 @@ Tests for summarization module - Error handling
 """
 
 import pytest
-from researchclaw.summarization.errors import (
+from deepclaw.summarization.errors import (
     ErrorSeverity,
     SummarizationError,
     LLMError,

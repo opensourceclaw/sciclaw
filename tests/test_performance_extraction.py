@@ -21,7 +21,7 @@ import time
 from unittest.mock import Mock, patch
 from bs4 import BeautifulSoup
 
-from researchclaw.tools.content_extraction import ContentExtractor
+from deepclaw.tools.content_extraction import ContentExtractor
 
 
 class TestExtractionPerformance:

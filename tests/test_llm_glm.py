@@ -18,8 +18,8 @@ Tests for GLM (Zhipu AI) LLM provider
 
 import pytest
 from unittest.mock import patch, MagicMock
-from researchclaw.llm.providers.glm import GLMProvider
-from researchclaw.llm.base import (
+from deepclaw.llm.providers.glm import GLMProvider
+from deepclaw.llm.base import (
     ChatMessage,
     ChatCompletionRequest,
     MessageRole,

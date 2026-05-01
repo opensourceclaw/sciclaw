@@ -17,9 +17,9 @@ Tests for Research Runner Module
 """
 
 import pytest
-from researchclaw.research.runner import ResearchRunner, ResearchFinding
-from researchclaw.research.search import SearchResult
-from researchclaw.tools.content_extraction import ExtractedContent
+from deepclaw.research.runner import ResearchRunner, ResearchFinding
+from deepclaw.research.search import SearchResult
+from deepclaw.tools.content_extraction import ExtractedContent
 from datetime import datetime
 
 

@@ -24,7 +24,7 @@ def main():
         "default_engine": "duckduckgo",
         "default_provider": "deepseek",
         "default_temperature": 0.5,
-        "cache_dir": "/tmp/researchclaw_cache"
+        "cache_dir": "/tmp/deepclaw_cache"
     }
 
     skill = ResearchClawSkill(config)

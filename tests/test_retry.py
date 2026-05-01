@@ -21,7 +21,7 @@ import time
 from unittest.mock import Mock, patch
 import requests
 
-from researchclaw.tools.retry import (
+from deepclaw.tools.retry import (
     RetryConfig,
     ExtractionError,
     NetworkError,

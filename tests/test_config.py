@@ -19,7 +19,7 @@ Tests for Config Module
 import pytest
 import tempfile
 from pathlib import Path
-from researchclaw.config import Config, ConfigManager, DEFAULT_CONFIG
+from deepclaw.config import Config, ConfigManager, DEFAULT_CONFIG
 
 
 class TestConfig:

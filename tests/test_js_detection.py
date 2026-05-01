@@ -17,12 +17,12 @@ Tests for User-Agent Pool and JS Detection
 """
 
 import pytest
-from researchclaw.tools.user_agent import (
+from deepclaw.tools.user_agent import (
     UserAgentPool,
     get_user_agent,
     get_default_headers,
 )
-from researchclaw.tools.js_detection import (
+from deepclaw.tools.js_detection import (
     JSSiteDetector,
     detect_js_site,
     should_use_headless,
@@ -86,7 +86,7 @@ class TestUserAgentPool:
 
     def test_get_headers_mobile(self):
         """Test getting mobile headers"""
-        from researchclaw.tools.user_agent import UserAgentPool
+        from deepclaw.tools.user_agent import UserAgentPool
         pool = UserAgentPool(use_mobile=True)
         headers = {"User-Agent": pool.get_mobile()}
         # Should be mobile UA

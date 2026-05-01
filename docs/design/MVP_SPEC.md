@@ -1,4 +1,4 @@
-# ResearchClaw - MVP Feature Specification
+# DeepClaw - MVP Feature Specification
 
 **Version**: 1.0.0
 **Date**: 2026-04-25
@@ -10,7 +10,7 @@
 
 ### 1.1 Goals
 
-- Prove ResearchClaw concept with minimal functionality
+- Prove DeepClaw concept with minimal functionality
 - Get user feedback for future development
 - Establish core architecture patterns
 
@@ -90,9 +90,9 @@
 ### 4.1 Module Structure
 
 ```
-researchclaw/
+deepclaw/
 ├── src/
-│   └── researchclaw/
+│   └── deepclaw/
 │       ├── __init__.py
 │       ├── research/          # Research engine
 │       │   ├── planner.py     # Task planning
@@ -121,7 +121,7 @@ researchclaw/
 ### 4.3 Storage Structure
 
 ```
-~/.researchclaw/
+~/.deepclaw/
 ├── cache/
 │   └── search_*.json      # Search result cache
 ├── data/
@@ -147,7 +147,7 @@ researchclaw/
 
 ```
 1. User enters query
-   $ researchclaw "impact of AI on education"
+   $ deepclaw "impact of AI on education"
 
 2. System analyzes query
    - Identify key concepts
@@ -185,7 +185,7 @@ researchclaw/
 
 ### 6.1 Success Conditions
 
-- [ ] Can execute `researchclaw "topic"` from command line
+- [ ] Can execute `deepclaw "topic"` from command line
 - [ ] Returns research report within 5 minutes
 - [ ] Report includes at least 5 sources
 - [ ] Sources are cited in output

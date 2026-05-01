@@ -18,7 +18,7 @@ Tests for Rich CLI Output
 
 import pytest
 from io import StringIO
-from researchclaw.tools.rich_output import (
+from deepclaw.tools.rich_output import (
     OutputLevel,
     CLIConfig,
     RichConsole,

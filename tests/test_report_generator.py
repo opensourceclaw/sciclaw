@@ -19,12 +19,12 @@ Tests for Report Generator
 import pytest
 import json
 from datetime import datetime
-from researchclaw.research.report_generator import (
+from deepclaw.research.report_generator import (
     ReportConfig,
     ReportGenerator,
     generate_report,
 )
-from researchclaw.research.synthesizer_v2 import (
+from deepclaw.research.synthesizer_v2 import (
     SynthesisResult,
     SynthesisSection,
     Finding,

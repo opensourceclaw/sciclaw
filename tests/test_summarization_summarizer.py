@@ -18,9 +18,9 @@ Tests for summarization module - Summarizer
 
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from researchclaw.summarization.summarizer import Summarizer, SummarizerConfig
-from researchclaw.summarization.data import SummarizationLength, SummarizationStyle, SummaryResult
-from researchclaw.summarization.errors import SummarizationError
+from deepclaw.summarization.summarizer import Summarizer, SummarizerConfig
+from deepclaw.summarization.data import SummarizationLength, SummarizationStyle, SummaryResult
+from deepclaw.summarization.errors import SummarizationError
 
 
 class TestSummarizerConfig:
@@ -49,21 +49,21 @@ class TestSummarizerConfig:
 class TestSummarizer:
     """Test Summarizer class"""
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_init_with_defaults(self, mock_llm_engine):
         """Test initialization with defaults"""
         summarizer = Summarizer()
         assert summarizer.llm_engine is not None
         assert summarizer.config.default_length == SummarizationLength.MEDIUM
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_init_with_custom_engine(self, mock_llm_engine):
         """Test initialization with custom LLM engine"""
         mock_engine = Mock()
         summarizer = Summarizer(llm_engine=mock_engine)
         assert summarizer.llm_engine == mock_engine
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_empty_content(self, mock_llm_engine):
         """Test summarizing empty content"""
         summarizer = Summarizer()
@@ -73,7 +73,7 @@ class TestSummarizer:
         assert result.error == "Empty content provided"
         assert result.summary == ""
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_whitespace_content(self, mock_llm_engine):
         """Test summarizing whitespace-only content"""
         summarizer = Summarizer()
@@ -82,7 +82,7 @@ class TestSummarizer:
         assert result.success is False
         assert "Empty" in result.error
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_success(self, mock_llm_engine):
         """Test successful summarization"""
         # Mock the LLM engine
@@ -97,7 +97,7 @@ class TestSummarizer:
         assert result.summary == "This is a summary of the content."
         assert result.original_length > 0
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_with_length_and_style(self, mock_llm_engine):
         """Test summarization with specific length and style"""
         mock_engine = Mock()
@@ -115,7 +115,7 @@ class TestSummarizer:
         assert result.style == SummarizationStyle.CASUAL
         mock_engine.chat_simple.assert_called_once()
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_content_truncation(self, mock_llm_engine):
         """Test content truncation for very long input"""
         mock_engine = Mock()
@@ -134,7 +134,7 @@ class TestSummarizer:
         # Verify truncation happened
         assert result.original_length == 200
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_retry_on_failure(self, mock_llm_engine):
         """Test retry on LLM failure"""
         mock_engine = Mock()
@@ -149,7 +149,7 @@ class TestSummarizer:
         result = summarizer.summarize("Test content")
         assert result.success is True
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_all_retries_fail(self, mock_llm_engine):
         """Test when all retries fail"""
         mock_engine = Mock()
@@ -165,7 +165,7 @@ class TestSummarizer:
         assert result.success is False
         assert result.error is not None
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_summarize_batch(self, mock_llm_engine):
         """Test batch summarization"""
         mock_engine = Mock()
@@ -178,10 +178,10 @@ class TestSummarizer:
         assert len(results) == 3
         assert all(r.success for r in results)
 
-    @patch('researchclaw.summarization.summarizer.LLMEngine')
+    @patch('deepclaw.summarization.summarizer.LLMEngine')
     def test_prompt_templates_exist(self, mock_llm_engine):
         """Test that all prompt templates exist"""
-        from researchclaw.summarization.summarizer import PROMPT_TEMPLATES
+        from deepclaw.summarization.summarizer import PROMPT_TEMPLATES
 
         # Check all combinations
         for length in SummarizationLength:

@@ -1,8 +1,8 @@
-# ResearchClaw v0.5.0 - Week 4 任务指令
+# DeepClaw v0.5.0 - Week 4 任务指令
 
 **执行者**: Jarvis
 **验收者**: Friday (Friday AI)
-**目标**: 完善 ResearchClaw 并发布 v0.5.0
+**目标**: 完善 DeepClaw 并发布 v0.5.0
 
 ---
 
@@ -13,7 +13,7 @@
 | 任务 | 验收标准 |
 |------|----------|
 | 完善 Skill 文档 | `skill/SKILL.md` 包含完整使用说明 |
-| 完善 Hook 文档 | `~/.openclaw/hooks/researchclaw/HOOK.md` 完整 |
+| 完善 Hook 文档 | `~/.openclaw/hooks/deepclaw/HOOK.md` 完整 |
 | API 文档 | 生成 `docs/API.md` 包含所有方法签名 |
 
 ### Day 17: 使用示例
@@ -53,14 +53,14 @@
 ## 关键文件位置
 
 ```
-researchclaw/
+deepclaw/
 ├── skill/                    # Skill 接口 (已开发)
-├── src/researchclaw/         # 核心代码
+├── src/deepclaw/         # 核心代码
 ├── tests/skill/              # 单元测试 (57/57)
 ├── docs/roadmaps/            # 迭代计划
 
 ~/.openclaw/hooks/
-└── researchclaw/             # Hook 接口 (已开发)
+└── deepclaw/             # Hook 接口 (已开发)
     ├── lib/bridge.py         # Python 桥接层
     ├── tests/                # Hook 测试 (31/31)
     └── config.json           # 配置文件

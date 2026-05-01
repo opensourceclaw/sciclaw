@@ -130,7 +130,7 @@ class TestBaseResearchSkill:
         skill = TestSkill()
         info = skill.get_info()
 
-        assert info["name"] == "researchclaw"
+        assert info["name"] == "deepclaw"
         assert info["version"] == "0.5.0"
         assert "description" in info
 
@@ -141,7 +141,7 @@ class TestResearchClawSkill:
     def test_creation(self):
         """Test creating ResearchClawSkill"""
         skill = ResearchClawSkill()
-        assert skill.name == "researchclaw"
+        assert skill.name == "deepclaw"
         assert skill.version == "0.5.0"
         assert skill.state == SkillState.UNLOADED
 
@@ -232,7 +232,7 @@ class TestSkillIntegration:
 
         # Get info
         info = skill.get_info()
-        assert info["name"] == "researchclaw"
+        assert info["name"] == "deepclaw"
         assert info["version"] == "0.5.0"
 
         # Health check

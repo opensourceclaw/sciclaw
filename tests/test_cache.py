@@ -20,7 +20,7 @@ import pytest
 import time
 import tempfile
 from pathlib import Path
-from researchclaw.cache import Cache, FileCache, cached, get_cache, clear_cache
+from deepclaw.cache import Cache, FileCache, cached, get_cache, clear_cache
 
 
 class TestCache:

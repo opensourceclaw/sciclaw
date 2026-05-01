@@ -17,7 +17,7 @@ Tests for summarization module - Data classes and enums
 """
 
 import pytest
-from researchclaw.summarization.data import (
+from deepclaw.summarization.data import (
     SummarizationLength,
     SummarizationStyle,
     SummaryResult,

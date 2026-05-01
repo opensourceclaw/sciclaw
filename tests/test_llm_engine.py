@@ -17,7 +17,7 @@ Tests for LLM Engine
 """
 
 import pytest
-from researchclaw.llm.engine import LLMEngine
+from deepclaw.llm.engine import LLMEngine
 
 
 class TestLLMEngineBasic:
@@ -26,10 +26,10 @@ class TestLLMEngineBasic:
     @pytest.fixture(autouse=True)
     def setup(self):
         """Ensure providers are registered"""
-        import researchclaw.llm.providers.deepseek  # noqa: F401
-        import researchclaw.llm.providers.glm  # noqa: F401
-        import researchclaw.llm.providers.minimax  # noqa: F401
-        import researchclaw.llm.providers.kimi  # noqa: F401
+        import deepclaw.llm.providers.deepseek  # noqa: F401
+        import deepclaw.llm.providers.glm  # noqa: F401
+        import deepclaw.llm.providers.minimax  # noqa: F401
+        import deepclaw.llm.providers.kimi  # noqa: F401
 
     def test_deepseek_default_model(self):
         """Test DeepSeek has correct default model"""

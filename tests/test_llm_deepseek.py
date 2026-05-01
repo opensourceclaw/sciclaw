@@ -18,8 +18,8 @@ Tests for DeepSeek LLM provider
 
 import pytest
 from unittest.mock import patch, MagicMock
-from researchclaw.llm.providers.deepseek import DeepSeekProvider
-from researchclaw.llm.base import (
+from deepclaw.llm.providers.deepseek import DeepSeekProvider
+from deepclaw.llm.base import (
     ChatMessage,
     ChatCompletionRequest,
     MessageRole,

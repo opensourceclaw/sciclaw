@@ -21,7 +21,7 @@ import pytest
 from unittest.mock import Mock, patch
 from bs4 import BeautifulSoup
 
-from researchclaw.tools.content_extraction import ContentExtractor
+from deepclaw.tools.content_extraction import ContentExtractor
 
 
 class TestExtractionPerformance:
@@ -60,7 +60,7 @@ class TestExtractionPerformance:
 
     def test_extraction_time_under_1_second(self, extractor, sample_html):
         """Test extraction completes in under reasonable time"""
-        with patch("researchclaw.tools.content_extraction.requests.get") as mock_get:
+        with patch("deepclaw.tools.content_extraction.requests.get") as mock_get:
             mock_response = Mock()
             mock_response.content = sample_html.encode()
             mock_response.raise_for_status = Mock()
@@ -76,7 +76,7 @@ class TestExtractionPerformance:
 
     def test_extraction_time_consistency(self, extractor, sample_html):
         """Test extraction time is consistent across multiple runs"""
-        with patch("researchclaw.tools.content_extraction.requests.get") as mock_get:
+        with patch("deepclaw.tools.content_extraction.requests.get") as mock_get:
             mock_response = Mock()
             mock_response.content = sample_html.encode()
             mock_response.raise_for_status = Mock()
@@ -143,7 +143,7 @@ class TestCacheIntegration:
 
     def test_cached_extraction_faster(self):
         """Test that cached extraction is significantly faster"""
-        from researchclaw.cache import Cache
+        from deepclaw.cache import Cache
 
         # This test would verify cache helps performance
         # but requires actual network calls to measure difference

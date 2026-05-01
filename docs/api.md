@@ -1,8 +1,8 @@
-# ResearchClaw API Documentation
+# DeepClaw API Documentation
 
 ## Overview
 
-ResearchClaw API provides programmatic access to search, research, and report management functionality.
+DeepClaw API provides programmatic access to search, research, and report management functionality.
 
 **Base URL:** `http://localhost:8000`
 **API Version:** v1
@@ -289,13 +289,13 @@ For OpenClaw Skill integration, use the Python API directly.
 ### Installation
 
 ```bash
-pip install git+https://github.com/liantian-cn/researchclaw.git
+pip install git+https://github.com/liantian-cn/deepclaw.git
 ```
 
 ### Basic Usage
 
 ```python
-from skill import ResearchClawSkill, create_skill
+from skill import DeepClawSkill, create_skill
 
 # Create skill instance
 skill = create_skill()

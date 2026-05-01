@@ -18,7 +18,7 @@ Tests for Search Provider Base Classes
 
 import pytest
 from typing import List
-from researchclaw.search.providers.base import (
+from deepclaw.search.providers.base import (
     SearchResult,
     SearchProvider,
     SearchProviderRegistry,

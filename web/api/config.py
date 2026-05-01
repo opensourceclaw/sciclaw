@@ -23,7 +23,7 @@ class APISettings:
     cors_origins: list = ["*"]
 
     # ResearchClaw
-    researchclaw_config: str = "config.json"
+    deepclaw_config: str = "config.json"
     reports_dir: str = "reports"
 
     # WebSocket

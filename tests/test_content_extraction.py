@@ -20,7 +20,7 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 from bs4 import BeautifulSoup
 
-from researchclaw.tools.content_extraction import (
+from deepclaw.tools.content_extraction import (
     ContentExtractor,
     ExtractedContent,
     extract_content,
@@ -297,7 +297,7 @@ class TestContentExtractor:
         result = extractor._extract_by_readability(soup)
         assert result != ""
 
-    @patch("researchclaw.tools.content_extraction.requests.Session")
+    @patch("deepclaw.tools.content_extraction.requests.Session")
     def test_extract_success(self, mock_session_class, extractor):
         """Test successful content extraction"""
         # Clear thread-local session
@@ -335,7 +335,7 @@ class TestContentExtractor:
         assert "Test description" in result.excerpt
         assert len(result.text) > 100
 
-    @patch("researchclaw.tools.content_extraction.requests.Session")
+    @patch("deepclaw.tools.content_extraction.requests.Session")
     def test_extract_network_error(self, mock_session_class, extractor):
         """Test extraction with network error"""
         import requests
@@ -351,7 +351,7 @@ class TestContentExtractor:
         result = extractor.extract("https://example.com/article")
         assert result is None
 
-    @patch("researchclaw.tools.content_extraction.requests.Session")
+    @patch("deepclaw.tools.content_extraction.requests.Session")
     def test_extract_http_error(self, mock_session_class, extractor):
         """Test extraction with HTTP error"""
         import requests
@@ -374,7 +374,7 @@ class TestContentExtractor:
 class TestExtractContent:
     """Test module-level extract_content function"""
 
-    @patch("researchclaw.tools.content_extraction.ContentExtractor")
+    @patch("deepclaw.tools.content_extraction.ContentExtractor")
     def test_extract_content_function(self, mock_extractor_class):
         """Test extract_content helper function"""
         mock_extractor = Mock()
