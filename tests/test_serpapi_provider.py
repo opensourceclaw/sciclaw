@@ -17,12 +17,12 @@ Tests for SerpAPI Provider
 """
 
 import pytest
-from researchclaw.search.providers.serpapi import (
+from deepclaw.search.providers.serpapi import (
     SerpAPISearchProvider,
     SerpAPIGoogleProvider,
     SUPPORTED_ENGINES,
 )
-from researchclaw.search.providers import SearchProviderRegistry
+from deepclaw.search.providers import SearchProviderRegistry
 
 
 class TestSerpAPISearchProvider:

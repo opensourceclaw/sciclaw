@@ -19,7 +19,7 @@ Tests for Storage Module
 import pytest
 import tempfile
 from pathlib import Path
-from researchclaw.storage.manager import StorageManager, ResearchProject
+from deepclaw.storage.manager import StorageManager, ResearchProject
 
 
 class TestResearchProject:

@@ -17,8 +17,8 @@ Tests for DuckDuckGo Provider
 """
 
 import pytest
-from researchclaw.search.providers.duckduckgo import DuckDuckGoSearchProvider, DDGSearchProvider
-from researchclaw.search.providers import SearchProviderRegistry
+from deepclaw.search.providers.duckduckgo import DuckDuckGoSearchProvider, DDGSearchProvider
+from deepclaw.search.providers import SearchProviderRegistry
 
 
 class TestDuckDuckGoSearchProvider:

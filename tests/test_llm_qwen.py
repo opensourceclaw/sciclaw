@@ -18,8 +18,8 @@ Tests for Qwen LLM provider
 
 import pytest
 from unittest.mock import patch, MagicMock
-from researchclaw.llm.providers.qwen import QwenProvider
-from researchclaw.llm.base import (
+from deepclaw.llm.providers.qwen import QwenProvider
+from deepclaw.llm.base import (
     ChatMessage,
     ChatCompletionRequest,
     MessageRole,
@@ -229,7 +229,7 @@ class TestQwenProvider:
 
     def test_registry_registration(self):
         """Test provider is registered in registry"""
-        from researchclaw.llm.base import LLMProviderRegistry
+        from deepclaw.llm.base import LLMProviderRegistry
         provider_class = LLMProviderRegistry.get("qwen")
         assert provider_class is not None
         assert provider_class == QwenProvider

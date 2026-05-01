@@ -44,7 +44,7 @@ async def search(
         if time.time() - cached_time < settings.search_cache_ttl:
             return cached_result
 
-    from researchclaw.tools.web_search import WebSearchTool
+    from deepclaw.tools.web_search import WebSearchTool
 
     try:
         # Create search tool and perform search

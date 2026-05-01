@@ -1,4 +1,4 @@
-# ResearchClaw 🦁
+# DeepClaw 🦁
 
 Open-source Deep Research framework based on OpenClaw. An intelligent research assistant that autonomously searches, extracts, and synthesizes information from the web.
 
@@ -17,30 +17,30 @@ Open-source Deep Research framework based on OpenClaw. An intelligent research a
 ## Installation
 
 ```bash
-pip3 install researchclaw
+pip3 install deepclaw
 ```
 
 ## Quick Start
 
 ```bash
 # Basic research
-researchclaw "artificial intelligence trends 2026"
+deepclaw "artificial intelligence trends 2026"
 
 # With custom depth
-researchclaw "quantum computing" --depth 5
+deepclaw "quantum computing" --depth 5
 
 # Use specific search engine
-researchclaw "machine learning" --engine bing
+deepclaw "machine learning" --engine bing
 ```
 
 ### Multi-Language Support
 
 ```bash
 # Use in English (default)
-researchclaw "machine learning"
+deepclaw "machine learning"
 
 # Use in Chinese
-researchclaw --lang zh research "机器学习"
+deepclaw --lang zh research "机器学习"
 ```
 
 ### REST API Server
@@ -50,8 +50,8 @@ researchclaw --lang zh research "机器学习"
 python3 -m web.api.main
 
 # Or install and use
-pip3 install researchclaw
-researchclaw-api
+pip3 install deepclaw
+deepclaw-api
 
 # Access API docs at http://localhost:8000/docs
 ```
@@ -60,13 +60,13 @@ researchclaw-api
 
 ```bash
 # Chat with LLM
-researchclaw llm "What is Python?"
+deepclaw llm "What is Python?"
 
 # Use specific provider
-researchclaw llm "Explain quantum computing" --provider glm
+deepclaw llm "Explain quantum computing" --provider glm
 
 # Use specific model
-researchclaw llm "Write a function" --model deepseek-coder --temperature 0.3
+deepclaw llm "Write a function" --model deepseek-coder --temperature 0.3
 ```
 
 ### Supported LLM Providers
@@ -83,14 +83,14 @@ researchclaw llm "Write a function" --model deepseek-coder --temperature 0.3
 
 ```bash
 # Initialize config
-researchclaw init
+deepclaw init
 
 # Edit config.json to add API keys
 ```
 
 ## Supported Sites
 
-ResearchClaw supports 24+ site-specific parsers including:
+DeepClaw supports 24+ site-specific parsers including:
 
 - **GitHub** - README, issues, PRs
 - **Medium** - Articles
@@ -110,15 +110,15 @@ ResearchClaw supports 24+ site-specific parsers including:
 
 ```bash
 # Clone and install
-git clone https://github.com/liantian-cn/researchclaw.git
-cd researchclaw
+git clone https://github.com/opensourceclaw/deepclaw.git
+cd deepclaw
 pip install -e ".[dev]"
 
 # Run tests
 pytest
 
 # Run CLI
-python -m researchclaw.cli.main research "your topic"
+python -m deepclaw.cli.main research "your topic"
 ```
 
 ## Architecture

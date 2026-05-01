@@ -1,11 +1,11 @@
 {
-  "name": "ResearchClaw",
-  "slug": "researchclaw",
+  "name": "DeepClaw",
+  "slug": "deepclaw",
   "version": "0.5.0",
   "description": "AI-powered deep research framework with multi-source search, content extraction, and intelligent synthesis",
   "owner": "Peter Cheng",
-  "homepage": "https://github.com/liantian-cn/researchclaw",
-  "repository": "https://github.com/liantian-cn/researchclaw",
+  "homepage": "https://github.com/opensourceclaw/deepclaw",
+  "repository": "https://github.com/opensourceclaw/deepclaw",
   "license": "Apache-2.0",
   "keywords": [
     "research",

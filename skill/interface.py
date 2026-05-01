@@ -1,5 +1,5 @@
 """
-ResearchClaw Skill Interface
+DeepClaw Skill Interface
 Defines the base class for OpenClaw Skill integration
 """
 
@@ -75,7 +75,7 @@ class SearchResult:
 
 
 class BaseResearchSkill(ABC):
-    """Base class for ResearchClaw OpenClaw Skill"""
+    """Base class for DeepClaw OpenClaw Skill"""
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         """Initialize skill with configuration
@@ -84,7 +84,7 @@ class BaseResearchSkill(ABC):
             config: Skill configuration dictionary
         """
         self.config = config or {}
-        self.name = "researchclaw"
+        self.name = "deepclaw"
         self.version = "0.5.0"
         self._state = SkillState.UNLOADED
         self._error_message: Optional[str] = None
@@ -255,15 +255,15 @@ class BaseResearchSkill(ABC):
         }
 
 
-class ResearchClawSkill(BaseResearchSkill):
-    """ResearchClaw Skill implementation for OpenClaw"""
+class DeepClawSkill(BaseResearchSkill):
+    """DeepClaw Skill implementation for OpenClaw"""
 
     def __init__(self, config: Optional[Dict[str, Any]] = None):
         super().__init__(config)
         self._runner = None
         self._search_engine = None
         self._llm_engine = None
-        self._cache_dir = self.get_config("cache_dir", ".researchclaw_cache")
+        self._cache_dir = self.get_config("cache_dir", ".deepclaw_cache")
 
     def on_load(self) -> bool:
         """Load skill and initialize components"""
@@ -315,7 +315,7 @@ class ResearchClawSkill(BaseResearchSkill):
 
         logger.info(f"Starting research on topic: {topic[:50]}... (depth={depth})")
 
-        from researchclaw.research.runner import ResearchRunner
+        from deepclaw.research.runner import ResearchRunner
 
         output = kwargs.get('output')
         output_format = kwargs.get('format', 'markdown')
@@ -399,7 +399,7 @@ class ResearchClawSkill(BaseResearchSkill):
 
         logger.info(f"Searching for: {query[:50]}... (limit={limit}, engine={engine})")
 
-        from researchclaw.research.search import SearchEngine
+        from deepclaw.research.search import SearchEngine
 
         search_engine = SearchEngine(provider=engine)
 
@@ -457,8 +457,8 @@ class ResearchClawSkill(BaseResearchSkill):
         logger.info(f"Chat request to {provider}: {prompt[:30]}...")
 
         try:
-            from researchclaw.llm.engine import LLMEngine
-            from researchclaw.llm import ChatMessage, MessageRole
+            from deepclaw.llm.engine import LLMEngine
+            from deepclaw.llm import ChatMessage, MessageRole
 
             engine = LLMEngine(provider=provider, model=model, api_key=api_key)
             messages = [ChatMessage(role=MessageRole.USER, content=prompt)]
@@ -475,8 +475,8 @@ class ResearchClawSkill(BaseResearchSkill):
 
         # Check if required modules are available
         try:
-            from researchclaw.research.runner import ResearchRunner
-            from researchclaw.research.search import SearchEngine
+            from deepclaw.research.runner import ResearchRunner
+            from deepclaw.research.search import SearchEngine
             modules_ok = True
         except ImportError as e:
             modules_ok = False

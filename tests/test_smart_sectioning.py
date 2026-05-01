@@ -7,7 +7,7 @@ Tests for Smart Sectioning
 """
 
 import pytest
-from researchclaw.research.smart_sectioning import (
+from deepclaw.research.smart_sectioning import (
     SectionCandidate,
     SectionAnalysis,
     SmartSectioner,

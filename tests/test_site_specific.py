@@ -19,7 +19,7 @@ Tests for Site-Specific Parsers
 import pytest
 from bs4 import BeautifulSoup
 
-from researchclaw.tools.site_specific import (
+from deepclaw.tools.site_specific import (
     SiteParser,
     get_parser,
     can_handle,

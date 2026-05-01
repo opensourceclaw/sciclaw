@@ -236,7 +236,7 @@ class TestSkillMethods:
         """Test skill properties"""
         skill = ResearchClawSkill()
 
-        assert skill.name == "researchclaw"
+        assert skill.name == "deepclaw"
         assert skill.version == "0.5.0"
         assert skill.state == SkillState.UNLOADED
 
@@ -247,7 +247,7 @@ class TestSkillConfig:
     def test_default_cache_dir(self):
         """Test default cache directory"""
         skill = ResearchClawSkill()
-        assert skill._cache_dir == ".researchclaw_cache"
+        assert skill._cache_dir == ".deepclaw_cache"
 
     def test_custom_cache_dir(self):
         """Test custom cache directory"""

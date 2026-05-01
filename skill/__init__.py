@@ -1,5 +1,5 @@
 """
-ResearchClaw Skill for OpenClaw
+DeepClaw Skill for OpenClaw
 """
 
 from .interface import (
@@ -7,7 +7,7 @@ from .interface import (
     SearchResult,
     SkillState,
     BaseResearchSkill,
-    ResearchClawSkill,
+    DeepClawSkill,
     create_skill,
 )
 
@@ -18,6 +18,6 @@ __all__ = [
     "SearchResult",
     "SkillState",
     "BaseResearchSkill",
-    "ResearchClawSkill",
+    "DeepClawSkill",
     "create_skill",
 ]

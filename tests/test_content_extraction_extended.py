@@ -20,7 +20,7 @@ import pytest
 from unittest.mock import Mock, patch
 from bs4 import BeautifulSoup
 
-from researchclaw.tools.content_extraction import (
+from deepclaw.tools.content_extraction import (
     ContentExtractor,
     ExtractedContent,
     extract_content,

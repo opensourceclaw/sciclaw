@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "researchclaw"
+name = "deepclaw"
 version = "0.5.0"
 description = "Open-source Deep Research framework based on OpenClaw"
 readme = "README.md"
@@ -42,7 +42,7 @@ api = [
 ]
 
 [project.scripts]
-researchclaw = "researchclaw.cli.main:main"
+deepclaw = "deepclaw.cli.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

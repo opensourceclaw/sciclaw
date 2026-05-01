@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the architecture for LLM-powered research synthesis in ResearchClaw.
+This document describes the architecture for LLM-powered research synthesis in DeepClaw.
 
 ## Components
 
@@ -63,6 +63,6 @@ Raw Findings → Preprocessing → LLM Theme Extraction
 
 ## Integration Points
 
-- **LLM Engine**: Uses existing `researchclaw.llm` for AI processing
-- **Content Extraction**: Uses existing `researchclaw.tools.content_extraction`
+- **LLM Engine**: Uses existing `deepclaw.llm` for AI processing
+- **Content Extraction**: Uses existing `deepclaw.tools.content_extraction`
 - **Storage**: Uses existing cache/storage mechanisms

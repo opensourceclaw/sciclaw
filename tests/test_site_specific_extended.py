@@ -20,7 +20,7 @@ import pytest
 from unittest.mock import Mock, patch
 from bs4 import BeautifulSoup
 
-from researchclaw.tools.site_specific import (
+from deepclaw.tools.site_specific import (
     get_parser,
     can_handle,
     parse_site,
@@ -216,7 +216,7 @@ class TestMultipleSiteHandles:
 
     def test_parser_count(self):
         """Test we have 20+ parsers"""
-        from researchclaw.tools.site_specific import SITE_PARSERS
+        from deepclaw.tools.site_specific import SITE_PARSERS
         # Count unique parser classes
         parser_count = len(set(SITE_PARSERS))
         assert parser_count >= 20, f"Expected 20+ parsers, got {parser_count}"

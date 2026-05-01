@@ -18,7 +18,7 @@ Tests for CLI
 
 import pytest
 from click.testing import CliRunner
-from researchclaw.cli.main import cli, research, search, init
+from deepclaw.cli.main import cli, research, search, init
 
 
 class TestCLI:

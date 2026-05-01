@@ -18,8 +18,8 @@ Tests for Kimi (Moonshot AI) LLM provider
 
 import pytest
 from unittest.mock import patch, MagicMock
-from researchclaw.llm.providers.kimi import KimiProvider
-from researchclaw.llm.base import (
+from deepclaw.llm.providers.kimi import KimiProvider
+from deepclaw.llm.base import (
     ChatMessage,
     ChatCompletionRequest,
     MessageRole,

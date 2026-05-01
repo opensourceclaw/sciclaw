@@ -24,12 +24,12 @@ import os
 from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 
-from researchclaw.tools.content_extraction import ContentExtractor, ExtractedContent
-from researchclaw.tools.report_formatter import ResearchReport, Source, create_report
-from researchclaw.tools.source_validation import SourceValidator, ValidationResult, ValidationStatus
-from researchclaw.tools.parallel_extraction import ParallelExtractor, ExtractionResult
-from researchclaw.search.providers.duckduckgo import DuckDuckGoSearchProvider
-from researchclaw.search.providers.base import SearchResult
+from deepclaw.tools.content_extraction import ContentExtractor, ExtractedContent
+from deepclaw.tools.report_formatter import ResearchReport, Source, create_report
+from deepclaw.tools.source_validation import SourceValidator, ValidationResult, ValidationStatus
+from deepclaw.tools.parallel_extraction import ParallelExtractor, ExtractionResult
+from deepclaw.search.providers.duckduckgo import DuckDuckGoSearchProvider
+from deepclaw.search.providers.base import SearchResult
 
 
 class TestContentExtractionWorkflow:

@@ -18,13 +18,13 @@ Tests for summarization module - Engine and Performance
 
 import pytest
 from unittest.mock import Mock, patch
-from researchclaw.summarization.engine import (
+from deepclaw.summarization.engine import (
     SummarizationEngine,
     EngineConfig,
     FallbackStrategy,
     PerformanceTracker,
 )
-from researchclaw.summarization.data import (
+from deepclaw.summarization.data import (
     SummarizationLength,
     SummarizationStyle,
     SummaryResult,
@@ -126,7 +126,7 @@ class TestPerformanceTracker:
 class TestSummarizationEngine:
     """Test SummarizationEngine"""
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_init(self, mock_llm_engine):
         """Test engine initialization"""
         engine = SummarizationEngine()
@@ -135,7 +135,7 @@ class TestSummarizationEngine:
         assert engine.key_point_extractor is not None
         assert engine.fact_extractor is not None
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_summarize_success(self, mock_llm_engine):
         """Test successful summarization"""
         mock_engine = Mock()
@@ -161,7 +161,7 @@ class TestSummarizationEngine:
         assert result.success is True
         assert result.summary == "Test summary"
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_summarize_with_fallback(self, mock_llm_engine):
         """Test summarization with fallback"""
         mock_engine = Mock()
@@ -189,7 +189,7 @@ class TestSummarizationEngine:
         # Should succeed with fallback
         assert result.success is True
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_extract_key_points(self, mock_llm_engine):
         """Test key point extraction"""
         mock_engine = Mock()
@@ -197,7 +197,7 @@ class TestSummarizationEngine:
         engine = SummarizationEngine()
         engine.key_point_extractor.llm_engine = mock_engine
         
-        from researchclaw.summarization.data import KeyPoint
+        from deepclaw.summarization.data import KeyPoint
         engine.key_point_extractor.extract_key_points = Mock(return_value=KeyPointsResult(
             key_points=[KeyPoint(text="Point 1", importance=0.9)],
             count=1,
@@ -211,7 +211,7 @@ class TestSummarizationEngine:
         assert result.success is True
         assert result.count == 1
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_extract_facts(self, mock_llm_engine):
         """Test fact extraction"""
         mock_engine = Mock()
@@ -219,7 +219,7 @@ class TestSummarizationEngine:
         engine = SummarizationEngine()
         engine.fact_extractor.llm_engine = mock_engine
         
-        from researchclaw.summarization.data import ExtractedFact
+        from deepclaw.summarization.data import ExtractedFact
         engine.fact_extractor.extract_facts = Mock(return_value=FactsResult(
             facts=[ExtractedFact(
                 statement="Fact 1",
@@ -239,7 +239,7 @@ class TestSummarizationEngine:
         assert result.success is True
         assert result.count == 1
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_process_combined(self, mock_llm_engine):
         """Test combined processing"""
         mock_engine = Mock()
@@ -250,7 +250,7 @@ class TestSummarizationEngine:
         engine.fact_extractor.llm_engine = mock_engine
         
         # Mock all methods
-        from researchclaw.summarization.data import KeyPoint, ExtractedFact
+        from deepclaw.summarization.data import KeyPoint, ExtractedFact
         
         engine.summarizer.summarize = Mock(return_value=SummaryResult(
             summary="Summary",
@@ -297,7 +297,7 @@ class TestSummarizationEngine:
         assert "key_points" in result
         assert "facts" in result
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_get_performance_stats(self, mock_llm_engine):
         """Test getting performance stats"""
         engine = SummarizationEngine()
@@ -309,7 +309,7 @@ class TestSummarizationEngine:
         assert "meets_latency_target" in stats
         assert stats["target_latency_ms"] == 3000.0
 
-    @patch('researchclaw.summarization.engine.LLMEngine')
+    @patch('deepclaw.summarization.engine.LLMEngine')
     def test_fallback_extractive_summarize(self, mock_llm_engine):
         """Test extractive summarization fallback"""
         mock_engine = Mock()

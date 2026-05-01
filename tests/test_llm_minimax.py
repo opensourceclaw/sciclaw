@@ -18,8 +18,8 @@ Tests for MiniMax LLM provider
 
 import pytest
 from unittest.mock import patch, MagicMock
-from researchclaw.llm.providers.minimax import MiniMaxProvider
-from researchclaw.llm.base import (
+from deepclaw.llm.providers.minimax import MiniMaxProvider
+from deepclaw.llm.base import (
     ChatMessage,
     ChatCompletionRequest,
     MessageRole,

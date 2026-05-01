@@ -1,4 +1,4 @@
-# ResearchClaw v0.1.0 - Iteration Plan
+# DeepClaw v0.1.0 - Iteration Plan
 
 **Version**: 1.0.0
 **Date**: 2026-04-25
@@ -168,10 +168,10 @@ T01 (Setup)
 
 ## 6. Success Criteria
 
-- [ ] `researchclaw "topic"` returns report in < 5 minutes
+- [ ] `deepclaw "topic"` returns report in < 5 minutes
 - [ ] Report includes at least 5 sources
 - [ ] Sources are cited in markdown format
-- [ ] Report saved to `~/.researchclaw/data/research/`
+- [ ] Report saved to `~/.deepclaw/data/research/`
 - [ ] 80% test coverage
 - [ ] No critical bugs
 

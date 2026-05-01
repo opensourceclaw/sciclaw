@@ -19,7 +19,7 @@ Tests for Report Formatter
 import pytest
 import json
 from datetime import datetime
-from researchclaw.tools.report_formatter import (
+from deepclaw.tools.report_formatter import (
     Source,
     ReportSection,
     ResearchReport,

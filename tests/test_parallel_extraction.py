@@ -37,7 +37,7 @@ Tests for Parallel Extraction
 import pytest
 import time
 from unittest.mock import Mock, patch, MagicMock
-from researchclaw.tools.parallel_extraction import (
+from deepclaw.tools.parallel_extraction import (
     ExtractionTask,
     ExtractionResult,
     ParallelExtractor,
@@ -98,7 +98,7 @@ class TestParallelExtractor:
         assert extractor.timeout == 5
         assert extractor.retry_count == 0
 
-    @patch("researchclaw.tools.parallel_extraction.extract_content")
+    @patch("deepclaw.tools.parallel_extraction.extract_content")
     def test_extract_single_success(self, mock_extract, extractor):
         """Test successful single extraction"""
         mock_content = Mock()
@@ -111,7 +111,7 @@ class TestParallelExtractor:
         assert result.content == mock_content
         assert result.duration > 0
 
-    @patch("researchclaw.tools.parallel_extraction.extract_content")
+    @patch("deepclaw.tools.parallel_extraction.extract_content")
     def test_extract_single_failure(self, mock_extract, extractor):
         """Test failed extraction"""
         mock_extract.side_effect = Exception("Connection error")
@@ -121,7 +121,7 @@ class TestParallelExtractor:
         assert result.success is False
         assert "Connection error" in result.error
 
-    @patch("researchclaw.tools.parallel_extraction.extract_content")
+    @patch("deepclaw.tools.parallel_extraction.extract_content")
     def test_extract_urls(self, mock_extract, extractor):
         """Test extracting multiple URLs"""
         mock_content = Mock()
@@ -139,7 +139,7 @@ class TestParallelExtractor:
         assert len(results) == 3
         assert all(r.success for r in results)
 
-    @patch("researchclaw.tools.parallel_extraction.extract_content")
+    @patch("deepclaw.tools.parallel_extraction.extract_content")
     def test_extract_urls_with_progress(self, mock_extract, extractor):
         """Test progress callback"""
         mock_content = Mock()
@@ -163,7 +163,7 @@ class TestParallelExtractor:
         results = extractor.extract_urls([])
         assert results == []
 
-    @patch("researchclaw.tools.parallel_extraction.extract_content")
+    @patch("deepclaw.tools.parallel_extraction.extract_content")
     def test_extract_urls_sequential(self, mock_extract, extractor):
         """Test sequential extraction"""
         mock_content = Mock()
@@ -180,7 +180,7 @@ class TestParallelExtractor:
 class TestExtractParallel:
     """Test module-level functions"""
 
-    @patch("researchclaw.tools.parallel_extraction.ParallelExtractor")
+    @patch("deepclaw.tools.parallel_extraction.ParallelExtractor")
     def test_extract_parallel(self, mock_extractor_class):
         """Test extract_parallel function"""
         mock_extractor = Mock()
@@ -227,7 +227,7 @@ class TestExtractWithTiming:
 class TestPerformance:
     """Performance-related tests"""
 
-    @patch("researchclaw.tools.parallel_extraction.extract_content")
+    @patch("deepclaw.tools.parallel_extraction.extract_content")
     def test_parallel_is_faster(self, mock_extract):
         """Test parallel is faster than sequential"""
         # Create slow mock

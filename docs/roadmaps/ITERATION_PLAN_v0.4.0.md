@@ -1,4 +1,4 @@
-# ResearchClaw v0.4.0 - Iteration Plan
+# DeepClaw v0.4.0 - Iteration Plan
 
 **Version**: 1.0.0
 **Date**: 2026-04-26

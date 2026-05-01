@@ -19,8 +19,8 @@ Tests for summarization module - Fact Extractor
 import pytest
 from unittest.mock import Mock, patch
 import json
-from researchclaw.summarization.facts import FactExtractor, FactExtractorConfig
-from researchclaw.summarization.data import ExtractedFact, FactsResult
+from deepclaw.summarization.facts import FactExtractor, FactExtractorConfig
+from deepclaw.summarization.data import ExtractedFact, FactsResult
 
 
 class TestFactExtractorConfig:
@@ -47,13 +47,13 @@ class TestFactExtractorConfig:
 class TestFactExtractor:
     """Test FactExtractor class"""
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_init_with_defaults(self, mock_llm_engine):
         """Test initialization with defaults"""
         extractor = FactExtractor()
         assert extractor.llm_engine is not None
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_empty_content(self, mock_llm_engine):
         """Test extracting from empty content"""
         extractor = FactExtractor()
@@ -62,7 +62,7 @@ class TestFactExtractor:
         assert result.success is False
         assert result.count == 0
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_success(self, mock_llm_engine):
         """Test successful fact extraction"""
         mock_engine = Mock()
@@ -97,7 +97,7 @@ class TestFactExtractor:
         assert result.count == 2
         assert result.facts[0].subject == "Company X"
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_filters_low_confidence(self, mock_llm_engine):
         """Test that low confidence facts are filtered"""
         mock_engine = Mock()
@@ -120,7 +120,7 @@ class TestFactExtractor:
         assert result.count == 1
         assert result.facts[0].statement == "High confidence fact"
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_sorted_by_confidence(self, mock_llm_engine):
         """Test that results are sorted by confidence"""
         mock_engine = Mock()
@@ -143,7 +143,7 @@ class TestFactExtractor:
         assert result.facts[1].confidence == 0.7
         assert result.facts[2].confidence == 0.5
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_limits_count(self, mock_llm_engine):
         """Test that count is limited"""
         mock_engine = Mock()
@@ -162,7 +162,7 @@ class TestFactExtractor:
 
         assert result.count == 5
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_fallback_parse(self, mock_llm_engine):
         """Test fallback parsing when JSON fails"""
         mock_engine = Mock()
@@ -183,7 +183,7 @@ class TestFactExtractor:
         # Should fall back to line parsing
         assert result.count >= 0
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_extract_batch(self, mock_llm_engine):
         """Test batch extraction"""
         mock_engine = Mock()
@@ -204,7 +204,7 @@ class TestFactExtractor:
 
         assert len(results) == 2
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_to_structured_data(self, mock_llm_engine):
         """Test converting facts to structured data"""
         mock_engine = Mock()
@@ -226,7 +226,7 @@ class TestFactExtractor:
         assert structured["count"] == 1
         assert structured["facts"][0]["subject"] == "Company"
 
-    @patch('researchclaw.summarization.facts.LLMEngine')
+    @patch('deepclaw.summarization.facts.LLMEngine')
     def test_content_truncation(self, mock_llm_engine):
         """Test content truncation for long input"""
         mock_engine = Mock()

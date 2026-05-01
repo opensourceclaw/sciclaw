@@ -40,7 +40,7 @@ async def run_research_task(task_id: str, request: ResearchRequest):
         research_tasks[task_id]["current_step"] = "Initializing research..."
         
         # Import ResearchClaw components
-        from researchclaw.research.runner import run_research
+        from deepclaw.research.runner import run_research
         
         research_tasks[task_id]["progress"] = 10
         research_tasks[task_id]["current_step"] = "Running research..."

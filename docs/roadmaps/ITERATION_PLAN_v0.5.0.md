@@ -1,4 +1,4 @@
-# ResearchClaw v0.5.0 - Iteration Plan
+# DeepClaw v0.5.0 - Iteration Plan
 
 **Version**: 1.0.0
 **Date**: 2026-04-26
@@ -14,7 +14,7 @@
 | **Version** | v0.5.0 |
 | **Code Name** | OpenClaw Integration |
 | **Target Date** | 4-6 weeks from start |
-| **Goal** | Integrate ResearchClaw as an OpenClaw Skill/Plugin |
+| **Goal** | Integrate DeepClaw as an OpenClaw Skill/Plugin |
 
 ---
 
@@ -24,7 +24,7 @@
 
 | Feature | Description | Priority |
 |---------|-------------|----------|
-| OpenClaw Skill | ResearchClaw as OpenClaw Skill | P0 |
+| OpenClaw Skill | DeepClaw as OpenClaw Skill | P0 |
 | Skill Hooks | Session start/end hooks | P0 |
 | Command Integration | Use OpenClaw commands | P1 |
 | Memory Integration | Connect to claw-mem | P1 |

@@ -10,7 +10,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 import argparse
-from researchclaw.research.runner import ResearchRunner
+from deepclaw.research.runner import ResearchRunner
 
 
 def main():
