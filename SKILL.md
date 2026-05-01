@@ -1,70 +1,193 @@
-# DeepClaw Skill Specification
+---
+name: deepclaw
+description: OpenClaw Deep Research Skill - AI-powered autonomous research assistant with multi-source search, content extraction, and intelligent synthesis.
+metadata: {"clawdbot":{"emoji":"🦁","requires":{"bins":["python3"]},"primaryEnv":"DEEPCLAW_ENABLED"}}
+---
 
-## Overview
+# DeepClaw - OpenClaw Deep Research Skill
 
-DeepClaw is an OpenClaw Skill that provides deep research capabilities powered by AI. It enables users to conduct comprehensive research on any topic with source validation, smart synthesis, and structured reporting.
+**AI-Powered Autonomous Research Assistant**
 
-## Capability
+---
 
-### Core Features
-- **Web Search**: Multi-engine search with DuckDuckGo, Tavily, and custom search providers
-- **Content Extraction**: Extract and parse content from web pages, handling JavaScript-rendered sites
-- **Source Validation**: Verify source credibility and relevance
-- **Smart Synthesis**: AI-powered content synthesis using multiple LLM providers (OpenAI, Claude, DeepSeek, GLM, Qwen, Kimi, MiniMax)
-- **Report Generation**: Generate structured research reports in multiple formats (Markdown, HTML, PDF)
+## 🚀 Quick Start
 
-### Use Cases
-- Academic research
-- Market research
-- Competitive analysis
-- Topic deep-dives
-- Fact-checking
+### Installation
 
-## Usage
+```bash
+# Via ClawHub (recommended)
+npx clawhub@latest install opensourceclaw-deepclaw
 
-### Commands
-- `/research <topic>` - Start a research task on the given topic
-- `/research --interactive` - Start an interactive research session
-- `/research --status` - Check current research status
-- `/research --report <id>` - Retrieve a previously generated report
+# Or from source
+git clone https://github.com/opensourceclaw/deepclaw.git ~/.openclaw/workspace/skills/deepclaw
+cd ~/.openclaw/workspace/skills/deepclaw
+pip3 install -e .
+```
 
-### Parameters
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| topic | string | Research topic or question |
-| depth | string | Research depth: quick/standard/deep |
-| sources | number | Maximum number of sources to analyze (default: 10) |
-| format | string | Output format: markdown/html/pdf |
-| language | string | Report language |
+### Enable
 
-### Examples
+Add to `~/.openclaw/config.json`:
+
+```json
+{
+  "skills": {
+    "deepclaw": {
+      "enabled": true
+    }
+  }
+}
+```
+
+### Usage
+
 ```
 /research "AI agents in 2026"
 /research "quantum computing applications" --depth=deep --sources=20
 /research --interactive
 ```
 
-## Architecture
+---
 
-### Components
-- **ResearchEngine**: Core research orchestration
-- **SearchProvider**: Multi-engine search abstraction
-- **ContentExtractor**: Web content extraction
-- **LLMEngine**: Multi-provider LLM integration
-- **ReportGenerator**: Multi-format report generation
+## 🎯 Core Features
 
-### Configuration
-- Search engine preferences
-- LLM provider settings (API keys, endpoints)
-- Output preferences
-- Cache settings
+### 1. Multi-Engine Search
 
-## Requirements
+| Engine | Description |
+|--------|-------------|
+| DuckDuckGo | Default search engine |
+| Bing | Microsoft Search API |
+| Tavily | AI-optimized search |
 
-- Python 3.10+
-- OpenClaw 0.9.0+
-- API keys for search/LLM providers (configurable)
+### 2. Multi-Provider LLM
 
-## License
+| Provider | Default Model | Environment Variable |
+|----------|---------------|---------------------|
+| DeepSeek | deepseek-chat | `DEEPSEEK_API_KEY` |
+| GLM | glm-4 | `GLM_API_KEY` |
+| MiniMax | abab6.5s-chat | `MINIMAX_API_KEY` |
+| Kimi | moonshot-v1-8k-chat | `KIMI_API_KEY` |
+| Qwen | qwen-turbo | `DASHSCOPE_API_KEY` |
 
-Apache-2.0
+### 3. Smart Content Extraction
+
+- Site-specific parsers (24+ sites)
+- JavaScript-rendered content handling
+- Multi-strategy extraction fallback
+
+### 4. Source Validation
+
+- Quality scoring
+- Credibility assessment
+- Relevance filtering
+
+---
+
+## 📁 Research Output
+
+DeepClaw generates structured research reports:
+
+```
+~/.openclaw/workspace/
+└── research/
+    └── {timestamp}_{topic}/
+        ├── report.md          # Markdown report
+        ├── report.html        # HTML report
+        └── sources/           # Raw source data
+```
+
+---
+
+## 🛠️ Configuration (Optional)
+
+### CLI Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `--depth` | int | `3` | Research depth (1-10) |
+| `--engine` | str | `duckduckgo` | Search engine |
+| `--lang` | str | `en` | Language (en/zh) |
+| `--format` | str | `markdown` | Output format |
+| `--output` | str | - | Output file path |
+
+### Skill Configuration
+
+```json
+{
+  "deepclaw": {
+    "search": {
+      "default_engine": "duckduckgo",
+      "max_results": 10
+    },
+    "llm": {
+      "default_provider": "deepseek",
+      "default_temperature": 0.7
+    },
+    "output": {
+      "default_format": "markdown",
+      "workspace": "~/.openclaw/workspace/research"
+    }
+  }
+}
+```
+
+---
+
+## 🔧 API
+
+### Python API
+
+```python
+from deepclaw.research.runner import ResearchRunner
+from deepclaw.research.search import SearchEngine
+from deepclaw.llm.engine import LLMEngine
+
+# Research API
+runner = ResearchRunner()
+report = runner.run("AI trends 2026", depth=3)
+print(report.format_markdown())
+
+# Search API
+engine = SearchEngine(provider="bing")
+results = engine.search("quantum computing", limit=10)
+
+# LLM API
+llm = LLMEngine(provider="deepseek", model="deepseek-chat")
+response = llm.chat([{"role": "user", "content": "What is Python?"}])
+```
+
+### OpenClaw Skill API
+
+```
+/research <topic> [options]
+```
+
+---
+
+## 📊 Supported Sites
+
+DeepClaw supports 24+ site-specific parsers:
+
+- GitHub, GitLab, Gitee
+- Medium, Substack, Hashnode
+- Hacker News, Reddit
+- YouTube, Twitter/X
+- Wikipedia, Zhihu, V2EX
+- 掘金 (Juejin), 知乎
+
+---
+
+## 📄 License
+
+Apache License 2.0
+
+---
+
+## 🙏 Acknowledgments
+
+- OpenClaw Community
+- BeautifulSoup Contributors
+- All LLM Providers
+
+---
+
+**AI-Powered Deep Research** 🦁
