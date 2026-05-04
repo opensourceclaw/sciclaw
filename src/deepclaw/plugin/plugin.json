@@ -1,0 +1,77 @@
+{
+  "id": "deepclaw",
+  "kind": "research",
+  "name": "Deep Research Agent",
+  "version": "0.5.0",
+  "description": "AI-powered deep research with memory and learning integration",
+  "author": "Peter Cheng",
+  "license": "Apache-2.0",
+  "hooks": {
+    "onSessionStart": "deepclaw.plugin.hooks.DeepClawPluginHooks.on_session_start",
+    "onSessionEnd": "deepclaw.plugin.hooks.DeepClawPluginHooks.on_session_end",
+    "onFeedback": "deepclaw.plugin.hooks.DeepClawPluginHooks.on_feedback",
+    "onLoad": "deepclaw.plugin.hooks.DeepClawPluginHooks.on_load",
+    "onUnload": "deepclaw.plugin.hooks.DeepClawPluginHooks.on_unload"
+  },
+  "commands": [
+    {
+      "name": "/research",
+      "description": "Conduct deep research on a topic",
+      "parameters": {
+        "topic": {
+          "type": "string",
+          "description": "Research topic or question",
+          "required": true
+        },
+        "depth": {
+          "type": "string",
+          "enum": ["quick", "standard", "deep"],
+          "description": "Research depth",
+          "default": "standard"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["markdown", "html", "json", "pdf"],
+          "description": "Output format",
+          "default": "markdown"
+        }
+      }
+    },
+    {
+      "name": "/search",
+      "description": "Quick web search",
+      "parameters": {
+        "query": {
+          "type": "string",
+          "description": "Search query",
+          "required": true
+        }
+      }
+    }
+  ],
+  "dependencies": {
+    "optional": ["claw-mem", "claw-rl"]
+  },
+  "configuration": {
+    "maxDepth": {
+      "type": "number",
+      "description": "Maximum research depth",
+      "default": 3
+    },
+    "autoInject": {
+      "type": "boolean",
+      "description": "Auto-inject memory context at session start",
+      "default": true
+    },
+    "autoLearn": {
+      "type": "boolean",
+      "description": "Auto-learn from feedback at session end",
+      "default": true
+    },
+    "topK": {
+      "type": "number",
+      "description": "Max memories to recall",
+      "default": 10
+    }
+  }
+}
