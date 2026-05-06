@@ -39,6 +39,8 @@ class SearchResult:
     score: float = 0.0
     timestamp: datetime = field(default_factory=datetime.now)
     source: str = ""
+    quality_score: Optional[float] = None
+    quality_label: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -48,6 +50,8 @@ class SearchResult:
             "score": self.score,
             "source": self.source,
             "timestamp": self.timestamp.isoformat(),
+            "quality_score": self.quality_score,
+            "quality_label": self.quality_label,
         }
 
 
@@ -178,6 +182,92 @@ class SearchEngine:
     def clear_cache(self) -> None:
         """Clear the results cache"""
         self.results_cache.clear()
+
+    def annotate_quality(self, results: List[SearchResult]) -> List[SearchResult]:
+        """Annotate search results with source quality scores
+
+        Uses the SourceScorer from the validation package to add
+        quality scores and labels to each search result.
+
+        Args:
+            results: Search results to annotate
+
+        Returns:
+            Same list with quality scores populated
+        """
+        try:
+            from deepclaw.validation.source_scorer import SourceScorer
+            scorer = SourceScorer()
+            for result in results:
+                if result.url:
+                    source_score = scorer.score(url=result.url)
+                    result.quality_score = source_score.combined_score
+                    result.quality_label = self._quality_label(
+                        source_score.combined_score
+                    )
+        except ImportError:
+            pass
+        return results
+
+    @staticmethod
+    def _quality_label(score: float) -> str:
+        """Get human-readable quality label
+
+        Args:
+            score: Quality score 0.0-1.0
+
+        Returns:
+            Quality label string
+        """
+        if score >= 0.8:
+            return "High Quality"
+        elif score >= 0.6:
+            return "Good"
+        elif score >= 0.4:
+            return "Average"
+        else:
+            return "Low Quality"
+
+    @staticmethod
+    def format_with_quality(results: List[SearchResult]) -> str:
+        """Format search results with quality scores for display
+
+        Args:
+            results: Search results to format
+
+        Returns:
+            Formatted string with quality indicators
+        """
+        lines = []
+        for i, result in enumerate(results, 1):
+            quality_parts = []
+            if result.quality_score is not None:
+                qs = result.quality_score
+                if qs >= 0.8:
+                    indicator = "[High]"
+                elif qs >= 0.6:
+                    indicator = "[Good]"
+                elif qs >= 0.4:
+                    indicator = "[Avg]"
+                else:
+                    indicator = "[Low]"
+
+                domain = ""
+                try:
+                    from urllib.parse import urlparse
+                    domain = urlparse(result.url).netloc.replace("www.", "")
+                except Exception:
+                    pass
+                quality_parts.append(f" {indicator}")
+
+            lines.append(
+                f"{i}. **{result.title}**\n"
+                f"   URL: {result.url}\n"
+                f"   {result.snippet}\n"
+                f"   Score: {result.score:.2f}"
+                f"{' ' + ' '.join(quality_parts) if quality_parts else ''}\n"
+            )
+        return "\n".join(lines)
 
     @staticmethod
     def list_providers() -> List[str]:

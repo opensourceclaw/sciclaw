@@ -37,6 +37,23 @@ from .citation_formatter import (
     format_bibliography,
 )
 
+from .source_validator import (
+    SSLInfo,
+    ContentIntegrity,
+    ExtendedValidationResult,
+    SSLChecker,
+    ContentIntegrityChecker,
+    ExternalSourceValidator,
+    validate_source_extended,
+    validate_sources_batch,
+)
+from .authority_scorer import (
+    AuthorReputation,
+    AuthorityScorer,
+    score_author,
+    score_authors,
+)
+
 __all__ = [
     # Source scoring
     "DomainReputation",
@@ -47,6 +64,15 @@ __all__ = [
     "SourceScorer",
     "score_source",
     "score_sources",
+    # Source validation
+    "SSLInfo",
+    "ContentIntegrity",
+    "ExtendedValidationResult",
+    "SSLChecker",
+    "ContentIntegrityChecker",
+    "ExternalSourceValidator",
+    "validate_source_extended",
+    "validate_sources_batch",
     # Citation tracking
     "Citation",
     "CitationTracker",
@@ -55,4 +81,9 @@ __all__ = [
     "CitationFormatter",
     "format_citation",
     "format_bibliography",
+    # Authority scoring
+    "AuthorReputation",
+    "AuthorityScorer",
+    "score_author",
+    "score_authors",
 ]
