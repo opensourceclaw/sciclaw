@@ -2,6 +2,27 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.6.0] - 2026-05-06
+
+### Added
+- **OpenClaw Plugin Architecture**
+  - `src/deepclaw/plugin/hooks.py` - Full plugin hook implementation
+  - `src/deepclaw/plugin/plugin.json` - Plugin manifest with commands and config
+  - `src/deepclaw/integration/memory_integration.py` - claw-mem/claw-rl adapter layer
+  - Session lifecycle hooks: onSessionStart, onSessionEnd, onFeedback
+- **Memory & Learning Integration**
+  - Seamless claw-mem integration for memory storage/search
+  - Seamless claw-rl integration for learning from feedback
+  - Graceful fallback when dependencies unavailable
+
+### Improved
+- **Adapter Pattern**: Applied "防波堤" (breakwater) strategy for OpenClaw version compatibility
+- **Test Coverage**: 45 plugin/integration tests added (100% pass)
+
+### Changed
+- Renamed project: ResearchClaw → DeepClaw
+- Package name: `researchclaw` → `deepclaw`
+
 ## [0.5.0] - 2026-04-27
 
 ### Added

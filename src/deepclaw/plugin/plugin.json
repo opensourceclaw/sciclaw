@@ -2,7 +2,7 @@
   "id": "deepclaw",
   "kind": "research",
   "name": "Deep Research Agent",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "AI-powered deep research with memory and learning integration",
   "author": "Peter Cheng",
   "license": "Apache-2.0",
