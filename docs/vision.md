@@ -1,178 +1,177 @@
 # DeepClaw Vision, Mission & Values
 
-> 愿景、使命、价值观文档 | Version 1.0 | 2026-05-06
+> Vision, Mission & Values Document | Version 1.0 | 2026-05-06
 
 ---
 
-## 🌟 Vision 愿景
+## 🌟 Vision
 
-**让 AI 成为每个人的研究伙伴，突破认知边界**
+**Make AI a research partner for everyone, breaking cognitive boundaries**
 
-### 核心理念
+### Core Principles
 
-- **降低门槛**：让深度研究不再是大公司或专业人士的专利
-- **普惠研究**：每个人都能获得接近专业研究员的信息能力
-- **人机协作**：AI 是增强人类认知的工具，而非替代
+- **Lower Barriers**: Deep research should no longer be exclusive to large companies or professionals
+- **Accessible Research**: Everyone can access research capabilities comparable to professional researchers
+- **Human-AI Collaboration**: AI is a tool to augment human cognition, not replace it
 
-### 长期愿景
+### Long-term Vision
 
-> 5 年后，任何人只需要一个问题，就能获得：
-> - 全面的信息收集
-> - 多维度的分析
-> - 有据可查的结论
-> - 可进一步探索的方向
-
----
-
-## 🎯 Mission 使命
-
-**提供开源、可信、持续进化的深度研究框架**
-
-### 三大支柱
-
-| 支柱 | 描述 | 实践 |
-|------|------|------|
-| **开源** | 代码透明、社区驱动 | Apache 2.0 许可证，开源 GitHub，接受社区贡献 |
-| **可信** | 源可验证、结论可追溯 | 来源质量评分、引用追溯、学习改进 |
-| **进化** | 从反馈中学习、持续改进 | 集成 claw-rl 学习系统，用户反馈驱动优化 |
-
-### 当前使命阶段
-
-**Phase 1 (v0.6-v1.0)**：构建核心研究能力
-- 多引擎搜索
-- 智能内容提取
-- 报告生成
-
-**Phase 2 (v1.0-v2.0)**：强化可信性
-- 来源验证系统
-- 引用追溯
-- 事实核查
-
-**Phase 3 (v2.0+)**：实现进化能力
-- 用户反馈学习
-- 研究习惯适应
-- 个性化研究策略
+> In 5 years, anyone只需要一个问题，就能获得：
+> - Comprehensive information collection
+> - Multi-dimensional analysis
+> - Evidence-based conclusions
+> - Directions for further exploration
 
 ---
 
-## 💎 Values 价值观
+## 🎯 Mission
 
-### 1. 可信 (Trustworthy)
+**Provide an open-source, trustworthy, continuously evolving deep research framework**
 
-**定义**：源可验证，结论可追溯
+### Three Pillars
 
-**实践**：
-- 每个结论都有来源标注
-- 来源质量公开评分
-- 允许用户查看原始信息
+| Pillar | Description | Practice |
+|--------|-------------|----------|
+| **Open** | Code transparency, community-driven | Apache 2.0 license, open GitHub, community contributions |
+| **Trustworthy** | Verifiable sources, traceable conclusions | Source quality scoring, citation tracking, learning improvements |
+| **Evolving** | Learn from feedback, continuously improve | Integrated claw-rl learning system, user feedback-driven optimization |
 
-**反对**：
-- 幻觉信息
-- 不可验证的断言
-- 隐瞒信息来源
+### Current Mission Phases
 
----
+**Phase 1 (v0.6-v1.0)**: Build Core Research Capabilities
+- Multi-engine search
+- Smart content extraction
+- Report generation
 
-### 2. 开放 (Open)
+**Phase 2 (v1.0-v2.0)**: Strengthen Trustworthiness
+- Source validation system
+- Citation tracking
+- Fact-checking
 
-**定义**：开源透明，社区共建
-
-**实践**：
-- 代码 100% 开源
-- 决策透明（RFC 流程）
-- 欢迎社区贡献
-
-**反对**：
-- 封闭的"黑盒"AI
-- 商业锁定
-- 隐藏算法
+**Phase 3 (v2.0+)**: Achieve Evolutionary Capabilities
+- User feedback learning
+- Research habit adaptation
+- Personalized research strategies
 
 ---
 
-### 3. 进化 (Evolving)
+## 💎 Values
 
-**定义**：从反馈中学习，持续改进
+### 1. Trustworthy
 
-**实践**：
-- 集成 claw-rl 学习系统
-- 收集用户反馈
-- 持续迭代优化
+**Definition**: Verifiable sources, traceable conclusions
 
-**反对**：
-- 一次性产品
-- 忽视用户反馈
-- 静态不变
+**Practice**:
+- Every conclusion has source attribution
+- Source quality is publicly scored
+- Users can view original information
 
----
-
-### 4. 赋能 (Empowering)
-
-**定义**：让人更强，而非替代人
-
-**实践**：
-- 提供信息，帮助用户做决策
-- 不代替用户思考
-- 增强而非替代
-
-**反对**：
-- 让人依赖
-- 替代人类判断
-- 减少思考机会
+**Opposition**:
+- Hallucinated information
+- Unverifiable claims
+- Hidden source information
 
 ---
 
-## 🏛️ 组织定位
+### 2. Open
 
-### 在 Project Neo 中的位置
+**Definition**: Open-source transparency, community co-building
+
+**Practice**:
+- 100% open source code
+- Transparent decisions (RFC process)
+- Welcome community contributions
+
+**Opposition**:
+- Closed "black box" AI
+- Commercial lock-in
+- Hidden algorithms
+
+---
+
+### 3. Evolving
+
+**Definition**: Learn from feedback, continuously improve
+
+**Practice**:
+- Integrated claw-rl learning system
+- Collect user feedback
+- Continuous iteration and optimization
+
+**Opposition**:
+- One-time product
+- Ignoring user feedback
+- Static and unchanging
+
+---
+
+### 4. Empowering
+
+**Definition**: Make humans stronger, not replace them
+
+**Practice**:
+- Provide information to help users make decisions
+- Don't think for users
+- Augment rather than replace
+
+**Opposition**:
+- Making humans dependent
+- Replacing human judgment
+- Reducing thinking opportunities
+
+---
+
+## 🏛️ Organizational Positioning
+
+### Position in Project Neo
 
 ```
-OpenClaw (主入口)
-    ├── 横向 → NeoClaw (通用 AI Agent 框架)
-    └── 纵向 → DeepClaw (深度研究)
+OpenClaw (Main Entry)
+    ├── Horizontal → NeoClaw (General AI Agent Framework)
+    └── Vertical → DeepClaw (Deep Research)
                         ↓
-              claw-mem (记忆) + claw-rl (学习)
+              claw-mem (Memory) + claw-rl (Learning)
 ```
 
-### 与其他项目的关系
+### Relationship with Other Projects
 
-| 项目 | 关系 | 说明 |
-|------|------|------|
-| NeoClaw | 横向协同 | 共享 claw-mem/claw-rl 底座 |
-| DevClaw | 纵向协同 | 研究 + 开发互补 |
-| OpenClaw | 技术基础 | 基于 OpenClaw 构建 |
+| Project | Relationship | Description |
+|---------|--------------|-------------|
+| NeoClaw | Horizontal Collaboration | Shared claw-mem/claw-rl foundation |
+| DevClaw | Vertical Collaboration | Research + Development complement |
 
 ---
 
-## 📊 成功指标
+## 📊 Success Metrics
 
-### 短期 (2026)
+### Short-term (2026)
 
-| 指标 | 目标 |
-|------|------|
+| Metric | Target |
+|--------|--------|
 | GitHub Stars | 500+ |
-| 月活跃用户 | 100+ |
-| 研究报告生成 | 1000+ |
+| Monthly Active Users | 100+ |
+| Research Reports Generated | 1000+ |
 
-### 中期 (2027)
+### Medium-term (2027)
 
-| 指标 | 目标 |
-|------|------|
+| Metric | Target |
+|--------|--------|
 | GitHub Stars | 2000+ |
-| 社区贡献者 | 50+ |
-| 研究主题覆盖 | 100+ |
+| Community Contributors | 50+ |
+| Research Topic Coverage | 100+ |
 
-### 长期 (2028+)
+### Long-term (2028+)
 
-| 指标 | 目标 |
-|------|------|
-| 学术引用 | 100+ |
-| 企业采用 | 10+ |
-| 成为领域标准 | 开源深度研究首选 |
+| Metric | Target |
+|--------|--------|
+| Academic Citations | 100+ |
+| Enterprise Adoption | 10+ |
+| Industry Standard | Preferred open-source deep research |
 
 ---
 
-## 🔄 修订历史
+## 🔄 Revision History
 
-| 版本 | 日期 | 修改内容 |
-|------|------|----------|
-| 1.0 | 2026-05-06 | 初始版本 |
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0 | 2026-05-06 | Initial version |
