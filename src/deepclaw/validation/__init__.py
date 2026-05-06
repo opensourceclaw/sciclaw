@@ -13,7 +13,8 @@
 # limitations under the License.
 
 """
-Validation Package - Source scoring, citation tracking, and formatting
+Validation Package - Source scoring, citation tracking, claim extraction,
+risk scoring, and fact-checking
 """
 
 from .source_scorer import (
@@ -53,6 +54,28 @@ from .authority_scorer import (
     score_author,
     score_authors,
 )
+from .claim_extractor import (
+    ClaimType,
+    NumericClaim,
+    Claim,
+    ClaimExtractor,
+    extract_claims,
+)
+from .risk_scorer import (
+    RiskLevel,
+    ClaimRisk,
+    SourceRisk,
+    RiskScorer,
+    score_claim_risk,
+    score_source_risk,
+)
+from .factcheck_service import (
+    VerificationStatus,
+    VerificationResult,
+    FactCheckService,
+    verify_claim,
+    verify_source,
+)
 
 __all__ = [
     # Source scoring
@@ -86,4 +109,23 @@ __all__ = [
     "AuthorityScorer",
     "score_author",
     "score_authors",
+    # Claim extraction
+    "ClaimType",
+    "NumericClaim",
+    "Claim",
+    "ClaimExtractor",
+    "extract_claims",
+    # Risk scoring
+    "RiskLevel",
+    "ClaimRisk",
+    "SourceRisk",
+    "RiskScorer",
+    "score_claim_risk",
+    "score_source_risk",
+    # Fact-checking
+    "VerificationStatus",
+    "VerificationResult",
+    "FactCheckService",
+    "verify_claim",
+    "verify_source",
 ]
