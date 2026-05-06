@@ -2,6 +2,25 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [1.0.0] - 2026-05-06
+
+### Added
+- **User Feedback System**
+  - `src/deepclaw/learning/feedback_collector.py` - 5 feedback types (quality, accuracy, relevance, completeness, usefulness)
+  - CLI and API feedback collection
+  - Integration with claw-mem for storage
+- **Learning Pipeline**
+  - `src/deepclaw/learning/learning_pipeline.py` - Feedback → Patterns → Rules → claw-rl bridge
+  - Connects to claw-rl for learning
+  - Context injection for future research
+
+### Testing
+- 38 new tests added
+- 825 total tests (all passing)
+
+### Changed
+- **Version milestone**: Reaching v1.0.0 marks Phase 3 completion (Evolution)
+
 ## [0.8.0] - 2026-05-06
 
 ### Added
