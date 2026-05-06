@@ -28,6 +28,10 @@ from .learning_pipeline import (
     LearningPipeline,
     process_feedback,
 )
+from .research_habit_tracker import (
+    ResearchHabit,
+    ResearchHabitTracker,
+)
 
 __all__ = [
     "FeedbackType",
@@ -38,4 +42,6 @@ __all__ = [
     "LearningResult",
     "LearningPipeline",
     "process_feedback",
+    "ResearchHabit",
+    "ResearchHabitTracker",
 ]
