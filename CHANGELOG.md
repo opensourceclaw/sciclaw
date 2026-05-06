@@ -2,6 +2,30 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.7.0] - 2026-05-06
+
+### Added
+- **Source Quality Scoring**
+  - `src/deepclaw/validation/source_scorer.py` - Domain reputation + freshness scoring
+  - Scoring model: Domain (40%) + Freshness (30%) + Authority (30%)
+- **Citation Tracking System**
+  - `src/deepclaw/validation/citation_tracker.py` - Full citation tracking
+  - Tracks all sources used during research
+- **Citation Formatting**
+  - `src/deepclaw/validation/citation_formatter.py` - APA, MLA, Chicago support
+  - In-text citations and bibliography formatting
+- **Report Integration**
+  - Auto-injected citations in generated reports
+  - Support for multiple citation styles
+
+### Improved
+- **Validation Coverage**: 104 new tests for validation features
+- **Report Quality**: All claims now have source attribution
+
+### Testing
+- 104 new tests added
+- 682 total tests (all passing)
+
 ## [0.6.0] - 2026-05-06
 
 ### Added
