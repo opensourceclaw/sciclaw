@@ -2,6 +2,26 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.8.0] - 2026-05-06
+
+### Added
+- **Claim Extraction**
+  - `src/deepclaw/validation/claim_extractor.py` - 6 claim types (factual, numeric, quotation, comparison, causation, opinion)
+  - Numeric and date extraction
+  - Source attribution
+- **Risk Scoring**
+  - `src/deepclaw/validation/risk_scorer.py` - Risk calculation model
+  - Risk levels: LOW, MEDIUM, HIGH, CRITICAL
+  - Formula: Risk = Source×0.3 + Claim×0.3 + Verification×0.4
+- **Fact-Check Service**
+  - `src/deepclaw/validation/factcheck_service.py` - Abstract fact-check layer
+  - Cross-verification support
+  - Result caching
+
+### Testing
+- 59 new tests added
+- 787 total tests (all passing)
+
 ## [0.7.1] - 2026-05-06
 
 ### Added
