@@ -8,7 +8,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
-[![Version](https://img.shields.io/badge/Version-0.6.0-blue.svg)](https://github.com/opensourceclaw/deepclaw)
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/opensourceclaw/deepclaw)
 
 </div>
 
@@ -16,26 +16,26 @@
 
 ## 🌟 Vision
 
-**让 AI 成为每个人的研究伙伴，突破认知边界**
+**Make AI a research partner for everyone, breaking cognitive boundaries**
 
-让每个人都能获得接近专业研究员的信息能力，降低深度研究的门槛。
+Enable everyone to access research capabilities comparable to professional researchers, lowering the barriers to deep research.
 
 ## 🎯 Mission
 
-**提供开源、可信、持续进化的深度研究框架**
+**Provide an open-source, trustworthy, continuously evolving deep research framework**
 
-- 开源：代码透明、社区驱动
-- 可信：源可验证、结论可追溯
-- 进化：从反馈中学习、持续改进
+- Open: Code transparency, community-driven
+- Trustworthy: Verifiable sources, traceable conclusions
+- Evolving: Learn from feedback, continuously improve
 
 ## 💎 Values
 
 | Value | Description |
 |-------|-------------|
-| **可信 (Trustworthy)** | 源可验证，结论可追溯 |
-| **开放 (Open)** | 开源透明，社区共建 |
-| **进化 (Evolving)** | 从反馈中学习，持续改进 |
-| **赋能 (Empowering)** | 让人更强，而非替代人 |
+| **Trustworthy** | Verifiable sources, traceable conclusions |
+| **Open** | Open-source transparency, community co-building |
+| **Evolving** | Learn from feedback, continuously improve |
+| **Empowering** | Make humans stronger, not replace them |
 
 ---
 
