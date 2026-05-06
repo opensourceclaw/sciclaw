@@ -23,7 +23,7 @@ from skill import (
     SearchResult,
     SkillState,
     BaseResearchSkill,
-    ResearchClawSkill,
+    DeepClawSkill,
     create_skill,
 )
 
@@ -135,12 +135,12 @@ class TestBaseResearchSkill:
         assert "description" in info
 
 
-class TestResearchClawSkill:
-    """Test ResearchClawSkill class"""
+class TestDeepClawSkill:
+    """Test DeepClawSkill class"""
 
     def test_creation(self):
-        """Test creating ResearchClawSkill"""
-        skill = ResearchClawSkill()
+        """Test creating DeepClawSkill"""
+        skill = DeepClawSkill()
         assert skill.name == "deepclaw"
         assert skill.version == "0.5.0"
         assert skill.state == SkillState.UNLOADED
@@ -148,14 +148,14 @@ class TestResearchClawSkill:
     def test_creation_with_config(self):
         """Test creating with config"""
         config = {"default_depth": 5, "cache_dir": "/tmp/test"}
-        skill = ResearchClawSkill(config)
+        skill = DeepClawSkill(config)
 
         assert skill.get_config("default_depth") == 5
         assert skill.get_config("cache_dir") == "/tmp/test"
 
     def test_config_methods(self):
         """Test configuration methods"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         skill.set_config("test_key", "test_value")
         assert skill.get_config("test_key") == "test_value"
@@ -163,7 +163,7 @@ class TestResearchClawSkill:
 
     def test_lifecycle(self):
         """Test lifecycle methods"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         # Test on_load
         result = skill.on_load()
@@ -185,7 +185,7 @@ class TestResearchClawSkill:
 
     def test_health_check(self):
         """Test health_check method"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         health = skill.health_check()
@@ -200,7 +200,7 @@ class TestCreateSkill:
     def test_create_skill(self):
         """Test factory function"""
         skill = create_skill()
-        assert isinstance(skill, ResearchClawSkill)
+        assert isinstance(skill, DeepClawSkill)
 
     def test_create_with_config(self):
         """Test factory with config"""
@@ -220,7 +220,7 @@ class TestSkillIntegration:
             "default_limit": 5,
             "default_engine": "duckduckgo"
         }
-        skill = ResearchClawSkill(config)
+        skill = DeepClawSkill(config)
 
         # Load skill
         assert skill.on_load() is True

@@ -6,7 +6,7 @@ Implements OpenClaw slash commands for ResearchClaw
 import re
 import json
 from typing import Dict, Any, List, Optional
-from skill.interface import ResearchClawSkill, ResearchResult, SearchResult
+from skill.interface import DeepClawSkill, ResearchResult, SearchResult
 
 
 class CommandParser:
@@ -83,13 +83,13 @@ class CommandParser:
 class ResearchCommandHandler:
     """Handle OpenClaw commands for ResearchClaw"""
 
-    def __init__(self, skill: Optional[ResearchClawSkill] = None):
+    def __init__(self, skill: Optional[DeepClawSkill] = None):
         """Initialize command handler
 
         Args:
             skill: ResearchClaw skill instance
         """
-        self.skill = skill or ResearchClawSkill()
+        self.skill = skill or DeepClawSkill()
         self.skill.on_load()
         self.parser = CommandParser()
 

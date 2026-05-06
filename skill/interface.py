@@ -499,7 +499,7 @@ def create_skill(config: Optional[Dict[str, Any]] = None) -> BaseResearchSkill:
     Returns:
         BaseResearchSkill: Skill instance
     """
-    return ResearchClawSkill(config=config)
+    return DeepClawSkill(config=config)
 
 
 __all__ = [
@@ -507,6 +507,6 @@ __all__ = [
     "SearchResult",
     "SkillState",
     "BaseResearchSkill",
-    "ResearchClawSkill",
+    "DeepClawSkill",
     "create_skill"
 ]

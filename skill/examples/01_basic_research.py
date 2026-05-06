@@ -10,7 +10,7 @@ import os
 # Add skill to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from skill import ResearchClawSkill
+from skill import DeepClawSkill
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
     print("=" * 50)
 
     # Create and load skill
-    skill = ResearchClawSkill()
+    skill = DeepClawSkill()
     skill.on_load()
 
     # Simple research
