@@ -18,7 +18,7 @@ ResearchClaw - Open-source Deep Research Framework
 A framework for conducting deep research on any topic.
 """
 
-__version__ = "0.5.0"
+__version__ = "1.0.0"
 __author__ = "OpenClaw Team"
 
 from .cli import main
