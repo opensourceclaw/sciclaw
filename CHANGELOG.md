@@ -2,6 +2,20 @@
 
 All notable changes to ResearchClaw will be documented in this file.
 
+## [0.7.1] - 2026-05-06
+
+### Added
+- **Source Validation API**
+  - `src/deepclaw/validation/source_validator.py` - URL accessibility + SSL check
+- **Authority Scorer**
+  - `src/deepclaw/validation/authority_scorer.py` - Author/institution/citation scoring
+- **Quality Transparency**
+  - Quality score display in search results
+
+### Testing
+- 46 new tests added
+- 728 total tests (all passing)
+
 ## [0.7.0] - 2026-05-06
 
 ### Added
