@@ -22,16 +22,16 @@ from skill import (
     ResearchResult,
     SearchResult,
     SkillState,
-    ResearchClawSkill,
+    DeepClawSkill,
 )
 
 
-class TestResearchClawSkillCoverage:
+class TestDeepClawSkillCoverage:
     """Additional tests to improve coverage"""
 
     def test_research_returns_result(self):
         """Test research method returns proper result"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Test that the method exists and returns expected type
@@ -40,7 +40,7 @@ class TestResearchClawSkillCoverage:
 
     def test_search_returns_result(self):
         """Test search method returns proper result"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Verify method exists
@@ -48,7 +48,7 @@ class TestResearchClawSkillCoverage:
 
     def test_chat_returns_result(self):
         """Test chat method returns proper result"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Verify method exists
@@ -56,14 +56,14 @@ class TestResearchClawSkillCoverage:
 
     def test_load_from_nonexistent_config(self):
         """Test loading from nonexistent config file"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         config = skill.load_config("/nonexistent/config.json")
         # Should return empty dict, not raise
         assert config == {}
 
     def test_health_check_when_loaded(self):
         """Test health check when modules are loaded"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         health = skill.health_check()
@@ -72,7 +72,7 @@ class TestResearchClawSkillCoverage:
 
     def test_on_enable_from_loaded_state(self):
         """Test enabling from loaded state"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
         result = skill.on_enable()
 
@@ -81,7 +81,7 @@ class TestResearchClawSkillCoverage:
 
     def test_on_enable_from_other_state(self):
         """Test enabling from non-loaded state"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         # Don't load, try to enable directly
         result = skill.on_enable()
 
@@ -93,7 +93,7 @@ class TestResearchClawSkillCoverage:
         import tempfile
         from pathlib import Path
 
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # The output param is passed to runner
@@ -103,7 +103,7 @@ class TestResearchClawSkillCoverage:
 
     def test_search_with_engine(self):
         """Test search with engine parameter"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Verify method accepts engine param
@@ -111,7 +111,7 @@ class TestResearchClawSkillCoverage:
 
     def test_chat_with_provider_and_model(self):
         """Test chat with provider and model"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Verify method accepts these params
@@ -149,17 +149,17 @@ class TestConfigDefaults:
 
     def test_default_cache_dir(self):
         """Test default cache directory"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         assert skill._cache_dir == ".deepclaw_cache"
 
     def test_config_override_cache_dir(self):
         """Test configuring custom cache dir"""
-        skill = ResearchClawSkill({"cache_dir": "/tmp/custom"})
+        skill = DeepClawSkill({"cache_dir": "/tmp/custom"})
         assert skill._cache_dir == "/tmp/custom"
 
     def test_default_config_values(self):
         """Test default configuration values"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         assert skill.get_config("default_depth", 3) == 3
         assert skill.get_config("default_limit", 10) == 10

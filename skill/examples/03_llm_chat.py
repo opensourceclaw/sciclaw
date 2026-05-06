@@ -9,7 +9,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from skill import ResearchClawSkill
+from skill import DeepClawSkill
 
 
 def main():
@@ -17,7 +17,7 @@ def main():
     print("Example 3: LLM Chat")
     print("=" * 50)
 
-    skill = ResearchClawSkill()
+    skill = DeepClawSkill()
     skill.on_load()
 
     # Chat with default provider (DeepSeek)

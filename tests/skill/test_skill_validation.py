@@ -21,7 +21,7 @@ from skill import (
     ResearchResult,
     SearchResult,
     SkillState,
-    ResearchClawSkill,
+    DeepClawSkill,
 )
 
 
@@ -30,7 +30,7 @@ class TestResearchValidation:
 
     def test_research_empty_topic(self):
         """Test research with empty topic"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         result = skill.research("")
@@ -42,7 +42,7 @@ class TestResearchValidation:
 
     def test_research_whitespace_topic(self):
         """Test research with whitespace-only topic"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         result = skill.research("   ")
@@ -56,7 +56,7 @@ class TestSearchValidation:
 
     def test_search_empty_query(self):
         """Test search with empty query"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         results = skill.search("")
@@ -65,7 +65,7 @@ class TestSearchValidation:
 
     def test_search_whitespace_query(self):
         """Test search with whitespace-only query"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         results = skill.search("   ")
@@ -78,7 +78,7 @@ class TestChatValidation:
 
     def test_chat_empty_prompt(self):
         """Test chat with empty prompt"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         response = skill.chat("")
@@ -88,7 +88,7 @@ class TestChatValidation:
 
     def test_chat_whitespace_prompt(self):
         """Test chat with whitespace-only prompt"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         response = skill.chat("   ")
@@ -113,7 +113,7 @@ class TestConfigValidation:
 
     def test_load_nonexistent_config(self):
         """Test loading nonexistent config file"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         config = skill.load_config("/nonexistent/path.json")
 
@@ -121,7 +121,7 @@ class TestConfigValidation:
 
     def test_set_and_get_config(self):
         """Test set and get config"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         skill.set_config("test_key", "test_value")
         assert skill.get_config("test_key") == "test_value"
@@ -134,21 +134,21 @@ class TestEdgeCases:
 
     def test_research_with_none_depth(self):
         """Test research with None depth"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         assert hasattr(skill, 'research')
 
     def test_search_with_none_limit(self):
         """Test search with None limit"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         assert hasattr(skill, 'search')
 
     def test_chat_with_none_temperature(self):
         """Test chat with None temperature"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         assert hasattr(skill, 'chat')
@@ -215,7 +215,7 @@ class TestSkillMethods:
 
     def test_skill_has_all_methods(self):
         """Test skill has all required methods"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         assert callable(skill.research)
         assert callable(skill.search)
@@ -234,7 +234,7 @@ class TestSkillMethods:
 
     def test_skill_properties(self):
         """Test skill properties"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         assert skill.name == "deepclaw"
         assert skill.version == "0.5.0"
@@ -246,17 +246,17 @@ class TestSkillConfig:
 
     def test_default_cache_dir(self):
         """Test default cache directory"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         assert skill._cache_dir == ".deepclaw_cache"
 
     def test_custom_cache_dir(self):
         """Test custom cache directory"""
-        skill = ResearchClawSkill({"cache_dir": "/tmp/test"})
+        skill = DeepClawSkill({"cache_dir": "/tmp/test"})
         assert skill._cache_dir == "/tmp/test"
 
     def test_multiple_config_values(self):
         """Test setting multiple config values"""
-        skill = ResearchClawSkill({
+        skill = DeepClawSkill({
             "default_depth": 5,
             "default_limit": 20,
             "default_engine": "bing"
@@ -272,7 +272,7 @@ class TestSkillLifecycleExtended:
 
     def test_full_lifecycle(self):
         """Test complete skill lifecycle"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         # Initial state
         assert skill.state == SkillState.UNLOADED
@@ -303,7 +303,7 @@ class TestSkillLifecycleExtended:
 
     def test_enable_without_load(self):
         """Test enabling without loading"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         result = skill.on_enable()
         assert result is False

@@ -22,38 +22,38 @@ from skill import (
     ResearchResult,
     SearchResult,
     SkillState,
-    ResearchClawSkill,
+    DeepClawSkill,
 )
 
 
-class TestResearchClawSkillExtended:
-    """Extended tests for ResearchClawSkill"""
+class TestDeepClawSkillExtended:
+    """Extended tests for DeepClawSkill"""
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_research_method(self, mock_skill_class):
         """Test research method integration"""
         # This test verifies the research method works
         # Note: We're testing the interface, not the actual research
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # The actual research would require network access
         # So we test the interface by verifying the skill can be created
         assert skill.state == SkillState.LOADED
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_search_method(self, mock_skill_class):
         """Test search method integration"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Verify skill is loaded
         assert skill.state == SkillState.LOADED
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_chat_method(self, mock_skill_class):
         """Test chat method integration"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         # Verify skill is loaded
@@ -61,7 +61,7 @@ class TestResearchClawSkillExtended:
 
     def test_error_state(self):
         """Test error state handling"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill._state = SkillState.ERROR
         skill._error_message = "Test error"
 
@@ -74,7 +74,7 @@ class TestResearchClawSkillExtended:
         import json
         from pathlib import Path
 
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
 
         # Create temp config file
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
@@ -89,7 +89,7 @@ class TestResearchClawSkillExtended:
 
     def test_on_start_stop(self):
         """Test on_start and on_stop"""
-        skill = ResearchClawSkill()
+        skill = DeepClawSkill()
         skill.on_load()
 
         result = skill.on_start()
@@ -102,7 +102,7 @@ class TestResearchClawSkillExtended:
 class TestCommandHandlerExtended:
     """Extended tests for command handler"""
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_research_command_full(self, mock_skill_class):
         """Test full research command handling"""
         from skill.commands import ResearchCommandHandler
@@ -125,7 +125,7 @@ class TestCommandHandlerExtended:
         assert result["success"] is True
         assert result["type"] == "research"
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_llm_command(self, mock_skill_class):
         """Test LLM command handling"""
         from skill.commands import ResearchCommandHandler, format_result_as_markdown
@@ -140,7 +140,7 @@ class TestCommandHandlerExtended:
         assert result["success"] is True
         assert result["type"] == "llm"
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_markdown_format_research(self, mock_skill_class):
         """Test markdown formatting for research results"""
         from skill.commands import format_result_as_markdown
@@ -158,7 +158,7 @@ class TestCommandHandlerExtended:
         assert "Research: Test Topic" in formatted
         assert "0.8" in formatted
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_markdown_format_search(self, mock_skill_class):
         """Test markdown formatting for search results"""
         from skill.commands import format_result_as_markdown
@@ -177,7 +177,7 @@ class TestCommandHandlerExtended:
         assert "Search Results: test query" in formatted
         assert "Result 1" in formatted
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_markdown_format_llm(self, mock_skill_class):
         """Test markdown formatting for LLM results"""
         from skill.commands import format_result_as_markdown

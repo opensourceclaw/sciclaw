@@ -100,7 +100,7 @@ class TestResearchCommandHandler:
         assert result["type"] == "health"
         assert "state" in result
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_handle_search(self, mock_skill_class):
         """Test handling /search command"""
         # Mock the search method
@@ -127,7 +127,7 @@ class TestResearchCommandHandler:
         assert result["type"] == "search"
         assert result["query"] == "test"
 
-    @patch('skill.commands.ResearchClawSkill')
+    @patch('skill.commands.DeepClawSkill')
     def test_handle_search_error(self, mock_skill_class):
         """Test handling search error"""
         mock_skill = Mock()

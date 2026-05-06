@@ -9,7 +9,7 @@ import os
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from skill import ResearchClawSkill
+from skill import DeepClawSkill
 
 
 def main():
@@ -27,7 +27,7 @@ def main():
         "cache_dir": "/tmp/deepclaw_cache"
     }
 
-    skill = ResearchClawSkill(config)
+    skill = DeepClawSkill(config)
     skill.on_load()
 
     print(f"\nConfig loaded:")
