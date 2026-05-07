@@ -46,6 +46,7 @@ deepclaw = "deepclaw.cli.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["deepclaw*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
