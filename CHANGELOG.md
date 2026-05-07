@@ -210,3 +210,8 @@ All notable changes to ResearchClaw will be documented in this file.
 ---
 
 For full documentation, visit: https://github.com/liantian-cn/researchclaw
+
+## v1.0.0 (2026-05-07)
+
+- chore: restructure directory layout to devclaw standard
+- Move config/skill json to configs/, caches to data/cache/
