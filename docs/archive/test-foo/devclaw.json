@@ -1,0 +1,12 @@
+{
+  "project": "test-foo",
+  "version": "0.1.0",
+  "createdAt": "2026-05-04T18:13:34.332229",
+  "specDir": "specs",
+  "planDir": "plans",
+  "harness": {
+    "mode": "auto",
+    "sandbox": true,
+    "modelRouting": true
+  }
+}
