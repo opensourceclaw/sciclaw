@@ -1,0 +1,57 @@
+name: Release Checklist
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  checklist:
+    name: Pre-Release Verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Get version info
+        id: version
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          PYPROJECT_VER=$(grep 'version = ' pyproject.toml | head -1 | awk '{print $3}' | tr -d '"')
+          echo "pyproject=$PYPROJECT_VER" >> $GITHUB_OUTPUT
+          echo "pyproject_full=v$PYPROJECT_VER" >> $GITHUB_OUTPUT
+      
+      - name: Verify version sync
+        run: |
+          TAG=${{ steps.version.outputs.tag }}
+          PYPROJECT=${{ steps.version.outputs.pyproject_full }}
+          if [ "$TAG" != "$PYPROJECT" ]; then
+            echo "❌ Version mismatch: tag=$TAG, pyproject=$PYPROJECT"
+            exit 1
+          fi
+          echo "✅ Version sync verified"
+      
+      - name: Verify CHANGELOG updated
+        run: |
+          TAG=${{ steps.version.outputs.tag }}
+          VERSION=${TAG#v}
+          if [ ! -f "CHANGELOG.md" ]; then exit 0; fi
+          if ! grep -q "## \[$VERSION\]" CHANGELOG.md; then
+            echo "❌ CHANGELOG not updated for $VERSION"
+            exit 1
+          fi
+          echo "✅ CHANGELOG verified"
+
+  notify:
+    name: Create Post-Release Issue
+    needs: checklist
+    runs-on: ubuntu-latest
+    if: github.event.release.prerelease == false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create issue
+        run: |
+          TAG=${GITHUB_REF#refs/tags/}
+          gh issue create --title "Post-Release Checklist for $TAG" \
+            --body "Release published. Verify and announce." || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

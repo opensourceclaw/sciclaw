@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/opensourceclaw/$project#readme
+    about: Check the documentation before opening an issue
+  - name: 💬 Discussions
+    url: https://github.com/opensourceclaw/$project/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 🔒 Security Issues
+    url: mailto:security@opensourceclaw.dev
+    about: Report security vulnerabilities privately
