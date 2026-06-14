@@ -10,6 +10,8 @@
   },
   "scripts": {
     "build": "tsc",
+    "serve": "node dist/api/server.js",
+    "dev": "node --loader ts-node/esm src/cli/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
