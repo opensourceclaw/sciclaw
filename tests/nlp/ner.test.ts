@@ -16,13 +16,16 @@ describe('NER', () => {
 
       const money = entities.filter((e) => e.type === 'MONEY');
       expect(money.length).toBeGreaterThanOrEqual(1);
+      expect(money.some((e) => e.text.includes('$'))).toBe(true);
     });
 
     it('should extract percentages', () => {
       const text = 'Growth of 15.5%';
       const entities = extractEntities(text);
 
-      expect(entities.length).toBeGreaterThanOrEqual(1);
+      const percents = entities.filter((e) => e.type === 'PERCENT');
+      expect(percents.length).toBeGreaterThanOrEqual(1);
+      expect(percents[0]?.text).toBe('15.5%');
     });
 
     it('should extract emails', () => {

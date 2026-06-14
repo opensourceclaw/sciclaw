@@ -46,12 +46,15 @@ const PATTERNS: Record<EntityType, RegExp[]> = {
     /\b(\d{1,2}:\d{2}(?::\d{2})?(?:\s*[AP]M)?)\b/gi, // Time
   ],
   MONEY: [
-    /\b(\$[\d,]+(?:\.\d{2})?)\b/g, // Dollar
-    /\b(¥[\d,]+(?:\.\d{2})?)\b/g, // Yen/Yuan
-    /\b(€[\d,]+(?:\.\d{2})?)\b/g, // Euro
+    // Fixed: Remove \b which conflicts with currency symbols
+    /(\$[\d,]+(?:\.\d{2})?)/g, // Dollar
+    /(¥[\d,]+(?:\.\d{2})?)/g, // Yen/Yuan
+    /(€[\d,]+(?:\.\d{2})?)/g, // Euro
+    /(£[\d,]+(?:\.\d{2})?)/g, // Pound
   ],
   PERCENT: [
-    /\b(\d+(?:\.\d+)?%)\b/g,
+    // Fixed: Remove \b which conflicts with %
+    /(\d+(?:\.\d+)?%)/g,
   ],
   EMAIL: [
     /\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/g,
@@ -69,11 +72,11 @@ export function extractEntities(text: string): Entity[] {
 
   for (const [type, patterns] of Object.entries(PATTERNS) as [EntityType, RegExp[]][]) {
     for (const pattern of patterns) {
-      // Reset lastIndex for global regex
-      pattern.lastIndex = 0;
+      // Create a new regex to avoid lastIndex issues
+      const regex = new RegExp(pattern.source, pattern.flags);
 
       let match;
-      while ((match = pattern.exec(text)) !== null) {
+      while ((match = regex.exec(text)) !== null) {
         const matchedText = match[1] ?? match[0];
         const start = match.index + (match[0].indexOf(matchedText));
 
@@ -111,10 +114,10 @@ export function extractEntitiesWithCustom(
 
   for (const [type, patterns] of Object.entries(allPatterns) as [EntityType, RegExp[]][]) {
     for (const pattern of patterns) {
-      pattern.lastIndex = 0;
+      const regex = new RegExp(pattern.source, pattern.flags);
 
       let match;
-      while ((match = pattern.exec(text)) !== null) {
+      while ((match = regex.exec(text)) !== null) {
         const matchedText = match[1] ?? match[0];
         const start = match.index + (match[0].indexOf(matchedText));
 
