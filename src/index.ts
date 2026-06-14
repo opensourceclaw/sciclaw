@@ -1,9 +1,9 @@
 /**
- * DeepClaw v2.0.0-beta.4
+ * DeepClaw v2.0.0-rc.1
  * Deep Research Framework - AI-powered multi-source research and synthesis
  */
 
-export const VERSION = '2.0.0-beta.4';
+export const VERSION = '2.0.0-rc.1';
 
 // Core exports
 export * from './types/index.js';
