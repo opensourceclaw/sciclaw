@@ -1,14 +1,25 @@
 /**
- * Search module - Multi-engine search
+ * Search module - Multi-engine search with caching
  */
 
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { getCache } from '../cache/index.js';
 import type { SearchOptions, SearchResult, SearchEngine } from '../types/index.js';
 
 export async function search(options: SearchOptions): Promise<SearchResult[]> {
   const engines = options.engines ?? ['duckduckgo'];
   const maxResults = options.maxResults ?? 20;
+  const useCache = options.useCache ?? true;
+
+  // Check cache first
+  if (useCache) {
+    const cache = getCache();
+    const cached = cache.get(options.query, engines);
+    if (cached) {
+      return cached.slice(0, maxResults);
+    }
+  }
 
   const results: SearchResult[] = [];
 
@@ -21,7 +32,15 @@ export async function search(options: SearchOptions): Promise<SearchResult[]> {
   results.push(...allResults.flat());
 
   // Deduplicate and sort
-  return deduplicateResults(results).slice(0, maxResults);
+  const finalResults = deduplicateResults(results).slice(0, maxResults);
+
+  // Store in cache
+  if (useCache) {
+    const cache = getCache();
+    cache.set(options.query, engines, finalResults);
+  }
+
+  return finalResults;
 }
 
 async function searchWithEngine(

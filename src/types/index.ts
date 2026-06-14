@@ -8,6 +8,7 @@ export interface SearchOptions {
   engines?: SearchEngine[];
   maxResults?: number;
   timeout?: number;
+  useCache?: boolean;
 }
 
 export type SearchEngine = 'duckduckgo' | 'google' | 'bing';
@@ -84,6 +85,19 @@ export interface LLMOptions {
   maxTokens?: number;
 }
 
+// Cache types
+export interface CacheOptions {
+  enabled: boolean;
+  ttl: number;
+  maxSize: number;
+}
+
+// Logging types
+export interface LoggingOptions {
+  level: 'debug' | 'info' | 'warn' | 'error';
+  format: 'json' | 'text';
+}
+
 // Config types
 export interface DeepClawConfig {
   defaultEngine: SearchEngine;
@@ -95,4 +109,10 @@ export interface DeepClawConfig {
     model?: string;
     apiKey?: string;
   };
+  api?: {
+    port: number;
+    host: string;
+  };
+  cache?: CacheOptions;
+  logging?: LoggingOptions;
 }
