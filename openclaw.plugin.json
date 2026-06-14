@@ -1,0 +1,57 @@
+{
+  "$schema": "https://openclaw.dev/schemas/plugin.json",
+  "name": "deepclaw",
+  "version": "2.0.0-beta.1",
+  "description": "Deep Research Framework - AI-powered multi-source research and synthesis",
+  "author": "Peter Cheng",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "capabilities": [
+    "search",
+    "research",
+    "report",
+    "api"
+  ],
+  "commands": {
+    "search": {
+      "description": "Search across multiple sources",
+      "usage": "deepclaw search <query> [options]"
+    },
+    "research": {
+      "description": "Deep research on a topic",
+      "usage": "deepclaw research <topic> [options]"
+    },
+    "report": {
+      "description": "Generate research report",
+      "usage": "deepclaw report [options]"
+    },
+    "serve": {
+      "description": "Start API server",
+      "usage": "deepclaw serve [options]"
+    }
+  },
+  "api": {
+    "endpoints": [
+      { "path": "/api/search", "method": "POST" },
+      { "path": "/api/research", "method": "POST" },
+      { "path": "/api/report/:id", "method": "GET" },
+      { "path": "/api/report/:id", "method": "POST" },
+      { "path": "/api/status", "method": "GET" }
+    ],
+    "defaultPort": 3000
+  },
+  "config": {
+    "defaultEngine": "duckduckgo",
+    "maxResults": 50,
+    "timeout": 30000,
+    "outputFormat": "markdown"
+  },
+  "dependencies": {
+    "openclaw": ">=0.9.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

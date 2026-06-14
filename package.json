@@ -1,0 +1,52 @@
+{
+  "name": "deepclaw",
+  "version": "2.0.0-beta.1",
+  "description": "Open-source Deep Research framework based on OpenClaw",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "deepclaw": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist/ node_modules/"
+  },
+  "keywords": [
+    "openclaw",
+    "deep-research",
+    "search",
+    "ai",
+    "llm"
+  ],
+  "author": "Peter Cheng",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0",
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.0",
+    "turndown": "^7.1.0",
+    "express": "^4.18.0",
+    "zod": "^3.23.0",
+    "uuid": "^9.0.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.0",
+    "@types/turndown": "^5.0.0",
+    "@types/uuid": "^9.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0"
+  }
+}
