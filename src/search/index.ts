@@ -12,10 +12,13 @@ export async function search(options: SearchOptions): Promise<SearchResult[]> {
 
   const results: SearchResult[] = [];
 
-  for (const engine of engines) {
-    const engineResults = await searchWithEngine(engine, options.query, maxResults);
-    results.push(...engineResults);
-  }
+  // Search in parallel for better performance
+  const searchPromises = engines.map((engine) =>
+    searchWithEngine(engine, options.query, maxResults)
+  );
+
+  const allResults = await Promise.all(searchPromises);
+  results.push(...allResults.flat());
 
   // Deduplicate and sort
   return deduplicateResults(results).slice(0, maxResults);
@@ -39,7 +42,6 @@ async function searchWithEngine(
 }
 
 async function searchDuckDuckGo(query: string, maxResults: number): Promise<SearchResult[]> {
-  // Use DuckDuckGo HTML version for scraping
   const url = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
 
   try {
@@ -82,14 +84,62 @@ async function searchDuckDuckGo(query: string, maxResults: number): Promise<Sear
 }
 
 async function searchGoogle(query: string, maxResults: number): Promise<SearchResult[]> {
-  // Placeholder - Google requires API key
-  console.warn('Google search not implemented, use DuckDuckGo');
+  // Google Custom Search API or HTML scraping
+  // Using a simplified approach - in production, use official API
+  const apiKey = process.env.GOOGLE_API_KEY;
+  const cx = process.env.GOOGLE_CX;
+
+  if (apiKey && cx) {
+    // Use official Google Custom Search API
+    try {
+      const url = `https://www.googleapis.com/customsearch/v1?key=${apiKey}&cx=${cx}&q=${encodeURIComponent(query)}&num=${maxResults}`;
+      const response = await axios.get(url, { timeout: 10000 });
+
+      return (response.data.items ?? []).map((item: any, i: number) => ({
+        title: item.title ?? '',
+        url: item.link ?? '',
+        snippet: item.snippet ?? '',
+        source: 'google' as const,
+        rank: i + 1,
+      }));
+    } catch (error) {
+      console.warn('Google API search failed:', error);
+    }
+  }
+
+  // Fallback: return empty (HTML scraping is blocked by Google)
+  console.warn('Google search requires GOOGLE_API_KEY and GOOGLE_CX environment variables');
   return [];
 }
 
 async function searchBing(query: string, maxResults: number): Promise<SearchResult[]> {
-  // Placeholder - Bing requires API key
-  console.warn('Bing search not implemented, use DuckDuckGo');
+  // Bing Search API
+  const apiKey = process.env.BING_API_KEY;
+
+  if (apiKey) {
+    try {
+      const url = `https://api.bing.microsoft.com/v7.0/search?q=${encodeURIComponent(query)}&count=${maxResults}`;
+      const response = await axios.get(url, {
+        headers: {
+          'Ocp-Apim-Subscription-Key': apiKey,
+        },
+        timeout: 10000,
+      });
+
+      return (response.data.webPages?.value ?? []).map((item: any, i: number) => ({
+        title: item.name ?? '',
+        url: item.url ?? '',
+        snippet: item.snippet ?? '',
+        source: 'bing' as const,
+        rank: i + 1,
+      }));
+    } catch (error) {
+      console.warn('Bing API search failed:', error);
+    }
+  }
+
+  // Fallback: return empty
+  console.warn('Bing search requires BING_API_KEY environment variable');
   return [];
 }
 
