@@ -1,0 +1,1 @@
+{"version":3,"file":"variable_extractor.d.ts","sourceRoot":"","sources":["../../../src/reasoning/causal_analysis/variable_extractor.ts"],"names":[],"mappings":"AAAA;;GAEG;AAEH,OAAO,KAAK,EAAE,cAAc,EAAE,MAAM,YAAY,CAAC;AA8BjD,qBAAa,iBAAiB;IAC5B,OAAO,CAAC,IAAI,EAAE,MAAM,GAAG,cAAc,EAAE;CA+DxC"}

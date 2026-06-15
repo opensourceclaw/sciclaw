@@ -1,6 +1,43 @@
 # Changelog
 
-All notable changes to ResearchClaw will be documented in this file.
+All notable changes to DeepClaw will be documented in this file.
+
+## [3.0.0-beta.1] - 2026-06-15
+
+### 🚀 Beta: Reasoning Enhancement
+
+#### Added
+- **Chain of Thought (思维链)**
+  - `src/reasoning/chain_of_thought/` - 多步推理链
+  - ProblemDecomposer: 问题分解器，支持复杂问题拆解
+  - StepExecutor: 步骤执行器，支持 DAG 并行调度
+  - ResultAggregator: 结果汇总器
+- **Causal Analysis (因果分析)**
+  - `src/reasoning/causal_analysis/` - 因果关系分析
+  - VariableExtractor: 变量提取
+  - CausalExtractor: 因果抽取（中英文模式）
+  - GraphBuilder: 因果图构建
+- **Explainer (可解释性)**
+  - `src/reasoning/explainer/` - 推理可解释性
+  - Logger: 推理日志（环形缓冲区）
+  - Confidence: 置信度评估（4 因子）
+  - Generator: 解释生成
+- **Visualization (可视化)**
+  - `src/reasoning/visualization/` - 思维链可视化
+  - TreeGenerator: 推理树生成
+  - Formatter: JSON/Markdown 导出
+
+#### Testing
+- 93 new reasoning tests (100% passing)
+- Overall coverage: 91.68%
+- Reasoning module coverage: 96.69%
+
+#### Architecture
+- ReasoningEngine: 统一入口，串联全流程
+- DAG 拓扑序调度：无依赖步骤可并发执行
+- LLMEngine 接口注入：可测试性
+
+---
 
 ## [1.0.0] - 2026-05-06
 
