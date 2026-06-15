@@ -2,6 +2,40 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.0.0-beta.2] - 2026-06-16
+
+### 🚀 Beta: Interactive Research
+
+#### Added
+- **Feedback Module (用户反馈)**
+  - `src/interactive/feedback/` - 用户反馈收集与处理
+  - FeedbackCollector: 支持 5 种反馈类型 (positive/negative/modify/supplement/pause)
+  - FeedbackProcessor: 将反馈转换为研究动作
+
+- **Query Optimizer (查询优化)**
+  - `src/interactive/query_optimizer/` - 自适应查询优化
+  - QueryRewriter: 4 条重写规则 (broad→specific, depth→in-depth 等)
+  - QueryExpander: 8 组同义词扩展
+  - QueryScheduler: priority + FIFO 调度算法
+
+- **Progressive Builder (渐进式构建)**
+  - `src/interactive/progressive/` - 分阶段报告构建
+  - SectionSegmenter: 自动识别标题层级分割章节
+  - SectionBuilder: 增量构建 + 依赖检测
+  - ProgressPreview: 中间预览支持
+
+- **Visualization (可视化)**
+  - `src/interactive/visualization/` - 研究过程可视化
+  - ProgressTracker: 实时进度跟踪
+  - StatusDisplay: 状态展示 (idle/searching/analyzing/writing/done)
+
+#### Testing
+- 75 new interactive tests (100% passing)
+- Overall coverage: 91.42%
+- Interactive module coverage: 76.19%
+
+---
+
 ## [3.0.0-beta.1] - 2026-06-15
 
 ### 🚀 Beta: Reasoning Enhancement
