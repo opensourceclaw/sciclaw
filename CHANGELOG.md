@@ -2,6 +2,32 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.0.0-rc.2] - 2026-06-17
+
+### 🚀 RC: Personalization + Style Adaptation
+
+#### Added
+- **Preference Learner** (`src/personalization/preference_learner.ts`)
+  - Explicit preference setting and behavioral signal tracking
+  - Adaptive depth adjustment (shallow/medium/deep) from research patterns
+  - Style adaptation from user behavior signals
+
+- **Style Adapter** (`src/personalization/style_adapter.ts`)
+  - 4 research styles: academic, business, technical, quick
+  - Style-specific tone (formality, technicality, conciseness)
+  - Style-specific structure (abstract, executive summary, code examples, appendix)
+  - Adaptive section titles and ordering per style
+
+- **Topic Tracker** (`src/personalization/topic_tracker.ts`)
+  - Interest weight tracking with time-based decay
+  - Related topic boosting with built-in topic relation graph
+  - Topic suggestion engine for unexplored areas
+  - Diversity scoring and max-topic enforcement
+
+- **PersonalizationEngine** (`src/personalization/index.ts`)
+  - Unified entry point for preference learning + style + topics
+  - Profile-synced section ordering and tone guidelines
+
 ## [3.0.0-rc.1] - 2026-06-17
 
 ### 🚀 RC: Continuous Learning + Self-Improvement
