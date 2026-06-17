@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { registerProvider, getProvider, synthesize } from '../../src/llm/index.js';
+import { registerProvider, getProvider, synthesize, complete } from '../../src/llm/index.js';
 import type { LLMProvider } from '../../src/types/index.js';
 
 describe('LLM Module', () => {
@@ -40,6 +40,22 @@ describe('LLM Module', () => {
     it('should handle empty contents array', async () => {
       const result = await synthesize('Empty Topic', []);
       expect(result).toContain('Empty Topic');
+    });
+  });
+
+  describe('complete', () => {
+    it('should complete with registered provider', async () => {
+      const mockProvider: LLMProvider = {
+        name: 'test-complete',
+        complete: vi.fn().mockResolvedValue('completion response'),
+      };
+      registerProvider(mockProvider);
+      const result = await complete('test prompt', { model: 'test-complete' });
+      expect(result).toBe('completion response');
+    });
+
+    it('should throw for unregistered provider', async () => {
+      await expect(complete('test')).rejects.toThrow('LLM provider not found');
     });
   });
 });

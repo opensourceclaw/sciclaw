@@ -5,7 +5,10 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { getCache } from '../cache/index.js';
+import { SearchOptimizer } from './optimizer.js';
 import type { SearchOptions, SearchResult, SearchEngine } from '../types/index.js';
+
+export { SearchOptimizer, createSearchOptimizer } from './optimizer.js';
 
 export async function search(options: SearchOptions): Promise<SearchResult[]> {
   const engines = options.engines ?? ['duckduckgo'];

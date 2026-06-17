@@ -10,6 +10,8 @@ Use this checklist before creating any release to ensure all version-related ite
 - [ ] CHANGELOG new entry added with date
 - [ ] `npm run build` succeeds
 - [ ] `npm test` passes (run 3 times for stability)
+- [ ] `npm test -- --coverage` shows ≥95% overall coverage
+- [ ] Tests stable (run 8 times to verify no flaky tests)
 - [ ] All changes committed to git
 - [ ] Git tag created with correct version
 

@@ -4,6 +4,7 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { getCache } from '../cache/index.js';
+export { SearchOptimizer, createSearchOptimizer } from './optimizer.js';
 export async function search(options) {
     const engines = options.engines ?? ['duckduckgo'];
     const maxResults = options.maxResults ?? 20;

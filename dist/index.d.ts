@@ -1,8 +1,8 @@
 /**
- * DeepClaw v3.0.0-rc.2
+ * DeepClaw v3.0.0-rc.3
  * Deep Research Framework — AI-powered multi-source research and synthesis
  */
-export declare const VERSION = "3.0.0-rc.2";
+export declare const VERSION = "3.0.0-rc.3";
 export * from './types/index.js';
 export * from './search/index.js';
 export * from './research/index.js';

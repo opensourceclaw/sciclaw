@@ -49,52 +49,35 @@ describe('API Module', () => {
     let server: Awaited<ReturnType<typeof createServer>>;
 
     beforeEach(async () => {
-      server = await createServer({ port: 3003, host: 'localhost' });
+      server = await createServer({ port: 3098, host: 'localhost' });
     });
 
     afterEach(() => {
       server?.close();
     });
 
-    it('should have search endpoint configured', async () => {
-      // Verify the server was created successfully
+    it('should have search endpoint configured', () => {
       expect(server).toBeDefined();
     });
 
-    it('should have research endpoint configured', async () => {
+    it('should have research endpoint configured', () => {
       expect(server).toBeDefined();
     });
 
-    it('should have report endpoints configured', async () => {
+    it('should have report endpoints configured', () => {
       expect(server).toBeDefined();
     });
 
-    it('should have status endpoint configured', async () => {
+    it('should have status endpoint configured', () => {
       expect(server).toBeDefined();
     });
-  });
-});
 
-describe('Response Helpers', () => {
-  it('successResponse should return correct format', () => {
-    const data = { test: 'value' };
-    const response = {
-      success: true,
-      data,
-      timestamp: expect.any(Date),
-    };
-    expect(response.success).toBe(true);
-    expect(response.data).toEqual(data);
-  });
-
-  it('errorResponse should return correct format', () => {
-    const error = new Error('Test error');
-    const response = {
-      success: false,
-      error: error.message,
-      timestamp: expect.any(Date),
-    };
-    expect(response.success).toBe(false);
-    expect(response.error).toBe('Test error');
+    it('server starts and responds to status', async () => {
+      await server.listen();
+      const response = await fetch('http://localhost:3098/api/status');
+      const data = await response.json();
+      expect(data.success).toBe(true);
+      server.close();
+    });
   });
 });
