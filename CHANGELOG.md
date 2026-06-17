@@ -2,6 +2,28 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.0.0-beta.3] - 2026-06-17
+
+### 🚀 Beta: Synthesis Engine
+
+#### Added
+- **Cross-Domain Synthesizer** (`src/synthesis/cross_domain_synthesizer.ts`)
+  - CrossDomainSynthesizer: Identifies connections across knowledge domains
+  - 4 connection types: analogy, causation, correlation, implication
+  - Cross-cutting concept insight generation
+
+- **Iterative Verifier** (`src/synthesis/iterative_verifier.ts`)
+  - IterativeVerifier: Hypothesis → Test → Refine loop
+  - Contradiction detection (English + Chinese patterns)
+  - Confidence calibration with iteration-based learning
+
+- **Discovery Engine** (`src/synthesis/discovery_engine.ts`)
+  - DiscoveryEngine: Pattern recognition across domains
+  - Research gap identification (7 research topic templates)
+  - Novel pattern strength scoring
+
+---
+
 ## [3.0.0-beta.2] - 2026-06-16
 
 ### 🚀 Beta: Interactive Research
