@@ -2,6 +2,25 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.0.0-rc.3] - 2026-06-17
+
+### 🚀 RC: Stabilization + Performance
+
+#### Added
+- **Search Optimizer** (`src/search/optimizer.ts`)
+  - Request deduplication: concurrent identical queries share a single promise
+  - Batch search with configurable concurrency limits
+  - URL normalization for improved deduplication (protocol/www/case-insensitive)
+  - Query prediction for cache warming
+
+#### Fixed
+- **Plugin manifest**: `openclaw.plugin.json` version bumped to 3.0.0-rc.3 (4th-time fix)
+
+#### Tests
+- 11 summarization error hierarchy tests (100% passing)
+- 14 search optimizer tests (100% passing)
+- 25 new tests total
+
 ## [3.0.0-rc.2] - 2026-06-17
 
 ### 🚀 RC: Personalization + Style Adaptation
