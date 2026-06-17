@@ -2,7 +2,38 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
-## [3.0.0-beta.3] - 2026-06-17
+## [3.0.0-rc.1] - 2026-06-17
+
+### 🚀 RC: Continuous Learning + Self-Improvement
+
+#### Added
+- **Feedback Learner** (`src/learning/feedback_learner.ts`)
+  - Explicit (ratings/comments) and implicit (actions) feedback processing
+  - Topic preference learning with adaptive recommendations
+  - Feedback pattern detection with trend analysis (improving/stable/declining)
+  - Search depth and cross-domain recommendations based on learned preferences
+
+- **Self Improver** (`src/learning/self_improver.ts`)
+  - Performance self-assessment from research outcomes
+  - Strategy adaptation: auto-adjusts search depth, max sources, cross-domain settings
+  - Error pattern recognition across research stages with mitigation suggestions
+  - Accuracy trend tracking over time
+
+- **Knowledge Evolution** (`src/learning/knowledge_evolution.ts`)
+  - Dynamic fact management with confidence-based filtering
+  - Freshness tracking with per-day decay model
+  - Fact versioning and update history
+  - Stale/outdated fact identification and batch verification
+
+- **DeepClawLearningEngine** (`src/learning/index.ts`)
+  - Unified LearningEngine interface implementation
+  - Coordinates feedback → strategy → knowledge pipeline
+  - `getLearningMetrics()` for complete learning state
+
+#### Fixed
+- **IterativeVerifier**: Removed non-deterministic `Math.random()` in confidence update (flaky test fix)
+
+### [3.0.0-beta.3] - 2026-06-17
 
 ### 🚀 Beta: Synthesis Engine
 

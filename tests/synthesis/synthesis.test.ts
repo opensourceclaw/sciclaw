@@ -263,7 +263,7 @@ describe("IterativeVerifier", () => {
     const result = v.verify("Renewable energy costs have dropped", evidence);
     // "costs" matches the energy domain claim text
     expect(result.conclusion).toBe("confirmed");
-    expect(result.confidence).toBeGreaterThan(0.5);
+    expect(result.confidence).toBeGreaterThanOrEqual(0.5);
   });
 
   it("custom config overrides defaults", () => {

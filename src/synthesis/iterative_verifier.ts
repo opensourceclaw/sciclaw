@@ -205,7 +205,7 @@ export class IterativeVerifier {
       case "fail":
         return Math.max(0, current - learningRate);
       case "partial":
-        return current + learningRate * 0.3 * (Math.random() > 0.5 ? 1 : -1);
+        return current; // partial evidence doesn't change confidence
     }
   }
 
