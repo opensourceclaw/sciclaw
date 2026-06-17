@@ -1,12 +1,7 @@
 /**
- * Learning module types - Feedback collection, learning pipeline, and habit tracking
+ * DeepClaw v3.0.0-rc.1 — Learning Engine Types
+ *
+ * Continuous Learning + Self-Improvement + Knowledge Evolution
  */
-export var FeedbackType;
-(function (FeedbackType) {
-    FeedbackType["QUALITY"] = "quality";
-    FeedbackType["ACCURACY"] = "accuracy";
-    FeedbackType["RELEVANCE"] = "relevance";
-    FeedbackType["COMPLETENESS"] = "completeness";
-    FeedbackType["USEFULNESS"] = "usefulness";
-})(FeedbackType || (FeedbackType = {}));
+export {};
 //# sourceMappingURL=types.js.map
