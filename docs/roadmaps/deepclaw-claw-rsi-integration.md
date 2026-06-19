@@ -9,7 +9,17 @@
 
 ### 目标
 
-**DeepClaw v6.0.0 + claw-rsi → 对标 Sakana.ai The AI Scientist**
+**DeepClaw v6.0.0 + claw-rsi → 对标 Sakana.ai**
+
+---
+
+## 赛道定位
+
+| 维度 | 说明 |
+|------|------|
+| **赛道** | AI for Science |
+| **国际对标** | Sakana.ai, Recursive |
+| **国内对标** | 百奥几何，津渡生科 |
 
 ---
 
