@@ -12,7 +12,7 @@
     "build": "tsc",
     "serve": "node dist/api/server.js",
     "dev": "node --loader ts-node/esm src/cli/index.ts",
-    "test": "vitest run",
+    "test": "NODE_OPTIONS='--max-old-space-size=4096' vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
