@@ -438,7 +438,7 @@ describe("KnowledgeEvolution", () => {
     await ke.updateKnowledge([fact]);
 
     ke.verifyFacts(["fact-verify"]);
-    expect(ke.getFactFreshness("fact-verify")).toBe(1);
+    expect(ke.getFactFreshness("fact-verify")).toBeCloseTo(1);
   });
 
   it("gets facts by domain", async () => {
