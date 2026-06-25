@@ -8,7 +8,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-3178c6.svg)](https://www.typescriptlang.org/)
-[![Version](https://img.shields.io/badge/Version-3.0.0-orange.svg)](https://github.com/opensourceclaw/deepclaw)
+[![Version](https://img.shields.io/badge/Version-3.0.2-orange.svg)](https://github.com/opensourceclaw/deepclaw)
 
 </div>
 

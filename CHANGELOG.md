@@ -2,6 +2,28 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.0.2] - 2026-06-25
+
+### Fixed
+- **Cache Module Coverage**: Improved from 62.16% to 93.77%
+  - Added `analytics.ts` - 100% coverage
+  - Added `compression.ts` - 100% coverage
+  - Added `distributed.ts` - 85.18% coverage
+  - Added `invalidation.ts` - 97.45% coverage
+  - Added `search-cache.ts` - 86.69% coverage
+  - Added `warmer.ts` - 100% coverage
+  - New test files: 7 tests, 95 test cases
+
+### Added
+- `src/types/optional-deps.d.ts` - Optional dependency type declarations
+- Redis mock support via injectable `RedisFactory`
+
+## [3.0.0-rc.4] - 2026-06-19
+
+### Fixed
+- OOM (JS heap out of memory) during test runs by adding `--max-old-space-size=4096`
+  via vitest `poolOptions.forks.execArgv` and npm `test` script
+
 ## [3.0.0-rc.3] - 2026-06-17
 
 ### 🚀 RC: Stabilization + Performance

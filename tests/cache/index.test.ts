@@ -6,33 +6,33 @@ describe('SearchCache', () => {
   let cache: SearchCache;
 
   beforeEach(() => {
-    cache = new SearchCache(60, 10); // 60s TTL, max 10 entries
+    cache = new SearchCache({ ttl: 60, maxSize: 10 });
   });
 
   describe('get/set', () => {
-    it('should store and retrieve results', () => {
+    it('should store and retrieve results', async () => {
       const results: SearchResult[] = [
         { title: 'Test', url: 'https://example.com', snippet: 'Test', source: 'duckduckgo' },
       ];
 
       cache.set('test query', ['duckduckgo'], results);
-      const cached = cache.get('test query', ['duckduckgo']);
+      const cached = await cache.get('test query', ['duckduckgo']);
 
       expect(cached).toEqual(results);
     });
 
-    it('should return null for missing entries', () => {
-      const cached = cache.get('missing', ['duckduckgo']);
+    it('should return null for missing entries', async () => {
+      const cached = await cache.get('missing', ['duckduckgo']);
       expect(cached).toBeNull();
     });
 
-    it('should generate consistent keys for same query+engines', () => {
+    it('should generate consistent keys for same query+engines', async () => {
       const results: SearchResult[] = [
         { title: 'Test', url: 'https://example.com', snippet: 'Test', source: 'duckduckgo' },
       ];
 
       cache.set('test', ['duckduckgo', 'google'], results);
-      const cached = cache.get('test', ['google', 'duckduckgo']); // Different order
+      const cached = await cache.get('test', ['google', 'duckduckgo']);
 
       expect(cached).toEqual(results);
     });
@@ -40,45 +40,48 @@ describe('SearchCache', () => {
 
   describe('TTL', () => {
     it('should respect TTL and return null for expired entries', async () => {
-      const shortCache = new SearchCache(0.1, 10); // 0.1s TTL
+      const shortCache = new SearchCache({ ttl: 0.05, maxSize: 10 });
       const results: SearchResult[] = [
         { title: 'Test', url: 'https://example.com', snippet: 'Test', source: 'duckduckgo' },
       ];
 
       shortCache.set('test', ['duckduckgo'], results);
 
-      // Wait for TTL to expire
-      await new Promise((resolve) => setTimeout(resolve, 150));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
-      const cached = shortCache.get('test', ['duckduckgo']);
+      const cached = await shortCache.get('test', ['duckduckgo']);
       expect(cached).toBeNull();
     });
   });
 
   describe('maxSize', () => {
-    it('should evict oldest entries when at max size', () => {
-      const smallCache = new SearchCache(3600, 2);
+    it('should evict LRU entries when at max size', async () => {
+      const smallCache = new SearchCache({ ttl: 3600, maxSize: 2 });
 
       smallCache.set('query1', ['duckduckgo'], [{ title: '1', url: '1', snippet: '1', source: 'duckduckgo' }]);
       smallCache.set('query2', ['duckduckgo'], [{ title: '2', url: '2', snippet: '2', source: 'duckduckgo' }]);
+
+      // Access query1 so query2 becomes LRU
+      await smallCache.get('query1', ['duckduckgo']);
+
       smallCache.set('query3', ['duckduckgo'], [{ title: '3', url: '3', snippet: '3', source: 'duckduckgo' }]);
 
-      // First entry should be evicted
-      expect(smallCache.get('query1', ['duckduckgo'])).toBeNull();
-      expect(smallCache.get('query2', ['duckduckgo'])).not.toBeNull();
-      expect(smallCache.get('query3', ['duckduckgo'])).not.toBeNull();
+      // query2 should be evicted (LRU), query1 should remain
+      expect(await smallCache.get('query2', ['duckduckgo'])).toBeNull();
+      expect(await smallCache.get('query1', ['duckduckgo'])).not.toBeNull();
+      expect(await smallCache.get('query3', ['duckduckgo'])).not.toBeNull();
     });
   });
 
   describe('clear', () => {
-    it('should clear all entries', () => {
+    it('should clear all entries', async () => {
       cache.set('test1', ['duckduckgo'], [{ title: '1', url: '1', snippet: '1', source: 'duckduckgo' }]);
       cache.set('test2', ['duckduckgo'], [{ title: '2', url: '2', snippet: '2', source: 'duckduckgo' }]);
 
       cache.clear();
 
-      expect(cache.get('test1', ['duckduckgo'])).toBeNull();
-      expect(cache.get('test2', ['duckduckgo'])).toBeNull();
+      expect(await cache.get('test1', ['duckduckgo'])).toBeNull();
+      expect(await cache.get('test2', ['duckduckgo'])).toBeNull();
     });
   });
 
@@ -86,7 +89,7 @@ describe('SearchCache', () => {
     it('should return cache statistics', () => {
       cache.set('test', ['duckduckgo'], [{ title: 'Test', url: '1', snippet: '1', source: 'duckduckgo' }]);
 
-      const stats = cache.stats();
+      const stats = cache.getStats();
 
       expect(stats.size).toBe(1);
       expect(stats.maxSize).toBe(10);
@@ -96,11 +99,11 @@ describe('SearchCache', () => {
 
   describe('cleanExpired', () => {
     it('should remove expired entries', async () => {
-      const shortCache = new SearchCache(0.1, 10);
+      const shortCache = new SearchCache({ ttl: 0.05, maxSize: 10 });
 
       shortCache.set('test', ['duckduckgo'], [{ title: 'Test', url: '1', snippet: '1', source: 'duckduckgo' }]);
 
-      await new Promise((resolve) => setTimeout(resolve, 150));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       const cleaned = shortCache.cleanExpired();
       expect(cleaned).toBe(1);
@@ -120,12 +123,12 @@ describe('Global cache', () => {
     expect(cache1).toBe(cache2);
   });
 
-  it('should clear global cache', () => {
+  it('should clear global cache', async () => {
     const cache = getCache();
     cache.set('test', ['duckduckgo'], [{ title: 'Test', url: '1', snippet: '1', source: 'duckduckgo' }]);
 
     clearCache();
 
-    expect(cache.get('test', ['duckduckgo'])).toBeNull();
+    expect(await cache.get('test', ['duckduckgo'])).toBeNull();
   });
 });
