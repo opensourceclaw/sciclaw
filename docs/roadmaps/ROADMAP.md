@@ -1,7 +1,7 @@
 # DeepClaw Roadmap
 
-**Version**: 2.0
-**Date**: 2026-06-14
+**Version**: 2.1
+**Date**: 2026-06-25
 **Status**: 📋 Planning
 **Focus**: Deep Research
 
@@ -25,7 +25,9 @@ DeepClaw 专注于 **Deep Research**（深度研究）而非简单搜索：
 | **v0.1.0 - v0.x** | 2026 Q2 | 基础能力构建 | ✅ 完成 |
 | **v1.0.0** | 2026-06 | 核心研究能力 | ✅ 已发布 |
 | **v2.0.0** | 2026 Q4 | 研究深度增强 | 📋 规划中 |
-| **v3.0.0+** | 2027+ | Auto Research 扩展 | 🔭 预留 |
+| **v3.0.0** | 2026 Q2-Q3 | Deep Research 增强 | 🔄 进行中 |
+| **v3.4.0** | 2026 Q3 | **TS 全量迁移** | 📋 规划中 |
+| **v4.0.0+** | 2027+ | Auto Research 扩展 | 🔭 预留 |
 
 ---
 
@@ -35,31 +37,11 @@ DeepClaw 专注于 **Deep Research**（深度研究）而非简单搜索：
 
 | 版本 | 时间 | 核心功能 | 状态 |
 |------|------|----------|:----:|
-| **v2.0.0-beta.1** | Q3 2026 | **技术栈迁移: Python → TypeScript** + 基础架构重构 | 📋 规划 |
-| **v2.0.0-beta.2** | Q4 Early | Knowledge Graph 核心功能 | 📋 规划 |
+| **v2.0.0-beta.1** | Q4 Early | Knowledge Graph 核心功能 | 📋 规划 |
 | **v2.0.0-rc.1** | Q4 Mid | Literature Review + Source Validation | 📋 规划 |
 | **v2.0.0** | Q4 Late | 正式版发布 | 📋 规划 |
 
-### v2.0.0-beta.1: 技术栈迁移
-
-**背景**: DeepClaw v1.0.0 是纯 Python 项目，与 OpenClaw 生态其他项目技术栈不一致。
-
-**目标**: 迁移到 TypeScript，与 DevClaw、neoclaw 等项目保持一致。
-
-| 任务 | 说明 |
-|------|------|
-| **项目结构重构** | 从 Python `src/deepclaw/` 到 TypeScript `src/` |
-| **依赖迁移** | Python 包 → npm 包，兼容 OpenClaw 插件标准 |
-| **CLI 迁移** | `deepclaw` CLI → `@deepclaw/cli` |
-| **API 迁移** | FastAPI → Express/Node.js API |
-| **测试迁移** | pytest → vitest + mocking |
-
-**依赖更新**:
-```
-deepclaw v2.0.0-beta.1
-├── openclaw >= 2026.x    (插件标准)
-└── TypeScript 5.x        (语言栈)
-```
+> ⚠️ **TS 全量迁移已移至 v3.4.0**（原 v2.0.0-beta.1 计划）。v2.x 专注于研究深度增强功能。
 
 | 特性 | 说明 | 优先级 |
 |------|------|:------:|
@@ -105,7 +87,67 @@ deepclaw v2.0.0
 
 ---
 
-## v3.0.0 展望 (2027+) — Auto Research
+## v3.4.0 — TypeScript 全量迁移
+
+**时间**: 2026 Q3（v3.3.0 之后）
+**状态**: 📋 规划中
+
+### 背景
+
+DeepClaw 当前为 Python + TypeScript 混合代码（100 TS + 70 Python），与 OpenClaw 生态其他项目（devclaw 已 100% TS）技术栈不一致。
+
+依据 [ADR-001: TypeScript 统一重构技术决策](../../project-neo/docs/standards/ADR-001-typescript-unified-rearchitecture.md)，deepclaw 需完成 TS 全量迁移。
+
+### 当前状态
+
+```
+当前 (v3.1.0):
+  - src/: 100 .ts + 70 .py (59% TS)
+  - tests/: 66 .ts + 55 .py (55% TS)
+
+目标 (v3.4.0):
+  - src/: 170 .ts + 0 .py (100% TS)
+  - tests/: 121 .ts + 0 .py (100% TS)
+```
+
+### 迁移任务
+
+| 任务 | 说明 | 预估行数 |
+|------|------|:------:|
+| **Python → TypeScript** | 转换 `src/deepclaw/*.py` (70 files) | ~8000 |
+| **测试迁移** | 转换 `tests/*.py` → `tests/*.test.ts` (55 files) | ~3000 |
+| **清理** | 移除所有 Python 源文件和测试 | - |
+| **验证** | 确保构建和测试通过 | - |
+
+### 迁移模块
+
+| 模块 | Python 文件数 | 说明 |
+|------|:-----------:|------|
+| `research/` | 7 | planner, runner, synthesizer, search, report |
+| `tools/` | 9 | web_search, content_extraction, source_validation, pdf_export |
+| `llm/` | 8 | providers (deepseek, qwen, kimi, glm, minimax), engine |
+| 其他 | 46 | config, CLI, API, 工具类 |
+
+### 验收标准
+
+- [ ] `src/deepclaw/` 中 0 个 .py 文件
+- [ ] `tests/` 中 0 个 .py 文件
+- [ ] `npm run build` 成功
+- [ ] `npm test` 成功 (≥95%)
+- [ ] 所有功能正常
+
+### 依赖更新
+
+```
+deepclaw v3.4.0
+├── openclaw >= 2026.x    (插件标准)
+├── TypeScript 5.x        (语言栈)
+└── (移除所有 Python 依赖)
+```
+
+---
+
+## v4.0.0 展望 (2027+) — Auto Research
 
 ### 预留特性
 
@@ -119,7 +161,7 @@ deepclaw v2.0.0
 ### 演进路径
 
 ```
-Deep Research (v1-v2)          Auto Research (v3+)
+Deep Research (v1-v3)          Auto Research (v4+)
        ↓                            ↓
   检索 → 综合 → 报告          假设 → 实验 → 验证 → 迭代
   (人主导)                  (AI 主导)
@@ -174,6 +216,7 @@ Project Neo (智能体家族)
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.1 | 2026-06-25 | TS 全量迁移从 v2.0.0-beta.1 移至 v3.4.0；新增 v3.4.0 详细迁移计划 |
 | 2.0 | 2026-06-14 | Updated for Deep Research focus |
 | 1.0 | 2026-06-03 | Initial roadmap |
 

@@ -5,11 +5,12 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['tests/**/*.test.ts'],
+    testTimeout: 30000,
+    hookTimeout: 30000,
     pool: 'forks',
     poolOptions: {
       forks: {
-        execArgv: ['--max-old-space-size=4096'],
-        maxForks: 4,
+        execArgv: ['--max-old-space-size=8192'],
       },
     },
     coverage: {

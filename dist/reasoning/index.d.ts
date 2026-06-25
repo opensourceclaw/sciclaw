@@ -1,37 +1,43 @@
 /**
- * ReasoningEngine - Main entry point for reasoning capabilities
+ * DeepClaw v3.0.0 — Reasoning Engine
  *
- * Integrates ChainOfThought, CausalAnalyzer, Explainer, and Visualizer
- * into a unified interface.
+ * Unified reasoning engine coordinating chain reasoning and causal analysis.
  */
-import type { LLMEngine } from '../summarization/types.js';
-import type { ReasoningOptions, ReasoningResult, ReasoningConfig } from './types.js';
-import type { DecomposedStep, ReasoningChain } from './chain_of_thought/types.js';
-import type { CausalGraph } from './causal_analysis/types.js';
-import type { Explanation } from './explainer/types.js';
-import type { VisualizationTree } from './visualization/types.js';
-import { DecompositionStrategy } from './chain_of_thought/index.js';
-export { ChainOfThought } from './chain_of_thought/index.js';
-export { CausalAnalyzer } from './causal_analysis/index.js';
-export { Explainer } from './explainer/index.js';
-export { Visualizer } from './visualization/index.js';
-export { DecompositionStrategy, StepStatus } from './chain_of_thought/types.js';
-export type { ReasoningOptions, ReasoningResult, ReasoningConfig } from './types.js';
-export type { DecomposedStep, ReasoningStepResult, ReasoningChain } from './chain_of_thought/types.js';
-export type { CausalVariable, CausalRelation, CausalGraph } from './causal_analysis/types.js';
-export type { Explanation, ConfidenceFactors, LogEntry } from './explainer/types.js';
-export type { TreeNode, VisualizationTree, ExportOptions } from './visualization/types.js';
-export declare class ReasoningEngine {
-    private chainOfThought;
-    private causalAnalyzer;
-    private explainer;
-    private visualizer;
-    private config;
-    constructor(llmEngine?: LLMEngine, config?: Partial<ReasoningConfig>);
-    run(question: string, options?: ReasoningOptions): Promise<ReasoningResult>;
-    decompose(question: string, strategy?: DecompositionStrategy): Promise<DecomposedStep[]>;
-    analyzeCausal(text: string): Promise<CausalGraph>;
-    explain(chain: ReasoningChain): Promise<Explanation>;
-    visualize(chain: ReasoningChain, maxDepth?: number): Promise<VisualizationTree>;
+import type { ReasoningChain, InferenceResult, CausalGraph, ReasoningConfig } from "./types.js";
+import { ReasoningChainManager } from "./chain.js";
+import { CausalAnalyzer } from "./causal.js";
+export * from "./types.js";
+export * from "./chain.js";
+export * from "./causal.js";
+export interface ReasoningEngineConfig {
+    chain?: Partial<ReasoningConfig>;
+    causal?: Partial<ReasoningConfig>;
 }
+export declare class ReasoningEngine {
+    private chainManager;
+    private causalAnalyzer;
+    constructor(config?: ReasoningEngineConfig);
+    createChain(topic: string, goal: string): ReasoningChain;
+    infer(chain: ReasoningChain, context: Record<string, unknown>): InferenceResult;
+    analyzeCausal(entities: Array<{
+        name: string;
+        relations: Array<{
+            target: string;
+            type: string;
+        }>;
+    }>): CausalGraph;
+    inferWithCausalSupport(chain: ReasoningChain, entities: Array<{
+        name: string;
+        relations: Array<{
+            target: string;
+            type: string;
+        }>;
+    }>, context: Record<string, unknown>): {
+        inference: InferenceResult;
+        causalGraph: CausalGraph;
+    };
+    getChainManager(): ReasoningChainManager;
+    getCausalAnalyzer(): CausalAnalyzer;
+}
+export declare function createReasoningEngine(config?: ReasoningEngineConfig): ReasoningEngine;
 //# sourceMappingURL=index.d.ts.map

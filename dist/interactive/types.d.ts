@@ -1,52 +1,123 @@
 /**
- * Interactive Module - Shared type definitions
+ * DeepClaw v3.0.0 — Interactive Research Types
  */
-import type { UserFeedback } from './feedback/types.js';
-import type { ResearchProgress } from './visualization/types.js';
-import type { SectionResult } from './progressive/types.js';
+export declare enum InteractionMode {
+    GUIDED = "guided",
+    EXPLORATORY = "exploratory",
+    COLLABORATIVE = "collaborative"
+}
+export declare enum QueryType {
+    CLARIFICATION = "clarification",
+    DIRECTION = "direction",
+    DEPTH = "depth",
+    VALIDATION = "validation",
+    PREFERENCE = "preference"
+}
+export declare enum FeedbackAction {
+    ACCEPT = "accept",
+    REJECT = "reject",
+    MODIFY = "modify",
+    REFINE = "refine",
+    SKIP = "skip",
+    REDIRECT = "redirect"
+}
+export declare enum SessionStatus {
+    ACTIVE = "active",
+    PAUSED = "paused",
+    WAITING_USER = "waiting_user",
+    COMPLETED = "completed",
+    EXPIRED = "expired"
+}
+export interface InteractionSession {
+    id: string;
+    topic: string;
+    userId: string;
+    mode: InteractionMode;
+    status: SessionStatus;
+    history: InteractionTurn[];
+    context: SessionContext;
+    createdAt: Date;
+    updatedAt: Date;
+    expiresAt: Date;
+}
+export interface InteractionTurn {
+    id: string;
+    turnNumber: number;
+    systemMessage?: SystemMessage;
+    userInput?: UserInput;
+    timestamp: Date;
+    latencyMs: number;
+}
+export interface SystemMessage {
+    id: string;
+    type: "question" | "suggestion" | "progress" | "result" | "error";
+    content: string;
+    options?: string[];
+    requiresResponse: boolean;
+}
+export interface UserInput {
+    id: string;
+    action: FeedbackAction;
+    content: string;
+    targetId?: string;
+    metadata?: Record<string, unknown>;
+}
+export interface SessionContext {
+    topic: string;
+    depth: number;
+    focus: string[];
+    exploredTopics: string[];
+    excludedTopics: string[];
+    preferences: UserPreference[];
+    confidence: number;
+}
+export interface UserPreference {
+    key: string;
+    value: string | number | boolean;
+    source: "explicit" | "inferred";
+    confidence: number;
+}
+export interface AdaptiveQuery {
+    id: string;
+    type: QueryType;
+    question: string;
+    context: string;
+    priority: number;
+    options?: string[];
+    expectedResponseType: "text" | "choice" | "boolean" | "rating";
+    generatedAt: Date;
+}
+export interface QueryResponse {
+    queryId: string;
+    answer: string;
+    action?: FeedbackAction;
+    timestamp: Date;
+}
+export interface ResearchUpdate {
+    sessionId: string;
+    phase: "query" | "response" | "analysis" | "direction_change";
+    summary: string;
+    newQueries?: AdaptiveQuery[];
+    updatedContext?: Partial<SessionContext>;
+    suggestions: string[];
+}
+export interface FeedbackResult {
+    inputId: string;
+    sessionId: string;
+    action: FeedbackAction;
+    sentiment: "positive" | "negative" | "neutral";
+    extractedPreferences: UserPreference[];
+    contextChanges: Partial<SessionContext>;
+    suggestions: string[];
+    processedAt: Date;
+}
 export interface InteractiveConfig {
-    feedback: {
-        enabled: boolean;
-        timeoutMs: number;
-        maxHistory: number;
-    };
-    queryOptimizer: {
-        enabled: boolean;
-        maxExpansions: number;
-        dedupThreshold: number;
-    };
-    progressive: {
-        enabled: boolean;
-        maxSections: number;
-        parallelBuild: boolean;
-    };
-    visualization: {
-        enabled: boolean;
-        refreshIntervalMs: number;
-    };
+    mode: InteractionMode;
+    sessionTimeoutMs: number;
+    maxTurns: number;
+    adaptiveQueryMaxPerTurn: number;
+    feedbackProcessingDelayMs: number;
+    queryGenerationTimeoutMs: number;
 }
-export interface InteractiveResult {
-    sections: SectionResult[];
-    progress: ResearchProgress;
-    feedbackHistory: UserFeedback[];
-    totalDurationMs: number;
-}
-export type InteractiveEvent = {
-    type: 'feedback_received';
-    feedback: UserFeedback;
-} | {
-    type: 'query_optimized';
-    original: string;
-    rewritten: string[];
-} | {
-    type: 'section_completed';
-    sectionIndex: number;
-    title: string;
-} | {
-    type: 'progress_updated';
-    progress: ResearchProgress;
-} | {
-    type: 'error';
-    message: string;
-};
+export declare const DEFAULT_INTERACTIVE_CONFIG: InteractiveConfig;
 //# sourceMappingURL=types.d.ts.map

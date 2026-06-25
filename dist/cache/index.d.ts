@@ -1,41 +1,12 @@
-/**
- * Search result cache - LRU with TTL
- */
-import type { SearchResult } from '../types/index.js';
-export declare class SearchCache {
-    private cache;
-    private ttl;
-    private maxSize;
-    constructor(ttl?: number, maxSize?: number);
-    /**
-     * Generate cache key from query and engines
-     */
-    private getKey;
-    /**
-     * Get cached results if available and not expired
-     */
-    get(query: string, engines: string[]): SearchResult[] | null;
-    /**
-     * Store results in cache
-     */
-    set(query: string, engines: string[], results: SearchResult[]): void;
-    /**
-     * Clear all cached entries
-     */
-    clear(): void;
-    /**
-     * Get cache statistics
-     */
-    stats(): {
-        size: number;
-        maxSize: number;
-        ttl: number;
-    };
-    /**
-     * Clean expired entries
-     */
-    cleanExpired(): number;
-}
+export { SearchCache } from "./search-cache.js";
+export { CacheAnalytics } from "./analytics.js";
+export { InvalidationManager } from "./invalidation.js";
+export { CacheCompressor } from "./compression.js";
+export { CacheWarmer } from "./warmer.js";
+export { DistributedCache } from "./distributed.js";
+export type { CacheConfig, CacheMetrics, CacheAnalyticsConfig, InvalidationConfig, CompressionConfig, WarmerConfig, DistributedCacheConfig, CacheEntry, InvalidationStrategy, } from "./types.js";
+import { SearchCache } from "./search-cache.js";
 export declare function getCache(ttl?: number, maxSize?: number): SearchCache;
 export declare function clearCache(): void;
+export declare function setGlobalCache(cache: SearchCache): void;
 //# sourceMappingURL=index.d.ts.map

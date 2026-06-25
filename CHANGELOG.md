@@ -2,6 +2,41 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.0.3] - 2026-06-26
+
+### 🚀 Performance Optimization
+
+#### Added
+- **SearchCoordinator** (`src/search/coordinator.ts`)
+  - Concurrent search scheduling with priority + weight
+  - Support for 50+ search sources via registration mechanism
+
+- **BatchQueue** (`src/search/batch.ts`)
+  - Time window (50ms) + count threshold batching
+  - Reduce network round-trips
+
+- **ConnectionPool** (`src/search/pool.ts`)
+  - HTTP connection pooling with keep-alive
+  - Undici Agent for Node 18+ (with fallback)
+  - Retry on error with configurable max retries
+
+- **SearchStream** (`src/search/stream.ts`)
+  - Event-driven streaming results
+  - First result < 500ms
+
+- **PerformanceMetrics** (`src/search/metrics.ts`)
+  - P50/P95/P99 sliding window
+  - Search throughput statistics
+
+#### Testing
+- New test files: 5, 49 test cases
+- All new modules ≥ 85% coverage
+
+### Performance Goals
+- P95 latency: < 3s (from ~10s)
+- Concurrent sources: 50+
+- First result streaming: < 500ms
+
 ## [3.0.2] - 2026-06-25
 
 ### Fixed
