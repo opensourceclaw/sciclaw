@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>43/43</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>43/43</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,92 +106,92 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * DeepClaw configuration
- */
-&nbsp;
-import { z } from 'zod';
-import type { DeepClawConfig } from './types/index.js';
-&nbsp;
-const configSchema = z.object({
-  defaultEngine: z.enum(['duckduckgo', 'google', 'bing']).default('duckduckgo'),
-  maxResults: z.number().min(1).max(100).default(50),
-  timeout: z.number().min(1000).max(300000).default(30000),
-  outputFormat: z.enum(['markdown', 'html', 'pdf']).default('markdown'),
-  llm: z
-    .object({
-      provider: z.string(),
-      model: z.string().optional(),
-      apiKey: z.string().optional(),
-    })
-    .optional(),
-});
-&nbsp;
-export function loadConfig(env: Record&lt;string, string | undefined&gt; = process.env): DeepClawConfig {
-  return configSchema.parse({
-    defaultEngine: env.DEEPCLAW_ENGINE,
-    maxResults: env.DEEPCLAW_MAX_RESULTS ? parseInt(env.DEEPCLAW_MAX_RESULTS, 10) : undefined,
-    timeout: env.DEEPCLAW_TIMEOUT ? parseInt(env.DEEPCLAW_TIMEOUT, 10) : undefined,
-    outputFormat: env.DEEPCLAW_OUTPUT_FORMAT,
-    llm: env.DEEPCLAW_LLM_PROVIDER
-      ? {
-          provider: env.DEEPCLAW_LLM_PROVIDER,
-          model: env.DEEPCLAW_LLM_MODEL,
-          apiKey: env.DEEPCLAW_LLM_API_KEY,
-        }
-      : undefined,
-  });
-}
-&nbsp;
-export const defaultConfig: DeepClawConfig = {
-  defaultEngine: 'duckduckgo',
-  maxResults: 50,
-  timeout: 30000,
-  outputFormat: 'markdown',
-};
+<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >/**<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" > * DeepClaw configuration</span>
+<span class="cstat-no" title="statement not covered" > */</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >import { z } from 'zod';</span>
+<span class="cstat-no" title="statement not covered" >import type { DeepClawConfig } from './types/index.js';</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >const configSchema = z.object({</span>
+<span class="cstat-no" title="statement not covered" >  defaultEngine: z.enum(['duckduckgo', 'google', 'bing']).default('duckduckgo'),</span>
+<span class="cstat-no" title="statement not covered" >  maxResults: z.number().min(1).max(100).default(50),</span>
+<span class="cstat-no" title="statement not covered" >  timeout: z.number().min(1000).max(300000).default(30000),</span>
+<span class="cstat-no" title="statement not covered" >  outputFormat: z.enum(['markdown', 'html', 'pdf']).default('markdown'),</span>
+<span class="cstat-no" title="statement not covered" >  llm: z</span>
+<span class="cstat-no" title="statement not covered" >    .object({</span>
+<span class="cstat-no" title="statement not covered" >      provider: z.string(),</span>
+<span class="cstat-no" title="statement not covered" >      model: z.string().optional(),</span>
+<span class="cstat-no" title="statement not covered" >      apiKey: z.string().optional(),</span>
+<span class="cstat-no" title="statement not covered" >    })</span>
+<span class="cstat-no" title="statement not covered" >    .optional(),</span>
+<span class="cstat-no" title="statement not covered" >});</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export function loadConfig(env: Record&lt;string, string | undefined&gt; = process.env): DeepClawConfig {</span>
+<span class="cstat-no" title="statement not covered" >  return configSchema.parse({</span>
+<span class="cstat-no" title="statement not covered" >    defaultEngine: env.DEEPCLAW_ENGINE,</span>
+<span class="cstat-no" title="statement not covered" >    maxResults: env.DEEPCLAW_MAX_RESULTS ? parseInt(env.DEEPCLAW_MAX_RESULTS, 10) : undefined,</span>
+<span class="cstat-no" title="statement not covered" >    timeout: env.DEEPCLAW_TIMEOUT ? parseInt(env.DEEPCLAW_TIMEOUT, 10) : undefined,</span>
+<span class="cstat-no" title="statement not covered" >    outputFormat: env.DEEPCLAW_OUTPUT_FORMAT,</span>
+<span class="cstat-no" title="statement not covered" >    llm: env.DEEPCLAW_LLM_PROVIDER</span>
+<span class="cstat-no" title="statement not covered" >      ? {</span>
+<span class="cstat-no" title="statement not covered" >          provider: env.DEEPCLAW_LLM_PROVIDER,</span>
+<span class="cstat-no" title="statement not covered" >          model: env.DEEPCLAW_LLM_MODEL,</span>
+<span class="cstat-no" title="statement not covered" >          apiKey: env.DEEPCLAW_LLM_API_KEY,</span>
+<span class="cstat-no" title="statement not covered" >        }</span>
+<span class="cstat-no" title="statement not covered" >      : undefined,</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export const defaultConfig: DeepClawConfig = {</span>
+<span class="cstat-no" title="statement not covered" >  defaultEngine: 'duckduckgo',</span>
+<span class="cstat-no" title="statement not covered" >  maxResults: 50,</span>
+<span class="cstat-no" title="statement not covered" >  timeout: 30000,</span>
+<span class="cstat-no" title="statement not covered" >  outputFormat: 'markdown',</span>
+<span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -199,7 +199,7 @@ export const defaultConfig: DeepClawConfig = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-25T16:32:21.656Z
+                at 2026-06-26T07:06:34.719Z
             </div>
         <script src="../prettify.js"></script>
         <script>

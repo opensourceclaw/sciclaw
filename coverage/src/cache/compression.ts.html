@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>63/63</span>
+                <span class='fraction'>0/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">81.81% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>18/22</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>63/63</span>
+                <span class='fraction'>0/63</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -126,132 +126,132 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">40x</span>
-<span class="cline-any cline-yes">40x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">44x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-yes">27x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">51x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">25x</span>
-<span class="cline-any cline-yes">25x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { SearchResult } from "../types/index.js";
-import { DEFAULT_COMPRESSION_CONFIG } from "./types.js";
-import type { CompressionConfig } from "./types.js";
-&nbsp;
-export class CacheCompressor {
-  constructor(private config: CompressionConfig = { ...DEFAULT_COMPRESSION_CONFIG }) {}
-&nbsp;
-  compress(results: SearchResult[]): {
-    data: string;
-    originalBytes: number;
-    compressedBytes: number;
-  } {
-    if (!this.config.enabled) {
-      const data = JSON.stringify(results);
-      const bytes = Buffer.byteLength(data, "utf-8");
-      return { data, originalBytes: bytes, compressedBytes: bytes };
-    }
-&nbsp;
-    const original = JSON.stringify(results);
-    const originalBytes = Buffer.byteLength(original, "utf-8");
-&nbsp;
-    if (originalBytes &lt; this.config.minBytesToCompress) {
-      return { data: original, originalBytes, compressedBytes: originalBytes };
-    }
-&nbsp;
-    const compact = results.map((r) =&gt; {
-      const item: Record&lt;string, unknown&gt; = {
-        t: r.title.length &gt; 200 ? r.title.slice(0, 200) : r.title,
-        u: r.url,
-      };
-      if (r.snippet &amp;&amp; r.snippet.length &gt; 0) item.s = r.snippet;
-      item.src = r.source;
-      if (r.rank !== undefined) item.rk = r.rank;
-      return item;
-    });
-&nbsp;
-    const data = JSON.stringify(compact);
-    const compressedBytes = Buffer.byteLength(data, "utf-8");
-    return { data, originalBytes, compressedBytes };
-  }
-&nbsp;
-  decompress(data: string): SearchResult[] {
-    try {
-      const parsed = JSON.parse(data);
-      if (!Array.isArray(parsed)) return [];
-&nbsp;
-      // Detect compact format: first item has 't' field instead of 'title'
-      if (parsed.length &gt; 0 &amp;&amp; parsed[0].t !== undefined) {
-        return parsed.map((item: Record&lt;string, unknown&gt;) =&gt; ({
-          title: (item.<span class="branch-0 cbranch-no" title="branch not covered" >t as string) ?? "",</span>
-          url: (item.<span class="branch-0 cbranch-no" title="branch not covered" >u as string) ?? "",</span>
-          snippet: (item.<span class="branch-0 cbranch-no" title="branch not covered" >s as string) ?? "",</span>
-          source: (item.<span class="branch-0 cbranch-no" title="branch not covered" >src as SearchResult["source"]) ?? "duckduckgo",</span>
-          rank: item.rk as number | undefined,
-        }));
-      }
-&nbsp;
-      return parsed as SearchResult[];
-    } catch {
-      return [];
-    }
-  }
-}
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import type { SearchResult } from "../types/index.js";<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >import { DEFAULT_COMPRESSION_CONFIG } from "./types.js";</span>
+<span class="cstat-no" title="statement not covered" >import type { CompressionConfig } from "./types.js";</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export class CacheCompressor {</span>
+<span class="cstat-no" title="statement not covered" >  constructor(private config: CompressionConfig = { ...DEFAULT_COMPRESSION_CONFIG }) {}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  compress(results: SearchResult[]): {</span>
+<span class="cstat-no" title="statement not covered" >    data: string;</span>
+<span class="cstat-no" title="statement not covered" >    originalBytes: number;</span>
+<span class="cstat-no" title="statement not covered" >    compressedBytes: number;</span>
+<span class="cstat-no" title="statement not covered" >  } {</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.config.enabled) {</span>
+<span class="cstat-no" title="statement not covered" >      const data = JSON.stringify(results);</span>
+<span class="cstat-no" title="statement not covered" >      const bytes = Buffer.byteLength(data, "utf-8");</span>
+<span class="cstat-no" title="statement not covered" >      return { data, originalBytes: bytes, compressedBytes: bytes };</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const original = JSON.stringify(results);</span>
+<span class="cstat-no" title="statement not covered" >    const originalBytes = Buffer.byteLength(original, "utf-8");</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (originalBytes &lt; this.config.minBytesToCompress) {</span>
+<span class="cstat-no" title="statement not covered" >      return { data: original, originalBytes, compressedBytes: originalBytes };</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const compact = results.map((r) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      const item: Record&lt;string, unknown&gt; = {</span>
+<span class="cstat-no" title="statement not covered" >        t: r.title.length &gt; 200 ? r.title.slice(0, 200) : r.title,</span>
+<span class="cstat-no" title="statement not covered" >        u: r.url,</span>
+<span class="cstat-no" title="statement not covered" >      };</span>
+<span class="cstat-no" title="statement not covered" >      if (r.snippet &amp;&amp; r.snippet.length &gt; 0) item.s = r.snippet;</span>
+<span class="cstat-no" title="statement not covered" >      item.src = r.source;</span>
+<span class="cstat-no" title="statement not covered" >      if (r.rank !== undefined) item.rk = r.rank;</span>
+<span class="cstat-no" title="statement not covered" >      return item;</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const data = JSON.stringify(compact);</span>
+<span class="cstat-no" title="statement not covered" >    const compressedBytes = Buffer.byteLength(data, "utf-8");</span>
+<span class="cstat-no" title="statement not covered" >    return { data, originalBytes, compressedBytes };</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  decompress(data: string): SearchResult[] {</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      const parsed = JSON.parse(data);</span>
+<span class="cstat-no" title="statement not covered" >      if (!Array.isArray(parsed)) return [];</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      // Detect compact format: first item has 't' field instead of 'title'</span>
+<span class="cstat-no" title="statement not covered" >      if (parsed.length &gt; 0 &amp;&amp; parsed[0].t !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return parsed.map((item: Record&lt;string, unknown&gt;) =&gt; ({</span>
+<span class="cstat-no" title="statement not covered" >          title: (item.t as string) ?? "",</span>
+<span class="cstat-no" title="statement not covered" >          url: (item.u as string) ?? "",</span>
+<span class="cstat-no" title="statement not covered" >          snippet: (item.s as string) ?? "",</span>
+<span class="cstat-no" title="statement not covered" >          source: (item.src as SearchResult["source"]) ?? "duckduckgo",</span>
+<span class="cstat-no" title="statement not covered" >          rank: item.rk as number | undefined,</span>
+<span class="cstat-no" title="statement not covered" >        }));</span>
+<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >      return parsed as SearchResult[];</span>
+<span class="cstat-no" title="statement not covered" >    } catch {</span>
+<span class="cstat-no" title="statement not covered" >      return [];</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -259,7 +259,7 @@ export class CacheCompressor {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-25T16:32:21.656Z
+                at 2026-06-26T07:06:34.719Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>63/63</span>
+                <span class='fraction'>0/63</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>63/63</span>
+                <span class='fraction'>0/63</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -126,132 +126,132 @@
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
-<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { BaseAgent } from "./base_agent.js";
-import type { AgentConfig, AgentTask, AgentResult } from "./types.js";
-import { AgentRole } from "./types.js";
-&nbsp;
-export class SearchAgent extends BaseAgent {
-  constructor(config?: Partial&lt;AgentConfig&gt; &amp; { role: AgentRole }) {
-    super({
-      role: AgentRole.SEARCH,
-      name: "SearchAgent",
-      capabilities: ["web_search", "content_extraction", "source_scoring"],
-      maxRetries: 2,
-      timeoutMs: 60000,
-      ...config,
-    });
-  }
-&nbsp;
-  async execute(task: AgentTask): Promise&lt;AgentResult&gt; {
-    const input = task.input as { queries?: string[]; maxResultsPerQuery?: number; engines?: string[] } | undefined;
-    const queries = input?.queries ?? [];
-&nbsp;
-    if (queries.length === 0) {
-      return {
-        taskId: task.id,
-        role: this.config.role,
-        status: "failed",
-        output: null,
-        artifacts: [],
-        metrics: { durationMs: 0 },
-        errors: ["Empty queries"],
-      };
-    }
-&nbsp;
-    const results = queries.map((q, i) =&gt; ({
-      url: `https://example.com/result-${i}`,
-      title: `Result for: ${q}`,
-      snippet: `Information about ${q}`,
-      content: `Content about ${q}. This is simulated search content.`,
-      domainScore: { domain: "example.com", reputation: 0.5, category: "unknown" },
-      freshnessScore: { score: 0.5, daysSincePublished: 0, category: "unknown" },
-      sourceScore: 0.5,
-    }));
-&nbsp;
-    const deduped = results.filter((r, i, arr) =&gt; arr.findIndex((x) =&gt; x.url === r.url) === i);
-&nbsp;
-    return {
-      taskId: task.id,
-      role: this.config.role,
-      status: "success",
-      output: {
-        sources: deduped,
-        extractedContent: [],
-        metadata: { totalSources: deduped.length, totalQueries: queries.length, durationMs: 0 },
-      },
-      artifacts: [],
-      metrics: { durationMs: 0, toolCalls: queries.length },
-      errors: [],
-    };
-  }
-}
-&nbsp;
-export function createSearchAgent(): SearchAgent {
-  return new SearchAgent();
-}
+<a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { BaseAgent } from "./base_agent.js";<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >import type { AgentConfig, AgentTask, AgentResult } from "./types.js";</span>
+<span class="cstat-no" title="statement not covered" >import { AgentRole } from "./types.js";</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export class SearchAgent extends BaseAgent {</span>
+<span class="cstat-no" title="statement not covered" >  constructor(config?: Partial&lt;AgentConfig&gt; &amp; { role: AgentRole }) {</span>
+<span class="cstat-no" title="statement not covered" >    super({</span>
+<span class="cstat-no" title="statement not covered" >      role: AgentRole.SEARCH,</span>
+<span class="cstat-no" title="statement not covered" >      name: "SearchAgent",</span>
+<span class="cstat-no" title="statement not covered" >      capabilities: ["web_search", "content_extraction", "source_scoring"],</span>
+<span class="cstat-no" title="statement not covered" >      maxRetries: 2,</span>
+<span class="cstat-no" title="statement not covered" >      timeoutMs: 60000,</span>
+<span class="cstat-no" title="statement not covered" >      ...config,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  async execute(task: AgentTask): Promise&lt;AgentResult&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const input = task.input as { queries?: string[]; maxResultsPerQuery?: number; engines?: string[] } | undefined;</span>
+<span class="cstat-no" title="statement not covered" >    const queries = input?.queries ?? [];</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    if (queries.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
+<span class="cstat-no" title="statement not covered" >        taskId: task.id,</span>
+<span class="cstat-no" title="statement not covered" >        role: this.config.role,</span>
+<span class="cstat-no" title="statement not covered" >        status: "failed",</span>
+<span class="cstat-no" title="statement not covered" >        output: null,</span>
+<span class="cstat-no" title="statement not covered" >        artifacts: [],</span>
+<span class="cstat-no" title="statement not covered" >        metrics: { durationMs: 0 },</span>
+<span class="cstat-no" title="statement not covered" >        errors: ["Empty queries"],</span>
+<span class="cstat-no" title="statement not covered" >      };</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const results = queries.map((q, i) =&gt; ({</span>
+<span class="cstat-no" title="statement not covered" >      url: `https://example.com/result-${i}`,</span>
+<span class="cstat-no" title="statement not covered" >      title: `Result for: ${q}`,</span>
+<span class="cstat-no" title="statement not covered" >      snippet: `Information about ${q}`,</span>
+<span class="cstat-no" title="statement not covered" >      content: `Content about ${q}. This is simulated search content.`,</span>
+<span class="cstat-no" title="statement not covered" >      domainScore: { domain: "example.com", reputation: 0.5, category: "unknown" },</span>
+<span class="cstat-no" title="statement not covered" >      freshnessScore: { score: 0.5, daysSincePublished: 0, category: "unknown" },</span>
+<span class="cstat-no" title="statement not covered" >      sourceScore: 0.5,</span>
+<span class="cstat-no" title="statement not covered" >    }));</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    const deduped = results.filter((r, i, arr) =&gt; arr.findIndex((x) =&gt; x.url === r.url) === i);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+<span class="cstat-no" title="statement not covered" >      taskId: task.id,</span>
+<span class="cstat-no" title="statement not covered" >      role: this.config.role,</span>
+<span class="cstat-no" title="statement not covered" >      status: "success",</span>
+<span class="cstat-no" title="statement not covered" >      output: {</span>
+<span class="cstat-no" title="statement not covered" >        sources: deduped,</span>
+<span class="cstat-no" title="statement not covered" >        extractedContent: [],</span>
+<span class="cstat-no" title="statement not covered" >        metadata: { totalSources: deduped.length, totalQueries: queries.length, durationMs: 0 },</span>
+<span class="cstat-no" title="statement not covered" >      },</span>
+<span class="cstat-no" title="statement not covered" >      artifacts: [],</span>
+<span class="cstat-no" title="statement not covered" >      metrics: { durationMs: 0, toolCalls: queries.length },</span>
+<span class="cstat-no" title="statement not covered" >      errors: [],</span>
+<span class="cstat-no" title="statement not covered" >    };</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+<span class="cstat-no" title="statement not covered" >}</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >export function createSearchAgent(): SearchAgent {</span>
+<span class="cstat-no" title="statement not covered" >  return new SearchAgent();</span>
+<span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -259,7 +259,7 @@ export function createSearchAgent(): SearchAgent {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-06-25T16:32:21.656Z
+                at 2026-06-26T07:06:34.719Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

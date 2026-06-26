@@ -4,7 +4,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { search } from '../search/index.js';
 import { extractContent } from '../extractor/index.js';
-import { synthesize } from '../llm/index.js';
+import { OpenClawModelAdapter } from '../model/index.js';
 export async function conductResearch(options) {
     const id = uuidv4();
     const depth = options.depth ?? 'medium';
@@ -23,8 +23,22 @@ export async function conductResearch(options) {
             return { ...r, content: r.snippet };
         }
     }));
-    // Step 3: Synthesize research
-    const summary = await synthesize(options.topic, contents);
+    // Step 3: Synthesize research via OpenClaw Gateway
+    let summary;
+    try {
+        const model = new OpenClawModelAdapter();
+        const synthesis = await model.chat({
+            task: "summarization",
+            messages: [
+                { role: "system", content: "You are a research synthesizer. Summarize the key findings from the provided sources on the given topic. Be concise and factual." },
+                { role: "user", content: `Topic: ${options.topic}\n\nSources:\n${contents.map((c) => `- ${c.title}: ${c.content.slice(0, 500)}`).join("\n")}` },
+            ],
+        });
+        summary = synthesis.content || fallbackSummary(options.topic, contents);
+    }
+    catch {
+        summary = fallbackSummary(options.topic, contents);
+    }
     // Step 4: Build sections
     const sections = [
         {
@@ -42,6 +56,10 @@ export async function conductResearch(options) {
         sources,
         createdAt: new Date(),
     };
+}
+function fallbackSummary(topic, contents) {
+    const items = contents.slice(0, 5).map((c) => `- ${c.title}: ${(c.content || c.snippet || "").slice(0, 200)}`).join("\n");
+    return `# Research: ${topic}\n\n## Key Sources\n\n${items}\n\n*Synthesis unavailable — OpenClaw Gateway not reachable.*`;
 }
 function toCitation(result) {
     return {

@@ -2,6 +2,61 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.2.0] - 2026-06-26
+
+### 🎯 OpenClaw Model Integration
+
+#### Added
+- **OpenClaw Model Adapter** (`src/model/adapter.ts`)
+  - HTTP REST wrapper for OpenClaw Gateway
+  - OpenAI-compatible protocol (`/v1/chat/completions`)
+  - Streaming support (`chatStream`)
+  - Health check (`healthCheck`)
+  - Timeout control (60s default)
+  - Comprehensive error handling
+
+- **Model Router** (`src/model/router.ts`)
+  - Task-based routing: reasoning/analysis/coding/summarization/embedding/creative
+  - Budget limit support
+  - Cheapest model preference option
+  - Integration with FallbackHandler & CostOptimizer
+
+- **API Fallback** (`src/model/fallback.ts`)
+  - Client-side fallback chain
+  - Default fallback configs for 3 main models
+  - Auto-retry on failure
+  - Dynamic fallback rule addition
+
+- **Cost Optimizer** (`src/model/cost.ts`)
+  - Built-in cost table for all models
+  - Budget control
+  - Cheapest model recommendation by task type
+
+- **Types** (`src/model/types.ts`)
+  - ModelConfig, ChatMessage, ChatResponse, etc.
+  - Default configurations
+
+#### Changed
+- **Research Module**: `src/research/index.ts` now uses OpenClawModelAdapter
+  - Replaced legacy LLM implementation
+  - Backward compatible API
+  - Auto-fallback when Gateway unavailable
+
+#### Removed
+- **Legacy LLM**: `src/llm/index.ts` deleted
+  - Duplicate code removed
+  - Unified to `src/model/` module
+
+#### Testing
+- Test files: 5 (adapter, fallback, cost, router, index)
+- Test cases: 62 (+37 from v3.1.0, +148% growth)
+- Coverage: 98.84% statements, 92.15% branches, 100% functions
+
+### Migration Guide
+- No breaking changes
+- All APIs remain backward compatible
+- Internal implementation migrated to OpenClaw Gateway
+
 ## [3.0.3] - 2026-06-26
 
 ### 🚀 Performance Optimization
