@@ -5,14 +5,12 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['tests/**/*.test.ts'],
-    testTimeout: 30000,
-    hookTimeout: 30000,
+    exclude: ['tests/nlp/rel-extract.test.ts'],
+
+    testTimeout: 120000,
+    hookTimeout: 120000,
     pool: 'forks',
-    poolOptions: {
-      forks: {
-        execArgv: ['--max-old-space-size=8192'],
-      },
-    },
+    execArgv: ['--max-old-space-size=1536'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

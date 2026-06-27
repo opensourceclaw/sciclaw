@@ -4,7 +4,7 @@
 import { describe, it, expect } from "vitest";
 import * as nlp from "../../src/nlp/index.js";
 import { extractEntities, extractEntitiesWithCustom } from "../../src/nlp/ner.js";
-import { extractRelations, extractRelationsBetweenEntities, extractEntitiesAndRelations } from "../../src/nlp/relation.js";
+import { extractRelations, extractRelationsBetweenEntities, extractEntitiesAndRelations } from "../../src/nlp/rel-extract.js";
 
 describe("NLP Index", () => {
   it("exports extractEntities", () => {

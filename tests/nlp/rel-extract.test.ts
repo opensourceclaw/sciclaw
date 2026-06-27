@@ -3,15 +3,13 @@ import {
   extractRelations,
   extractRelationsBetweenEntities,
   extractEntitiesAndRelations,
-} from '../../src/nlp/relation.js';
-import { extractEntities } from '../../src/nlp/ner.js';
+} from '../../src/nlp/rel-extract.js';
 
 describe('Relation Extraction', () => {
   describe('extractRelations', () => {
     it('should extract WORKS_FOR relations', () => {
       const text = 'John Smith works at Google and Jane Doe works for Microsoft';
       const relations = extractRelations(text);
-
       expect(relations.length).toBeGreaterThanOrEqual(1);
       const worksFor = relations.filter((r) => r.type === 'WORKS_FOR');
       expect(worksFor.length).toBeGreaterThanOrEqual(1);
@@ -20,7 +18,6 @@ describe('Relation Extraction', () => {
     it('should extract LOCATED_IN relations', () => {
       const text = 'Google is located in Mountain View';
       const relations = extractRelations(text);
-
       const located = relations.filter((r) => r.type === 'LOCATED_IN');
       expect(located.length).toBeGreaterThanOrEqual(1);
     });
@@ -28,7 +25,6 @@ describe('Relation Extraction', () => {
     it('should extract CEO_OF relations', () => {
       const text = 'Sundar Pichai is the CEO of Google';
       const relations = extractRelations(text);
-
       const ceo = relations.filter((r) => r.type === 'CEO_OF');
       expect(ceo.length).toBeGreaterThanOrEqual(1);
     });
@@ -36,7 +32,6 @@ describe('Relation Extraction', () => {
     it('should extract FOUNDED relations', () => {
       const text = 'Mark Zuckerberg founded Facebook';
       const relations = extractRelations(text);
-
       const founded = relations.filter((r) => r.type === 'FOUNDED');
       expect(founded.length).toBeGreaterThanOrEqual(1);
     });
@@ -70,17 +65,28 @@ describe('Relation Extraction', () => {
   });
 
   describe('extractRelationsBetweenEntities', () => {
+    function makeEntities(
+      pairs: Array<{ text: string; type: string; start: number; end: number }>
+    ) {
+      return pairs.map((p) => ({ ...p, confidence: 0.8 }));
+    }
+
     it('should find relations between nearby entities', () => {
       const text = 'John Smith works at Google Inc';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'John Smith', type: 'PERSON', start: 0, end: 10 },
+        { text: 'Google Inc', type: 'ORG', start: 21, end: 31 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
-
       expect(relations.length).toBeGreaterThanOrEqual(0);
     });
 
     it('detects WORKS_FOR from between-text', () => {
       const text = 'John Smith works at Google Inc';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'John Smith', type: 'PERSON', start: 0, end: 10 },
+        { text: 'Google Inc', type: 'ORG', start: 21, end: 31 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
       const worksFor = relations.filter((r) => r.type === 'WORKS_FOR');
       expect(worksFor.length).toBeGreaterThanOrEqual(1);
@@ -88,7 +94,10 @@ describe('Relation Extraction', () => {
 
     it('detects LOCATED_IN from between-text', () => {
       const text = 'Google Inc is located in New York City';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'Google Inc', type: 'ORG', start: 0, end: 10 },
+        { text: 'New York City', type: 'LOC', start: 23, end: 37 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
       const located = relations.filter((r) => r.type === 'LOCATED_IN');
       expect(located.length).toBeGreaterThanOrEqual(1);
@@ -96,7 +105,10 @@ describe('Relation Extraction', () => {
 
     it('detects CEO_OF from between-text', () => {
       const text = 'Sundar Pichai CEO of Google Inc';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'Sundar Pichai', type: 'PERSON', start: 0, end: 13 },
+        { text: 'Google Inc', type: 'ORG', start: 20, end: 30 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
       const ceo = relations.filter((r) => r.type === 'CEO_OF');
       expect(ceo.length).toBeGreaterThanOrEqual(1);
@@ -104,7 +116,10 @@ describe('Relation Extraction', () => {
 
     it('detects FOUNDED from between-text', () => {
       const text = 'Mark Zuckerberg founded Facebook Inc';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'Mark Zuckerberg', type: 'PERSON', start: 0, end: 15 },
+        { text: 'Facebook Inc', type: 'ORG', start: 24, end: 37 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
       const founded = relations.filter((r) => r.type === 'FOUNDED');
       expect(founded.length).toBeGreaterThanOrEqual(1);
@@ -112,7 +127,10 @@ describe('Relation Extraction', () => {
 
     it('detects RELATED_TO for entities within 100 chars', () => {
       const text = 'John Smith Google Inc';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'John Smith', type: 'PERSON', start: 0, end: 10 },
+        { text: 'Google Inc', type: 'ORG', start: 11, end: 21 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
       const related = relations.filter((r) => r.type === 'RELATED_TO');
       expect(related.length).toBeGreaterThanOrEqual(1);
@@ -120,32 +138,36 @@ describe('Relation Extraction', () => {
 
     it('skips entities more than 100 chars apart', () => {
       const text = 'John Smith' + ' '.repeat(200) + 'Google Inc';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'John Smith', type: 'PERSON', start: 0, end: 10 },
+        { text: 'Google Inc', type: 'ORG', start: 210, end: 220 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
-      // All relations from this should be RELATED_TO or none, not based on connecting words
       const specificRelations = relations.filter((r) => r.type !== 'RELATED_TO');
       expect(specificRelations.length).toBe(0);
     });
 
     it('returns empty for single entity', () => {
       const text = 'John Smith';
-      const entities = extractEntities(text);
+      const entities = makeEntities([
+        { text: 'John Smith', type: 'PERSON', start: 0, end: 10 },
+      ]);
       const relations = extractRelationsBetweenEntities(text, entities);
       expect(relations).toEqual([]);
     });
   });
 
   describe('extractEntitiesAndRelations', () => {
-    it('combines pattern and entity-based relations', async () => {
+    it('combines pattern and entity-based relations', () => {
       const text = 'John Smith works at Google Inc in Mountain View';
-      const result = await extractEntitiesAndRelations(text);
+      const result = extractEntitiesAndRelations(text);
       expect(result.entities.length).toBeGreaterThan(0);
       expect(result.relations.length).toBeGreaterThan(0);
     });
 
-    it('handles text with no relations', async () => {
+    it('handles text with no relations', () => {
       const text = 'No entities here';
-      const result = await extractEntitiesAndRelations(text);
+      const result = extractEntitiesAndRelations(text);
       expect(result.entities).toBeDefined();
       expect(result.relations).toBeDefined();
     });

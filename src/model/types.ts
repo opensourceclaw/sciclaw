@@ -8,6 +8,7 @@ export interface ModelRequest {
   messages: Array<{ role: "system" | "user" | "assistant"; content: string }>;
   task?: TaskCategory;
   options?: {
+    model?: string;
     temperature?: number;
     maxTokens?: number;
     reasoningEffort?: "low" | "medium" | "high";

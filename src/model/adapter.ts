@@ -179,9 +179,6 @@ export class OpenClawModelAdapter {
   }
 
   private resolveModel(request: ModelRequest): string {
-    if (request.options && Object.keys(request.options).length > 0) {
-      return this.config.defaultModel;
-    }
-    return this.config.defaultModel;
+    return request.options?.model ?? this.config.defaultModel;
   }
 }
