@@ -1,28 +1,27 @@
+// Copyright 2026 Peter Cheng
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 /**
- * LLM module - Language model integration
+ * LLM module - Large Language Model providers
  */
-const providers = new Map();
-export function registerProvider(provider) {
-    providers.set(provider.name, provider);
-}
-export function getProvider(name) {
-    return providers.get(name);
-}
-export async function synthesize(topic, contents) {
-    // Simple synthesis without LLM (placeholder)
-    const summaries = contents
-        .slice(0, 5)
-        .map((c) => `- **${c.title}**: ${c.content.slice(0, 200)}...`)
-        .join('\n');
-    return `# Research Summary: ${topic}\n\nBased on analysis of ${contents.length} sources:\n\n${summaries}`;
-}
-export async function complete(prompt, options) {
-    const providerName = options?.model ?? 'default';
-    const provider = getProvider(providerName);
-    if (!provider) {
-        throw new Error(`LLM provider not found: ${providerName}`);
-    }
-    return provider.complete(prompt, options);
-}
-export { synthesize as default };
+// Base types and classes
+export { MessageRole, ChatMessageUtil, ChatCompletionUtil, ChatCompletionStreamChunkUtil, EmbeddingResultUtil, ChatCompletionRequestUtil, } from "./types";
+// Base classes and registry
+export { LLMProvider, LLMProviderRegistry, registerLLMProvider, } from "./base";
+// Engine
+export { LLMEngine } from "./engine";
+// Import providers to register them
+import "./providers";
+// Re-export provider classes
+export { DeepSeekProvider, GLMProvider, MiniMaxProvider, KimiProvider, QwenProvider, } from "./providers";
 //# sourceMappingURL=index.js.map

@@ -8,6 +8,8 @@ export * from "./image.js";
 export * from "./table.js";
 export * from "./chart.js";
 export * from "./pdf.js";
+export * from "./gemini-vision.js";
+export * from "./synthesizer.js";
 export interface MultiModalProcessorConfig {
     image?: Partial<MultiModalConfig["image"]>;
     table?: Partial<MultiModalConfig["table"]>;

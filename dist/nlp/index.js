@@ -2,5 +2,5 @@
  * NER module - Named Entity Recognition
  */
 export * from './ner.js';
-export * from './relation.js';
+export * from './rel-extract.js';
 //# sourceMappingURL=index.js.map

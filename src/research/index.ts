@@ -1,21 +1,92 @@
 /**
  * Research module - Deep research orchestration
+ *
+ * Copyright 2026 OpenClaw
+ * Licensed under the Apache License, Version 2.0
  */
 
-import { v4 as uuidv4 } from 'uuid';
-import { search } from '../search/index.js';
-import { extractContent } from '../extractor/index.js';
-import { OpenClawModelAdapter } from '../model/index.js';
-import type { ResearchOptions, ResearchResult, ResearchSection, SourceCitation } from '../types/index.js';
+import { v4 as uuidv4 } from "uuid";
+import { search } from "../search/index.js";
+import { extractContent } from "../extractor/index.js";
+import { OpenClawModelAdapter } from "../model/index.js";
+import type {
+  ResearchOptions,
+  ResearchResult,
+  ResearchSection,
+  SourceCitation,
+} from "../types/index.js";
 
-export async function conductResearch(options: ResearchOptions): Promise<ResearchResult> {
+// Export types (excluding conflicting ones)
+export type {
+  ResearchPlan,
+  ResearchFinding,
+  Finding,
+  SynthesisRequest,
+  SynthesisSection,
+  SynthesisResult,
+  ResearchSection as ResearchReportSection,
+  SectionCandidate,
+  SectionAnalysis,
+  ReportConfig,
+  ThemeInfo,
+  LLMEngine,
+} from "./types.js";
+
+// Export planner module
+export { ResearchPlanner, createPlan } from "./planner.js";
+
+// Export search module
+export {
+  ResearchSearchEngine,
+  researchSearch,
+} from "./search.js";
+
+// Export synthesizer module
+export {
+  ResearchSynthesizer,
+  ReportFormatter,
+  synthesize,
+} from "./synthesizer.js";
+
+// Export synthesizer V2 module
+export {
+  LLMSynthesizer,
+  createFinding,
+  synthesizeFindings,
+} from "./synthesizer_v2.js";
+
+// Export smart sectioning module
+export {
+  SmartSectioner,
+  smartSectioner,
+} from "./smart_sectioning.js";
+
+// Export report generator module
+export {
+  ReportGenerator,
+  generateReport as generateSynthesisReport,
+} from "./report_generator.js";
+
+// Export runner module
+export {
+  ResearchRunner,
+  runResearch,
+} from "./runner.js";
+
+/**
+ * Conduct research on a topic (main entry point)
+ */
+export async function conductResearch(
+  options: ResearchOptions
+): Promise<ResearchResult> {
   const id = uuidv4();
-  const depth = options.depth ?? 'medium';
+  const depth = options.depth ?? "medium";
 
   // Step 1: Search for sources
   const searchResults = await search({
     query: options.topic,
-    maxResults: depth === 'shallow' ? 10 : depth === 'medium' ? 20 : 50,
+    maxResults:
+      depth === "shallow" ? 10 : depth === "medium" ? 20 : 50,
   });
 
   // Step 2: Extract content from top sources
@@ -37,8 +108,17 @@ export async function conductResearch(options: ResearchOptions): Promise<Researc
     const synthesis = await model.chat({
       task: "summarization",
       messages: [
-        { role: "system", content: "You are a research synthesizer. Summarize the key findings from the provided sources on the given topic. Be concise and factual." },
-        { role: "user", content: `Topic: ${options.topic}\n\nSources:\n${contents.map((c: any) => `- ${c.title}: ${c.content.slice(0, 500)}`).join("\n")}` },
+        {
+          role: "system",
+          content:
+            "You are a research synthesizer. Summarize the key findings from the provided sources on the given topic. Be concise and factual.",
+        },
+        {
+          role: "user",
+          content: `Topic: ${options.topic}\n\nSources:\n${contents
+            .map((c: any) => `- ${c.title}: ${c.content.slice(0, 500)}`)
+            .join("\n")}`,
+        },
       ],
     });
     summary = synthesis.content || fallbackSummary(options.topic, contents);
@@ -49,7 +129,7 @@ export async function conductResearch(options: ResearchOptions): Promise<Researc
   // Step 4: Build sections
   const sections: ResearchSection[] = [
     {
-      title: 'Overview',
+      title: "Overview",
       content: summary,
       sources: contents.slice(0, 5).map(toCitation),
     },
@@ -67,11 +147,20 @@ export async function conductResearch(options: ResearchOptions): Promise<Researc
   };
 }
 
+/**
+ * Generate fallback summary when LLM is unavailable
+ */
 function fallbackSummary(topic: string, contents: any[]): string {
-  const items = contents.slice(0, 5).map((c: any) => `- ${c.title}: ${(c.content || c.snippet || "").slice(0, 200)}`).join("\n");
+  const items = contents
+    .slice(0, 5)
+    .map((c: any) => `- ${c.title}: ${(c.content || c.snippet || "").slice(0, 200)}`)
+    .join("\n");
   return `# Research: ${topic}\n\n## Key Sources\n\n${items}\n\n*Synthesis unavailable — OpenClaw Gateway not reachable.*`;
 }
 
+/**
+ * Convert search result to citation
+ */
 function toCitation(result: { title: string; url: string }): SourceCitation {
   return {
     title: result.title,

@@ -7,6 +7,8 @@ export * from "./image.js";
 export * from "./table.js";
 export * from "./chart.js";
 export * from "./pdf.js";
+export * from "./gemini-vision.js";
+export * from "./synthesizer.js";
 // ── MultiModalProcessor ────────────────────────────────────────────────
 export class MultiModalProcessor {
     imageProcessor;

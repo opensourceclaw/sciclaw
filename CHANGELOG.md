@@ -2,6 +2,64 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.4.0] - 2026-07-04
+
+### 🎯 100% TypeScript Migration
+
+This release completes the migration from Python/TypeScript hybrid to **100% TypeScript**.
+
+#### Added — LLM Module (TypeScript)
+- **Types** (`src/llm/types.ts`) - MessageRole, ChatMessage, ChatCompletion, EmbeddingResult
+- **Base Classes** (`src/llm/base.ts`) - LLMProvider abstract class, LLMProviderRegistry
+- **Engine** (`src/llm/engine.ts`) - Unified LLMEngine interface
+- **Providers**:
+  - DeepSeek (`src/llm/providers/deepseek.ts`)
+  - Qwen (`src/llm/providers/qwen.ts`)
+  - Kimi/Moonshot (`src/llm/providers/kimi.ts`)
+  - GLM/Zhipu (`src/llm/providers/glm.ts`)
+  - MiniMax (`src/llm/providers/minimax.ts`)
+
+#### Added — Research Module (TypeScript)
+- **Planner** (`src/research/planner.ts`) - Research planning with sub-topics
+- **Search Engine** (`src/research/search.ts`) - Multi-engine search with caching
+- **Synthesizer** (`src/research/synthesizer.ts`) - Content synthesis
+- **LLM Synthesizer** (`src/research/synthesizer_v2.ts`) - LLM-powered synthesis
+- **Smart Sectioning** (`src/research/smart_sectioning.ts`) - Intelligent section detection
+- **Report Generator** (`src/research/report_generator.ts`) - Markdown/HTML/JSON output
+- **Runner** (`src/research/runner.ts`) - Research workflow orchestration
+
+#### Added — Tools Module (TypeScript)
+- **Web Search** (`src/tools/web_search.ts`) - DuckDuckGo, Google, Bing
+- **Content Extraction** (`src/tools/content_extraction.ts`) - Cheerio-based extraction
+- **Source Validation** (`src/tools/source_validation.ts`) - URL validation, quality scoring
+- **PDF Export** (`src/tools/pdf_export.ts`) - PDFKit with APA/MLA formatting
+- **Retry Logic** (`src/tools/retry.ts`) - Exponential backoff, error classification
+- **Report Formatter** (`src/tools/report_formatter.ts`) - Citation formatting
+- **Site Specific** (`src/tools/site_specific.ts`) - 20+ site-specific parsers
+- **User Agent** (`src/tools/user_agent.ts`) - UA rotation pool
+- **JS Detection** (`src/tools/js_detection.ts`) - SPA detection
+- **Parallel Extraction** (`src/tools/parallel_extraction.ts`) - Batch processing
+- **Rich Output** (`src/tools/rich_output.ts`) - CLI output with chalk + ora
+
+#### Removed
+- **All Python files** - `src/deepclaw/*.py` (70 files deleted)
+- **Python tests** - `tests/*.py` (55 files deleted)
+- **Web API (Python)** - `web/api/*.py` (deferred to future release)
+- **Skill module (Python)** - `skill/*.py` (deferred to future release)
+- **pyproject.toml** - No longer needed
+
+#### Migration Stats
+| Module | Files Created | Lines of Code |
+|--------|:-------------:|:-------------:|
+| LLM | 10 | 1,766 |
+| Research | 9 | 2,036 |
+| Tools | 12 | 3,795 |
+
+#### Testing
+- All 1039 tests passing
+- 100% TypeScript coverage
+- No Python dependencies remaining
+
 ## [3.2.0] - 2026-06-26
 
 ### 🎯 OpenClaw Model Integration

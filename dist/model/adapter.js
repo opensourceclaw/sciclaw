@@ -148,10 +148,7 @@ export class OpenClawModelAdapter {
         return { ...this.config };
     }
     resolveModel(request) {
-        if (request.options && Object.keys(request.options).length > 0) {
-            return this.config.defaultModel;
-        }
-        return this.config.defaultModel;
+        return request.options?.model ?? this.config.defaultModel;
     }
 }
 //# sourceMappingURL=adapter.js.map

@@ -7,6 +7,7 @@ export interface ModelRequest {
     }>;
     task?: TaskCategory;
     options?: {
+        model?: string;
         temperature?: number;
         maxTokens?: number;
         reasoningEffort?: "low" | "medium" | "high";
