@@ -143,16 +143,44 @@ export abstract class LLMProvider {
 export type LLMProviderClass = new (config: LLMProviderConfig) => LLMProvider;
 
 /**
- * Registry for LLM providers
+ * Registry for LLM providers with capabilities and fallback support (v3.5.0)
  */
 export class LLMProviderRegistry {
   private static providers: Map<string, LLMProviderClass> = new Map();
+  private static metadata: Map<string, import("./types.js").ProviderMetadata> = new Map();
+  private static health: Map<string, import("./types.js").ProviderHealth> = new Map();
+
+  // ── Registration ─────────────────────────────────────────────────────
 
   /**
    * Register an LLM provider
    */
-  static register(name: string, providerClass: LLMProviderClass): void {
-    LLMProviderRegistry.providers.set(name.toLowerCase(), providerClass);
+  static register(
+    name: string,
+    providerClass: LLMProviderClass,
+    metadata?: Partial<import("./types.js").ProviderMetadata>
+  ): void {
+    const key = name.toLowerCase();
+    LLMProviderRegistry.providers.set(key, providerClass);
+
+    if (metadata) {
+      LLMProviderRegistry.metadata.set(key, {
+        name: name.toLowerCase(),
+        capabilities: metadata.capabilities ?? ["chat"],
+        defaultModel: metadata.defaultModel ?? "",
+        maxTokens: metadata.maxTokens ?? 4096,
+        pricing: metadata.pricing,
+      });
+    }
+
+    // Initialize health status
+    LLMProviderRegistry.health.set(key, {
+      name: name.toLowerCase(),
+      status: "healthy",
+      successRate: 1,
+      avgLatency: 0,
+      lastCheck: new Date().toISOString(),
+    });
   }
 
   /**
@@ -178,6 +206,152 @@ export class LLMProviderRegistry {
       return new providerClass(config);
     }
     return undefined;
+  }
+
+  // ── Capability-based Lookup ──────────────────────────────────────────
+
+  /**
+   * Get providers by capability.
+   */
+  static getByCapability(capability: import("./types.js").ProviderCapability): LLMProviderClass[] {
+    const result: LLMProviderClass[] = [];
+
+    for (const [name, meta] of LLMProviderRegistry.metadata) {
+      if (meta.capabilities.includes(capability)) {
+        const providerClass = LLMProviderRegistry.providers.get(name);
+        if (providerClass) {
+          result.push(providerClass);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  /**
+   * List providers by capability.
+   */
+  static listByCapability(capability: import("./types.js").ProviderCapability): string[] {
+    const result: string[] = [];
+
+    for (const [name, meta] of LLMProviderRegistry.metadata) {
+      if (meta.capabilities.includes(capability)) {
+        result.push(name);
+      }
+    }
+
+    return result;
+  }
+
+  // ── Health Tracking ───────────────────────────────────────────────────
+
+  /**
+   * Report provider success.
+   */
+  static reportSuccess(name: string, latency: number): void {
+    const key = name.toLowerCase();
+    const health = LLMProviderRegistry.health.get(key);
+    if (!health) return;
+
+    // Update success rate (exponential moving average)
+    health.successRate = health.successRate * 0.9 + 0.1;
+    health.avgLatency = health.avgLatency * 0.9 + latency * 0.1;
+    health.lastCheck = new Date().toISOString();
+
+    // Update status
+    if (health.successRate > 0.9) {
+      health.status = "healthy";
+    } else if (health.successRate > 0.5) {
+      health.status = "degraded";
+    }
+
+    LLMProviderRegistry.health.set(key, health);
+  }
+
+  /**
+   * Report provider failure.
+   */
+  static reportFailure(name: string, error: string): void {
+    const key = name.toLowerCase();
+    const health = LLMProviderRegistry.health.get(key);
+    if (!health) return;
+
+    // Update success rate
+    health.successRate = health.successRate * 0.9;
+    health.lastError = error;
+    health.lastCheck = new Date().toISOString();
+
+    // Update status
+    if (health.successRate < 0.5) {
+      health.status = "unhealthy";
+    } else if (health.successRate < 0.9) {
+      health.status = "degraded";
+    }
+
+    LLMProviderRegistry.health.set(key, health);
+  }
+
+  /**
+   * Get provider health.
+   */
+  static getHealth(name: string): import("./types.js").ProviderHealth | undefined {
+    return LLMProviderRegistry.health.get(name.toLowerCase());
+  }
+
+  /**
+   * Get all health statuses.
+   */
+  static getAllHealth(): import("./types.js").ProviderHealth[] {
+    return Array.from(LLMProviderRegistry.health.values());
+  }
+
+  // ── Fallback Execution ────────────────────────────────────────────────
+
+  /**
+   * Execute with automatic fallback on failure.
+   */
+  static async executeWithFallback(
+    request: import("./types.js").ChatCompletionRequest,
+    config: import("./types.js").FallbackConfig
+  ): Promise<import("./types.js").ChatCompletion> {
+    const providers = config.providers ?? LLMProviderRegistry.listProviders();
+    let lastError: Error | undefined;
+
+    for (const name of providers) {
+      const provider = LLMProviderRegistry.create(name);
+      if (!provider) continue;
+
+      const startTime = Date.now();
+
+      try {
+        const result = await provider.chat(request);
+        LLMProviderRegistry.reportSuccess(name, Date.now() - startTime);
+        return result;
+      } catch (err) {
+        lastError = err as Error;
+        LLMProviderRegistry.reportFailure(name, lastError.message);
+
+        if (!config.enabled) {
+          throw lastError;
+        }
+
+        // Wait before trying next provider
+        if (config.retryDelay > 0) {
+          await new Promise((r) => setTimeout(r, config.retryDelay));
+        }
+      }
+    }
+
+    throw new Error(`All providers failed. Last error: ${lastError?.message}`);
+  }
+
+  // ── Metadata ──────────────────────────────────────────────────────────
+
+  /**
+   * Get provider metadata.
+   */
+  static getMetadata(name: string): import("./types.js").ProviderMetadata | undefined {
+    return LLMProviderRegistry.metadata.get(name.toLowerCase());
   }
 }
 

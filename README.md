@@ -8,7 +8,8 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-3178c6.svg)](https://www.typescriptlang.org/)
-[![Version](https://img.shields.io/badge/Version-3.4.0-orange.svg)](https://github.com/opensourceclaw/deepclaw)
+[![Version](https://img.shields.io/badge/Version-3.5.0-orange.svg)](https://github.com/opensourceclaw/deepclaw)
+[![Tests](https://img.shields.io/badge/Tests-1140%2B-brightgreen.svg)](#)
 
 </div>
 
@@ -53,13 +54,20 @@ DeepClaw is an **open-source deep research framework** based on OpenClaw. It is 
 | Source Deduplication | URL and title-based deduplication |
 | Rich Reports | Markdown, HTML formats with citations |
 | REST API | Express-based API server |
+| **Gate Enforcement** (v3.5.0) | Quality checkpoints in pipelines |
+| **Pipeline CLI** (v3.5.0) | Command-line research workflows |
+| **Monitoring** (v3.5.0) | Metrics collection and alerting |
+| **Human-in-the-Loop** (v3.5.0) | Approval flow for critical decisions |
+| **Trigger Manager** (v3.5.0) | Scheduled and event-based triggers |
 
 ### Key Advantages
 
 - ⚡ **Fast Research**: Parallel processing with async support
 - 🎯 **TypeScript**: Full type safety and modern tooling
-- 🌍 **Multi-Language**: English and Chinese support
+- 🌍 **English Only**: 100% English codebase (v3.5.0)
 - 🌐 **REST API**: Express-based API server
+- 🚪 **Gate System**: Enforced quality checkpoints (v3.5.0)
+- 📊 **Monitoring**: Real-time metrics and alerts (v3.5.0)
 
 ---
 

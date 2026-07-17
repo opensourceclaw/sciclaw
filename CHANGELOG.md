@@ -46,6 +46,26 @@ This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipel
 - **3 Approval Points**: research_plan, budget_threshold, source_quality
 - **Audit Logging** - All approval decisions recorded
 
+#### Added — Trigger Manager (Phase 3)
+
+- **Trigger Types** (`src/trigger/types.ts`) - TriggerType, Trigger, ScheduleConfig, EventConfig
+- **TriggerManager** (`src/trigger/TriggerManager.ts`) - Lightweight trigger system
+- **3 Trigger Types**: schedule (cron), event (on_failure), manual (CLI)
+
+#### Added — Provider Registry Enhancement (Phase 3)
+
+- **Capability-based routing** - Select provider by feature
+- **Fallback chains** - Auto-failover on provider failure
+- **Provider health tracking** - Success rate and latency monitoring
+- **New types**: ProviderCapability, ProviderMetadata, ProviderHealth, FallbackConfig
+
+#### Added — Documentation (Phase 3)
+
+- **CONTRIBUTING.md** - Development setup, PR process, code style
+- **docs/MIGRATION.md** - Migration guide from v3.4.0
+- **docs/architecture/diagrams.md** - Mermaid architecture diagrams
+- **README.md** - Updated with v3.5.0 features and badges
+
 ### Changed (Phase 1)
 
 - Removed all Chinese characters from source code (100% English-only)
@@ -57,7 +77,8 @@ This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipel
 
 - Phase 1: 29 new tests (Gate: 16, CLI: 13)
 - Phase 2: 48 new tests (Monitoring: 29, Approval: 19)
-- Total: 77 new tests, 1116 total tests passing
+- Phase 3: 24 new tests (Trigger: 14, ProviderRegistry: 10)
+- Total: 101 new tests, 1140 total tests passing
 
 ## [3.4.0] - 2026-07-04
 

@@ -31,6 +31,12 @@ export {
   ChatCompletionStreamChunkUtil,
   EmbeddingResultUtil,
   ChatCompletionRequestUtil,
+  // v3.5.0 additions
+  ProviderCapability,
+  ProviderMetadata,
+  ProviderHealth,
+  RoutingConfig,
+  FallbackConfig,
 } from "./types";
 
 // Base classes and registry

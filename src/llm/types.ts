@@ -205,3 +205,51 @@ export interface LLMProviderConfig {
   timeout?: number;
   [key: string]: unknown;
 }
+
+// ── Provider Capabilities (v3.5.0) ─────────────────────────────────────
+
+/** Provider capabilities/features */
+export type ProviderCapability =
+  | "chat"
+  | "streaming"
+  | "embeddings"
+  | "function_calling"
+  | "vision";
+
+/** Provider metadata */
+export interface ProviderMetadata {
+  name: string;
+  capabilities: ProviderCapability[];
+  defaultModel: string;
+  maxTokens: number;
+  pricing?: {
+    input: number;   // per 1K tokens
+    output: number;  // per 1K tokens
+  };
+}
+
+/** Provider health status */
+export interface ProviderHealth {
+  name: string;
+  status: "healthy" | "degraded" | "unhealthy";
+  successRate: number;     // 0-1
+  avgLatency: number;      // ms
+  lastError?: string;
+  lastCheck: string;
+}
+
+/** Routing config */
+export interface RoutingConfig {
+  preferredProvider?: string;
+  fallbackChain?: string[];
+  requireCapability?: ProviderCapability;
+  maxLatency?: number;
+}
+
+/** Fallback config */
+export interface FallbackConfig {
+  enabled: boolean;
+  maxRetries: number;
+  retryDelay: number;      // ms
+  providers: string[];     // fallback order
+}
