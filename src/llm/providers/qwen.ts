@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * LLM Provider - Qwen (通义千问)
+ * LLM Provider - Qwen (Alibaba Cloud)
  */
 
 import axios from "axios";

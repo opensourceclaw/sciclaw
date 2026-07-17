@@ -40,37 +40,37 @@ const RESEARCH_TOPIC_TEMPLATES: Array<{
 }> = [
   {
     topic: "Ethical implications",
-    keywords: ["ethic", "moral", "fair", "bias", "responsible", "伦理", "道德"],
+    keywords: ["ethic", "moral", "fair", "bias", "responsible"],
     requiresDomains: 2,
   },
   {
     topic: "Scalability challenges",
-    keywords: ["scale", "performance", "throughput", "latency", "扩展", "性能"],
+    keywords: ["scale", "performance", "throughput", "latency"],
     requiresDomains: 2,
   },
   {
     topic: "Regulatory compliance",
-    keywords: ["regulat", "compliance", "legal", "policy", "law", "监管", "合规"],
+    keywords: ["regulat", "compliance", "legal", "policy", "law"],
     requiresDomains: 2,
   },
   {
     topic: "Data privacy concerns",
-    keywords: ["privacy", "data protection", "personal data", "gdpr", "隐私"],
+    keywords: ["privacy", "data protection", "personal data", "gdpr"],
     requiresDomains: 2,
   },
   {
     topic: "Implementation feasibility",
-    keywords: ["implement", "deploy", "feasib", "practical", "实施", "可行"],
+    keywords: ["implement", "deploy", "feasib", "practical"],
     requiresDomains: 1,
   },
   {
     topic: "Economic impact",
-    keywords: ["cost", "economic", "budget", "roi", "investment", "经济", "成本"],
+    keywords: ["cost", "economic", "budget", "roi", "investment"],
     requiresDomains: 2,
   },
   {
     topic: "Long-term sustainability",
-    keywords: ["sustain", "long-term", "future", "maintain", "可持续", "长期"],
+    keywords: ["sustain", "long-term", "future", "maintain"],
     requiresDomains: 2,
   },
 ];

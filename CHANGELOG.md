@@ -2,6 +2,46 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.5.0] - 2026-07-17
+
+### 🎯 AI-Native Maturity Enhancement
+
+This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipeline CLI, and English-only source code.
+
+#### Added — Gate Enforcement System
+
+- **Gate Types** (`src/gate/types.ts`) - GateStatus, GateState, ValidationResult
+- **GateRegistry** (`src/gate/GateRegistry.ts`) - Gate status persistence and management
+- **InternalVerifyGate** (`src/gate/gates/InternalVerifyGate.ts`) - 9 validation rules (6 failed + 3 warning)
+  - Failed rules: type_check_failed, build_failed, tests_failed, incomplete_tests, regression_failed, config_error
+  - Warning rules: chinese_characters_detected, hardcoded_paths_detected, missing_apache_headers
+
+#### Added — Pipeline CLI
+
+- **Pipeline Types** (`src/cli/types.ts`) - PipelineStage, PipelineState, StageState
+- **Pipeline Coordinator** (`src/cli/pipeline-coordinator.ts`) - Pipeline state management
+- **CLI Commands**:
+  - `deepclaw pipeline create <topic>` - Create new pipeline
+  - `deepclaw pipeline start <id>` - Start execution
+  - `deepclaw pipeline status [id]` - Show status
+  - `deepclaw pipeline approve <id> <stage>` - Approve stage
+  - `deepclaw pipeline verify <id>` - Run verification gate
+  - `deepclaw pipeline list` - List all pipelines
+  - `deepclaw pipeline delete <id>` - Delete pipeline
+
+### Changed
+
+- Removed all Chinese characters from source code (100% English-only)
+- Updated Chinese keyword patterns to English equivalents in synthesis modules
+- Changed "知乎" to "Zhihu" in site-specific parser
+- Changed "通义千问" to "Qwen (Alibaba Cloud)" in provider documentation
+
+### Tests
+
+- Added 16 tests for InternalVerifyGate
+- Added 13 tests for PipelineCoordinator
+- Total: 29 new tests
+
 ## [3.4.0] - 2026-07-04
 
 ### 🎯 100% TypeScript Migration

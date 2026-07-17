@@ -37,25 +37,25 @@ const CONNECTION_PATTERNS: Array<{
   {
     type: "causation",
     patterns: [
-      /\b(?:cause|lead to|result in|trigger|drive|due to|because|因此|导致|引起|造成)\b/i,
+      /\b(?:cause|lead to|result in|trigger|drive|due to|because)\b/i,
     ],
   },
   {
     type: "correlation",
     patterns: [
-      /\b(?:correlat|associat|relat|link|tied to|connected|相关|关联|联系)\b/i,
+      /\b(?:correlat|associat|relat|link|tied to|connected)\b/i,
     ],
   },
   {
     type: "analogy",
     patterns: [
-      /\b(?:similar to|analogous|like|resemble|parallel|mirror|类似|类比|如同)\b/i,
+      /\b(?:similar to|analogous|like|resemble|parallel|mirror)\b/i,
     ],
   },
   {
     type: "implication",
     patterns: [
-      /\b(?:implies|suggests|indicates|points to|means|entails|意味|暗示|表明|指向)\b/i,
+      /\b(?:implies|suggests|indicates|points to|means|entails)\b/i,
     ],
   },
 ];

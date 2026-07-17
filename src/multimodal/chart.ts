@@ -23,11 +23,11 @@ function generateId(): string {
 async function detectChartType(description: string): Promise<ChartType> {
   const typePatterns: Array<{ pattern: RegExp; type: ChartType }> = [
     { pattern: /\b(histogram|distribution)\b/i, type: ChartType.HISTOGRAM },
-    { pattern: /\b(bar\s*chart|bar\s*graph|柱状图)\b/i, type: ChartType.BAR },
-    { pattern: /\b(line\s*chart|line\s*graph|折线图|trend)\b/i, type: ChartType.LINE },
-    { pattern: /\b(pie\s*chart|pie\s*graph|饼图|donut)\b/i, type: ChartType.PIE },
-    { pattern: /\b(scatter\s*plot|scatter\s*chart|散点图)\b/i, type: ChartType.SCATTER },
-    { pattern: /\b(area\s*chart|area\s*graph|面积图)\b/i, type: ChartType.AREA },
+    { pattern: /\b(bar\s*chart|bar\s*graph)\b/i, type: ChartType.BAR },
+    { pattern: /\b(line\s*chart|line\s*graph|trend)\b/i, type: ChartType.LINE },
+    { pattern: /\b(pie\s*chart|pie\s*graph|donut)\b/i, type: ChartType.PIE },
+    { pattern: /\b(scatter\s*plot|scatter\s*chart)\b/i, type: ChartType.SCATTER },
+    { pattern: /\b(area\s*chart|area\s*graph)\b/i, type: ChartType.AREA },
   ];
 
   for (const { pattern, type } of typePatterns) {

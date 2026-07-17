@@ -151,7 +151,7 @@ export class ZhihuParser extends SiteParser {
     const result: ParsedContent = { title: '', content: '' };
 
     // Title
-    result.title = $('title').text().replace(/\s*[-|–]\s*知乎.*$/, '').trim();
+    result.title = $('title').text().replace(/\s*[-|–]\s*Zhihu.*$/, '').trim();
 
     // Author
     const author = $('[class*="author"], a[class*="name"]').first().text().trim();

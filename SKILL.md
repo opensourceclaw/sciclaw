@@ -182,6 +182,35 @@ Apache License 2.0
 
 ---
 
+## 🔧 DevClaw Methodology Compliance
+
+This project follows the **DevClaw AI-Native Software Engineering Methodology**.
+
+- **Full Spec**: `../devclaw/docs/architecture/methodology.md`
+- **Project Protocol**: `docs/protocol/inbox-protocol.md`
+- **SDLC Stages**: PLAN → DESIGN → BUILD → TEST → RELEASE
+
+### Mandatory SubStages (Do Not Skip)
+
+| Stage | SubStage | Owner |
+|-------|----------|:-----:|
+| DESIGN | design-review | Friday |
+| BUILD | code-review | Friday |
+| BUILD | internal-verify | Friday |
+| TEST | edith-acceptance | Edith |
+
+### Friday Self-Audit
+
+Before any Stage transition, verify:
+- [ ] Current SubStage complete?
+- [ ] Gate for this SubStage passed?
+- [ ] Result written to inbox-friday?
+- [ ] Not skipping any mandatory SubStage?
+
+**Violation**: Versions released without completing all SubStages shall not be published.
+
+---
+
 ## 🙏 Acknowledgments
 
 - OpenClaw Community
