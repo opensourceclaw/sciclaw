@@ -133,8 +133,9 @@ describe("PipelineCoordinator", () => {
   });
 
   describe("getLatest", () => {
-    it("gets most recent pipeline", () => {
+    it("gets most recent pipeline", async () => {
       coordinator.create("First");
+      await new Promise(r => setTimeout(r, 10)); // Ensure different timestamp
       coordinator.create("Second");
       const latest = coordinator.getLatest();
       expect(latest?.topic).toBe("Second");

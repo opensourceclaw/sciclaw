@@ -6,9 +6,9 @@ All notable changes to DeepClaw will be documented in this file.
 
 ### 🎯 AI-Native Maturity Enhancement
 
-This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipeline CLI, and English-only source code.
+This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipeline CLI, Monitoring, and Human-in-the-Loop approval.
 
-#### Added — Gate Enforcement System
+#### Added — Gate Enforcement System (Phase 1)
 
 - **Gate Types** (`src/gate/types.ts`) - GateStatus, GateState, ValidationResult
 - **GateRegistry** (`src/gate/GateRegistry.ts`) - Gate status persistence and management
@@ -16,7 +16,7 @@ This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipel
   - Failed rules: type_check_failed, build_failed, tests_failed, incomplete_tests, regression_failed, config_error
   - Warning rules: chinese_characters_detected, hardcoded_paths_detected, missing_apache_headers
 
-#### Added — Pipeline CLI
+#### Added — Pipeline CLI (Phase 1)
 
 - **Pipeline Types** (`src/cli/types.ts`) - PipelineStage, PipelineState, StageState
 - **Pipeline Coordinator** (`src/cli/pipeline-coordinator.ts`) - Pipeline state management
@@ -29,7 +29,24 @@ This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipel
   - `deepclaw pipeline list` - List all pipelines
   - `deepclaw pipeline delete <id>` - Delete pipeline
 
-### Changed
+#### Added — Monitoring Observer (Phase 2)
+
+- **Monitoring Types** (`src/monitoring/types.ts`) - ResearchMetrics, Alert, AlertRule
+- **DeepClawObserver** (`src/monitoring/Observer.ts`) - Passive metrics collection
+- **MetricsCollector** (`src/monitoring/MetricsCollector.ts`) - Metrics tracking with persistence
+- **AlertManager** (`src/monitoring/AlertManager.ts`) - 5 alert rules engine
+  - Alert rules: high_error_rate, slow_response, low_cache_hit, token_budget_exceeded, zero_sources
+- **7 Research Metrics**: researchDurationMs, phaseDurationMs, agentResponseTimeMs, cacheHitRate, errorRate, sourceCount, tokenUsage
+
+#### Added — Human-in-the-Loop Approval (Phase 2)
+
+- **Approval Types** (`src/approval/types.ts`) - ApprovalRequest, ApprovalStatus, ApprovalDecision
+- **ApprovalFlow** (`src/approval/ApprovalFlow.ts`) - State machine with file-based approval
+- **ApprovalGate** (`src/approval/ApprovalGate.ts`) - Gate integration with GateRegistry
+- **3 Approval Points**: research_plan, budget_threshold, source_quality
+- **Audit Logging** - All approval decisions recorded
+
+### Changed (Phase 1)
 
 - Removed all Chinese characters from source code (100% English-only)
 - Updated Chinese keyword patterns to English equivalents in synthesis modules
@@ -38,9 +55,9 @@ This release enhances DeepClaw's AI-Native maturity with Gate enforcement, Pipel
 
 ### Tests
 
-- Added 16 tests for InternalVerifyGate
-- Added 13 tests for PipelineCoordinator
-- Total: 29 new tests
+- Phase 1: 29 new tests (Gate: 16, CLI: 13)
+- Phase 2: 48 new tests (Monitoring: 29, Approval: 19)
+- Total: 77 new tests, 1116 total tests passing
 
 ## [3.4.0] - 2026-07-04
 
