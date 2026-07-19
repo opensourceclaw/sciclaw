@@ -46,7 +46,7 @@ var __runInitializers = (this && this.__runInitializers) || function (thisArg, i
     return useValue ? value : void 0;
 };
 /**
- * LLM Provider - Qwen (通义千问)
+ * LLM Provider - Qwen (Alibaba Cloud)
  */
 import axios from "axios";
 import { ChatCompletionRequestUtil, } from "../types";

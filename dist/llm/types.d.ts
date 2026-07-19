@@ -119,4 +119,40 @@ export interface LLMProviderConfig {
     timeout?: number;
     [key: string]: unknown;
 }
+/** Provider capabilities/features */
+export type ProviderCapability = "chat" | "streaming" | "embeddings" | "function_calling" | "vision";
+/** Provider metadata */
+export interface ProviderMetadata {
+    name: string;
+    capabilities: ProviderCapability[];
+    defaultModel: string;
+    maxTokens: number;
+    pricing?: {
+        input: number;
+        output: number;
+    };
+}
+/** Provider health status */
+export interface ProviderHealth {
+    name: string;
+    status: "healthy" | "degraded" | "unhealthy";
+    successRate: number;
+    avgLatency: number;
+    lastError?: string;
+    lastCheck: string;
+}
+/** Routing config */
+export interface RoutingConfig {
+    preferredProvider?: string;
+    fallbackChain?: string[];
+    requireCapability?: ProviderCapability;
+    maxLatency?: number;
+}
+/** Fallback config */
+export interface FallbackConfig {
+    enabled: boolean;
+    maxRetries: number;
+    retryDelay: number;
+    providers: string[];
+}
 //# sourceMappingURL=types.d.ts.map

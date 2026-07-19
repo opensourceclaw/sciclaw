@@ -6,11 +6,11 @@ export const DEFAULT_VERIFIER_CONFIG = {
 };
 // ── Contradiction patterns ───────────────────────────────────────────
 const CONTRADICTION_PATTERNS = [
-    /\b(?:however|but|on the other hand|conversely|nevertheless|although|然而|但是|相反|尽管如此|虽然)\b/i,
-    /\b(?:contradict|disagree|refute|dispute|challenge|矛盾|反驳|质疑)\b/i,
+    /\b(?:however|but|on the other hand|conversely|nevertheless|although)\b/i,
+    /\b(?:contradict|disagree|refute|dispute|challenge)\b/i,
 ];
 const NEGATION_PATTERNS = [
-    /\b(?:not|no|never|neither|nor|cannot|isn't|aren't|don't|doesn't|不|没有|无|非)\b/i,
+    /\b(?:not|no|never|neither|nor|cannot|isn't|aren't|don't|doesn't)\b/i,
 ];
 // ── IterativeVerifier ────────────────────────────────────────────────
 export class IterativeVerifier {
@@ -94,8 +94,6 @@ export class IterativeVerifier {
             "would", "could", "should", "may", "might", "can", "shall",
             "to", "of", "in", "for", "on", "with", "at", "by", "from",
             "and", "or", "but", "not", "this", "that", "it", "its",
-            "的", "了", "在", "是", "我", "有", "和", "就", "不", "人",
-            "都", "一", "一个", "上", "也", "很", "到", "说", "要", "去",
         ]);
         return text
             .toLowerCase()

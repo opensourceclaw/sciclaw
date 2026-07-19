@@ -65,14 +65,16 @@ export declare abstract class LLMProvider {
  */
 export type LLMProviderClass = new (config: LLMProviderConfig) => LLMProvider;
 /**
- * Registry for LLM providers
+ * Registry for LLM providers with capabilities and fallback support (v3.5.0)
  */
 export declare class LLMProviderRegistry {
     private static providers;
+    private static metadata;
+    private static health;
     /**
      * Register an LLM provider
      */
-    static register(name: string, providerClass: LLMProviderClass): void;
+    static register(name: string, providerClass: LLMProviderClass, metadata?: Partial<import("./types.js").ProviderMetadata>): void;
     /**
      * Get provider class by name
      */
@@ -85,6 +87,38 @@ export declare class LLMProviderRegistry {
      * Create a provider instance
      */
     static create(name: string, config?: LLMProviderConfig): LLMProvider | undefined;
+    /**
+     * Get providers by capability.
+     */
+    static getByCapability(capability: import("./types.js").ProviderCapability): LLMProviderClass[];
+    /**
+     * List providers by capability.
+     */
+    static listByCapability(capability: import("./types.js").ProviderCapability): string[];
+    /**
+     * Report provider success.
+     */
+    static reportSuccess(name: string, latency: number): void;
+    /**
+     * Report provider failure.
+     */
+    static reportFailure(name: string, error: string): void;
+    /**
+     * Get provider health.
+     */
+    static getHealth(name: string): import("./types.js").ProviderHealth | undefined;
+    /**
+     * Get all health statuses.
+     */
+    static getAllHealth(): import("./types.js").ProviderHealth[];
+    /**
+     * Execute with automatic fallback on failure.
+     */
+    static executeWithFallback(request: import("./types.js").ChatCompletionRequest, config: import("./types.js").FallbackConfig): Promise<import("./types.js").ChatCompletion>;
+    /**
+     * Get provider metadata.
+     */
+    static getMetadata(name: string): import("./types.js").ProviderMetadata | undefined;
 }
 /**
  * Decorator to register an LLM provider

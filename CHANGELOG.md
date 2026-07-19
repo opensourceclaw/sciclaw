@@ -2,6 +2,60 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.6.0] - 2026-07-19
+
+### 🎯 DevClaw Methodology Alignment
+
+This release aligns DeepClaw with DevClaw methodology, integrating claw-mem v6.40.0, claw-cog v5.11.0, and adding OBSERVE + GOVERN stages.
+
+#### Added — claw-mem Integration (P0)
+
+- **DeepClawMemoryAdapter** (`src/memory-adapter.ts`) - Full claw-mem v6.40.0 integration
+  - `store()` - Store with optional governance check
+  - `search()` - BM25-powered memory search
+  - `getGovernanceMetrics()` - v6.40.0 governance statistics
+  - Progressive loading support
+
+#### Added — claw-cog Integration (P1)
+
+- **DeepClawCogIntegration** (`src/cog-integration.ts`) - claw-cog v5.11.0 integration
+  - GlobalWorkspace broadcast/subscribe for cognitive content
+  - PolicyEnforcer for action evaluation
+  - ActionExecutor with research handlers (search, analyze, synthesize)
+  - `decide()` - Cognitive decision making
+
+#### Added — Quality Gates (P2)
+
+- Existing inbox directory structure enhanced:
+  - `inbox-design-review/` - Design review gate
+  - `inbox-code-review/` - Code review gate
+  - `inbox-internal-verify/` - Internal verification gate
+
+#### Added — ESLint + Prettier (P3)
+
+- `.eslintrc.json` - Enhanced TypeScript rules
+- `.prettierrc` - Code formatting config
+- `.eslintignore` - Ignore patterns
+- Added devDependencies: @typescript-eslint, eslint, prettier, eslint-config-prettier
+
+#### Added — OBSERVE Stage (P4)
+
+- **MetricsCollector** (`src/observe/metrics-collector.ts`)
+  - Counter, gauge, timing, histogram metrics
+  - `timeOperation()` - Async timing helper
+  - Research metrics: SEARCH_REQUESTS, SEARCH_LATENCY, SOURCES_FOUND, etc.
+  - Export and statistics functions
+
+#### Added — GOVERN Stage (P4)
+
+- **GovernancePolicy** (`src/governance/policy.ts`)
+  - 4 built-in rules: max-sources, sensitive-data, quality-threshold, attribution
+  - `evaluate()` - Policy evaluation with audit log
+  - `addRule()` - Custom rule registration
+  - Severity levels: low, medium, high, critical
+
+---
+
 ## [3.5.0] - 2026-07-17
 
 ### 🎯 AI-Native Maturity Enhancement
