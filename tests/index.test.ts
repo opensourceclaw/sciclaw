@@ -4,6 +4,6 @@ import { VERSION } from '../src/index.js';
 describe('Main Module', () => {
   it('should export VERSION constant', () => {
     expect(VERSION).toBeDefined();
-    expect(VERSION).toBe('3.3.0');
+    expect(VERSION).toBe('3.7.0');
   });
 });

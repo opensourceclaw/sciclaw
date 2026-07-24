@@ -1,5 +1,5 @@
-import type { VerificationResult } from "../validation/types.js";
-import { VerificationStatus } from "../validation/types.js";
+import type { VerificationResult } from "@deepclaw/core";
+import { VerificationStatus } from "@deepclaw/core";
 import type { BenchmarkScore } from "./types.js";
 
 function overlapRatio(a: string, b: string): number {

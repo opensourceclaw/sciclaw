@@ -4,7 +4,7 @@
  * Image analysis powered by Gemini Vision via OpenClaw Gateway.
  * Flash (default) with automatic Pro fallback for low-confidence results.
  */
-import { OpenClawModelAdapter } from "../model/adapter.js";
+import { OpenClawModelAdapter } from "@deepclaw/core";
 import type {
   ImageContent,
   ChartData,

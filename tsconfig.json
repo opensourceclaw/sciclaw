@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
     "strict": true,
     "esModuleInterop": true,
@@ -20,11 +20,7 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@search/*": ["src/search/*"],
-      "@research/*": ["src/research/*"],
-      "@tools/*": ["src/tools/*"],
-      "@llm/*": ["src/llm/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src/**/*"],

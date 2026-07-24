@@ -1,4 +1,4 @@
-import type { VerificationResult } from "../validation/types.js";
+import type { VerificationResult } from "@deepclaw/core";
 export declare function computeFactuality(verified: VerificationResult[], expectedFacts: string[]): number;
 export declare function computeCompleteness(sources: string[], actualSections: number, expectedSources: string[], minSections: number): number;
 export declare function computeCitationQuality(citations: Array<{

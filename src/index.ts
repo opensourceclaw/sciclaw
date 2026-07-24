@@ -1,18 +1,18 @@
 /**
- * DeepClaw v3.0.0-rc.3
+ * DeepClaw v3.7.0
  * Deep Research Framework — AI-powered multi-source research and synthesis
  */
 
-export const VERSION = '3.3.0';
+export const VERSION = '3.7.0';
 
-// Core exports
-export * from './types/index.js';
-export * from './search/index.js';
+// Core exports from @deepclaw/core
+export * from '@deepclaw/core';
+
+// Deep Research specific modules
 export * from './research/index.js';
-export * from './tools/index.js';
 
 // v2.0.0-rc.2 — Validation + Knowledge Graph
-export * from './validation/index.js';
+// Validation moved to @deepclaw/core
 export * from './knowledge/index.js';
 
 // v2.0.0-rc.3 — Multi-Agent System + Benchmark
@@ -27,9 +27,6 @@ export * from './learning/index.js';
 
 // v3.0.0-rc.2 — Personalization Layer
 export * from './personalization/index.js';
-
-// v3.2.0 — OpenClaw Model Integration
-export * from './model/index.js';
 
 // v3.3.0 — Research Orchestrator (Reasoning-Driven Search)
 export * from './orchestrator/index.js';

@@ -2,7 +2,7 @@
  * API module - REST API server
  */
 import express from 'express';
-import { search } from '../search/index.js';
+import { search } from '@deepclaw/core';
 import { conductResearch } from '../research/index.js';
 import { generateReport } from '../report/index.js';
 export async function createServer(options) {

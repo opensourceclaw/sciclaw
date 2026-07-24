@@ -6,7 +6,7 @@ import {
   computeReasoningDepth,
   computeOverall,
 } from '../../src/benchmark/metrics.js';
-import { VerificationStatus } from '../../src/validation/types.js';
+import { VerificationStatus } from '@deepclaw/core';
 
 describe('Benchmark Metrics', () => {
   describe('computeFactuality', () => {

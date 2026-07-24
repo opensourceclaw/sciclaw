@@ -1,6 +1,6 @@
 import crypto from "crypto";
-import type { Entity } from "../nlp/ner.js";
-import type { Relation } from "../nlp/rel-extract.js";
+import type { Entity } from "@deepclaw/core";
+import type { Relation } from "@deepclaw/core";
 import type { GraphNode, GraphEdge, KnowledgeGraph } from "./types.js";
 
 function hash(input: string): string {

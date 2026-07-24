@@ -1,7 +1,7 @@
 import { BaseAgent } from "./base_agent.js";
 import type { AgentConfig, AgentTask, AgentResult } from "./types.js";
 import { AgentRole } from "./types.js";
-import { CitationStyle } from "../validation/types.js";
+import { CitationStyle } from "@deepclaw/core";
 
 export class WritingAgent extends BaseAgent {
   constructor(config?: Partial<AgentConfig> & { role: AgentRole }) {

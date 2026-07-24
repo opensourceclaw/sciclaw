@@ -4,7 +4,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { generatePDF } from './pdf.js';
-import type { Report, ReportOptions } from '../types/index.js';
+import type { Report, ReportOptions } from '@deepclaw/core';
 
 export interface ReportResult extends Report {
   pdfPath?: string;

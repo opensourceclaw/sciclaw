@@ -3,10 +3,10 @@
  */
 
 import express, { type Express, type Request, type Response } from 'express';
-import { search } from '../search/index.js';
+import { search } from '@deepclaw/core';
 import { conductResearch } from '../research/index.js';
 import { generateReport } from '../report/index.js';
-import type { ApiResponse } from '../types/index.js';
+import type { ApiResponse } from '@deepclaw/core';
 
 export interface ServerOptions {
   port: number;

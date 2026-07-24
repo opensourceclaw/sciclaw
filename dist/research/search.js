@@ -4,7 +4,7 @@
  * Copyright 2026 OpenClaw
  * Licensed under the Apache License, Version 2.0
  */
-import { search } from "../search/index.js";
+import { search } from "@deepclaw/core";
 /**
  * Research search engine with caching and quality annotation
  */

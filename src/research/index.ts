@@ -6,17 +6,15 @@
  */
 
 import { v4 as uuidv4 } from "uuid";
-import { search } from "../search/index.js";
-import { extractContent } from "../extractor/index.js";
-import { OpenClawModelAdapter } from "../model/index.js";
+import { search, extractContent, OpenClawModelAdapter } from "@deepclaw/core";
 import type {
   ResearchOptions,
   ResearchResult,
   ResearchSection,
   SourceCitation,
-} from "../types/index.js";
+} from "@deepclaw/core";
 
-// Export types (excluding conflicting ones)
+// Export types (excluding conflicting ones - LLMEngine is in @deepclaw/core)
 export type {
   ResearchPlan,
   ResearchFinding,
@@ -29,7 +27,6 @@ export type {
   SectionAnalysis,
   ReportConfig,
   ThemeInfo,
-  LLMEngine,
 } from "./types.js";
 
 // Export planner module
