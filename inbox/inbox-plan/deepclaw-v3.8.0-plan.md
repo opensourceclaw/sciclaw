@@ -1,9 +1,9 @@
-# Plan: DeepClaw v3.7.0 — Flow Separation (Deep Research)
+# Plan: DeepClaw v3.8.0 — Flow Separation (Deep Research)
 
 **From**: Friday (A)
 **Date**: 2026-07-22
 **Project**: deepclaw
-**Version**: 3.7.0
+**Version**: 3.8.0
 
 ---
 
@@ -17,7 +17,7 @@ Based on the architecture decision ( Jarvis + Edith recommendation):
 
 ---
 
-## Goals for v3.7.0
+## Goals for v3.8.0
 
 ### Primary Goals
 

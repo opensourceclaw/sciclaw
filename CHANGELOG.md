@@ -2,6 +2,49 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.8.0] - 2026-07-27
+
+### Added
+- **DeepResearchFlow** — Interactive deep research flow with depth-first strategy
+  - Step-by-step with human approval at each stage (PLAN → SEARCH → ANALYZE → SYNTHESIZE → REPORT)
+  - `ApprovalCallback` for custom approval logic
+  - Pause/resume support
+  - Execution time tracking (`getStageDurations()`)
+- **AutoResearchFlow** — Autonomous breadth-first research flow
+  - `run()` method for full autonomous pipeline
+- **CLI `--mode` flag** — Choose between `deep` (interactive, default) and `auto` (autonomous)
+- **GateStrategy** — `DeepResearchGateStrategy` and `AutoResearchGateStrategy` for flow-specific gate behavior
+- **Research Kernel documentation** — `docs/architecture/kernel.md`
+
+### Changed
+- Separated DeepResearchFlow and AutoResearchFlow from Orchestrator
+- Documented shared Research Kernel components
+
+### Fixed
+- MemoryGovernance import from claw-mem v6.40.3
+
+---
+
+## [3.7.0] - 2026-07-24
+
+### Added
+- **DeepResearchFlow** — Interactive deep research flow with depth-first strategy
+  - Step-by-step with human approval at each stage (PLAN → SEARCH → ANALYZE → SYNTHESIZE → REPORT)
+  - `ApprovalCallback` for custom approval logic
+- **AutoResearchFlow** — Autonomous breadth-first research flow
+- **CLI `--mode` flag** — Choose between `deep` (interactive, default) and `auto` (autonomous)
+- **GateStrategy** — `DeepResearchGateStrategy` and `AutoResearchGateStrategy` for flow-specific gate behavior
+- **Research Kernel documentation** — `docs/architecture/kernel.md`
+
+### Changed
+- Separated DeepResearchFlow and AutoResearchFlow from Orchestrator
+- Documented shared Research Kernel components
+
+### Fixed
+- MemoryGovernance import from claw-mem v6.40.3
+
+---
+
 ## [3.6.0] - 2026-07-19
 
 ### 🎯 DevClaw Methodology Alignment
