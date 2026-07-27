@@ -2,6 +2,58 @@
 
 All notable changes to DeepClaw will be documented in this file.
 
+## [3.9.0] - 2026-07-27
+
+### Added — Research Methodology Enhancement
+
+#### Infrastructure Integration (Phase 1)
+- **ContextManager** (`src/context/ContextManager.ts`) — claw-ctx integration for model-aware context optimization
+  - `optimize(context)` — Token-optimized research context
+  - `setModelProfile(profile)` — Switch model profiles
+  - `getContextWindow()`, `getCompressionThreshold()` — Model profile accessors
+- **MetricsCollector** (`src/observe/MetricsCollector.ts`) — claw-obs integration for metrics collection
+  - `recordSearchLatency()`, `recordExtractionQuality()`, `recordGateResult()` — Research metrics
+  - `getSnapshot()`, `flush()` — Metrics reporting
+- **ResearchContext** types — Deep research context structure
+- **ResearchMetrics** types — Research-specific metrics
+
+#### Research Quality Gates (Phase 2)
+- **SourceCredibilityGate** (`src/gate/research/source-credibility-gate.ts`) — Source credibility scoring (threshold ≥ 0.7)
+  - Domain authority, recency, relevance scoring
+- **CrossValidationGate** (`src/gate/research/cross-validation-gate.ts`) — Multi-source agreement (threshold ≥ 0.8)
+  - Claim support validation
+- **BiasDetectionGate** (`src/gate/research/bias-detection-gate.ts`) — Bias detection (threshold ≤ 0.3)
+  - Selection bias, confirmation bias, temporal bias
+- **CitationIntegrityGate** (`src/gate/research/citation-integrity-gate.ts`) — Citation integrity (threshold ≥ 0.95)
+  - Citation completeness, source verification
+- **ResearchGateRegistry** (`src/gate/research/research-gate-registry.ts`) — Gate registration and orchestration
+
+#### Research Pipeline Enhancement (Phase 3)
+- **ResearchStateMachine** (`src/orchestrator/research-state-machine.ts`) — 7-stage state machine
+  - Stages: observe → plan → search → extract → synthesize → validate → report
+  - Gate integration via `researchGateRegistry.getByStage()`
+  - Metrics collection via `metricsCollector.recordGateResult()`
+- **OBSERVE Stage** (`src/stages/observe.ts`) — Research topic discovery
+  - Topic extraction, question generation, scope definition
+- **VALIDATE Stage** (`src/stages/validate.ts`) — Research validation
+  - Bias report, cross-validation results, recommendations
+- **DeepResearchFlow integration** — State machine integration
+  - `initStateMachine()`, `runObserve()`, `runValidate()`, `getGateResults()`
+
+### Changed
+- Integrated claw-ctx v5.16.3 for model-aware context optimization
+- Integrated claw-obs v1.3.0 for observability
+- Enhanced Research Pipeline to 7 stages (OBSERVE + VALIDATE added)
+- Gates now integrated into pipeline execution flow
+
+### Tests
+- 900 tests passed (808 existing + 92 new)
+  - Phase 1: +23 tests (ContextManager, MetricsCollector)
+  - Phase 2: +39 tests (4 Gates + Registry)
+  - Phase 3: +30 tests (StateMachine, OBSERVE, VALIDATE)
+
+---
+
 ## [3.8.0] - 2026-07-27
 
 ### Added

@@ -21,4 +21,7 @@ export * from './learning/index.js';
 export * from './personalization/index.js';
 // v3.3.0 — Research Orchestrator (Reasoning-Driven Search)
 export * from './orchestrator/index.js';
+// v3.9.0 — Context + Observability Integration
+export { ContextManager, contextManager } from './context/index.js';
+export { ResearchMetricsCollector, researchMetricsCollector } from './observe/index.js';
 //# sourceMappingURL=index.js.map

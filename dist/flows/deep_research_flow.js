@@ -12,8 +12,11 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.8.0 — Deep Research Flow (Interactive, Depth-First)
+// DeepClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
 import { ResearchStrategy, } from "../orchestrator/types.js";
+import { ResearchStateMachine } from "../orchestrator/research-state-machine.js";
+import { observeStage } from "../stages/observe.js";
+import { validateStage } from "../stages/validate.js";
 const STAGE_ORDER = ["plan", "search", "analyze", "synthesize", "report"];
 /**
  * Interactive deep research flow.
@@ -187,6 +190,46 @@ export class DeepResearchFlow {
             throw new Error(`Approval denied for step: ${step}`);
         }
         return true;
+    }
+    // ── Phase 3: ResearchStateMachine + Stages ──────────────────────────
+    stateMachine = null;
+    /**
+     * Initialize state machine with context
+     */
+    initStateMachine(initialContext = {}) {
+        this.stateMachine = new ResearchStateMachine(initialContext);
+        return this.stateMachine;
+    }
+    /**
+     * Get current stage from state machine
+     */
+    getCurrentStageFromMachine() {
+        return this.stateMachine?.getStage() ?? null;
+    }
+    /**
+     * Get gate results
+     */
+    getGateResults() {
+        return this.stateMachine?.getGateResults() ?? new Map();
+    }
+    /**
+     * Run observe stage
+     */
+    async runObserve(input) {
+        if (!this.stateMachine) {
+            this.initStateMachine({ topic: input });
+        }
+        const result = await observeStage(input);
+        this.stateMachine.updateContext({ topic: result.topic, questions: result.questions });
+    }
+    /**
+     * Run validate stage
+     */
+    async runValidate() {
+        if (!this.stateMachine) {
+            throw new Error("State machine not initialized");
+        }
+        return validateStage(this.stateMachine.getContext());
     }
 }
 //# sourceMappingURL=deep_research_flow.js.map

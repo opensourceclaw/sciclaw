@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 import { ResearchStrategy, type ResearchContext, type SubQuery, type ResearchSearchResult, type BlindSpot } from "../orchestrator/types.js";
+import { ResearchStateMachine } from "../orchestrator/research-state-machine.js";
+import type { ValidationResult } from "../stages/validate.js";
 export type ResearchStage = "plan" | "search" | "analyze" | "synthesize" | "report";
 export interface DeepResearchConfig {
     maxDepth?: number;
@@ -79,5 +81,26 @@ export declare class DeepResearchFlow {
     synthesize(): Promise<SynthesisResult>;
     report(): Promise<ResearchReport>;
     requestApproval(step: string, details: string): Promise<boolean>;
+    private stateMachine;
+    /**
+     * Initialize state machine with context
+     */
+    initStateMachine(initialContext?: Record<string, unknown>): ResearchStateMachine;
+    /**
+     * Get current stage from state machine
+     */
+    getCurrentStageFromMachine(): string | null;
+    /**
+     * Get gate results
+     */
+    getGateResults(): Map<string, boolean>;
+    /**
+     * Run observe stage
+     */
+    runObserve(input: string): Promise<void>;
+    /**
+     * Run validate stage
+     */
+    runValidate(): Promise<ValidationResult>;
 }
 //# sourceMappingURL=deep_research_flow.d.ts.map

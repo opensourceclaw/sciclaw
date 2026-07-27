@@ -12,4 +12,8 @@ export * from './synthesis/index.js';
 export * from './learning/index.js';
 export * from './personalization/index.js';
 export * from './orchestrator/index.js';
+export { ContextManager, contextManager } from './context/index.js';
+export type { ContextManagerConfig, OptimizedContext } from './context/index.js';
+export { ResearchMetricsCollector, researchMetricsCollector } from './observe/index.js';
+export type { MetricsCollectorConfig, DetailedResearchMetrics, MetricsSnapshot } from './observe/index.js';
 //# sourceMappingURL=index.d.ts.map

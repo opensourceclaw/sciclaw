@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.8.0 — Deep Research Flow (Interactive, Depth-First)
+// DeepClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
 
 import {
   ResearchState,
@@ -23,6 +23,10 @@ import {
   type ResearchSearchResult,
   type BlindSpot,
 } from "../orchestrator/types.js";
+import { ResearchStateMachine } from "../orchestrator/research-state-machine.js";
+import { observeStage } from "../stages/observe.js";
+import { validateStage } from "../stages/validate.js";
+import type { ValidationResult } from "../stages/validate.js";
 
 export type ResearchStage = "plan" | "search" | "analyze" | "synthesize" | "report";
 
@@ -265,5 +269,52 @@ export class DeepResearchFlow {
       throw new Error(`Approval denied for step: ${step}`);
     }
     return true;
+  }
+
+  // ── Phase 3: ResearchStateMachine + Stages ──────────────────────────
+
+  private stateMachine: ResearchStateMachine | null = null;
+
+  /**
+   * Initialize state machine with context
+   */
+  initStateMachine(initialContext: Record<string, unknown> = {}): ResearchStateMachine {
+    this.stateMachine = new ResearchStateMachine(initialContext as any);
+    return this.stateMachine;
+  }
+
+  /**
+   * Get current stage from state machine
+   */
+  getCurrentStageFromMachine(): string | null {
+    return this.stateMachine?.getStage() ?? null;
+  }
+
+  /**
+   * Get gate results
+   */
+  getGateResults(): Map<string, boolean> {
+    return this.stateMachine?.getGateResults() ?? new Map();
+  }
+
+  /**
+   * Run observe stage
+   */
+  async runObserve(input: string): Promise<void> {
+    if (!this.stateMachine) {
+      this.initStateMachine({ topic: input });
+    }
+    const result = await observeStage(input);
+    this.stateMachine!.updateContext({ topic: result.topic, questions: result.questions } as any);
+  }
+
+  /**
+   * Run validate stage
+   */
+  async runValidate(): Promise<ValidationResult> {
+    if (!this.stateMachine) {
+      throw new Error("State machine not initialized");
+    }
+    return validateStage(this.stateMachine.getContext());
   }
 }
