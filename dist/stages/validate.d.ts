@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — VALIDATE Stage
+ * SciClaw v3.9.0 — VALIDATE Stage
  */
 import type { ResearchContext } from "../context/ResearchContext.js";
 export interface BiasReport {

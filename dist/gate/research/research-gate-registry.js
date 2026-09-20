@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Research Gate Registry
+ * SciClaw v3.9.0 — Research Gate Registry
  */
 import { SourceCredibilityGate } from "./source-credibility-gate.js";
 import { CrossValidationGate } from "./cross-validation-gate.js";

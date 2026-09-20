@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Citation Integrity Gate
+ * SciClaw v3.9.0 — Citation Integrity Gate
  */
 import type { ResearchGate, GateResult } from "./types.js";
 import type { ResearchContext, ResearchStage } from "../../context/ResearchContext.js";

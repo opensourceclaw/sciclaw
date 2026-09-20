@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline Types
+// SciClaw v3.5.0 — Pipeline Types
 /** Pipeline stages for research workflow */
 export var PipelineStage;
 (function (PipelineStage) {

@@ -6,8 +6,8 @@ import { createWriteStream } from 'fs';
 import { mkdir } from 'fs/promises';
 import { dirname } from 'path';
 const defaultOptions = {
-    title: 'DeepClaw Report',
-    author: 'DeepClaw',
+    title: 'SciClaw Report',
+    author: 'SciClaw',
     pageSize: 'A4',
     margins: { top: 50, bottom: 50, left: 50, right: 50 },
 };

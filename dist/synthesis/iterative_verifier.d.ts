@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-beta.3 — Iterative Verifier
+ * SciClaw v3.0.0-beta.3 — Iterative Verifier
  *
  * Hypothesis → Test → Refine automated verification loop.
  * Validates claims through multi-source evidence, contradiction

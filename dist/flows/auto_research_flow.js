@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.8.0 — Auto Research Flow (Autonomous, Breadth-First)
+// SciClaw v3.8.0 — Auto Research Flow (Autonomous, Breadth-First)
 import { ResearchState, ResearchStrategy, } from "../orchestrator/types.js";
 const STAGE_ORDER = ["plan", "search", "analyze", "synthesize", "report"];
 /**

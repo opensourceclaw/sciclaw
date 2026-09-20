@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Multi-Modal Types
+ * SciClaw v3.0.0 — Multi-Modal Types
  */
 export declare enum ImageFormat {
     JPEG = "jpeg",

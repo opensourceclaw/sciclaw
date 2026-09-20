@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.2 — Topic Tracker
+ * SciClaw v3.0.0-rc.2 — Topic Tracker
  *
  * Tracks user research interests over time, maintains topic weights,
  * and provides interest-based suggestions.

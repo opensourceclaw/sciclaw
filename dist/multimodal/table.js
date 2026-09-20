@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Table Extractor
+ * SciClaw v3.0.0 — Table Extractor
  *
  * Extracts tables from HTML, Markdown, CSV, and JSON formats.
  * Supports format detection, conversion, and validation.

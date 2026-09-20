@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — PDF Analyzer
+ * SciClaw v3.0.0 — PDF Analyzer
  *
  * Analyzes PDF content: validates magic bytes, extracts metadata,
  * splits into pages, searches text, and exports content.

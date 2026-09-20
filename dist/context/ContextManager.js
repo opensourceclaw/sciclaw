@@ -1,6 +1,6 @@
 /**
  * Licensed under the Apache License, Version 2.0
- * DeepClaw v3.9.0 — Context Manager (claw-ctx integration)
+ * SciClaw v3.9.0 — Context Manager (claw-ctx integration)
  */
 import { ModelAwareOptimizer, modelProfileRegistry, } from "claw-ctx";
 export class ContextManager {

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Orchestrator Types
+ * SciClaw v3.3.0 — Orchestrator Types
  *
  * Core type definitions for Research State Machine, Dynamic Planner,
  * Cross-Validation, Blind Spot Detection, and Iterative Refinement.

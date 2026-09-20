@@ -1,10 +1,10 @@
 /**
- * DeepClaw v3.6.0 — Cog Integration
+ * SciClaw v3.6.0 — Cog Integration
  * Integration with claw-cog v5.11.0 for cognitive enhancement
  */
 type Subscriber = (content: unknown) => void;
 /**
- * Cognitive context for DeepClaw research
+ * Cognitive context for SciClaw research
  */
 export interface CognitiveContext {
     researchTopic?: string;
@@ -23,9 +23,9 @@ export interface CognitiveDecision {
     metadata?: Record<string, unknown>;
 }
 /**
- * DeepClaw Cog Integration - claw-cog v5.11.0 integration
+ * SciClaw Cog Integration - claw-cog v5.11.0 integration
  */
-export declare class DeepClawCogIntegration {
+export declare class SciClawCogIntegration {
     private workspace;
     private policyEnforcer;
     private executor;
@@ -77,6 +77,6 @@ export declare class DeepClawCogIntegration {
     };
     isEnabled(): boolean;
 }
-export declare const cogIntegration: DeepClawCogIntegration;
+export declare const cogIntegration: SciClawCogIntegration;
 export {};
 //# sourceMappingURL=cog-integration.d.ts.map

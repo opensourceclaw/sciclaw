@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Monitoring Module Exports
-export { DeepClawObserver } from "./Observer.js";
+// SciClaw v3.5.0 — Monitoring Module Exports
+export { SciClawObserver } from "./Observer.js";
 export { MetricsCollector } from "./MetricsCollector.js";
 export { AlertManager, DEFAULT_ALERT_RULES } from "./AlertManager.js";
 export { DEFAULT_RESEARCH_METRICS } from "./types.js";

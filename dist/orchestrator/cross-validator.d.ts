@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Cross-Validation Engine
+ * SciClaw v3.3.0 — Cross-Validation Engine
  *
  * Extracts factual claims from search results, cross-validates them across
  * sources, computes confidence scores, and detects contradictions.

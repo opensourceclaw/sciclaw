@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Hypothesis Generator
+ * SciClaw v3.0.0 — Hypothesis Generator
  *
  * Evidence-based hypothesis generation with clustering and template expansion.
  */

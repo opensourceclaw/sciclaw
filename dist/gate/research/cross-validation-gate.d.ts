@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Cross Validation Gate
+ * SciClaw v3.9.0 — Cross Validation Gate
  */
 import type { ResearchGate, GateResult } from "./types.js";
 import type { ResearchContext, ResearchStage } from "../../context/ResearchContext.js";

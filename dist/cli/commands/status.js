@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline Status Command
+// SciClaw v3.5.0 — Pipeline Status Command
 import { PipelineCoordinator } from "../pipeline-coordinator.js";
 /**
  * Show pipeline status.
@@ -51,7 +51,7 @@ export function showStatus(pipelineId, options = {}) {
             console.log("No pipelines found.");
             console.log("");
             console.log("Create a new pipeline:");
-            console.log("  deepclaw pipeline create <topic>");
+            console.log("  sciclaw pipeline create <topic>");
             return;
         }
         console.log("Pipelines:");

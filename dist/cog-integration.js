@@ -1,11 +1,11 @@
 /**
- * DeepClaw v3.6.0 — Cog Integration
+ * SciClaw v3.6.0 — Cog Integration
  * Integration with claw-cog v5.11.0 for cognitive enhancement
  */
 /**
- * DeepClaw Cog Integration - claw-cog v5.11.0 integration
+ * SciClaw Cog Integration - claw-cog v5.11.0 integration
  */
-export class DeepClawCogIntegration {
+export class SciClawCogIntegration {
     workspace = null;
     policyEnforcer = null;
     executor = null;
@@ -30,13 +30,13 @@ export class DeepClawCogIntegration {
                 this.registerDefaultHandlers();
             }
             this.enabled = true;
-            console.log("[DeepClaw] Cog integration initialized");
-            console.log(`[DeepClaw] Workspace: ${this.workspace ? "enabled" : "unavailable"}`);
-            console.log(`[DeepClaw] PolicyEnforcer: ${this.policyEnforcer ? "enabled" : "unavailable"}`);
-            console.log(`[DeepClaw] ActionExecutor: ${this.executor ? "enabled" : "unavailable"}`);
+            console.log("[SciClaw] Cog integration initialized");
+            console.log(`[SciClaw] Workspace: ${this.workspace ? "enabled" : "unavailable"}`);
+            console.log(`[SciClaw] PolicyEnforcer: ${this.policyEnforcer ? "enabled" : "unavailable"}`);
+            console.log(`[SciClaw] ActionExecutor: ${this.executor ? "enabled" : "unavailable"}`);
         }
         catch (error) {
-            console.warn("[DeepClaw] Cog integration initialization failed:", error);
+            console.warn("[SciClaw] Cog integration initialization failed:", error);
             this.enabled = false;
         }
     }
@@ -74,7 +74,7 @@ export class DeepClawCogIntegration {
      */
     broadcast(content) {
         if (!this.workspace) {
-            console.warn("[DeepClaw] Workspace not available");
+            console.warn("[SciClaw] Workspace not available");
             return;
         }
         this.workspace.broadcast(content, "deepclaw");
@@ -169,5 +169,5 @@ export class DeepClawCogIntegration {
         return this.enabled;
     }
 }
-export const cogIntegration = new DeepClawCogIntegration();
+export const cogIntegration = new SciClawCogIntegration();
 //# sourceMappingURL=cog-integration.js.map

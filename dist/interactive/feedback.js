@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Real-Time Feedback Handler
+ * SciClaw v3.0.0 — Real-Time Feedback Handler
  *
  * Intent detection, sentiment analysis, and preference extraction
  * from user input in real time.

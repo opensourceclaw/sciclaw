@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — OBSERVE Stage
+ * SciClaw v3.9.0 — OBSERVE Stage
  */
 export async function observeStage(input) {
     const topic = extractTopic(input);

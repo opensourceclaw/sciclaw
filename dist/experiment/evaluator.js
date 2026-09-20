@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Experiment Evaluator
+ * SciClaw v3.0.0 — Experiment Evaluator
  *
  * Evaluates experiment results, computes scores, extracts findings,
  * and generates recommendations.

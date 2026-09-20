@@ -37,7 +37,7 @@ export function generateReport(results, version) {
 }
 export function formatMarkdown(report) {
     const lines = [
-        `# DeepClaw Benchmark Report`,
+        `# SciClaw Benchmark Report`,
         ``,
         `**Version**: ${report.version}`,
         `**Date**: ${report.timestamp.toISOString().split("T")[0]}`,

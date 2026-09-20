@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
+// SciClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
 import { ResearchStrategy, } from "../orchestrator/types.js";
 import { ResearchStateMachine } from "../orchestrator/research-state-machine.js";
 import { observeStage } from "../stages/observe.js";

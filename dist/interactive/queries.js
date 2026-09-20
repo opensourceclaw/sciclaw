@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Adaptive Query Engine
+ * SciClaw v3.0.0 — Adaptive Query Engine
  *
  * Context-aware query generation with template-based approach.
  * Target latency: < 500ms (no LLM calls).

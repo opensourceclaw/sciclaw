@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.1 — Feedback Learner
+ * SciClaw v3.0.0-rc.1 — Feedback Learner
  *
  * Learns from both explicit (ratings/comments) and implicit (pause/modify/refine)
  * user feedback. Extracts patterns and adjusts behavior accordingly.

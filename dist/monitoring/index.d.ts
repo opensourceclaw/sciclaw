@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { DeepClawObserver } from "./Observer.js";
+export { SciClawObserver } from "./Observer.js";
 export type { MetricsHandler, AlertHandler } from "./Observer.js";
 export { MetricsCollector } from "./MetricsCollector.js";
 export { AlertManager, DEFAULT_ALERT_RULES } from "./AlertManager.js";

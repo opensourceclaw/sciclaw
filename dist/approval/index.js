@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Approval Module Exports
+// SciClaw v3.5.0 — Approval Module Exports
 export { ApprovalFlow } from "./ApprovalFlow.js";
 export { ApprovalGate } from "./ApprovalGate.js";
 //# sourceMappingURL=index.js.map

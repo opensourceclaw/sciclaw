@@ -21,12 +21,12 @@ export type MetricsHandler = (snapshot: MetricsSnapshot) => void;
  */
 export type AlertHandler = (alert: Alert) => void;
 /**
- * DeepClaw Observer for research pipeline monitoring.
+ * SciClaw Observer for research pipeline monitoring.
  *
  * Design Principle: Passive observer — collects metrics without blocking pipeline.
  * All hooks are wrapped in try-catch to ensure observer never throws.
  */
-export declare class DeepClawObserver {
+export declare class SciClawObserver {
     private config;
     private alertManager;
     private metricsCollector;

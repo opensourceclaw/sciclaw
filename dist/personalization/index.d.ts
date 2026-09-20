@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.2 — Personalization Layer
+ * SciClaw v3.0.0-rc.2 — Personalization Layer
  *
  * User preference learning, style adaptation, and topic tracking.
  * Provides personalized research experiences through adaptive profiles.

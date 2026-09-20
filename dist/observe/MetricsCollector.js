@@ -1,6 +1,6 @@
 /**
  * Licensed under the Apache License, Version 2.0
- * DeepClaw v3.9.0 — Metrics Collector (claw-obs integration)
+ * SciClaw v3.9.0 — Metrics Collector (claw-obs integration)
  */
 import { EventBus, TokenCounter } from "claw-obs";
 export class MetricsCollector {

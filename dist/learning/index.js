@@ -5,8 +5,8 @@ export * from "./types.js";
 export * from "./feedback_learner.js";
 export * from "./self_improver.js";
 export * from "./knowledge_evolution.js";
-// ── DeepClaw Learning Engine ───────────────────────────────────────────
-export class DeepClawLearningEngine {
+// ── SciClaw Learning Engine ───────────────────────────────────────────
+export class SciClawLearningEngine {
     feedbackLearner;
     selfImprover;
     knowledgeEvolution;
@@ -54,6 +54,6 @@ export class DeepClawLearningEngine {
 }
 /** Factory function for the learning engine */
 export function createLearningEngine(config) {
-    return new DeepClawLearningEngine(config);
+    return new SciClawLearningEngine(config);
 }
 //# sourceMappingURL=index.js.map

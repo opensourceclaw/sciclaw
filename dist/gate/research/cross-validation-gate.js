@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Cross Validation Gate
+ * SciClaw v3.9.0 — Cross Validation Gate
  */
 export class CrossValidationGate {
     name = "cross-validation";

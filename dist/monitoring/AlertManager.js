@@ -165,7 +165,7 @@ export class AlertManager {
             message: `${rule.name}: ${rule.condition.metric} is ${value} (threshold: ${rule.condition.threshold})`,
             timestamp: new Date().toISOString(),
             state: "firing",
-            source: "DeepClawObserver",
+            source: "SciClawObserver",
             labels: rule.labels ?? {},
             annotations: {
                 ...rule.annotations,

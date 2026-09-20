@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Gate Registry
+// SciClaw v3.5.0 — Gate Registry
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";

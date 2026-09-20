@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.6.0 — Memory Adapter
+ * SciClaw v3.6.0 — Memory Adapter
  * Full integration with claw-mem v6.40.0 for persistent memory
  */
 /**
@@ -25,9 +25,9 @@ export interface MemorySearchResult {
     tags?: string[];
 }
 /**
- * DeepClaw Memory Adapter - Full claw-mem v6.40.0 integration
+ * SciClaw Memory Adapter - Full claw-mem v6.40.0 integration
  */
-export declare class DeepClawMemoryAdapter {
+export declare class SciClawMemoryAdapter {
     private manager;
     private governance;
     private enabled;
@@ -73,5 +73,5 @@ export declare class DeepClawMemoryAdapter {
     } | null;
     isEnabled(): boolean;
 }
-export declare const memoryAdapter: DeepClawMemoryAdapter;
+export declare const memoryAdapter: SciClawMemoryAdapter;
 //# sourceMappingURL=memory-adapter.d.ts.map

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.2 — Preference Learner
+ * SciClaw v3.0.0-rc.2 — Preference Learner
  *
  * Learns user preferences from explicit feedback and behavioral signals.
  * Adapts depth, style, format, and other research parameters over time.

@@ -1,1 +1,0 @@
-{"version":3,"file":"session-start.d.ts","sourceRoot":"","sources":["../../src/integrations/session-start.ts"],"names":[],"mappings":"AAAA;;;;GAIG;AAEH,qBAAa,wBAAwB;IACnC,OAAO,CAAC,SAAS,CAAS;gBAEd,SAAS,CAAC,EAAE,MAAM;IAI9B,GAAG,CAAC,QAAQ,SAAa,EAAE,QAAQ,GAAE,MAAM,CAAC,MAAM,EAAE,OAAO,CAAM,GAAG,MAAM;IAO1E,SAAS,IAAI,MAAM,CAAC,MAAM,EAAE,OAAO,CAAC;IAMpC,uBAAuB,IAAI,MAAM;CAGlC"}

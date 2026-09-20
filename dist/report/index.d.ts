@@ -1,7 +1,7 @@
 /**
  * Report generator - Generate reports in various formats
  */
-import type { Report, ReportOptions } from '@deepclaw/core';
+import type { Report, ReportOptions } from '@sciclaw/core';
 export interface ReportResult extends Report {
     pdfPath?: string;
 }

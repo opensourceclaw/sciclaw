@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Human-in-the-Loop Adapter
+ * SciClaw v3.0.0 — Human-in-the-Loop Adapter
  *
  * Session management and user interaction processing.
  */

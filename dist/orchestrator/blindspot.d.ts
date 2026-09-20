@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Blind Spot Detector
+ * SciClaw v3.3.0 — Blind Spot Detector
  *
  * 7 heuristic rules for detecting information gaps in research results.
  */

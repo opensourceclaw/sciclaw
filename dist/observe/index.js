@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Observe Module
+ * SciClaw v3.9.0 — Observe Module
  * Operational observation and monitoring for research workflow
  */
 // v3.6.0 existing exports

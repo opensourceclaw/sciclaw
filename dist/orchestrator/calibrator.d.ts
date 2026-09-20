@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Confidence Calibrator
+ * SciClaw v3.3.0 — Confidence Calibrator
  *
  * Records human feedback on claim validation to optimize confidence thresholds.
  * Supports the 4-phase tuning strategy from the detailed design.

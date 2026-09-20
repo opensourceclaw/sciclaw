@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Hypothesis Engine
+ * SciClaw v3.0.0 — Hypothesis Engine
  *
  * Unified hypothesis engine coordinating generation, ranking, and validation.
  */

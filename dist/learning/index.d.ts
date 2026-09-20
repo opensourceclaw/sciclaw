@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.1 — Learning Engine
+ * SciClaw v3.0.0-rc.1 — Learning Engine
  *
  * Unified learning engine implementing the LearningEngine interface.
  * Coordinates feedback learning, strategy optimization, and knowledge evolution.
@@ -12,16 +12,16 @@ export * from "./types.js";
 export * from "./feedback_learner.js";
 export * from "./self_improver.js";
 export * from "./knowledge_evolution.js";
-export interface DeepClawLearningConfig {
+export interface SciClawLearningConfig {
     feedback?: Partial<FeedbackLearnerConfig>;
     selfImprove?: Partial<SelfImproverConfig>;
     knowledge?: Partial<KnowledgeEvolutionConfig>;
 }
-export declare class DeepClawLearningEngine implements LearningEngine {
+export declare class SciClawLearningEngine implements LearningEngine {
     private feedbackLearner;
     private selfImprover;
     private knowledgeEvolution;
-    constructor(config?: DeepClawLearningConfig);
+    constructor(config?: SciClawLearningConfig);
     learnFromFeedback(feedback: UserFeedback[]): Promise<void>;
     optimizeStrategy(history: ResearchHistory): Promise<Strategy>;
     updateKnowledge(newFacts: Fact[]): Promise<void>;
@@ -34,5 +34,5 @@ export declare class DeepClawLearningEngine implements LearningEngine {
     getKnowledgeEvolution(): KnowledgeEvolution;
 }
 /** Factory function for the learning engine */
-export declare function createLearningEngine(config?: DeepClawLearningConfig): DeepClawLearningEngine;
+export declare function createLearningEngine(config?: SciClawLearningConfig): SciClawLearningEngine;
 //# sourceMappingURL=index.d.ts.map

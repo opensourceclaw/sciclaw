@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Iterative Refiner
+ * SciClaw v3.3.0 — Iterative Refiner
  *
  * Rewrites queries based on blind spots and low-confidence claims to
  * improve research quality in subsequent iterations.

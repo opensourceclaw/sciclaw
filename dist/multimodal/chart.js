@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Chart Parser
+ * SciClaw v3.0.0 — Chart Parser
  *
  * Detects chart types from descriptions and parses chart data
  * from structured inputs (labels, datasets, axes).

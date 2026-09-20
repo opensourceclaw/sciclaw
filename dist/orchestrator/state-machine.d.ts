@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Research State Machine
+ * SciClaw v3.3.0 — Research State Machine
  *
  * Lightweight hand-written FSM managing the PLAN → SEARCH → ANALYZE → REFINE cycle.
  * Zero external dependencies.

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Experimental Design Types
+ * SciClaw v3.0.0 — Experimental Design Types
  */
 export declare enum ExperimentType {
     A_B_TEST = "ab_test",

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Source Credibility Gate
+ * SciClaw v3.9.0 — Source Credibility Gate
  */
 const HIGH_CRED = ["arxiv.org", "nature.com", "science.org", "ieee.org", "acm.org", "springer.com", "wiley.com"];
 const MEDIUM_CRED = ["wikipedia.org", ".edu", ".gov", "medium.com"];

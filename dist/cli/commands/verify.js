@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline Verify Command
+// SciClaw v3.5.0 — Pipeline Verify Command
 import { GateRegistry } from "../../gate/GateRegistry.js";
 import { InternalVerifyGate } from "../../gate/gates/InternalVerifyGate.js";
 import { PipelineCoordinator } from "../pipeline-coordinator.js";

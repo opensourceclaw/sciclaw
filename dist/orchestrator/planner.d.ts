@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Dynamic Planner
+ * SciClaw v3.3.0 — Dynamic Planner
  *
  * Decomposes queries, selects search strategy, and detects pivot signals.
  * Supports 4 strategies: breadth-first, depth-first, tree-search, pivot.

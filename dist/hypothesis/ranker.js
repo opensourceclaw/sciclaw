@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Hypothesis Ranker
+ * SciClaw v3.0.0 — Hypothesis Ranker
  *
  * Multi-factor hypothesis ranking with configurable weights.
  */

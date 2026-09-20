@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Trigger Module Exports
+// SciClaw v3.5.0 — Trigger Module Exports
 export { TriggerManager } from "./TriggerManager.js";
 //# sourceMappingURL=index.js.map

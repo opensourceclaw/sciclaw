@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Interactive Research Types
+ * SciClaw v3.0.0 — Interactive Research Types
  */
 export declare enum InteractionMode {
     GUIDED = "guided",

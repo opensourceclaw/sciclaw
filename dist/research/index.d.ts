@@ -4,7 +4,7 @@
  * Copyright 2026 OpenClaw
  * Licensed under the Apache License, Version 2.0
  */
-import type { ResearchOptions, ResearchResult } from "@deepclaw/core";
+import type { ResearchOptions, ResearchResult } from "@sciclaw/core";
 export type { ResearchPlan, ResearchFinding, Finding, SynthesisRequest, SynthesisSection, SynthesisResult, ResearchSection as ResearchReportSection, SectionCandidate, SectionAnalysis, ReportConfig, ThemeInfo, } from "./types.js";
 export { ResearchPlanner, createPlan } from "./planner.js";
 export { ResearchSearchEngine, researchSearch, } from "./search.js";

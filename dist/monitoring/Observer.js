@@ -15,12 +15,12 @@ import { DEFAULT_RESEARCH_METRICS } from "./types.js";
 import { AlertManager, DEFAULT_ALERT_RULES } from "./AlertManager.js";
 import { MetricsCollector } from "./MetricsCollector.js";
 /**
- * DeepClaw Observer for research pipeline monitoring.
+ * SciClaw Observer for research pipeline monitoring.
  *
  * Design Principle: Passive observer — collects metrics without blocking pipeline.
  * All hooks are wrapped in try-catch to ensure observer never throws.
  */
-export class DeepClawObserver {
+export class SciClawObserver {
     config;
     alertManager;
     metricsCollector;

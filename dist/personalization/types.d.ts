@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.2 — Personalization Types
+ * SciClaw v3.0.0-rc.2 — Personalization Types
  *
  * User preference learning, style adaptation, topic tracking.
  */

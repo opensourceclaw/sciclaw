@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Experiment Designer
+ * SciClaw v3.0.0 — Experiment Designer
  *
  * Automatic experiment design from hypothesis statements.
  * Generates variables, steps, metrics, and constraints.

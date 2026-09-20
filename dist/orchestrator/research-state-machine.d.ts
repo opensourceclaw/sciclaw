@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — 7-Stage Research State Machine
+ * SciClaw v3.9.0 — 7-Stage Research State Machine
  */
 import type { ResearchContext, ResearchStage } from "../context/ResearchContext.js";
 export declare class ResearchStateMachine {

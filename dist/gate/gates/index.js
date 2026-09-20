@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Gate Gates Exports
+// SciClaw v3.5.0 — Gate Gates Exports
 export { InternalVerifyGate } from "./InternalVerifyGate.js";
 //# sourceMappingURL=index.js.map

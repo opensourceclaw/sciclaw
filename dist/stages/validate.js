@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — VALIDATE Stage
+ * SciClaw v3.9.0 — VALIDATE Stage
  */
 import { researchGateRegistry } from "../gate/research/research-gate-registry.js";
 import { metricsCollector } from "../observe/MetricsCollector.js";

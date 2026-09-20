@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.2 — Style Adapter
+ * SciClaw v3.0.0-rc.2 — Style Adapter
  *
  * Adapts report generation to user's preferred research style.
  * 4 styles: academic, business, technical, quick — each with distinct

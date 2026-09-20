@@ -1,14 +1,14 @@
 /**
- * DeepClaw v3.6.0 — Memory Adapter
+ * SciClaw v3.6.0 — Memory Adapter
  * Full integration with claw-mem v6.40.0 for persistent memory
  */
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
 /**
- * DeepClaw Memory Adapter - Full claw-mem v6.40.0 integration
+ * SciClaw Memory Adapter - Full claw-mem v6.40.0 integration
  */
-export class DeepClawMemoryAdapter {
+export class SciClawMemoryAdapter {
     manager = null;
     governance = null;
     enabled = false;
@@ -48,11 +48,11 @@ export class DeepClawMemoryAdapter {
                 });
             }
             this.enabled = true;
-            console.log(`[DeepClaw] Memory adapter initialized, workspace: ${this.workspace}`);
-            console.log(`[DeepClaw] Governance: ${this.governance ? "enabled" : "unavailable"}`);
+            console.log(`[SciClaw] Memory adapter initialized, workspace: ${this.workspace}`);
+            console.log(`[SciClaw] Governance: ${this.governance ? "enabled" : "unavailable"}`);
         }
         catch (error) {
-            console.warn("[DeepClaw] Memory adapter initialization failed:", error);
+            console.warn("[SciClaw] Memory adapter initialization failed:", error);
             this.enabled = false;
         }
     }
@@ -61,21 +61,21 @@ export class DeepClawMemoryAdapter {
      */
     async store(key, value) {
         if (!this.enabled || !this.manager) {
-            console.warn("[DeepClaw] Memory not enabled, skipping store");
+            console.warn("[SciClaw] Memory not enabled, skipping store");
             return false;
         }
         // Use governance if available and scores provided
         if (this.governance && value.importance !== undefined && value.relevance !== undefined) {
             const shouldStore = this.governance.select(value.importance, value.relevance);
             if (!shouldStore) {
-                console.log(`[DeepClaw] Memory rejected by governance: ${key}`);
+                console.log(`[SciClaw] Memory rejected by governance: ${key}`);
                 return false;
             }
         }
         const result = this.manager.store(value.content, value.type ?? "episodic", value.tags ?? [], { ...value.metadata, key });
         if (result) {
             this.storeCount++;
-            console.log(`[DeepClaw] Stored memory: ${key}`);
+            console.log(`[SciClaw] Stored memory: ${key}`);
         }
         return result;
     }
@@ -132,5 +132,5 @@ export class DeepClawMemoryAdapter {
         return this.enabled;
     }
 }
-export const memoryAdapter = new DeepClawMemoryAdapter();
+export const memoryAdapter = new SciClawMemoryAdapter();
 //# sourceMappingURL=memory-adapter.js.map

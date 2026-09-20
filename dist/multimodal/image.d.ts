@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Image Processor
+ * SciClaw v3.0.0 — Image Processor
  *
  * Detects image formats via magic bytes, extracts metadata,
  * categorizes content, and extracts descriptions/text/objects/colors.

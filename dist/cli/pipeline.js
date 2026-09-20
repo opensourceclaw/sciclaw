@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline CLI Entry
+// SciClaw v3.5.0 — Pipeline CLI Entry
 import { Command } from "commander";
 import { startPipeline } from "./commands/start.js";
 import { showStatus } from "./commands/status.js";
