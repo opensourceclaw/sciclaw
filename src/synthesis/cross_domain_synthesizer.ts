@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-beta.3 — Cross-Domain Synthesizer
+ * SciClaw v3.0.0-beta.3 — Cross-Domain Synthesizer
  *
  * Identifies connections across knowledge domains, maps relationships,
  * and fuses multi-source evidence into coherent cross-domain insights.

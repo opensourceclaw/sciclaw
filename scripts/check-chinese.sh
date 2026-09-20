@@ -1,5 +1,5 @@
 #!/bin/bash
-# DeepClaw v3.5.0 - Chinese Character Detection Script
+# SciClaw v3.5.0 - Chinese Character Detection Script
 # Usage: ./scripts/check-chinese.sh
 # Exit 1 if Chinese characters found in source files
 

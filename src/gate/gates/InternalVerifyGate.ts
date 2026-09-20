@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Internal Verify Gate
+// SciClaw v3.5.0 — Internal Verify Gate
 
 import { GateRegistry } from "../GateRegistry.js";
 import type {

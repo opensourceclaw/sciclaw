@@ -138,7 +138,7 @@ Deep Research (v1-v2)          Auto Research (v3+)
   (人主导)                  (AI 主导，但需 human-in-loop)
 ```
 
-DeepClaw 当前定位：Deep Research (v1-v2)，未来扩展到 Auto Research (v3+)
+SciClaw 当前定位：Deep Research (v1-v2)，未来扩展到 Auto Research (v3+)
 
 ---
 

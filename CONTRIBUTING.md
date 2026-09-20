@@ -1,6 +1,6 @@
-# Contributing to DeepClaw
+# Contributing to SciClaw
 
-Thank you for your interest in contributing to DeepClaw! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to SciClaw! This document provides guidelines and instructions for contributing.
 
 ## Development Setup
 
@@ -188,13 +188,13 @@ See [Architecture Documentation](docs/architecture/README.md) for details.
 Key patterns:
 - **Agent Pattern**: `BaseAgent`, `Orchestrator`
 - **Gate Pattern**: `InternalVerifyGate`, `ApprovalGate`
-- **Observer Pattern**: `DeepClawObserver`
+- **Observer Pattern**: `SciClawObserver`
 - **Registry Pattern**: `LLMProviderRegistry`, `GateRegistry`
 
 ## License
 
-DeepClaw is licensed under the **Apache License 2.0**. By contributing, you agree that your contributions will be licensed under the same license.
+SciClaw is licensed under the **Apache License 2.0**. By contributing, you agree that your contributions will be licensed under the same license.
 
 ---
 
-*Thank you for contributing to DeepClaw!*
+*Thank you for contributing to SciClaw!*

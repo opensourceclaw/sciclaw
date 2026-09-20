@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Advanced Reasoning Types
+ * SciClaw v3.0.0 — Advanced Reasoning Types
  *
  * Type definitions for reasoning chain and causal analysis.
  */

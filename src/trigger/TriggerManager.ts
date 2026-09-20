@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Trigger Manager
+// SciClaw v3.5.0 — Trigger Manager
 
 import type {
   Trigger,
@@ -33,10 +33,10 @@ import * as crypto from "crypto";
 const DEFAULT_TRIGGER_DIR = path.join(os.homedir(), ".deepclaw", "triggers");
 
 /**
- * Lightweight trigger manager for DeepClaw.
+ * Lightweight trigger manager for SciClaw.
  *
  * Design Decision: File-based (no external scheduler) because:
- * - DeepClaw is primarily interactive, not automated
+ * - SciClaw is primarily interactive, not automated
  * - Cron-style scheduling is sufficient
  * - No external dependencies
  */

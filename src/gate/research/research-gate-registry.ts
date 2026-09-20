@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Research Gate Registry
+ * SciClaw v3.9.0 — Research Gate Registry
  */
 
 import type { ResearchGate, GateResult } from "./types.js";

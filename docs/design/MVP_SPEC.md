@@ -1,4 +1,4 @@
-# DeepClaw - MVP Feature Specification
+# SciClaw - MVP Feature Specification
 
 **Version**: 1.0.0
 **Date**: 2026-04-25
@@ -10,7 +10,7 @@
 
 ### 1.1 Goals
 
-- Prove DeepClaw concept with minimal functionality
+- Prove SciClaw concept with minimal functionality
 - Get user feedback for future development
 - Establish core architecture patterns
 

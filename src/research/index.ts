@@ -6,15 +6,15 @@
  */
 
 import { v4 as uuidv4 } from "uuid";
-import { search, extractContent, OpenClawModelAdapter } from "@deepclaw/core";
+import { search, extractContent, OpenClawModelAdapter } from "@sciclaw/core";
 import type {
   ResearchOptions,
   ResearchResult,
   ResearchSection,
   SourceCitation,
-} from "@deepclaw/core";
+} from "@sciclaw/core";
 
-// Export types (excluding conflicting ones - LLMEngine is in @deepclaw/core)
+// Export types (excluding conflicting ones - LLMEngine is in @sciclaw/core)
 export type {
   ResearchPlan,
   ResearchFinding,

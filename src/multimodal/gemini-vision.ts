@@ -1,10 +1,10 @@
 /**
- * DeepClaw v3.3.0 — Gemini Vision Adapter
+ * SciClaw v3.3.0 — Gemini Vision Adapter
  *
  * Image analysis powered by Gemini Vision via OpenClaw Gateway.
  * Flash (default) with automatic Pro fallback for low-confidence results.
  */
-import { OpenClawModelAdapter } from "@deepclaw/core";
+import { OpenClawModelAdapter } from "@sciclaw/core";
 import type {
   ImageContent,
   ChartData,

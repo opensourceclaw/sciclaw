@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.8.0 — CLI Entry
+// SciClaw v3.8.0 — CLI Entry
 
 import { Command } from "commander";
 import { pipelineCommand } from "./pipeline.js";
@@ -29,9 +29,9 @@ interface ResearchOptions {
 const program = new Command();
 
 program
-  .name("deepclaw")
-  .description("DeepClaw — Multi-Agent Deep Research Platform")
-  .version("3.8.0");
+  .name("sciclaw")
+  .description("SciClaw — Multi-Agent Deep Research Platform")
+  .version("4.0.0");
 
 // Research command
 program
@@ -47,7 +47,7 @@ program
       process.exit(1);
     }
 
-    console.log(`DeepClaw Research: "${topic}"`);
+    console.log(`SciClaw Research: "${topic}"`);
     console.log(`   Mode: ${options.mode}, Max Depth: ${options.maxDepth}, Timeout: ${options.timeout}s`);
 
     if (options.mode === "auto") {

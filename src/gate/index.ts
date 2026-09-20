@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Gate Exports
+// SciClaw v3.5.0 — Gate Exports
 
 export { GateRegistry } from "./GateRegistry.js";
 export type { StatusChangeCallback } from "./GateRegistry.js";

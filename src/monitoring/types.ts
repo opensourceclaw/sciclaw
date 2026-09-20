@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Monitoring Types
+// SciClaw v3.5.0 — Monitoring Types
 
 // ── Metric Types ─────────────────────────────────────────────────────
 

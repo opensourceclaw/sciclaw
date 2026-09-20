@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline Coordinator
+// SciClaw v3.5.0 — Pipeline Coordinator
 
 import * as fs from "fs";
 import * as path from "path";

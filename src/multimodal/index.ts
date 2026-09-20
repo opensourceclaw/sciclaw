@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Multi-Modal Processor
+ * SciClaw v3.0.0 — Multi-Modal Processor
  *
  * Unified processor coordinating image, table, chart, and PDF analysis.
  */

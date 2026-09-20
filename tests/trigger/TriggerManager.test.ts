@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 - TriggerManager Tests
+// SciClaw v3.5.0 - TriggerManager Tests
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import * as fs from "fs";

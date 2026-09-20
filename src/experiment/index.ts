@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Experiment Engine
+ * SciClaw v3.0.0 — Experiment Engine
  *
  * Unified engine coordinating experiment design, execution, and evaluation.
  */

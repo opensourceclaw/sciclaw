@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
+// SciClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
 
 import {
   ResearchState,

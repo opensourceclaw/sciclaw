@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Experiment Runner
+ * SciClaw v3.0.0 — Experiment Runner
  *
  * Executes experiment steps in dependency order with timeout control.
  * Target: < 30s total execution time.

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-beta.3 — Discovery Engine
+ * SciClaw v3.0.0-beta.3 — Discovery Engine
  *
  * Automated discovery loop: pattern recognition across domains,
  * novel insight generation, and research gap identification.

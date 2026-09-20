@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Hypothesis Generation Types
+ * SciClaw v3.0.0 — Hypothesis Generation Types
  */
 
 // ── Enums ────────────────────────────────────────────────────────────────

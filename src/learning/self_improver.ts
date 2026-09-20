@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.1 — Self Improver
+ * SciClaw v3.0.0-rc.1 — Self Improver
  *
  * Performance self-assessment, strategy adaptation based on outcomes,
  * and error pattern recognition for continuous improvement.

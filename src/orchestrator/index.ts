@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Orchestrator Public API
+ * SciClaw v3.3.0 — Orchestrator Public API
  *
  * Main entry point for reasoning-driven search.
  */

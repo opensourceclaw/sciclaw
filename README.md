@@ -1,14 +1,14 @@
-# DeepClaw
+# SciClaw
 
 <div align="center">
 
-**Open-source Deep Research Framework**
+**SciClaw — the AI4S counterpart of DevClaw: research you can verify.**
 
-*AI-Powered Autonomous Research Assistant*
+*Open-source deep research framework · AI-Powered Autonomous Research Assistant*
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-3178c6.svg)](https://www.typescriptlang.org/)
-[![Version](https://img.shields.io/badge/Version-3.5.0-orange.svg)](https://github.com/opensourceclaw/deepclaw)
+[![Version](https://img.shields.io/badge/Version-4.0.0-orange.svg)](https://github.com/opensourceclaw/sciclaw)
 [![Tests](https://img.shields.io/badge/Tests-1140%2B-brightgreen.svg)](#)
 
 </div>
@@ -42,7 +42,11 @@ Enable everyone to access research capabilities comparable to professional resea
 
 ## 🎯 Product Positioning
 
-DeepClaw is an **open-source deep research framework** based on OpenClaw. It is an intelligent research assistant that autonomously searches, extracts, and synthesizes information from the web.
+**SciClaw — the AI4S counterpart of DevClaw: research you can verify.**
+
+DevClaw serves AI4SWE (software engineering with AI agents); SciClaw serves AI4S (AI for Science) — an open-source deep research framework built on OpenClaw that autonomously searches, extracts, cross-validates, and synthesizes information from the web, with verifiable sources and traceable conclusions.
+
+The research capability evolves in stages through two flows, **DeepResearchFlow → AutoResearchFlow**, kept in one codebase (see [Roadmap](#-roadmap)).
 
 ### Core Features
 
@@ -87,8 +91,8 @@ node --version
 
 ```bash
 # Clone repository
-git clone https://github.com/opensourceclaw/deepclaw.git
-cd deepclaw
+git clone https://github.com/opensourceclaw/sciclaw.git
+cd sciclaw
 
 # Install dependencies
 npm install
@@ -100,7 +104,7 @@ npm run build
 ### Method 2: Via npm (Coming Soon)
 
 ```bash
-npm install -g deepclaw
+npm install -g sciclaw
 ```
 
 ---
@@ -126,7 +130,7 @@ node dist/cli/index.js serve
 ### TypeScript API
 
 ```typescript
-import { search, conductResearch, generateReport } from 'deepclaw';
+import { search, conductResearch, generateReport } from 'sciclaw';
 
 // Search
 const results = await search({ query: 'AI trends 2026', maxResults: 20 });
@@ -190,7 +194,7 @@ HOST=localhost
 
 ## 🔌 OpenClaw Plugin Integration
 
-DeepClaw v2.0.0+ is designed as an OpenClaw plugin.
+SciClaw v2.0.0+ is designed as an OpenClaw plugin.
 
 ### Plugin Configuration
 
@@ -207,7 +211,7 @@ The `openclaw.plugin.json` file defines:
 
 ```
 ┌─────────────────────────────────────────┐
-│           DeepClaw v2.0.0               │
+│           SciClaw v2.0.0               │
 ├─────────────────────────────────────────┤
 │  ┌─────────────────────────────────┐   │
 │  │     CLI (Commander)             │   │  ← Command Line Interface
@@ -268,6 +272,19 @@ npm run test:coverage
 
 ---
 
+## 🗺️ Roadmap
+
+SciClaw's staged evolution runs through two research flows over a shared architecture:
+
+| Stage | Flow | Status | Focus |
+|-------|------|--------|-------|
+| 1 | **DeepResearchFlow** | ✅ Current | Deep retrieval and synthesis — multi-engine search, quality gates, verifiable reports |
+| 2 | **AutoResearchFlow** | 🔄 Evolving | Autonomous research loops — hypothesis generation, experiment design and execution, iterative self-verification |
+
+Both flows live in one codebase (unified in v3.8); AutoResearchFlow is the direction that makes SciClaw a true AI4S research partner — mirroring how DevClaw drives the AI4SWE engineering loop.
+
+---
+
 ## 📝 Changelog
 
 ### v2.0.0-beta.1 (2026-06-14)
@@ -289,7 +306,7 @@ npm run test:coverage
 
 ## 🔄 Comparison with Other Systems
 
-| Feature | DeepClaw | Perplexity | ChatGPT Search |
+| Feature | SciClaw | Perplexity | ChatGPT Search |
 |---------|----------|------------|----------------|
 | Open Source | ✅ | ❌ | ❌ |
 | Local Deployment | ✅ | ❌ | ❌ |

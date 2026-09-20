@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.6.0 — Governance Policy (GOVERN Stage)
+ * SciClaw v3.6.0 — Governance Policy (GOVERN Stage)
  * Policy enforcement and compliance for research workflow
  */
 

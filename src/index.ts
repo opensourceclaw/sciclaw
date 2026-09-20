@@ -1,18 +1,18 @@
 /**
- * DeepClaw v3.7.0
+ * SciClaw v3.7.0
  * Deep Research Framework — AI-powered multi-source research and synthesis
  */
 
 export const VERSION = '3.7.0';
 
-// Core exports from @deepclaw/core
-export * from '@deepclaw/core';
+// Core exports from @sciclaw/core
+export * from '@sciclaw/core';
 
 // Deep Research specific modules
 export * from './research/index.js';
 
 // v2.0.0-rc.2 — Validation + Knowledge Graph
-// Validation moved to @deepclaw/core
+// Validation moved to @sciclaw/core
 export * from './knowledge/index.js';
 
 // v2.0.0-rc.3 — Multi-Agent System + Benchmark

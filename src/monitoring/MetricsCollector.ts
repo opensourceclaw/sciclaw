@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Metrics Collector
+// SciClaw v3.5.0 — Metrics Collector
 
 import type { ResearchMetrics, MetricsSnapshot } from "./types.js";
 import * as fs from "fs";

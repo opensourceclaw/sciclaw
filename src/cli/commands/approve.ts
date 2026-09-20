@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline Approve Command
+// SciClaw v3.5.0 — Pipeline Approve Command
 
 import { PipelineCoordinator } from "../pipeline-coordinator.js";
 import { PipelineStage } from "../types.js";

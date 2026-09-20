@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0
  */
 
-import { search } from "@deepclaw/core";
-import type { SearchResult } from "@deepclaw/core";
+import { search } from "@sciclaw/core";
+import type { SearchResult } from "@sciclaw/core";
 import type { ResearchSearchResult } from "./types.js";
 
 /**

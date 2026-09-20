@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.8.0 — Auto Research Flow (Autonomous, Breadth-First)
+// SciClaw v3.8.0 — Auto Research Flow (Autonomous, Breadth-First)
 
 import {
   ResearchState,

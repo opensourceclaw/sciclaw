@@ -43,7 +43,7 @@ export function generateReport(results: BenchmarkResult[], version: string): Ben
 
 export function formatMarkdown(report: BenchmarkReport): string {
   const lines: string[] = [
-    `# DeepClaw Benchmark Report`,
+    `# SciClaw Benchmark Report`,
     ``,
     `**Version**: ${report.version}`,
     `**Date**: ${report.timestamp.toISOString().split("T")[0]}`,

@@ -1,7 +1,7 @@
 # Deep Research 重点论文列表
 
 > 整理日期: 2026-07-22
-> 用途: DeepClaw / AutoClaw 项目迭代参考
+> 用途: SciClaw 项目迭代参考
 
 ---
 

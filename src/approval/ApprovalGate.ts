@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Approval Gate
+// SciClaw v3.5.0 — Approval Gate
 
 import { GateRegistry } from "../gate/GateRegistry.js";
 import type { GateStatus } from "../gate/types.js";

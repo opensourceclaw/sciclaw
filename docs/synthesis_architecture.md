@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the architecture for LLM-powered research synthesis in DeepClaw.
+This document describes the architecture for LLM-powered research synthesis in SciClaw.
 
 ## Components
 

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Causal Analysis Engine
+ * SciClaw v3.0.0 — Causal Analysis Engine
  *
  * Causal graph construction, path finding, and node classification.
  */

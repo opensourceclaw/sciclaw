@@ -1,7 +1,7 @@
 {
   "$schema": "https://openclaw.dev/schemas/plugin.json",
-  "name": "deepclaw",
-  "version": "3.0.0",
+  "name": "sciclaw",
+  "version": "4.0.0",
   "description": "Deep Research Framework - AI-powered multi-source research and synthesis",
   "author": "Peter Cheng",
   "license": "Apache-2.0",
@@ -17,19 +17,19 @@
   "commands": {
     "search": {
       "description": "Search across multiple sources",
-      "usage": "deepclaw search <query> [options]"
+      "usage": "sciclaw search <query> [options]"
     },
     "research": {
       "description": "Deep research on a topic",
-      "usage": "deepclaw research <topic> [options]"
+      "usage": "sciclaw research <topic> [options]"
     },
     "report": {
       "description": "Generate research report",
-      "usage": "deepclaw report [options]"
+      "usage": "sciclaw report [options]"
     },
     "serve": {
       "description": "Start API server",
-      "usage": "deepclaw serve [options]"
+      "usage": "sciclaw serve [options]"
     }
   },
   "api": {

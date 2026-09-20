@@ -1,4 +1,4 @@
-# DeepClaw Vision, Mission & Values
+# SciClaw Vision, Mission & Values
 
 > Vision, Mission & Values Document | Version 1.0 | 2026-05-06
 
@@ -128,7 +128,7 @@
 ```
 OpenClaw (Main Entry)
     ├── Horizontal → NeoClaw (General AI Agent Framework)
-    └── Vertical → DeepClaw (Deep Research)
+    └── Vertical → SciClaw (Deep Research)
                         ↓
               claw-mem (Memory) + claw-rl (Learning)
 ```

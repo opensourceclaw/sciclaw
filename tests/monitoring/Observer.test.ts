@@ -13,23 +13,23 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 - Monitoring Observer Tests
+// SciClaw v3.5.0 - Monitoring Observer Tests
 
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 import * as os from "os";
-import { DeepClawObserver } from "../../src/monitoring/Observer.js";
+import { SciClawObserver } from "../../src/monitoring/Observer.js";
 import type { MetricsSnapshot, Alert } from "../../src/monitoring/types.js";
 
-describe("DeepClawObserver", () => {
+describe("SciClawObserver", () => {
   let tmpDir: string;
-  let observer: DeepClawObserver;
+  let observer: SciClawObserver;
 
   beforeEach(() => {
     tmpDir = path.join(os.tmpdir(), `deepclaw-observer-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
     fs.mkdirSync(tmpDir, { recursive: true });
-    observer = new DeepClawObserver({ metricsDir: tmpDir });
+    observer = new SciClawObserver({ metricsDir: tmpDir });
   });
 
   afterEach(() => {

@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Trigger Types
+// SciClaw v3.5.0 — Trigger Types
 
 // ── Trigger Types ────────────────────────────────────────────────────
 

@@ -10,7 +10,7 @@ const host = process.env.HOST ?? 'localhost';
 async function main() {
   const server = await createServer({ port, host });
 
-  console.log(`DeepClaw API server running at http://${host}:${port}`);
+  console.log(`SciClaw API server running at http://${host}:${port}`);
   console.log();
   console.log('Endpoints:');
   console.log('  POST /api/search     - Search across sources');

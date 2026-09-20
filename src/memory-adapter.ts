@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.6.0 — Memory Adapter
+ * SciClaw v3.6.0 — Memory Adapter
  * Full integration with claw-mem v6.40.0 for persistent memory
  */
 
@@ -47,9 +47,9 @@ export interface MemorySearchResult {
 }
 
 /**
- * DeepClaw Memory Adapter - Full claw-mem v6.40.0 integration
+ * SciClaw Memory Adapter - Full claw-mem v6.40.0 integration
  */
-export class DeepClawMemoryAdapter {
+export class SciClawMemoryAdapter {
   private manager: MemoryManager | null = null;
   private governance: MemoryGovernance | null = null;
   private enabled: boolean = false;
@@ -95,10 +95,10 @@ export class DeepClawMemoryAdapter {
       }
 
       this.enabled = true;
-      console.log(`[DeepClaw] Memory adapter initialized, workspace: ${this.workspace}`);
-      console.log(`[DeepClaw] Governance: ${this.governance ? "enabled" : "unavailable"}`);
+      console.log(`[SciClaw] Memory adapter initialized, workspace: ${this.workspace}`);
+      console.log(`[SciClaw] Governance: ${this.governance ? "enabled" : "unavailable"}`);
     } catch (error) {
-      console.warn("[DeepClaw] Memory adapter initialization failed:", error);
+      console.warn("[SciClaw] Memory adapter initialization failed:", error);
       this.enabled = false;
     }
   }
@@ -108,7 +108,7 @@ export class DeepClawMemoryAdapter {
    */
   async store(key: string, value: MemoryValue): Promise<boolean> {
     if (!this.enabled || !this.manager) {
-      console.warn("[DeepClaw] Memory not enabled, skipping store");
+      console.warn("[SciClaw] Memory not enabled, skipping store");
       return false;
     }
 
@@ -116,7 +116,7 @@ export class DeepClawMemoryAdapter {
     if (this.governance && value.importance !== undefined && value.relevance !== undefined) {
       const shouldStore = this.governance.select(value.importance, value.relevance);
       if (!shouldStore) {
-        console.log(`[DeepClaw] Memory rejected by governance: ${key}`);
+        console.log(`[SciClaw] Memory rejected by governance: ${key}`);
         return false;
       }
     }
@@ -130,7 +130,7 @@ export class DeepClawMemoryAdapter {
 
     if (result) {
       this.storeCount++;
-      console.log(`[DeepClaw] Stored memory: ${key}`);
+      console.log(`[SciClaw] Stored memory: ${key}`);
     }
 
     return result;
@@ -203,4 +203,4 @@ export class DeepClawMemoryAdapter {
   }
 }
 
-export const memoryAdapter = new DeepClawMemoryAdapter();
+export const memoryAdapter = new SciClawMemoryAdapter();

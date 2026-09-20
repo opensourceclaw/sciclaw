@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Experimental Design Types
+ * SciClaw v3.0.0 — Experimental Design Types
  */
 
 // ── Enums ────────────────────────────────────────────────────────────────

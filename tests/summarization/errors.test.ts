@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.3 — Summarization Errors tests
+ * SciClaw v3.0.0-rc.3 — Summarization Errors tests
  */
 import { describe, it, expect } from "vitest";
 import {

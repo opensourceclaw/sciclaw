@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.6.0 — Metrics Collector (OBSERVE Stage)
+ * SciClaw v3.6.0 — Metrics Collector (OBSERVE Stage)
  * Collects and tracks operational metrics for research workflow
  */
 

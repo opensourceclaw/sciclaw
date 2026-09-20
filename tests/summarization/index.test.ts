@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.3 — Summarization index smoke test
+ * SciClaw v3.0.0-rc.3 — Summarization index smoke test
  */
 import { describe, it, expect } from "vitest";
 import * as summarization from "../../src/summarization/index.js";

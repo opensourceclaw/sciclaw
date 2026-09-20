@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.6.0 — Governance Module
+ * SciClaw v3.6.0 — Governance Module
  * Policy enforcement and compliance for research workflow
  */
 

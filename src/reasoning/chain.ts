@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Reasoning Chain Manager
+ * SciClaw v3.0.0 — Reasoning Chain Manager
  *
  * Multi-step reasoning chain with chain-of-thought support.
  * Supports ≥5 step reasoning chains with topological ordering and validation.

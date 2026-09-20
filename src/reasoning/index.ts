@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Reasoning Engine
+ * SciClaw v3.0.0 — Reasoning Engine
  *
  * Unified reasoning engine coordinating chain reasoning and causal analysis.
  */

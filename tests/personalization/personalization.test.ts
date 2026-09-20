@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.2 — Personalization Tests
+ * SciClaw v3.0.0-rc.2 — Personalization Tests
  */
 import { describe, it, expect, beforeEach } from "vitest";
 import {

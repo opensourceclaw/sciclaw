@@ -1,6 +1,6 @@
 # Migration Guide: v3.4.0 → v3.5.0
 
-This guide helps you migrate from DeepClaw v3.4.0 to v3.5.0.
+This guide helps you migrate from SciClaw v3.4.0 to v3.5.0.
 
 ## Overview
 
@@ -70,9 +70,9 @@ deepclaw pipeline verify pipeline-abc123
 Track research metrics:
 
 ```typescript
-import { DeepClawObserver } from "deepclaw/monitoring";
+import { SciClawObserver } from "deepclaw/monitoring";
 
-const observer = new DeepClawObserver();
+const observer = new SciClawObserver();
 
 // Lifecycle hooks
 observer.onResearchStart("pipeline-1", "AI Safety");
@@ -209,4 +209,4 @@ https://github.com/peterchengorg/deepclaw/issues
 
 ---
 
-*DeepClaw v3.5.0 — Migration Guide*
+*SciClaw v3.5.0 — Migration Guide*

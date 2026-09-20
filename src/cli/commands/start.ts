@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Pipeline Start Command
+// SciClaw v3.5.0 — Pipeline Start Command
 
 import { PipelineCoordinator } from "../pipeline-coordinator.js";
 import { PipelineStage } from "../types.js";
@@ -40,8 +40,8 @@ export function startPipeline(topic: string, options: StartOptions = {}): void {
   console.log(`Stage: ${state.currentStage}`);
   console.log("");
   console.log("To start execution:");
-  console.log(`  deepclaw pipeline start ${state.id}`);
+  console.log(`  sciclaw pipeline start ${state.id}`);
   console.log("");
   console.log("To check status:");
-  console.log(`  deepclaw pipeline status ${state.id}`);
+  console.log(`  sciclaw pipeline status ${state.id}`);
 }

@@ -13,9 +13,9 @@ Downloaded: 2026-07-22
 | 5 | worldcup-arena.pdf | 2607.18029 | WorldCupArena | 2026-07-20 |
 | 6 | auto-synthesis.pdf | 2607.15247 | AutoSynthesis | 2026-07-16 |
 
-## Relevance to DeepClaw
+## Relevance to SciClaw
 
-| Paper | Priority | DeepClaw Value |
+| Paper | Priority | SciClaw Value |
 |-------|:--------:|-----------------|
 | SciHazard | ⭐⭐⭐ | Safety filter for deep research |
 | Beyond Memory | ⭐⭐⭐ | Context budget management |

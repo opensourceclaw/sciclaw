@@ -1,12 +1,12 @@
 {
-  "name": "deepclaw",
-  "version": "3.9.0",
+  "name": "sciclaw",
+  "version": "4.0.0",
   "description": "Open-source Deep Research framework based on OpenClaw",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "deepclaw": "dist/cli/index.js"
+    "sciclaw": "dist/cli/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -35,7 +35,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@deepclaw/core": "file:../deepclaw-core",
+    "@sciclaw/core": "file:../deepclaw-core",
     "claw-cog": "file:../claw-cog",
     "claw-mem": "file:../claw-mem",
     "claw-ctx": "file:../claw-ctx",

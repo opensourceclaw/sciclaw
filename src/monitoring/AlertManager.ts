@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Alert Manager
+// SciClaw v3.5.0 — Alert Manager
 
 import type { Alert, AlertRule, AlertCondition, AlertSeverity, ResearchMetrics } from "./types.js";
 
@@ -191,7 +191,7 @@ export class AlertManager {
       message: `${rule.name}: ${rule.condition.metric} is ${value} (threshold: ${rule.condition.threshold})`,
       timestamp: new Date().toISOString(),
       state: "firing",
-      source: "DeepClawObserver",
+      source: "SciClawObserver",
       labels: rule.labels ?? {},
       annotations: {
         ...rule.annotations,

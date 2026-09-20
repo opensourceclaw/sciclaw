@@ -1,6 +1,6 @@
-# DeepClaw Architecture Diagrams
+# SciClaw Architecture Diagrams
 
-Visual representation of DeepClaw v3.5.0 architecture using Mermaid diagrams.
+Visual representation of SciClaw v3.5.0 architecture using Mermaid diagrams.
 
 ## Pipeline Flow
 
@@ -72,7 +72,7 @@ graph LR
         H5[onResearchEnd]
     end
     
-    H1 --> O[DeepClawObserver]
+    H1 --> O[SciClawObserver]
     H2 --> O
     H3 --> O
     H4 --> O
@@ -229,4 +229,4 @@ graph LR
 
 ---
 
-*DeepClaw v3.5.0 Architecture Diagrams*
+*SciClaw v3.5.0 Architecture Diagrams*

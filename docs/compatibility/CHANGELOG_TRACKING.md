@@ -1,10 +1,10 @@
-# 变更追踪流程 (DeepClaw)
+# 变更追踪流程 (SciClaw)
 
 > 如何跟踪 OpenClaw 变化并保持兼容
 
 ## 🎯 目标
 
-- 监控 OpenClaw 变化对 DeepClaw 的影响
+- 监控 OpenClaw 变化对 SciClaw 的影响
 - 保持「纵向整合」定位：增强而非改变
 - 确保 Skill 接口和 SDK 兼容性
 
@@ -12,14 +12,14 @@
 
 ## 📡 依赖链
 
-DeepClaw 通过两层依赖 OpenClaw：
+SciClaw 通过两层依赖 OpenClaw：
 
 ```
 OpenClaw (底层)
     ├── Skill 接口 (/research 命令)
     └── openclaw SDK (Python 包)
            ↓
-      DeepClaw (应用层)
+      SciClaw (应用层)
 ```
 
 ---
@@ -40,7 +40,7 @@ OpenClaw (底层)
 # 检查 OpenClaw 版本
 openclaw --version
 
-# 检查 DeepClaw 版本
+# 检查 SciClaw 版本
 deepclaw --version 2>/dev/null || grep version pyproject.toml
 ```
 
@@ -98,7 +98,7 @@ python scripts/track_openclaw.py
 - [x] SDK: ✅ 兼容
 
 ### 结论
-- DeepClaw v0.5.0 兼容，无需更新
+- SciClaw v0.5.0 兼容，无需更新
 ```
 
 ---

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Interactive Research Engine
+ * SciClaw v3.0.0 — Interactive Research Engine
  *
  * Unified engine coordinating human-in-the-loop, adaptive queries,
  * and real-time feedback.

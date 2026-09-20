@@ -1,10 +1,10 @@
-# DeepClaw 兼容性矩阵
+# SciClaw 兼容性矩阵
 
-> 记录 DeepClaw 与 OpenClaw 版本的兼容关系
+> 记录 SciClaw 与 OpenClaw 版本的兼容关系
 
 ## 📋 版本对应表
 
-| DeepClaw | OpenClaw | 状态 | Skill 接口 | SDK | 备注 |
+| SciClaw | OpenClaw | 状态 | Skill 接口 | SDK | 备注 |
 |----------|----------|------|------------|-----|------|
 | v0.5.0 | ≥2026.5.3 | ✅ 兼容 | v3 | openclaw SDK | 当前版本 |
 | v0.4.0 | 2026.5.x | ✅ 兼容 | v3 | openclaw SDK | 上一版本 |
@@ -18,7 +18,7 @@
 ```
 OpenClaw (主入口，用户习惯不变)
     ↓ 纵向整合
-DeepClaw (深度研究能力增强)
+SciClaw (深度研究能力增强)
     ↓ 依赖
 openclaw SDK + Skill 接口
     ↓
@@ -72,7 +72,7 @@ claw-mem / claw-rl (底层组件)
 
 ## 📝 更新日志
 
-| 日期 | DeepClaw | OpenClaw | 变更 |
+| 日期 | SciClaw | OpenClaw | 变更 |
 |------|----------|----------|------|
 | 2026-05-05 | v0.5.0 | 2026.5.3-1 | 初始记录 |
 
@@ -80,6 +80,6 @@ claw-mem / claw-rl (底层组件)
 
 ## 🔗 相关链接
 
-- [DeepClaw GitHub](https://github.com/opensourceclaw/deepclaw)
+- [SciClaw GitHub](https://github.com/opensourceclaw/deepclaw)
 - [OpenClaw Docs](https://docs.openclaw.ai)
 - [ClawHub](https://clawhub.ai)

@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.8.0 — Gate Strategy for Flow Separation
+// SciClaw v3.8.0 — Gate Strategy for Flow Separation
 
 export interface Gate {
   id: string;

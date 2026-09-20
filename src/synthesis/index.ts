@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-beta.3 — Synthesis Engine
+ * SciClaw v3.0.0-beta.3 — Synthesis Engine
  *
  * Cross-domain synthesis, iterative verification, and discovery loop.
  */

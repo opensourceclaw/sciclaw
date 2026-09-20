@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.1 — Learning Engine Tests
+ * SciClaw v3.0.0-rc.1 — Learning Engine Tests
  */
 import { describe, it, expect, beforeEach } from "vitest";
 import {
@@ -18,7 +18,7 @@ import {
   DEFAULT_KNOWLEDGE_EVOLUTION_CONFIG,
 } from "../../src/learning/knowledge_evolution.js";
 import {
-  DeepClawLearningEngine,
+  SciClawLearningEngine,
   createLearningEngine,
 } from "../../src/learning/index.js";
 import type {
@@ -466,18 +466,18 @@ describe("KnowledgeEvolution", () => {
   });
 });
 
-// ── DeepClawLearningEngine Integration ─────────────────────────────────
+// ── SciClawLearningEngine Integration ─────────────────────────────────
 
-describe("DeepClawLearningEngine", () => {
-  let engine: DeepClawLearningEngine;
+describe("SciClawLearningEngine", () => {
+  let engine: SciClawLearningEngine;
 
   beforeEach(() => {
-    engine = new DeepClawLearningEngine();
+    engine = new SciClawLearningEngine();
   });
 
   it("creates with factory function", () => {
     const e = createLearningEngine();
-    expect(e).toBeInstanceOf(DeepClawLearningEngine);
+    expect(e).toBeInstanceOf(SciClawLearningEngine);
   });
 
   it("learns from feedback", async () => {
@@ -528,7 +528,7 @@ describe("DeepClawLearningEngine", () => {
   });
 
   it("custom config propagates to sub-components", () => {
-    const e = new DeepClawLearningEngine({
+    const e = new SciClawLearningEngine({
       feedback: { minRatingForLearning: 4 },
       knowledge: { freshnessThresholdHigh: 0.95 },
     });

@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — DeepClaw Observer
+// SciClaw v3.5.0 — SciClaw Observer
 
 import type {
   ResearchMetrics,
@@ -37,12 +37,12 @@ export type MetricsHandler = (snapshot: MetricsSnapshot) => void;
 export type AlertHandler = (alert: Alert) => void;
 
 /**
- * DeepClaw Observer for research pipeline monitoring.
+ * SciClaw Observer for research pipeline monitoring.
  *
  * Design Principle: Passive observer — collects metrics without blocking pipeline.
  * All hooks are wrapped in try-catch to ensure observer never throws.
  */
-export class DeepClawObserver {
+export class SciClawObserver {
   private config: ObserverConfig;
   private alertManager: AlertManager;
   private metricsCollector: MetricsCollector;

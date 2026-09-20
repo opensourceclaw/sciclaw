@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0 — Hypothesis Validator
+ * SciClaw v3.0.0 — Hypothesis Validator
  *
  * Validates hypothesis feasibility, testability, falsifiability,
  * novelty, and clarity.

@@ -1,8 +1,8 @@
-# DeepClaw API Documentation
+# SciClaw API Documentation
 
 ## Overview
 
-DeepClaw API provides programmatic access to search, research, and report management functionality.
+SciClaw API provides programmatic access to search, research, and report management functionality.
 
 **Base URL:** `http://localhost:8000`
 **API Version:** v1
@@ -295,7 +295,7 @@ pip install git+https://github.com/liantian-cn/deepclaw.git
 ### Basic Usage
 
 ```python
-from skill import DeepClawSkill, create_skill
+from skill import SciClawSkill, create_skill
 
 # Create skill instance
 skill = create_skill()

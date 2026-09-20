@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-beta.3 — Synthesis Engine Tests
+ * SciClaw v3.0.0-beta.3 — Synthesis Engine Tests
  */
 import { describe, it, expect } from "vitest";
 import {

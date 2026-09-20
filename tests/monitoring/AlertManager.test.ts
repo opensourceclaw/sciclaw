@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 - AlertManager Tests
+// SciClaw v3.5.0 - AlertManager Tests
 
 import { describe, it, expect, beforeEach } from "vitest";
 import { AlertManager, DEFAULT_ALERT_RULES } from "../../src/monitoring/AlertManager.js";

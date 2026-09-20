@@ -1,10 +1,10 @@
 ---
-name: deepclaw
+name: sciclaw
 description: OpenClaw Deep Research Skill - AI-powered autonomous research assistant with multi-source search, content extraction, and intelligent synthesis.
-metadata: {"clawdbot":{"emoji":"🦁","requires":{"bins":["python3"]},"primaryEnv":"DEEPCLAW_ENABLED"}}
+metadata: {"clawdbot":{"emoji":"🦁","requires":{"bins":["python3"]},"primaryEnv":"SCICLAW_ENABLED"}}
 ---
 
-# DeepClaw - OpenClaw Deep Research Skill
+# SciClaw - OpenClaw Deep Research Skill
 
 **AI-Powered Autonomous Research Assistant**
 
@@ -16,11 +16,11 @@ metadata: {"clawdbot":{"emoji":"🦁","requires":{"bins":["python3"]},"primaryEn
 
 ```bash
 # Via ClawHub (recommended)
-npx clawhub@latest install opensourceclaw-deepclaw
+npx clawhub@latest install opensourceclaw-sciclaw
 
 # Or from source
-git clone https://github.com/opensourceclaw/deepclaw.git ~/.openclaw/workspace/skills/deepclaw
-cd ~/.openclaw/workspace/skills/deepclaw
+git clone https://github.com/opensourceclaw/sciclaw.git ~/.openclaw/workspace/skills/sciclaw
+cd ~/.openclaw/workspace/skills/sciclaw
 pip3 install -e .
 ```
 
@@ -31,7 +31,7 @@ Add to `~/.openclaw/config.json`:
 ```json
 {
   "skills": {
-    "deepclaw": {
+    "sciclaw": {
       "enabled": true
     }
   }
@@ -84,7 +84,7 @@ Add to `~/.openclaw/config.json`:
 
 ## 📁 Research Output
 
-DeepClaw generates structured research reports:
+SciClaw generates structured research reports:
 
 ```
 ~/.openclaw/workspace/
@@ -113,7 +113,7 @@ DeepClaw generates structured research reports:
 
 ```json
 {
-  "deepclaw": {
+  "sciclaw": {
     "search": {
       "default_engine": "duckduckgo",
       "max_results": 10
@@ -165,7 +165,7 @@ response = llm.chat([{"role": "user", "content": "What is Python?"}])
 
 ## 📊 Supported Sites
 
-DeepClaw supports 24+ site-specific parsers:
+SciClaw supports 24+ site-specific parsers:
 
 - GitHub, GitLab, Gitee
 - Medium, Substack, Hashnode

@@ -13,9 +13,9 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Monitoring Module Exports
+// SciClaw v3.5.0 — Monitoring Module Exports
 
-export { DeepClawObserver } from "./Observer.js";
+export { SciClawObserver } from "./Observer.js";
 export type { MetricsHandler, AlertHandler } from "./Observer.js";
 
 export { MetricsCollector } from "./MetricsCollector.js";

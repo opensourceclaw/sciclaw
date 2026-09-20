@@ -1,4 +1,4 @@
-# DeepClaw Research Kernel
+# SciClaw Research Kernel
 
 ## Overview
 
@@ -18,7 +18,7 @@ Research Kernel (Shared)
 │   ├── Knowledge        — Knowledge graph construction
 │   └── Reasoner         — Logical reasoning engine
 ├── Memory
-│   ├── DeepClawMemoryAdapter — Interface to claw-mem
+│   ├── SciClawMemoryAdapter — Interface to claw-mem
 │   └── Governance            — Memory governance (via MemoryGovernance)
 └── Gate
     ├── GateRegistry     — Gate state management

@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — OBSERVE Stage
+ * SciClaw v3.9.0 — OBSERVE Stage
  */
 
 import type { ResearchContext } from "../context/ResearchContext.js";

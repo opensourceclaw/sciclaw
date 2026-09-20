@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.9.0 — Research Gate Types
+ * SciClaw v3.9.0 — Research Gate Types
  */
 
 import type { ResearchContext, ResearchStage } from "../../context/ResearchContext.js";

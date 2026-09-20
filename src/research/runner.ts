@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0
  */
 
-import { search } from "@deepclaw/core";
+import { search } from "@sciclaw/core";
 import { ResearchPlanner } from "./planner.js";
 import { ResearchSynthesizer, ReportFormatter } from "./synthesizer.js";
 import type {
@@ -139,7 +139,7 @@ export class ResearchRunner {
       const response = await axios.default.get(url, {
         timeout: 10000,
         headers: {
-          "User-Agent": "Mozilla/5.0 (compatible; DeepClaw/3.0)",
+          "User-Agent": "Mozilla/5.0 (compatible; SciClaw/3.0)",
         },
       });
 

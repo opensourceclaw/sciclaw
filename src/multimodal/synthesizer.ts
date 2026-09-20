@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.3.0 — Multi-Modal Synthesizer
+ * SciClaw v3.3.0 — Multi-Modal Synthesizer
  *
  * Synthesizes analysis across text, images, PDFs, tables, and charts
  * into a unified multi-modal report with cross-modal linking and conflict resolution.

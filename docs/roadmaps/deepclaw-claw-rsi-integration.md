@@ -1,4 +1,4 @@
-# DeepClaw + claw-rsi 整合路线图
+# SciClaw + claw-rsi 整合路线图
 
 **日期**: 2026-06-19
 **版本**: v1.0
@@ -9,7 +9,7 @@
 
 ### 目标
 
-**DeepClaw v6.0.0 + claw-rsi → 对标 Sakana.ai**
+**SciClaw v6.0.0 + claw-rsi → 对标 Sakana.ai**
 
 ---
 
@@ -17,7 +17,7 @@
 
 **双轨同步推进**: 自顶向下 + 自底向上
 
-- 应用维度: DeepClaw → AI for Science
+- 应用维度: SciClaw → AI for Science
 - 底层组件: claw-rsi 等响应需求
 - 碰撞创新: 寻找商业机会
 
@@ -35,7 +35,7 @@
 
 ## 版本演进路线
 
-### DeepClaw 版本规划
+### SciClaw 版本规划
 
 | 版本 | 主题 | 目标 |
 |------|------|------|
@@ -46,7 +46,7 @@
 
 ---
 
-## DeepClaw v6.0.0 目标
+## SciClaw v6.0.0 目标
 
 ### 核心能力
 
@@ -66,9 +66,9 @@
 ## 结合架构
 
 ```
-DeepClaw v6.0.0 + claw-rsi
+SciClaw v6.0.0 + claw-rsi
          │
-         ├── DeepClaw (研究执行)
+         ├── SciClaw (研究执行)
          │     ├── Idea Generator
          │     ├── Experiment Runner
          │     ├── Result Analyzer
@@ -83,11 +83,11 @@ DeepClaw v6.0.0 + claw-rsi
 ### 数据流
 
 ```
-DeepClaw 执行研究
+SciClaw 执行研究
     ↓ 研究结果
 claw-rsi 分析模式
     ↓ 改进策略
-DeepClaw 优化执行
+SciClaw 优化执行
     ↓ 循环...
 ```
 
@@ -95,7 +95,7 @@ DeepClaw 优化执行
 
 ## 与 Sakana.ai 对比
 
-| 维度 | DeepClaw + claw-rsi | Sakana.ai |
+| 维度 | SciClaw + claw-rsi | Sakana.ai |
 |------|---------------------|-----------|
 | **定位** | 开源 + 可自托管 | 商业 SaaS |
 | **架构** | 双层治理 (Harness + Coding) | 未公开 |

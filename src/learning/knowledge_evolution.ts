@@ -1,5 +1,5 @@
 /**
- * DeepClaw v3.0.0-rc.1 — Knowledge Evolution
+ * SciClaw v3.0.0-rc.1 — Knowledge Evolution
  *
  * Dynamic knowledge graph updates, fact freshness tracking,
  * outdated information flagging, and knowledge versioning.

@@ -13,7 +13,7 @@
  */
 
 // Copyright 2026 Peter Cheng
-// DeepClaw v3.5.0 — Gate Types
+// SciClaw v3.5.0 — Gate Types
 
 /** Gate status values */
 export type GateStatus = "pending" | "passed" | "failed" | "blocked";
