@@ -1,0 +1,2665 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GA acceptance GA-T1 (positive, fixture mode) > golden-output snapshot — normalized evidence block is frozen 1`] = `
+{
+  "asOf": "<asOf>",
+  "blocked": true,
+  "claims": [
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C1",
+      "text": "76 385 43 0.000 000 17 MHz T^-1 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C2",
+      "text": "1.410 570 5830 e-26 0.000 000 0058 e-26 J T^-1 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C3",
+      "text": "to Bohr magneton ratio 1.520 993 1551 e-3 0.000 000 0062 e-3 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C4",
+      "text": "to nuclear magneton ratio 2.792 775 648 0.000 000 011 shielding difference of d and p in HD 1.987 70 e-8 0.000 10 e-8 shielding difference of t and p in HT 2.394 50 e-8 0.000 20 e-8 speed of light in vacuum 299 792 458 (exact) m s^-1 standard acceleration of gravity 9.806 65 (exact) m s^-2 standard atmosphere 101 325 (exact) Pa standard-state pressure 100 000 (exact) Pa Stefan-Boltzmann constant 5.670 374 419...",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C5",
+      "text": "e-8 (exact) W m^-2 K^-4 tau Compton wavelength 6.977 71 e-16 0.000 47 e-16 m tau-electron mass ratio 3477.23 0.23 tau energy equivalent 1776.86 0.12 MeV tau mass 3.167 54 e-27 0.000 21 e-27",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C6",
+      "text": "Constants Topics: Values Energy Equivalents Searchable Bibliography Background Constants Bibliography Constants, Units & Uncertainty home page speed of light in vacuum Numerical value 299 792 458 m s-1 Standard uncertainty (exact) Relative standard uncertainty (exact) Concise form 299 792 458 m s-1 Click here for correlation coefficient of this constant with other constants Source: 2022 CODATA recommended values Definition of uncertainty Correlation coefficient with any other constant",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C7",
+      "text": "76 385 43 0.000 000 17 MHz T^-1 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C8",
+      "text": "1.410 570 5830 e-26 0.000 000 0058 e-26 J T^-1 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C9",
+      "text": "to Bohr magneton ratio 1.520 993 1551 e-3 0.000 000 0062 e-3 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C10",
+      "text": "to nuclear magneton ratio 2.792 775 648 0.000 000 011 shielding difference of d and p in HD 1.987 70 e-8 0.000 10 e-8 shielding difference of t and p in HT 2.394 50 e-8 0.000 20 e-8 speed of light in vacuum 299 792 458 (exact) m s^-1 standard acceleration of gravity 9.806 65 (exact) m s^-2 standard atmosphere 101 325 (exact) Pa standard-state pressure 100 000 (exact) Pa Stefan-Boltzmann constant 5.670 374 419...",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C11",
+      "text": "e-8 (exact) W m^-2 K^-4 tau Compton wavelength 6.977 71 e-16 0.000 47 e-16 m tau-electron mass ratio 3477.23 0.23 tau energy equivalent 1776.86 0.12 MeV tau mass 3.167 54 e-27 0.000 21 e-27",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C12",
+      "text": "Constants Topics: Values Energy Equivalents Searchable Bibliography Background Constants Bibliography Constants, Units & Uncertainty home page speed of light in vacuum Numerical value 299 792 458 m s-1 Standard uncertainty (exact) Relative standard uncertainty (exact) Concise form 299 792 458 m s-1 Click here for correlation coefficient of this constant with other constants Source: 2022 CODATA recommended values Definition of uncertainty Correlation coefficient with any other constant",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C13",
+      "text": "76 385 43 0.000 000 17 MHz T^-1 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C14",
+      "text": "1.410 570 5830 e-26 0.000 000 0058 e-26 J T^-1 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C15",
+      "text": "to Bohr magneton ratio 1.520 993 1551 e-3 0.000 000 0062 e-3 shielded proton mag.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C16",
+      "text": "to nuclear magneton ratio 2.792 775 648 0.000 000 011 shielding difference of d and p in HD 1.987 70 e-8 0.000 10 e-8 shielding difference of t and p in HT 2.394 50 e-8 0.000 20 e-8 speed of light in vacuum 299 792 458 (exact) m s^-1 standard acceleration of gravity 9.806 65 (exact) m s^-2 standard atmosphere 101 325 (exact) Pa standard-state pressure 100 000 (exact) Pa Stefan-Boltzmann constant 5.670 374 419...",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C17",
+      "text": "e-8 (exact) W m^-2 K^-4 tau Compton wavelength 6.977 71 e-16 0.000 47 e-16 m tau-electron mass ratio 3477.23 0.23 tau energy equivalent 1776.86 0.12 MeV tau mass 3.167 54 e-27 0.000 21 e-27",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C18",
+      "text": "Constants Topics: Values Energy Equivalents Searchable Bibliography Background Constants Bibliography Constants, Units & Uncertainty home page speed of light in vacuum Numerical value 299 792 458 m s-1 Standard uncertainty (exact) Relative standard uncertainty (exact) Concise form 299 792 458 m s-1 Click here for correlation coefficient of this constant with other constants Source: 2022 CODATA recommended values Definition of uncertainty Correlation coefficient with any other constant",
+      "type": "numeric",
+    },
+  ],
+  "gates": [
+    {
+      "name": "source-credibility",
+      "passed": true,
+      "score": 0.875,
+      "threshold": 0.7,
+    },
+    {
+      "name": "cross-validation",
+      "passed": true,
+      "score": 0.9000000000000001,
+      "threshold": 0.8,
+    },
+    {
+      "name": "bias-detection",
+      "passed": false,
+      "score": 0.6111111111111112,
+      "threshold": 0.3,
+    },
+    {
+      "name": "citation-integrity",
+      "passed": true,
+      "score": 1,
+      "threshold": 0.95,
+    },
+  ],
+  "sources": [
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "fb29a4e3ae5003ec46ab4b84012d714377461a78094669892791fae6628c6764",
+      "domain": "physics.nist.gov",
+      "id": "S1",
+      "title": "GA-T1 src-1",
+      "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+    },
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "2745c6f98ed42cf2e14f372333d6d8db7b0dc73851821d912241996f665faacc",
+      "domain": "physics.nist.gov",
+      "id": "S2",
+      "title": "GA-T1 src-2",
+      "url": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+    },
+  ],
+  "taskId": "<task>",
+  "verdictOverall": "blocked",
+  "verifications": [
+    {
+      "claimId": "C1",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C2",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C3",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C4",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C5",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C6",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C7",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C8",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C9",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C10",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C11",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C12",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C13",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C14",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C15",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C16",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C17",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C18",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+  ],
+}
+`;
+
+exports[`GA acceptance GA-T2 (positive, fixture mode) > golden-output snapshot — normalized evidence block is frozen 1`] = `
+{
+  "asOf": "<asOf>",
+  "blocked": true,
+  "claims": [
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C1",
+      "text": "l-Text Archive Search in PMC Journal List User Guide PERMALINK Copy As a library, NLM provides access to scientific literature.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C2",
+      "text": "Inclusion in an NLM database does not imply endorsement of, or agreement with, the contents by NLM or the National Institutes of Health.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C3",
+      "text": "Learn more: PMC Disclaimer | PMC Copyright Notice J Cell Mol Med.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C4",
+      "text": "2026 Apr 25;30(8):e71159.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C5",
+      "text": "doi: 10.1111/jcmm.71159 Advances in CRISPR Base Editing: From Molecular Evolution to Therapeutic Applications in Genomic Medicine Melike Aliciaslan Melike Aliciaslan 1 Department of Gene and Cell Therapy, Faculty of Medicine, Akdeniz University, Antalya, Turkey Find articles by Melike Aliciaslan 1, Ezgi Erbasan Ezgi Erbasan 1 Department of Gene and Cell Therapy, Faculty of Medicine, Akdeniz University, Antalya, Turkey Find articles by Ezgi Erbasan 1,  [...] uent cellular repair (NHEJ or HDR) leads to gene editing outcomes.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C6",
+      "text": "(D) Base Editors (BEs): Derived from the CRISPR system, Base Editors enable precise single‐base changes without inducing DSBs [5].",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C7",
+      "text": "They consist of a catalytically impaired Cas protein (either a nickase, nCas9, which cuts only one strand, or a deactivated Cas9, dCas9, which doesn't cut at all) fused to a DNA deaminase enzyme (e.g., cytidine deaminase for C•G to T•A edits or adenine deaminase for A•T to G•C edits).",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C8",
+      "text": "Guided by an sgRNA, the editor binds to the target DNA, and the deaminase directly converts a target base within a specific editing window.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C9",
+      "text": "A nick on the non‐edited strand often enhances the efficiency of incorporating the edit during DNA repair.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C10",
+      "text": "(E) Prime Editors (PEs): A versatile ‘search‐and‐replace’ genome editing tech [...] DR efficiency), led researchers to invent new, more accurate gene editing tools.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C11",
+      "text": "Base editing represents a significant leap forward, enabling targeted single‐nucleotide conversions directly on the DNA without DSBs or donor templates.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C12",
+      "text": "The core technology involves fusing catalytically dead or nickase Cas proteins to DNA deaminase enzymes.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C13",
+      "text": "Cytosine base editors (CBEs) convert C•G to T•A pairs, while adenine base editors (ABEs) change A•T to G•C.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C14",
+      "text": "These editors exploit the deaminase function within the R‐loop structure formed by Cas binding and co‐opt endogenous DNA repair mechanisms for precision.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C15",
+      "text": "While offering improved efficiency and editing precision, base editing faces persistent challenges, such as off‐target effects, bystander edits, delivery and ethical concerns.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C16",
+      "text": "Continuous engineering efforts",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C17",
+      "text": "nisms; therefore, there is a need to develop base editors that can simultaneously achieve C-to-T and A-to-G substitutions at the targeting site.",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C18",
+      "text": "In this study, a novel fusion adenine and cytosine base editor (ACBE) was generated by fusing a heterodimer of TadA (ecTadAWT/*) and an activation-induced cytidine deaminase (AID) to the N- and C-terminals of Cas9 nickase (nCas9), respectively.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C19",
+      "text": "ACBE could simultaneously induce C-to-T and A-to-G base editing at the same target site, which were verified in HEK293-EGFP reporter cell line and 45 endogenous gene loci of HEK293 cells.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C20",
+      "text": "Moreover, the ACBE could accomplish simultaneous point mutations of C-to-T and A-to-G in primary somatic cells (mouse embryonic fibroblasts and porcine fetal fibroblasts) in an applicable efficiency.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C21",
+      "text": "Furthermore, the spacer length [...] in this article, unless otherwise stated in a credit line to the data.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C22",
+      "text": "Many favorable traits of crops and livestock and human genetic diseases arise from multiple single nucleotide polymorphisms or multiple point mutations with heterogeneous base substitutions at the same locus.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C23",
+      "text": "Current cytosine or adenine base editors can only accomplish C-to-T (G-to-A) or A-to-G (T-to-C) substitutions in the windows of target genomic sites of organisms; therefore, there is a need to develop base editors that can simultaneously achieve C-to-T and A-to-G substitutions at the targeting site.",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C24",
+      "text": "In this study, a novel fusion adenine and cytosine base editor (ACBE) was generated by fusing a heterodimer of TadA (ecTadAWT/*) and an activation-induced cytidine deaminase (AID) to the N- and C-terminals of Cas9 nickase (nCa",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C25",
+      "text": "l-Text Archive Search in PMC Journal List User Guide PERMALINK Copy As a library, NLM provides access to scientific literature.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C26",
+      "text": "Inclusion in an NLM database does not imply endorsement of, or agreement with, the contents by NLM or the National Institutes of Health.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C27",
+      "text": "Learn more: PMC Disclaimer | PMC Copyright Notice J Cell Mol Med.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C28",
+      "text": "2026 Apr 25;30(8):e71159.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C29",
+      "text": "doi: 10.1111/jcmm.71159 Advances in CRISPR Base Editing: From Molecular Evolution to Therapeutic Applications in Genomic Medicine Melike Aliciaslan Melike Aliciaslan 1 Department of Gene and Cell Therapy, Faculty of Medicine, Akdeniz University, Antalya, Turkey Find articles by Melike Aliciaslan 1, Ezgi Erbasan Ezgi Erbasan 1 Department of Gene and Cell Therapy, Faculty of Medicine, Akdeniz University, Antalya, Turkey Find articles by Ezgi Erbasan 1,  [...] uent cellular repair (NHEJ or HDR) leads to gene editing outcomes.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C30",
+      "text": "(D) Base Editors (BEs): Derived from the CRISPR system, Base Editors enable precise single‐base changes without inducing DSBs [5].",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C31",
+      "text": "They consist of a catalytically impaired Cas protein (either a nickase, nCas9, which cuts only one strand, or a deactivated Cas9, dCas9, which doesn't cut at all) fused to a DNA deaminase enzyme (e.g., cytidine deaminase for C•G to T•A edits or adenine deaminase for A•T to G•C edits).",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C32",
+      "text": "Guided by an sgRNA, the editor binds to the target DNA, and the deaminase directly converts a target base within a specific editing window.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C33",
+      "text": "A nick on the non‐edited strand often enhances the efficiency of incorporating the edit during DNA repair.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C34",
+      "text": "(E) Prime Editors (PEs): A versatile ‘search‐and‐replace’ genome editing tech [...] DR efficiency), led researchers to invent new, more accurate gene editing tools.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C35",
+      "text": "Base editing represents a significant leap forward, enabling targeted single‐nucleotide conversions directly on the DNA without DSBs or donor templates.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C36",
+      "text": "The core technology involves fusing catalytically dead or nickase Cas proteins to DNA deaminase enzymes.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C37",
+      "text": "Cytosine base editors (CBEs) convert C•G to T•A pairs, while adenine base editors (ABEs) change A•T to G•C.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C38",
+      "text": "These editors exploit the deaminase function within the R‐loop structure formed by Cas binding and co‐opt endogenous DNA repair mechanisms for precision.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C39",
+      "text": "While offering improved efficiency and editing precision, base editing faces persistent challenges, such as off‐target effects, bystander edits, delivery and ethical concerns.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C40",
+      "text": "Continuous engineering efforts",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C41",
+      "text": "nisms; therefore, there is a need to develop base editors that can simultaneously achieve C-to-T and A-to-G substitutions at the targeting site.",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C42",
+      "text": "In this study, a novel fusion adenine and cytosine base editor (ACBE) was generated by fusing a heterodimer of TadA (ecTadAWT/*) and an activation-induced cytidine deaminase (AID) to the N- and C-terminals of Cas9 nickase (nCas9), respectively.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C43",
+      "text": "ACBE could simultaneously induce C-to-T and A-to-G base editing at the same target site, which were verified in HEK293-EGFP reporter cell line and 45 endogenous gene loci of HEK293 cells.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C44",
+      "text": "Moreover, the ACBE could accomplish simultaneous point mutations of C-to-T and A-to-G in primary somatic cells (mouse embryonic fibroblasts and porcine fetal fibroblasts) in an applicable efficiency.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C45",
+      "text": "Furthermore, the spacer length [...] in this article, unless otherwise stated in a credit line to the data.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C46",
+      "text": "Many favorable traits of crops and livestock and human genetic diseases arise from multiple single nucleotide polymorphisms or multiple point mutations with heterogeneous base substitutions at the same locus.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C47",
+      "text": "Current cytosine or adenine base editors can only accomplish C-to-T (G-to-A) or A-to-G (T-to-C) substitutions in the windows of target genomic sites of organisms; therefore, there is a need to develop base editors that can simultaneously achieve C-to-T and A-to-G substitutions at the targeting site.",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C48",
+      "text": "In this study, a novel fusion adenine and cytosine base editor (ACBE) was generated by fusing a heterodimer of TadA (ecTadAWT/*) and an activation-induced cytidine deaminase (AID) to the N- and C-terminals of Cas9 nickase (nCa",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C49",
+      "text": "l-Text Archive Search in PMC Journal List User Guide PERMALINK Copy As a library, NLM provides access to scientific literature.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C50",
+      "text": "Inclusion in an NLM database does not imply endorsement of, or agreement with, the contents by NLM or the National Institutes of Health.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C51",
+      "text": "Learn more: PMC Disclaimer | PMC Copyright Notice J Cell Mol Med.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C52",
+      "text": "2026 Apr 25;30(8):e71159.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C53",
+      "text": "doi: 10.1111/jcmm.71159 Advances in CRISPR Base Editing: From Molecular Evolution to Therapeutic Applications in Genomic Medicine Melike Aliciaslan Melike Aliciaslan 1 Department of Gene and Cell Therapy, Faculty of Medicine, Akdeniz University, Antalya, Turkey Find articles by Melike Aliciaslan 1, Ezgi Erbasan Ezgi Erbasan 1 Department of Gene and Cell Therapy, Faculty of Medicine, Akdeniz University, Antalya, Turkey Find articles by Ezgi Erbasan 1,  [...] uent cellular repair (NHEJ or HDR) leads to gene editing outcomes.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C54",
+      "text": "(D) Base Editors (BEs): Derived from the CRISPR system, Base Editors enable precise single‐base changes without inducing DSBs [5].",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C55",
+      "text": "They consist of a catalytically impaired Cas protein (either a nickase, nCas9, which cuts only one strand, or a deactivated Cas9, dCas9, which doesn't cut at all) fused to a DNA deaminase enzyme (e.g., cytidine deaminase for C•G to T•A edits or adenine deaminase for A•T to G•C edits).",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C56",
+      "text": "Guided by an sgRNA, the editor binds to the target DNA, and the deaminase directly converts a target base within a specific editing window.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C57",
+      "text": "A nick on the non‐edited strand often enhances the efficiency of incorporating the edit during DNA repair.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C58",
+      "text": "(E) Prime Editors (PEs): A versatile ‘search‐and‐replace’ genome editing tech [...] DR efficiency), led researchers to invent new, more accurate gene editing tools.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C59",
+      "text": "Base editing represents a significant leap forward, enabling targeted single‐nucleotide conversions directly on the DNA without DSBs or donor templates.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C60",
+      "text": "The core technology involves fusing catalytically dead or nickase Cas proteins to DNA deaminase enzymes.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C61",
+      "text": "Cytosine base editors (CBEs) convert C•G to T•A pairs, while adenine base editors (ABEs) change A•T to G•C.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C62",
+      "text": "These editors exploit the deaminase function within the R‐loop structure formed by Cas binding and co‐opt endogenous DNA repair mechanisms for precision.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C63",
+      "text": "While offering improved efficiency and editing precision, base editing faces persistent challenges, such as off‐target effects, bystander edits, delivery and ethical concerns.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C64",
+      "text": "Continuous engineering efforts",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C65",
+      "text": "nisms; therefore, there is a need to develop base editors that can simultaneously achieve C-to-T and A-to-G substitutions at the targeting site.",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C66",
+      "text": "In this study, a novel fusion adenine and cytosine base editor (ACBE) was generated by fusing a heterodimer of TadA (ecTadAWT/*) and an activation-induced cytidine deaminase (AID) to the N- and C-terminals of Cas9 nickase (nCas9), respectively.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C67",
+      "text": "ACBE could simultaneously induce C-to-T and A-to-G base editing at the same target site, which were verified in HEK293-EGFP reporter cell line and 45 endogenous gene loci of HEK293 cells.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C68",
+      "text": "Moreover, the ACBE could accomplish simultaneous point mutations of C-to-T and A-to-G in primary somatic cells (mouse embryonic fibroblasts and porcine fetal fibroblasts) in an applicable efficiency.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C69",
+      "text": "Furthermore, the spacer length [...] in this article, unless otherwise stated in a credit line to the data.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C70",
+      "text": "Many favorable traits of crops and livestock and human genetic diseases arise from multiple single nucleotide polymorphisms or multiple point mutations with heterogeneous base substitutions at the same locus.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C71",
+      "text": "Current cytosine or adenine base editors can only accomplish C-to-T (G-to-A) or A-to-G (T-to-C) substitutions in the windows of target genomic sites of organisms; therefore, there is a need to develop base editors that can simultaneously achieve C-to-T and A-to-G substitutions at the targeting site.",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C72",
+      "text": "In this study, a novel fusion adenine and cytosine base editor (ACBE) was generated by fusing a heterodimer of TadA (ecTadAWT/*) and an activation-induced cytidine deaminase (AID) to the N- and C-terminals of Cas9 nickase (nCa",
+      "type": "numeric",
+    },
+  ],
+  "gates": [
+    {
+      "name": "source-credibility",
+      "passed": true,
+      "score": 0.875,
+      "threshold": 0.7,
+    },
+    {
+      "name": "cross-validation",
+      "passed": true,
+      "score": 0.899999999999999,
+      "threshold": 0.8,
+    },
+    {
+      "name": "bias-detection",
+      "passed": false,
+      "score": 0.6111111111111112,
+      "threshold": 0.3,
+    },
+    {
+      "name": "citation-integrity",
+      "passed": true,
+      "score": 1,
+      "threshold": 0.95,
+    },
+  ],
+  "sources": [
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "4deccc3601d94b86f039c27c08f8915bac9e8ae5edf1d478b28f4d8bc8e54b2a",
+      "domain": "pmc.ncbi.nlm.nih.gov",
+      "id": "S1",
+      "title": "GA-T2 src-1",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13109818/",
+    },
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "35d36a2ddc3e287b5198fe79d7616deedf02f62aece64ec316d6adb3d9650602",
+      "domain": "pmc.ncbi.nlm.nih.gov",
+      "id": "S2",
+      "title": "GA-T2 src-2",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7510086/",
+    },
+  ],
+  "taskId": "<task>",
+  "verdictOverall": "blocked",
+  "verifications": [
+    {
+      "claimId": "C1",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C2",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C3",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C4",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C5",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C6",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C7",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C8",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C9",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C10",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C11",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C12",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C13",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C14",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C15",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C16",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C17",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C18",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C19",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C20",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C21",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C22",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C23",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C24",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C25",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C26",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C27",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C28",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C29",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C30",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C31",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C32",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C33",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C34",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C35",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C36",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C37",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C38",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C39",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C40",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C41",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C42",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C43",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C44",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C45",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C46",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C47",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C48",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C49",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C50",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C51",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C52",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C53",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C54",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C55",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C56",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C57",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C58",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C59",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C60",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C61",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C62",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C63",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C64",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C65",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C66",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C67",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C68",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C69",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C70",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C71",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C72",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+  ],
+}
+`;
+
+exports[`GA acceptance GA-T5 (positive, fixture mode) > golden-output snapshot — normalized evidence block is frozen 1`] = `
+{
+  "asOf": "<asOf>",
+  "blocked": true,
+  "claims": [
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C1",
+      "text": "ive information only on official, secure websites.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C2",
+      "text": "Search Search GML: Global Monitoring Laboratory Trends in CO2, CH4, N2O, SF6 Trends in CO2 Trends in CH4 Trends in N2O Trends in SF6 Trends in Atmospheric Carbon Dioxide (CO2) Mauna Loa, Hawaii Global CO2 Animation CO2 Emissions Last Month Last 1 Year Full Record Growth Rate Data Interactive Plots Monthly Average Mauna Loa CO2 August 2026: 427.55 ppm August 2025: 425.48 ppm Last updated: Sep 05, 2026 PNG Version PDF Version PNG Version PDF Version The graphs show monthly mean carbon dioxide measured at Mauna Loa Observatory, Hawaii.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C3",
+      "text": "The carbon dioxide data on Mauna Loa constitute the longest record of direct measurements of CO2 in the atmosphere.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C4",
+      "text": "They were started by C.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C5",
+      "text": "David Keeling of the Scripps Institution of Oceanography in March of 1958",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C6",
+      "text": "ng days becomes available.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C7",
+      "text": "For details, see ”How we measure background CO2 levels at Mauna Loa”.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C8",
+      "text": "The average standard deviation of day to day variability, calculated as the difference from the appropriate weekly mean, equals 0.38 ppm for the entire record.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C9",
+      "text": "These data are still preliminary, pending recalibrations of reference gases and other quality control checks.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C10",
+      "text": "Atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C11",
+      "text": "PNG Version of plot PDF Version of plot This figure shows the atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C12",
+      "text": "The value of 280 ppm is chosen as representative of pre-industrial air because it is close to the average of CO2 measured and dated with high time resolution between the years 1000 and 1800 in a [...] e data are still preliminary, pending recalibrations of reference gases and other quality control checks.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C13",
+      "text": "Atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C14",
+      "text": "PNG Version of plot PDF Version of plot This figure shows the atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C15",
+      "text": "The value of 280 ppm is chosen as representative of pre-industrial air because it is close to the average of CO2 measured and dated with high time resolution between the years 1000 and 1800 in an ice core from Law Dome, Antarctica.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C16",
+      "text": "[Etheridge et al., 1996].",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C17",
+      "text": "Although the time resolution of old air locked in ice cores is not enough to preserve seasonal cycles, there is no doubt that the seasonal cycle, which is mostly caused by photosynthesis and respiration of ec",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C18",
+      "text": "ive information only on official, secure websites.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C19",
+      "text": "Search Search GML: Global Monitoring Laboratory Trends in CO2, CH4, N2O, SF6 Trends in CO2 Trends in CH4 Trends in N2O Trends in SF6 Trends in Atmospheric Carbon Dioxide (CO2) Mauna Loa, Hawaii Global CO2 Animation CO2 Emissions Last Month Last 1 Year Full Record Growth Rate Data Interactive Plots Monthly Average Mauna Loa CO2 August 2026: 427.55 ppm August 2025: 425.48 ppm Last updated: Sep 05, 2026 PNG Version PDF Version PNG Version PDF Version The graphs show monthly mean carbon dioxide measured at Mauna Loa Observatory, Hawaii.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C20",
+      "text": "The carbon dioxide data on Mauna Loa constitute the longest record of direct measurements of CO2 in the atmosphere.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C21",
+      "text": "They were started by C.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C22",
+      "text": "David Keeling of the Scripps Institution of Oceanography in March of 1958",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C23",
+      "text": "ng days becomes available.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C24",
+      "text": "For details, see ”How we measure background CO2 levels at Mauna Loa”.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C25",
+      "text": "The average standard deviation of day to day variability, calculated as the difference from the appropriate weekly mean, equals 0.38 ppm for the entire record.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C26",
+      "text": "These data are still preliminary, pending recalibrations of reference gases and other quality control checks.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C27",
+      "text": "Atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C28",
+      "text": "PNG Version of plot PDF Version of plot This figure shows the atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C29",
+      "text": "The value of 280 ppm is chosen as representative of pre-industrial air because it is close to the average of CO2 measured and dated with high time resolution between the years 1000 and 1800 in a [...] e data are still preliminary, pending recalibrations of reference gases and other quality control checks.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C30",
+      "text": "Atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C31",
+      "text": "PNG Version of plot PDF Version of plot This figure shows the atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C32",
+      "text": "The value of 280 ppm is chosen as representative of pre-industrial air because it is close to the average of CO2 measured and dated with high time resolution between the years 1000 and 1800 in an ice core from Law Dome, Antarctica.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C33",
+      "text": "[Etheridge et al., 1996].",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C34",
+      "text": "Although the time resolution of old air locked in ice cores is not enough to preserve seasonal cycles, there is no doubt that the seasonal cycle, which is mostly caused by photosynthesis and respiration of ec",
+      "type": "causation",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C35",
+      "text": "ive information only on official, secure websites.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C36",
+      "text": "Search Search GML: Global Monitoring Laboratory Trends in CO2, CH4, N2O, SF6 Trends in CO2 Trends in CH4 Trends in N2O Trends in SF6 Trends in Atmospheric Carbon Dioxide (CO2) Mauna Loa, Hawaii Global CO2 Animation CO2 Emissions Last Month Last 1 Year Full Record Growth Rate Data Interactive Plots Monthly Average Mauna Loa CO2 August 2026: 427.55 ppm August 2025: 425.48 ppm Last updated: Sep 05, 2026 PNG Version PDF Version PNG Version PDF Version The graphs show monthly mean carbon dioxide measured at Mauna Loa Observatory, Hawaii.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C37",
+      "text": "The carbon dioxide data on Mauna Loa constitute the longest record of direct measurements of CO2 in the atmosphere.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C38",
+      "text": "They were started by C.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C39",
+      "text": "David Keeling of the Scripps Institution of Oceanography in March of 1958",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C40",
+      "text": "ng days becomes available.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C41",
+      "text": "For details, see ”How we measure background CO2 levels at Mauna Loa”.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C42",
+      "text": "The average standard deviation of day to day variability, calculated as the difference from the appropriate weekly mean, equals 0.38 ppm for the entire record.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C43",
+      "text": "These data are still preliminary, pending recalibrations of reference gases and other quality control checks.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C44",
+      "text": "Atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C45",
+      "text": "PNG Version of plot PDF Version of plot This figure shows the atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C46",
+      "text": "The value of 280 ppm is chosen as representative of pre-industrial air because it is close to the average of CO2 measured and dated with high time resolution between the years 1000 and 1800 in a [...] e data are still preliminary, pending recalibrations of reference gases and other quality control checks.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C47",
+      "text": "Atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C48",
+      "text": "PNG Version of plot PDF Version of plot This figure shows the atmospheric increase of CO2 over 280 ppm in weekly averages of CO2 observed at Mauna Loa.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C49",
+      "text": "The value of 280 ppm is chosen as representative of pre-industrial air because it is close to the average of CO2 measured and dated with high time resolution between the years 1000 and 1800 in an ice core from Law Dome, Antarctica.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C50",
+      "text": "[Etheridge et al., 1996].",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C51",
+      "text": "Although the time resolution of old air locked in ice cores is not enough to preserve seasonal cycles, there is no doubt that the seasonal cycle, which is mostly caused by photosynthesis and respiration of ec",
+      "type": "causation",
+    },
+  ],
+  "gates": [
+    {
+      "name": "source-credibility",
+      "passed": true,
+      "score": 0.875,
+      "threshold": 0.7,
+    },
+    {
+      "name": "cross-validation",
+      "passed": true,
+      "score": 0.8999999999999991,
+      "threshold": 0.8,
+    },
+    {
+      "name": "bias-detection",
+      "passed": false,
+      "score": 0.6111111111111112,
+      "threshold": 0.3,
+    },
+    {
+      "name": "citation-integrity",
+      "passed": true,
+      "score": 1,
+      "threshold": 0.95,
+    },
+  ],
+  "sources": [
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "ea94dd676541769f27ae6d4326586aefb94da8464a758a7981299b5dabd9a40b",
+      "domain": "gml.noaa.gov",
+      "id": "S1",
+      "title": "GA-T5 src-1",
+      "url": "https://gml.noaa.gov/ccgg/trends/",
+    },
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "f8a1896cc1588413631a8eed36b15147cd0f65709b400557171741166583b399",
+      "domain": "gml.noaa.gov",
+      "id": "S2",
+      "title": "GA-T5 src-2",
+      "url": "https://gml.noaa.gov/ccgg/trends/weekly.html",
+    },
+  ],
+  "taskId": "<task>",
+  "verdictOverall": "blocked",
+  "verifications": [
+    {
+      "claimId": "C1",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C2",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C3",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C4",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C5",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C6",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C7",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C8",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C9",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C10",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C11",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C12",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C13",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C14",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C15",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C16",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C17",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C18",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C19",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C20",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C21",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C22",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C23",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C24",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C25",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C26",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C27",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C28",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C29",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C30",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C31",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C32",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C33",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C34",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C35",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C36",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C37",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C38",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C39",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C40",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C41",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C42",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C43",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C44",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C45",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C46",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C47",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C48",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C49",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C50",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C51",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+  ],
+}
+`;
+
+exports[`GA acceptance GA-T6 (positive, fixture mode) > golden-output snapshot — normalized evidence block is frozen 1`] = `
+{
+  "asOf": "<asOf>",
+  "blocked": true,
+  "claims": [
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C1",
+      "text": "EnglishEnglish (pdf)SwedishSwedish (pdf) The Nobel Assembly at Karolinska Institutet has today decided to award the 2023 Nobel Prize in Physiology or Medicine Katalin Karikó and Drew Weissman for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19 The discoveries by the two Nobel Laureates were critical for developing effective mRNA vaccines against COVID-19 during the pandemic that began in early 2020.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C2",
+      "text": "Through their groundbreaking findings, which have fundamentally changed our understanding of how mRNA interacts with our immune system, the laureates contributed to the unprecedented ra",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C3",
+      "text": "© Nobel Prize Outreach.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C4",
+      "text": "Photo: Clément Morin © Nobel Prize Outreach.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C5",
+      "text": "Photo: Clément Morin Katalin Karikó Nobel Prize in Physiology or Medicine 2023 Born: 17 January 1955, Szolnok, Hungary Affiliation at the time of the award: Szeged University, Szeged, Hungary; University of Pennsylvania, Philadelphia, PA, USA Prize motivation: “for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19” A vaccine prevents diseases by stimulating the body's immune system to develop a defense against the infectious agent.",
+      "type": "quotation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C6",
+      "text": "One type of vacc [...] prevents diseases by stimulating the body's immune system to develop a defense against the infectious agent.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C7",
+      "text": "One type of vaccine uses mRNA, which transfers genetic information from DNA to stimulate protein production.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C8",
+      "text": "In 2005 Katalin Karikó and Drew Weissman discovered that certain modifications of the building blocks of RNA prevented unwanted inflammatory reactions and increased the production of desired proteins.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C9",
+      "text": "The discovery laid the foundation for effective mRNA vaccines against COVID-19 during the pandemic that began in early 2020.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C10",
+      "text": "She was met with mistrust and eventually forced to leave academia – but Katalin Karikó never lost focus, doubling-down on her work to harness mRNA for new vaccines and therapies.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C11",
+      "text": "Karikó’s Nobel Prize-awarded discov",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C12",
+      "text": "EnglishEnglish (pdf)SwedishSwedish (pdf) The Nobel Assembly at Karolinska Institutet has today decided to award the 2023 Nobel Prize in Physiology or Medicine Katalin Karikó and Drew Weissman for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19 The discoveries by the two Nobel Laureates were critical for developing effective mRNA vaccines against COVID-19 during the pandemic that began in early 2020.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C13",
+      "text": "Through their groundbreaking findings, which have fundamentally changed our understanding of how mRNA interacts with our immune system, the laureates contributed to the unprecedented ra",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C14",
+      "text": "© Nobel Prize Outreach.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C15",
+      "text": "Photo: Clément Morin © Nobel Prize Outreach.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C16",
+      "text": "Photo: Clément Morin Katalin Karikó Nobel Prize in Physiology or Medicine 2023 Born: 17 January 1955, Szolnok, Hungary Affiliation at the time of the award: Szeged University, Szeged, Hungary; University of Pennsylvania, Philadelphia, PA, USA Prize motivation: “for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19” A vaccine prevents diseases by stimulating the body's immune system to develop a defense against the infectious agent.",
+      "type": "quotation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C17",
+      "text": "One type of vacc [...] prevents diseases by stimulating the body's immune system to develop a defense against the infectious agent.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C18",
+      "text": "One type of vaccine uses mRNA, which transfers genetic information from DNA to stimulate protein production.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C19",
+      "text": "In 2005 Katalin Karikó and Drew Weissman discovered that certain modifications of the building blocks of RNA prevented unwanted inflammatory reactions and increased the production of desired proteins.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C20",
+      "text": "The discovery laid the foundation for effective mRNA vaccines against COVID-19 during the pandemic that began in early 2020.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C21",
+      "text": "She was met with mistrust and eventually forced to leave academia – but Katalin Karikó never lost focus, doubling-down on her work to harness mRNA for new vaccines and therapies.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C22",
+      "text": "Karikó’s Nobel Prize-awarded discov",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C23",
+      "text": "EnglishEnglish (pdf)SwedishSwedish (pdf) The Nobel Assembly at Karolinska Institutet has today decided to award the 2023 Nobel Prize in Physiology or Medicine Katalin Karikó and Drew Weissman for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19 The discoveries by the two Nobel Laureates were critical for developing effective mRNA vaccines against COVID-19 during the pandemic that began in early 2020.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S1",
+      ],
+      "id": "C24",
+      "text": "Through their groundbreaking findings, which have fundamentally changed our understanding of how mRNA interacts with our immune system, the laureates contributed to the unprecedented ra",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C25",
+      "text": "© Nobel Prize Outreach.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C26",
+      "text": "Photo: Clément Morin © Nobel Prize Outreach.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C27",
+      "text": "Photo: Clément Morin Katalin Karikó Nobel Prize in Physiology or Medicine 2023 Born: 17 January 1955, Szolnok, Hungary Affiliation at the time of the award: Szeged University, Szeged, Hungary; University of Pennsylvania, Philadelphia, PA, USA Prize motivation: “for their discoveries concerning nucleoside base modifications that enabled the development of effective mRNA vaccines against COVID-19” A vaccine prevents diseases by stimulating the body's immune system to develop a defense against the infectious agent.",
+      "type": "quotation",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C28",
+      "text": "One type of vacc [...] prevents diseases by stimulating the body's immune system to develop a defense against the infectious agent.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C29",
+      "text": "One type of vaccine uses mRNA, which transfers genetic information from DNA to stimulate protein production.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C30",
+      "text": "In 2005 Katalin Karikó and Drew Weissman discovered that certain modifications of the building blocks of RNA prevented unwanted inflammatory reactions and increased the production of desired proteins.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C31",
+      "text": "The discovery laid the foundation for effective mRNA vaccines against COVID-19 during the pandemic that began in early 2020.",
+      "type": "numeric",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C32",
+      "text": "She was met with mistrust and eventually forced to leave academia – but Katalin Karikó never lost focus, doubling-down on her work to harness mRNA for new vaccines and therapies.",
+      "type": "factual",
+    },
+    {
+      "citations": [
+        "S2",
+      ],
+      "id": "C33",
+      "text": "Karikó’s Nobel Prize-awarded discov",
+      "type": "factual",
+    },
+  ],
+  "gates": [
+    {
+      "name": "source-credibility",
+      "passed": true,
+      "score": 0.8300000000000001,
+      "threshold": 0.7,
+    },
+    {
+      "name": "cross-validation",
+      "passed": true,
+      "score": 0.8999999999999995,
+      "threshold": 0.8,
+    },
+    {
+      "name": "bias-detection",
+      "passed": false,
+      "score": 0.6111111111111112,
+      "threshold": 0.3,
+    },
+    {
+      "name": "citation-integrity",
+      "passed": true,
+      "score": 1,
+      "threshold": 0.95,
+    },
+  ],
+  "sources": [
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "ff404fc71090f06350d3d35641e7739c254155f4dc4dea48d9bc9396151b66ba",
+      "domain": "www.nobelprize.org",
+      "id": "S1",
+      "title": "GA-T6 src-1",
+      "url": "https://www.nobelprize.org/prizes/medicine/2023/press-release/",
+    },
+    {
+      "accessedAt": "<accessedAt>",
+      "contentSha256": "7257ebab9f745bb2526cacbfcc95fde291a97d966ba58ad9bffcf11d3ef37fc3",
+      "domain": "www.nobelprize.org",
+      "id": "S2",
+      "title": "GA-T6 src-2",
+      "url": "https://www.nobelprize.org/prizes/medicine/2023/kariko/facts/",
+    },
+  ],
+  "taskId": "<task>",
+  "verdictOverall": "blocked",
+  "verifications": [
+    {
+      "claimId": "C1",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C2",
+      "confidence": 0.7,
+      "status": "partially_true",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C3",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C4",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C5",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C6",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C7",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C8",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C9",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C10",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C11",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C12",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C13",
+      "confidence": 0.7,
+      "status": "partially_true",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C14",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C15",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C16",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C17",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C18",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C19",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C20",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C21",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C22",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C23",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C24",
+      "confidence": 0.7,
+      "status": "partially_true",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C25",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C26",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C27",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C28",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C29",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C30",
+      "confidence": 0.5,
+      "status": "false",
+      "supportingSources": 1,
+    },
+    {
+      "claimId": "C31",
+      "confidence": 0.9,
+      "status": "verified",
+      "supportingSources": 2,
+    },
+    {
+      "claimId": "C32",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+    {
+      "claimId": "C33",
+      "confidence": 0.3,
+      "status": "pending",
+      "supportingSources": 0,
+    },
+  ],
+}
+`;

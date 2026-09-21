@@ -1,0 +1,12 @@
+[
+  {
+    "sourceId": "src-1",
+    "url": "https://www.nobelprize.org/prizes/medicine/2023/press-release/",
+    "pageFile": "pages/src-1.txt"
+  },
+  {
+    "sourceId": "src-2",
+    "url": "https://www.nobelprize.org/prizes/medicine/2023/kariko/facts/",
+    "pageFile": "pages/src-2.txt"
+  }
+]

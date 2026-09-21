@@ -1,0 +1,12 @@
+[
+  {
+    "sourceId": "src-1",
+    "url": "https://gml.noaa.gov/ccgg/trends/",
+    "pageFile": "pages/src-1.txt"
+  },
+  {
+    "sourceId": "src-2",
+    "url": "https://gml.noaa.gov/ccgg/trends/weekly.html",
+    "pageFile": "pages/src-2.txt"
+  }
+]

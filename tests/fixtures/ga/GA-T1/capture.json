@@ -1,0 +1,14 @@
+{
+  "src-1": {
+    "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:18:34.196Z",
+    "contentSha256": "fb29a4e3ae5003ec46ab4b84012d714377461a78094669892791fae6628c6764"
+  },
+  "src-2": {
+    "url": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:24:00.087Z",
+    "contentSha256": "2745c6f98ed42cf2e14f372333d6d8db7b0dc73851821d912241996f665faacc"
+  }
+}

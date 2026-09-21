@@ -1,0 +1,16 @@
+{
+  "id": "GA-T6",
+  "topic": "relationships among 2023 Nobel Prize in Physiology or Medicine laureates and mRNA vaccine enabling technology",
+  "category": "reasoning",
+  "description": "GA acceptance task GA-T6 (Edith 2026-09-21 spec A1.1)",
+  "expectedFacts": [
+    "Karikó",
+    "Weissman"
+  ],
+  "whitelist": [
+    "nobelprize.org",
+    "api.nobelprize.org",
+    "nature.com"
+  ],
+  "minCitations": 2
+}

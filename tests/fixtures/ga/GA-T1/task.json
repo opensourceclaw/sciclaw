@@ -1,0 +1,13 @@
+{
+  "id": "GA-T1",
+  "topic": "speed of light in vacuum and its exact value",
+  "category": "factuality",
+  "description": "GA acceptance task GA-T1 (Edith 2026-09-21 spec A1.1)",
+  "expectedFacts": [
+    "299 792 458"
+  ],
+  "whitelist": [
+    "physics.nist.gov"
+  ],
+  "minCitations": 1
+}

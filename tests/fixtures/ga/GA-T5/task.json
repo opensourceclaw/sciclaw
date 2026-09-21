@@ -1,0 +1,17 @@
+{
+  "id": "GA-T5",
+  "topic": "current atmospheric CO2 concentration vs pre-industrial baseline",
+  "category": "completeness",
+  "description": "GA acceptance task GA-T5 (Edith 2026-09-21 spec A1.1)",
+  "expectedFacts": [
+    "427.55",
+    "280"
+  ],
+  "whitelist": [
+    "gml.noaa.gov",
+    "noaa.gov",
+    "ipcc.ch"
+  ],
+  "minCitations": 2,
+  "asOfRequired": true
+}

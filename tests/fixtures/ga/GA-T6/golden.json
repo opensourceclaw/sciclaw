@@ -1,0 +1,13 @@
+{
+  "taskId": "GA-T6",
+  "facts": [
+    {
+      "id": "g1",
+      "text": "Karikó"
+    },
+    {
+      "id": "g2",
+      "text": "Weissman"
+    }
+  ]
+}

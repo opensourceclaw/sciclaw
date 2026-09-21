@@ -1,0 +1,16 @@
+{
+  "id": "GA-T2",
+  "topic": "mechanism of CRISPR base editors cytidine vs adenine",
+  "category": "completeness",
+  "description": "GA acceptance task GA-T2 (Edith 2026-09-21 spec A1.1)",
+  "expectedFacts": [
+    "cytidine",
+    "adenine"
+  ],
+  "whitelist": [
+    "pmc.ncbi.nlm.nih.gov",
+    "pubmed.ncbi.nlm.nih.gov",
+    "nature.com"
+  ],
+  "minCitations": 2
+}

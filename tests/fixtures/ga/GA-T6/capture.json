@@ -1,0 +1,14 @@
+{
+  "src-1": {
+    "url": "https://www.nobelprize.org/prizes/medicine/2023/press-release/",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:48:31.035Z",
+    "contentSha256": "ff404fc71090f06350d3d35641e7739c254155f4dc4dea48d9bc9396151b66ba"
+  },
+  "src-2": {
+    "url": "https://www.nobelprize.org/prizes/medicine/2023/kariko/facts/",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:48:31.040Z",
+    "contentSha256": "7257ebab9f745bb2526cacbfcc95fde291a97d966ba58ad9bffcf11d3ef37fc3"
+  }
+}

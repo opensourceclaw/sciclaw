@@ -1,0 +1,14 @@
+{
+  "src-1": {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13109818/",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:19:21.766Z",
+    "contentSha256": "4deccc3601d94b86f039c27c08f8915bac9e8ae5edf1d478b28f4d8bc8e54b2a"
+  },
+  "src-2": {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7510086/",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:49:41.699Z",
+    "contentSha256": "35d36a2ddc3e287b5198fe79d7616deedf02f62aece64ec316d6adb3d9650602"
+  }
+}

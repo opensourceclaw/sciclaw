@@ -1,0 +1,12 @@
+[
+  {
+    "sourceId": "src-1",
+    "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+    "pageFile": "pages/src-1.txt"
+  },
+  {
+    "sourceId": "src-2",
+    "url": "https://physics.nist.gov/cgi-bin/cuu/Value?c",
+    "pageFile": "pages/src-2.txt"
+  }
+]

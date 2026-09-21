@@ -1,0 +1,10 @@
+{
+  "id": "GA-T7",
+  "topic": "flux-capacitor metadata standard",
+  "category": "negative",
+  "description": "GA acceptance task GA-T7 (Edith 2026-09-21 spec A1.1)",
+  "expectedFacts": [],
+  "whitelist": [],
+  "minCitations": 0,
+  "negative": true
+}

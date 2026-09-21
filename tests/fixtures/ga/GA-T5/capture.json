@@ -1,0 +1,14 @@
+{
+  "src-1": {
+    "url": "https://gml.noaa.gov/ccgg/trends/",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:18:39.131Z",
+    "contentSha256": "ea94dd676541769f27ae6d4326586aefb94da8464a758a7981299b5dabd9a40b"
+  },
+  "src-2": {
+    "url": "https://gml.noaa.gov/ccgg/trends/weekly.html",
+    "httpStatus": 200,
+    "capturedAt": "2026-09-21T08:22:03.493Z",
+    "contentSha256": "f8a1896cc1588413631a8eed36b15147cd0f65709b400557171741166583b399"
+  }
+}

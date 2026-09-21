@@ -1,0 +1,13 @@
+{
+  "taskId": "GA-T2",
+  "facts": [
+    {
+      "id": "g1",
+      "text": "cytidine"
+    },
+    {
+      "id": "g2",
+      "text": "adenine"
+    }
+  ]
+}
