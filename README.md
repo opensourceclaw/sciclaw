@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-3178c6.svg)](https://www.typescriptlang.org/)
 [![Version](https://img.shields.io/badge/Version-4.0.0-orange.svg)](https://github.com/opensourceclaw/sciclaw)
-[![Tests](https://img.shields.io/badge/Tests-1140%2B-brightgreen.svg)](#)
+[![Tests](https://img.shields.io/badge/Tests-959%20passed%20%2B%2026%20GA-brightgreen.svg)](#)
 
 </div>
 
@@ -278,10 +278,12 @@ SciClaw's staged evolution runs through two research flows over a shared archite
 
 | Stage | Flow | Status | Focus |
 |-------|------|--------|-------|
-| 1 | **DeepResearchFlow** | ✅ Current | Deep retrieval and synthesis — multi-engine search, quality gates, verifiable reports |
+| 1 | **DeepResearchFlow** | ✅ Current | Deep retrieval and synthesis — multi-engine search, quality gates, verifiable reports (evidence-chain verified by the GA acceptance suite) |
 | 2 | **AutoResearchFlow** | 🔄 Evolving | Autonomous research loops — hypothesis generation, experiment design and execution, iterative self-verification |
 
 Both flows live in one codebase (unified in v3.8); AutoResearchFlow is the direction that makes SciClaw a true AI4S research partner, closing the loop from question to verified knowledge.
+
+> **On "verifiable"**: the claim is backed by the GA acceptance suite (fixture + live runs asserting source provenance, citation coverage, gate enforcement and verifier verdicts — see `npm run test:ga` and `benchmark-results.json`). Known calibration limits are tracked honestly: two bias factors (confirmation/temporal) are currently not measurable from available inputs and are excluded from gate verdicts until the v4.0.x corpus expansion lands.
 
 ---
 

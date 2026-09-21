@@ -2,7 +2,7 @@
   "$schema": "https://openclaw.dev/schemas/plugin.json",
   "name": "sciclaw",
   "version": "4.0.0",
-  "description": "Deep Research Framework - AI-powered multi-source research and synthesis",
+  "description": "SciClaw — verifiable deep research for AI4S: multi-source search, evidence-gated synthesis, traceable reports",
   "author": "Peter Cheng",
   "license": "Apache-2.0",
   "type": "module",
