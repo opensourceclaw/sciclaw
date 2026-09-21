@@ -1,8 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { DeepResearchFlow } from "../../src/flows/deep_research_flow.js";
 import { AutoResearchFlow } from "../../src/flows/auto_research_flow.js";
+import { registerFixtureSearch } from "../helpers/fixture-search.js";
 
 describe("CLI Mode Flag", () => {
+  beforeEach(() => {
+    registerFixtureSearch();
+  });
+
   it("should create DeepResearchFlow for deep mode", () => {
     const flow = new DeepResearchFlow();
     expect(flow.getCurrentStage()).toBe("plan");
