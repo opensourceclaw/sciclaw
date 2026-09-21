@@ -1,4 +1,4 @@
-import { VerificationStatus } from "@sciclaw/core";
+import { VerificationStatus } from "../core/index.js";
 function overlapRatio(a, b) {
     const wordsA = new Set(a.toLowerCase().split(/\s+/));
     const wordsB = new Set(b.toLowerCase().split(/\s+/));

@@ -3,7 +3,7 @@
  * Deep Research Framework — AI-powered multi-source research and synthesis
  */
 export declare const VERSION = "3.7.0";
-export * from '@sciclaw/core';
+export * from './core/index.js';
 export * from './research/index.js';
 export * from './knowledge/index.js';
 export * from './agents/index.js';

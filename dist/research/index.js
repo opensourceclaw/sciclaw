@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0
  */
 import { v4 as uuidv4 } from "uuid";
-import { search, extractContent, OpenClawModelAdapter } from "@sciclaw/core";
+import { search, extractContent, OpenClawModelAdapter } from "../core/index.js";
 // Export planner module
 export { ResearchPlanner, createPlan } from "./planner.js";
 // Export search module

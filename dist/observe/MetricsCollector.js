@@ -1,8 +1,52 @@
 /**
  * Licensed under the Apache License, Version 2.0
- * SciClaw v3.9.0 — Metrics Collector (claw-obs integration)
+ * SciClaw v4.0.0 — Metrics Collector (self-contained; claw-obs port).
+ *
+ * claw-obs v2.5.0 removed the generic `EventBus` / `TokenCounter` utilities this
+ * module used: its v2.5 face is `MetricsAggregator` (windowed min/max/avg
+ * aggregation) + `AlertEngine` (rule-based alerting) — neither covers pub/sub
+ * consumer events or cumulative usage counters. Ported to internal lightweight
+ * equivalents, self-contained, zero new dependencies (ruling basis:
+ * ack-clawobs-port-metricscollector-20260921).
  */
-import { EventBus, TokenCounter } from "claw-obs";
+/** Minimal internal event emitter — replaces claw-obs's removed `EventBus`. */
+class MetricsEventBus {
+    handlers = new Map();
+    on(event, handler) {
+        const list = this.handlers.get(event) ?? [];
+        list.push(handler);
+        this.handlers.set(event, list);
+    }
+    emit(event, payload) {
+        for (const handler of this.handlers.get(event) ?? []) {
+            handler(payload);
+        }
+    }
+}
+/** Minimal cumulative token counter — replaces claw-obs's removed `TokenCounter`. */
+class TokenUsageCounter {
+    promptTokens = 0;
+    completionTokens = 0;
+    callCount = 0;
+    record(promptTokens, completionTokens) {
+        this.promptTokens += promptTokens;
+        this.completionTokens += completionTokens;
+        this.callCount++;
+    }
+    get totals() {
+        return {
+            prompt: this.promptTokens,
+            completion: this.completionTokens,
+            total: this.promptTokens + this.completionTokens,
+            calls: this.callCount,
+        };
+    }
+    reset() {
+        this.promptTokens = 0;
+        this.completionTokens = 0;
+        this.callCount = 0;
+    }
+}
 export class MetricsCollector {
     eventBus = null;
     tokenCounter;
@@ -11,9 +55,9 @@ export class MetricsCollector {
     constructor(config) {
         this.sessionId = config?.sessionId ?? `deepclaw-${Date.now()}`;
         if (config?.enableEvents) {
-            this.eventBus = new EventBus();
+            this.eventBus = new MetricsEventBus();
         }
-        this.tokenCounter = new TokenCounter();
+        this.tokenCounter = new TokenUsageCounter();
         this.metrics = this.initMetrics();
     }
     recordSearchLatency(source, latencyMs) {

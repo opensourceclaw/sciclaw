@@ -1,7 +1,7 @@
 /**
  * Report generator - Generate reports in various formats
  */
-import type { Report, ReportOptions } from '@sciclaw/core';
+import type { Report, ReportOptions } from '../core/index.js';
 export interface ReportResult extends Report {
     pdfPath?: string;
 }
