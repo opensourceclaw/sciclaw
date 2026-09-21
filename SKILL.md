@@ -182,11 +182,11 @@ Apache License 2.0
 
 ---
 
-## 🔧 DevClaw Methodology Compliance
+## 🔧 AI-Native Methodology Compliance
 
-This project follows the **DevClaw AI-Native Software Engineering Methodology**.
+This project follows the agent family's **AI-Native Software Engineering Methodology** (multi-agent inbox protocol, separation of powers).
 
-- **Full Spec**: `../devclaw/docs/architecture/methodology.md`
+- **Methodology Spec**: `../devclaw/docs/architecture/methodology.md`（家族方法论源文档）
 - **Project Protocol**: `docs/protocol/inbox-protocol.md`
 - **SDLC Stages**: PLAN → DESIGN → BUILD → TEST → RELEASE
 
