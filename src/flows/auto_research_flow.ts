@@ -25,6 +25,7 @@ import {
 } from "../orchestrator/types.js";
 import type { ResearchPlan, SearchResultSet, ResearchReport, DeepResearchConfig, ResearchStage } from "./deep_research_flow.js";
 import type { AnalysisResult, SynthesisResult } from "./deep_research_flow.js";
+import { searchSubQueries, synthesizeResults } from "./wiring.js";
 
 const STAGE_ORDER: ResearchStage[] = ["plan", "search", "analyze", "synthesize", "report"];
 
@@ -97,14 +98,12 @@ export class AutoResearchFlow {
   async search(): Promise<SearchResultSet[]> {
     if (!this.context) throw new Error("Flow not started.");
     this.beginStage("search");
-    const resultSets: SearchResultSet[] = this.context.subQueries.map(q => ({
-      query: q.query,
-      results: [
-        { title: `Quick: ${q.query}`, url: `https://example.com/1`, snippet: "Auto-research result.", source: "duckduckgo" },
-      ],
-      timestamp: Date.now(),
-    }));
-    this.searchResults = resultSets.flatMap(s => s.results);
+    const resultSets = await searchSubQueries(this.context.subQueries, {
+      maxQueries: this.context.subQueries.length,
+      maxResults: 5,
+      mock: this.config.mock,
+    });
+    this.searchResults = resultSets.flatMap((s) => s.results);
     this.context.results = this.searchResults;
     this.endStage();
     return resultSets;
@@ -121,12 +120,13 @@ export class AutoResearchFlow {
   async synthesize(): Promise<SynthesisResult> {
     if (!this.context) throw new Error("Flow not started.");
     this.beginStage("synthesize");
+    const synthesis = await synthesizeResults(
+      this.context.originalQuery,
+      this.searchResults,
+      this.config.llm
+    );
     this.endStage();
-    return {
-      summary: `Auto-research: ${this.context.originalQuery}`,
-      keyInsights: ["Quick insight"],
-      openQuestions: [],
-    };
+    return synthesis;
   }
 
   async run(originalQuery: string): Promise<OrchestratorResult> {

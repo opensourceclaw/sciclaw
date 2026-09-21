@@ -10,11 +10,20 @@ import type { SearchResult } from "../core/index.js";
 import type { ResearchSearchResult } from "./types.js";
 
 /**
- * Research search engine with caching and quality annotation
+ * Research search engine with caching and quality annotation.
+ *
+ * GA-A2: failures are OBSERVABLE — the previous silent mock fallback is gone.
+ * Synthetic results are produced only when `allowMock` is explicitly set
+ * (mock mode / tests); otherwise a failed search throws with the cause.
  */
 export class ResearchSearchEngine {
   private resultsCache: Map<string, ResearchSearchResult[]> = new Map();
   private providerName: string = "duckduckgo";
+  private allowMock: boolean;
+
+  constructor(opts: { allowMock?: boolean } = {}) {
+    this.allowMock = opts.allowMock ?? false;
+  }
 
   /**
    * Search for results
@@ -42,9 +51,14 @@ export class ResearchSearchEngine {
       this.resultsCache.set(cacheKey, researchResults);
 
       return researchResults;
-    } catch {
-      // Return mock results on failure
-      return this.mockSearch(query, limit);
+    } catch (error) {
+      if (this.allowMock) {
+        return this.mockSearch(query, limit);
+      }
+      throw new Error(
+        `Search failed for "${query}": ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
     }
   }
 
@@ -63,15 +77,16 @@ export class ResearchSearchEngine {
   }
 
   /**
-   * Mock search implementation
+   * Mock search implementation — explicit mock mode only, clearly labeled
+   * (reserved `.invalid` URLs, source "mock").
    */
   private mockSearch(query: string, limit: number): ResearchSearchResult[] {
     const results: ResearchSearchResult[] = [];
     for (let i = 0; i < Math.min(limit, 5); i++) {
       results.push({
-        title: `Result ${i + 1} for ${query}`,
-        url: `https://example.com/${i + 1}`,
-        snippet: `This is a sample result for the query: ${query}`,
+        title: `Mock result ${i + 1} for ${query}`,
+        url: `https://mock.invalid/${i + 1}`,
+        snippet: `Synthetic mock snippet for "${query}" — no real search was performed.`,
         score: 1.0 - (i * 0.2),
         timestamp: new Date(),
         source: "mock",
@@ -181,8 +196,9 @@ export class ResearchSearchEngine {
  */
 export async function researchSearch(
   query: string,
-  limit: number = 10
+  limit: number = 10,
+  opts: { allowMock?: boolean } = {}
 ): Promise<ResearchSearchResult[]> {
-  const engine = new ResearchSearchEngine();
+  const engine = new ResearchSearchEngine(opts);
   return engine.search(query, limit);
 }

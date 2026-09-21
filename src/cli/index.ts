@@ -24,6 +24,7 @@ interface ResearchOptions {
   mode: string;
   maxDepth: string;
   timeout: string;
+  mock: boolean;
 }
 
 const program = new Command();
@@ -40,6 +41,7 @@ program
   .option("--mode <mode>", "Research mode: deep | auto", "deep")
   .option("--max-depth <number>", "Maximum research depth", "5")
   .option("--timeout <seconds>", "Research timeout in seconds", "300")
+  .option("--mock", "Use synthetic mock data (no network; for demos/tests)", false)
   .action(async (topic: string, options: ResearchOptions) => {
     const validModes = ["deep", "auto"];
     if (!validModes.includes(options.mode)) {
@@ -49,11 +51,15 @@ program
 
     console.log(`SciClaw Research: "${topic}"`);
     console.log(`   Mode: ${options.mode}, Max Depth: ${options.maxDepth}, Timeout: ${options.timeout}s`);
+    if (options.mock) {
+      console.warn("   MOCK MODE — synthetic, labeled results; no real search is performed.");
+    }
 
     if (options.mode === "auto") {
       const flow = new AutoResearchFlow({
         maxDepth: parseInt(options.maxDepth) || 3,
         timeout: parseInt(options.timeout) * 1000 || 120000,
+        mock: options.mock,
       });
       console.log("   Auto mode — breadth-first, autonomous");
       const result = await flow.run(topic);
@@ -66,6 +72,7 @@ program
       }, {
         maxDepth: parseInt(options.maxDepth) || 5,
         timeout: parseInt(options.timeout) * 1000 || 300000,
+        mock: options.mock,
       });
 
       await flow.start(topic);
@@ -73,16 +80,27 @@ program
       console.log(`   Plan: ${plan.strategy} strategy, ${plan.subQueries.length} sub-queries`);
 
       const searchResults = await flow.search();
-      console.log(`   Found ${searchResults.length} result sets`);
+      const totalResults = searchResults.reduce((n, s) => n + s.results.length, 0);
+      console.log(`   Found ${totalResults} results across ${searchResults.length} queries`);
 
       const analysis = await flow.analyze();
       console.log(`   Analysis: ${analysis.claimsCount} claims, confidence ${analysis.confidence}`);
 
       const synthesis = await flow.synthesize();
-      console.log(`   Synthesis: ${synthesis.keyInsights.length} insights`);
+      console.log(`   Synthesis (${synthesis.synthesisMode ?? "unknown"}): ${synthesis.keyInsights.length} insights`);
 
       const report = await flow.report();
       console.log(`   Report: ${report.sections.length} sections, ${report.references.length} references`);
+      if (report.evidence) {
+        const ev = report.evidence;
+        console.log(
+          `   Evidence: ${ev.sources.length} sources, ${ev.claims.length} claims, ${ev.verifications.length} verifier verdicts`
+        );
+        console.log(`   Gates: ${ev.gates.map((g) => `${g.name}:${g.passed ? "pass" : "fail"}`).join(", ")}`);
+        if (report.blocked) {
+          console.log("   BLOCKED — gate check(s) failed; conclusions withheld (fail-closed).");
+        }
+      }
       console.log(`   Deep research complete. Progress: ${Math.round(flow.getProgress() * 100)}%`);
     }
   });
