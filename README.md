@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**SciClaw — the AI4S counterpart of DevClaw: research you can verify.**
+**SciClaw — verifiable deep research for AI4S: research you can verify.**
 
 *Open-source deep research framework · AI-Powered Autonomous Research Assistant*
 
@@ -42,9 +42,9 @@ Enable everyone to access research capabilities comparable to professional resea
 
 ## 🎯 Product Positioning
 
-**SciClaw — the AI4S counterpart of DevClaw: research you can verify.**
+**SciClaw — verifiable deep research for AI4S: research you can verify.**
 
-DevClaw serves AI4SWE (software engineering with AI agents); SciClaw serves AI4S (AI for Science) — an open-source deep research framework built on OpenClaw that autonomously searches, extracts, cross-validates, and synthesizes information from the web, with verifiable sources and traceable conclusions.
+SciClaw serves AI4S (AI for Science) — an open-source deep research framework built on OpenClaw that autonomously searches, extracts, cross-validates, and synthesizes information from the web, with verifiable sources and traceable conclusions. It is an independent member of the agent family (alongside agents such as DevClaw in AI4SWE) — no direct dependency, shared ecosystem only.
 
 The research capability evolves in stages through two flows, **DeepResearchFlow → AutoResearchFlow**, kept in one codebase (see [Roadmap](#-roadmap)).
 
@@ -281,7 +281,7 @@ SciClaw's staged evolution runs through two research flows over a shared archite
 | 1 | **DeepResearchFlow** | ✅ Current | Deep retrieval and synthesis — multi-engine search, quality gates, verifiable reports |
 | 2 | **AutoResearchFlow** | 🔄 Evolving | Autonomous research loops — hypothesis generation, experiment design and execution, iterative self-verification |
 
-Both flows live in one codebase (unified in v3.8); AutoResearchFlow is the direction that makes SciClaw a true AI4S research partner — mirroring how DevClaw drives the AI4SWE engineering loop.
+Both flows live in one codebase (unified in v3.8); AutoResearchFlow is the direction that makes SciClaw a true AI4S research partner, closing the loop from question to verified knowledge.
 
 ---
 

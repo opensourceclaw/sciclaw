@@ -6,7 +6,7 @@ All notable changes to SciClaw will be documented in this file.
 
 ### Changed — DeepClaw → SciClaw (identity integration)
 
-- **Renamed to SciClaw** — the AI4S counterpart of DevClaw: research you can verify. Package identity `sciclaw`; the former shared core package (deepclaw-core) is **merged into `src/core/`** — single-consumer library, the file dependency is gone. Platform-side renames (`deepclaw → sciclaw`; `deepclaw-core` archived after merge; `autoclaw` archived as superseded) are handled separately.
+- **Renamed to SciClaw** — verifiable deep research for AI4S; an independent member of the agent family. Package identity `sciclaw`; the former shared core package (deepclaw-core) is **merged into `src/core/`** — single-consumer library, the file dependency is gone. Platform-side renames (`deepclaw → sciclaw`; `deepclaw-core` and `autoclaw` removed) are handled separately.
 - **History note**: DeepClaw / AutoClaw / deepclaw-core were one project — AutoClaw was a 2-commit rename experiment (v3.7.0 era, mirrored from the same codebase), and both research flows (DeepResearchFlow / AutoResearchFlow) already ship together in this repo since v3.8.0. This is an identity breaking change, hence the major version jump to 4.0.0 for traceability (private repo, no external consumers).
 - **Brand strings** updated across README / SKILL / CONTRIBUTING / docs (living pages) / source comments and console prefixes. Flow class names (`DeepResearchFlow` / `AutoResearchFlow`) are unchanged — they are stage semantics, not branding.
 - **CLI renamed**: `sciclaw` (was `deepclaw`); plugin identity synced in `openclaw.plugin.json` (version was stale at 3.0.0).
