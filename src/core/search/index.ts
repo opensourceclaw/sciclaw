@@ -35,6 +35,25 @@ const BUILTIN_SOURCES: SearchSourceConfig[] = [
 
 // ── Search engine implementations (adapter for Coordinator) ────────────
 
+/**
+ * GA R2: DuckDuckGo html results wrap targets as
+ * `//duckduckgo.com/l/?uddg=<encoded real url>` (or a protocol-relative link) —
+ * unwrap to the real target so downstream domain verdicts (live acceptance E1)
+ * see the actual host. No-op for already-direct URLs.
+ */
+export function unwrapDdgUrl(href: string): string {
+  const m = href.match(/[?&]uddg=([^&]+)/);
+  const encoded = m?.[1];
+  if (encoded) {
+    try {
+      return decodeURIComponent(encoded);
+    } catch {
+      return href;
+    }
+  }
+  return href.startsWith("//") ? `https:${href}` : href;
+}
+
 async function duckduckgoSearch(query: string, maxResults: number, _signal: AbortSignal): Promise<SearchResult[]> {
   const url = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
   try {
@@ -52,7 +71,7 @@ async function duckduckgoSearch(query: string, maxResults: number, _signal: Abor
       const href = titleEl.attr("href") ?? "";
       const snippet = snippetEl.text().trim();
       if (title && href) {
-        results.push({ title, url: href, snippet, source: "duckduckgo", rank: results.length + 1 });
+        results.push({ title, url: unwrapDdgUrl(href), snippet, source: "duckduckgo", rank: results.length + 1 });
       }
     });
     return results;

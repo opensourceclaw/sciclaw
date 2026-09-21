@@ -8,6 +8,13 @@ export { ConnectionPool } from "./pool.js";
 export { SearchStream } from "./stream.js";
 export { PerformanceMetrics } from "./metrics.js";
 export type { SearchSourceConfig, SearchTask, SearchSourceResult, AggregatedResults, StreamEvent, BatchConfig, PoolConfig, PoolStats, LatencyRecord, MetricsSnapshot, CoordinatorConfig, SearchFn, } from "./types.js";
+/**
+ * GA R2: DuckDuckGo html results wrap targets as
+ * `//duckduckgo.com/l/?uddg=<encoded real url>` (or a protocol-relative link) —
+ * unwrap to the real target so downstream domain verdicts (live acceptance E1)
+ * see the actual host. No-op for already-direct URLs.
+ */
+export declare function unwrapDdgUrl(href: string): string;
 export declare function search(options: SearchOptions): Promise<SearchResult[]>;
 /** Stream search results as they arrive. (v3.0.3) */
 export declare function searchStream(options: SearchOptions): SearchStream;
