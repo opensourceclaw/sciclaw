@@ -1,10 +1,61 @@
 /**
  * Licensed under the Apache License, Version 2.0
- * SciClaw v3.9.0 — Metrics Collector (claw-obs integration)
+ * SciClaw v4.0.0 — Metrics Collector (self-contained; claw-obs port).
+ *
+ * claw-obs v2.5.0 removed the generic `EventBus` / `TokenCounter` utilities this
+ * module used: its v2.5 face is `MetricsAggregator` (windowed min/max/avg
+ * aggregation) + `AlertEngine` (rule-based alerting) — neither covers pub/sub
+ * consumer events or cumulative usage counters. Ported to internal lightweight
+ * equivalents, self-contained, zero new dependencies (ruling basis:
+ * ack-clawobs-port-metricscollector-20260921).
  */
 
-import { EventBus, TokenCounter } from "claw-obs";
 import type { ResearchMetrics, MetricsSnapshot, GateResult } from "./ResearchMetrics.js";
+
+/** Minimal internal event emitter — replaces claw-obs's removed `EventBus`. */
+class MetricsEventBus {
+  private handlers = new Map<string, Array<(payload: unknown) => void>>();
+
+  on(event: string, handler: (payload: unknown) => void): void {
+    const list = this.handlers.get(event) ?? [];
+    list.push(handler);
+    this.handlers.set(event, list);
+  }
+
+  emit(event: string, payload: unknown): void {
+    for (const handler of this.handlers.get(event) ?? []) {
+      handler(payload);
+    }
+  }
+}
+
+/** Minimal cumulative token counter — replaces claw-obs's removed `TokenCounter`. */
+class TokenUsageCounter {
+  private promptTokens = 0;
+  private completionTokens = 0;
+  private callCount = 0;
+
+  record(promptTokens: number, completionTokens: number): void {
+    this.promptTokens += promptTokens;
+    this.completionTokens += completionTokens;
+    this.callCount++;
+  }
+
+  get totals(): { prompt: number; completion: number; total: number; calls: number } {
+    return {
+      prompt: this.promptTokens,
+      completion: this.completionTokens,
+      total: this.promptTokens + this.completionTokens,
+      calls: this.callCount,
+    };
+  }
+
+  reset(): void {
+    this.promptTokens = 0;
+    this.completionTokens = 0;
+    this.callCount = 0;
+  }
+}
 
 export interface MetricsCollectorConfig {
   enableEvents?: boolean;
@@ -12,17 +63,17 @@ export interface MetricsCollectorConfig {
 }
 
 export class MetricsCollector {
-  private eventBus: EventBus | null = null;
-  private tokenCounter: TokenCounter;
+  private eventBus: MetricsEventBus | null = null;
+  private tokenCounter: TokenUsageCounter;
   private metrics: ResearchMetrics;
   private sessionId: string;
 
   constructor(config?: MetricsCollectorConfig) {
     this.sessionId = config?.sessionId ?? `deepclaw-${Date.now()}`;
     if (config?.enableEvents) {
-      this.eventBus = new EventBus();
+      this.eventBus = new MetricsEventBus();
     }
-    this.tokenCounter = new TokenCounter();
+    this.tokenCounter = new TokenUsageCounter();
     this.metrics = this.initMetrics();
   }
 
