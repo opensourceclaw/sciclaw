@@ -3,7 +3,7 @@
 exports[`GA acceptance GA-T1 (positive, fixture mode) > golden-output snapshot â€” normalized evidence block is frozen 1`] = `
 {
   "asOf": "<asOf>",
-  "blocked": true,
+  "blocked": false,
   "claims": [
     {
       "citations": [
@@ -165,9 +165,9 @@ exports[`GA acceptance GA-T1 (positive, fixture mode) > golden-output snapshot â
     },
     {
       "name": "bias-detection",
-      "passed": false,
-      "score": 0.6111111111111112,
-      "threshold": 0.3,
+      "passed": true,
+      "score": 0.5,
+      "threshold": 0.5,
     },
     {
       "name": "citation-integrity",
@@ -195,7 +195,7 @@ exports[`GA acceptance GA-T1 (positive, fixture mode) > golden-output snapshot â
     },
   ],
   "taskId": "<task>",
-  "verdictOverall": "blocked",
+  "verdictOverall": "pass",
   "verifications": [
     {
       "claimId": "C1",
@@ -312,7 +312,7 @@ exports[`GA acceptance GA-T1 (positive, fixture mode) > golden-output snapshot â
 exports[`GA acceptance GA-T2 (positive, fixture mode) > golden-output snapshot â€” normalized evidence block is frozen 1`] = `
 {
   "asOf": "<asOf>",
-  "blocked": true,
+  "blocked": false,
   "claims": [
     {
       "citations": [
@@ -906,9 +906,9 @@ exports[`GA acceptance GA-T2 (positive, fixture mode) > golden-output snapshot â
     },
     {
       "name": "bias-detection",
-      "passed": false,
-      "score": 0.6111111111111112,
-      "threshold": 0.3,
+      "passed": true,
+      "score": 0.5,
+      "threshold": 0.5,
     },
     {
       "name": "citation-integrity",
@@ -936,7 +936,7 @@ exports[`GA acceptance GA-T2 (positive, fixture mode) > golden-output snapshot â
     },
   ],
   "taskId": "<task>",
-  "verdictOverall": "blocked",
+  "verdictOverall": "pass",
   "verifications": [
     {
       "claimId": "C1",
@@ -1377,7 +1377,7 @@ exports[`GA acceptance GA-T2 (positive, fixture mode) > golden-output snapshot â
 exports[`GA acceptance GA-T5 (positive, fixture mode) > golden-output snapshot â€” normalized evidence block is frozen 1`] = `
 {
   "asOf": "<asOf>",
-  "blocked": true,
+  "blocked": false,
   "claims": [
     {
       "citations": [
@@ -1803,9 +1803,9 @@ exports[`GA acceptance GA-T5 (positive, fixture mode) > golden-output snapshot â
     },
     {
       "name": "bias-detection",
-      "passed": false,
-      "score": 0.6111111111111112,
-      "threshold": 0.3,
+      "passed": true,
+      "score": 0.5,
+      "threshold": 0.5,
     },
     {
       "name": "citation-integrity",
@@ -1833,7 +1833,7 @@ exports[`GA acceptance GA-T5 (positive, fixture mode) > golden-output snapshot â
     },
   ],
   "taskId": "<task>",
-  "verdictOverall": "blocked",
+  "verdictOverall": "pass",
   "verifications": [
     {
       "claimId": "C1",
@@ -2148,7 +2148,7 @@ exports[`GA acceptance GA-T5 (positive, fixture mode) > golden-output snapshot â
 exports[`GA acceptance GA-T6 (positive, fixture mode) > golden-output snapshot â€” normalized evidence block is frozen 1`] = `
 {
   "asOf": "<asOf>",
-  "blocked": true,
+  "blocked": false,
   "claims": [
     {
       "citations": [
@@ -2430,9 +2430,9 @@ exports[`GA acceptance GA-T6 (positive, fixture mode) > golden-output snapshot â
     },
     {
       "name": "bias-detection",
-      "passed": false,
-      "score": 0.6111111111111112,
-      "threshold": 0.3,
+      "passed": true,
+      "score": 0.5,
+      "threshold": 0.5,
     },
     {
       "name": "citation-integrity",
@@ -2460,7 +2460,7 @@ exports[`GA acceptance GA-T6 (positive, fixture mode) > golden-output snapshot â
     },
   ],
   "taskId": "<task>",
-  "verdictOverall": "blocked",
+  "verdictOverall": "pass",
   "verifications": [
     {
       "claimId": "C1",

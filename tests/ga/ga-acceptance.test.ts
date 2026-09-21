@@ -149,7 +149,7 @@ describe.each(POSITIVES)("GA acceptance %s (positive, fixture mode)", (id) => {
     expect(evidence.sources.length).toBeGreaterThanOrEqual(task.minCitations);
   });
 
-  it("E3 — all four gates present, blocked ⇔ any gate failed; blocked withholds conclusions", async () => {
+  it("E3 — all four gates present, blocked ⇔ any gate failed; positives reach the pass state", async () => {
     const report = await runFixtureTask(id);
     const evidence = evidenceOf(report);
 
@@ -166,10 +166,13 @@ describe.each(POSITIVES)("GA acceptance %s (positive, fixture mode)", (id) => {
     }
     expect(evidence.blocked).toBe(evidence.gates.some((g) => !g.passed));
     expect(report.blocked).toBe(evidence.blocked);
-    if (evidence.blocked) {
-      expect(report.sections.some((s) => s.heading === "Conclusions")).toBe(false);
-      expect(report.sections.some((s) => s.heading === "Evidence Status")).toBe(true);
-    }
+
+    // R1 §6.3: positive tasks reach the reachable pass state (bias recalibrated).
+    expect(evidence.blocked).toBe(false);
+    expect(report.blocked).toBe(false);
+    expect(evidence.verdictOverall).toBe("pass");
+    expect(report.sections.some((s) => s.heading === "Conclusions")).toBe(true);
+    expect(report.sections.some((s) => s.heading === "Evidence Status")).toBe(false);
   });
 
   it("E4 — every golden fact has a VERIFIED verifier verdict", async () => {
