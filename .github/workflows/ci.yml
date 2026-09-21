@@ -24,7 +24,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [22.x]  # family deps (openclaw via claw-ctx) require >=22.22.3; 18/20 legs fail at install
       # A failure in one leg must not cancel the others: cancels hide which
       # versions actually fail (observed on the v4.0.0 matrix).
       fail-fast: false
@@ -101,7 +101,7 @@ jobs:
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20.x
+          node-version: 22.x
           cache: 'npm'
           registry-url: https://npm.pkg.github.com
 
