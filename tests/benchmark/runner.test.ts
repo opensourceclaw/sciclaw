@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { BenchmarkRunner } from '../../src/benchmark/runner.js';
 import type { BenchmarkTask } from '../../src/benchmark/types.js';
+import { registerFixtureSearch } from '../helpers/fixture-search.js';
 
 const mockTask: BenchmarkTask = {
   id: 'test_task',
@@ -12,6 +13,10 @@ const mockTask: BenchmarkTask = {
 };
 
 describe('BenchmarkRunner', () => {
+  beforeEach(() => {
+    registerFixtureSearch();
+  });
+
   it('should register a single task', () => {
     const runner = new BenchmarkRunner();
     runner.registerTask(mockTask);
@@ -66,5 +71,38 @@ describe('BenchmarkRunner', () => {
     const report = await runner.runAll();
     expect(report.totalTasks).toBe(0);
     expect(report.passRate).toBe(0);
+  });
+
+  it('scores real pipeline outputs — no structural zeros (GA-A3)', async () => {
+    const runner = new BenchmarkRunner();
+    runner.registerTask({
+      ...mockTask,
+      id: 'real_task',
+      input: {
+        topic: 'fixture topic',
+        expectedFacts: ['fixture'],
+        expectedSources: [],
+        minSections: 2,
+        minCitations: 1,
+      },
+      scoring: { factualityWeight: 0.4, completenessWeight: 0.3, citationWeight: 0.2, reasoningWeight: 0.1, threshold: 0.1 },
+    });
+
+    const result = await runner.runTask('real_task');
+
+    expect(result.errors).toEqual([]);
+    expect(result.scores.factuality).toBeGreaterThan(0);
+    expect(result.metrics.claimCount).toBeGreaterThan(0);
+    expect(result.metrics.sourceCount).toBeGreaterThan(0);
+  });
+
+  it('reports the package version in the benchmark report (GA-A3)', async () => {
+    const { readFileSync } = await import('node:fs');
+    const pkg = JSON.parse(
+      readFileSync(new URL('../../package.json', import.meta.url), 'utf-8')
+    ) as { version: string };
+    const runner = new BenchmarkRunner();
+    const report = await runner.runAll();
+    expect(report.version).toBe(pkg.version);
   });
 });

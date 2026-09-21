@@ -1,0 +1,103 @@
+{
+  "timestamp": "2026-09-21T10:20:33.885Z",
+  "version": "4.0.0",
+  "totalTasks": 3,
+  "passedTasks": 3,
+  "passRate": 1,
+  "averageScores": {
+    "factuality": 0.667,
+    "completeness": 1,
+    "citation": 0.4,
+    "reasoning": 1,
+    "overall": 0.74
+  },
+  "categoryBreakdown": {
+    "factuality": {
+      "count": 1,
+      "passed": 1,
+      "avgScore": 0.88
+    },
+    "completeness": {
+      "count": 1,
+      "passed": 1,
+      "avgScore": 0.88
+    },
+    "citation": {
+      "count": 1,
+      "passed": 1,
+      "avgScore": 0.46
+    },
+    "reasoning": {
+      "count": 0,
+      "passed": 0,
+      "avgScore": 0
+    },
+    "multi_agent": {
+      "count": 0,
+      "passed": 0,
+      "avgScore": 0
+    }
+  },
+  "results": [
+    {
+      "taskId": "factuality-quantum",
+      "taskName": "Quantum computing fundamentals",
+      "category": "factuality",
+      "scores": {
+        "factuality": 1,
+        "completeness": 1,
+        "citation": 0.4,
+        "reasoning": 1,
+        "overall": 0.88
+      },
+      "metrics": {
+        "durationMs": 3906,
+        "tokenCount": 0,
+        "sourceCount": 12,
+        "claimCount": 33
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "taskId": "completeness-photosynthesis",
+      "taskName": "Photosynthesis process coverage",
+      "category": "completeness",
+      "scores": {
+        "factuality": 1,
+        "completeness": 1,
+        "citation": 0.4,
+        "reasoning": 1,
+        "overall": 0.88
+      },
+      "metrics": {
+        "durationMs": 2729,
+        "tokenCount": 0,
+        "sourceCount": 13,
+        "claimCount": 33
+      },
+      "passed": true,
+      "errors": []
+    },
+    {
+      "taskId": "citation-energy-storage",
+      "taskName": "Grid energy storage citations",
+      "category": "citation",
+      "scores": {
+        "factuality": 0,
+        "completeness": 1,
+        "citation": 0.4,
+        "reasoning": 1,
+        "overall": 0.46
+      },
+      "metrics": {
+        "durationMs": 1864,
+        "tokenCount": 0,
+        "sourceCount": 5,
+        "claimCount": 9
+      },
+      "passed": true,
+      "errors": []
+    }
+  ]
+}
