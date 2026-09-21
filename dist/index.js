@@ -2,7 +2,7 @@
  * SciClaw v3.7.0
  * Deep Research Framework — AI-powered multi-source research and synthesis
  */
-export const VERSION = '3.7.0';
+export const VERSION = '4.0.0';
 // Core module exports (src/core, merged 2026-09-21)
 export * from './core/index.js';
 // Deep Research specific modules

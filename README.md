@@ -8,7 +8,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4%2B-3178c6.svg)](https://www.typescriptlang.org/)
-[![Version](https://img.shields.io/badge/Version-4.0.0-orange.svg)](https://github.com/opensourceclaw/sciclaw)
+[![Release](https://img.shields.io/badge/Release-v4.0.0--ga-blue.svg)](https://github.com/opensourceclaw/sciclaw/releases/tag/v4.0.0-ga)
 [![Tests](https://img.shields.io/badge/Tests-959%20passed%20%2B%2026%20GA-brightgreen.svg)](#)
 
 </div>
@@ -52,49 +52,48 @@ The research capability evolves in stages through two flows, **DeepResearchFlow 
 
 | Feature | Description |
 |---------|-------------|
-| Multi-Engine Search | DuckDuckGo, Google, Bing |
-| Smart Content Extraction | Cheerio-based robust extraction |
-| Parallel Processing | Fast concurrent content retrieval |
-| Source Deduplication | URL and title-based deduplication |
-| Rich Reports | Markdown, HTML formats with citations |
-| REST API | Express-based API server |
-| **Gate Enforcement** (v3.5.0) | Quality checkpoints in pipelines |
-| **Pipeline CLI** (v3.5.0) | Command-line research workflows |
-| **Monitoring** (v3.5.0) | Metrics collection and alerting |
-| **Human-in-the-Loop** (v3.5.0) | Approval flow for critical decisions |
-| **Trigger Manager** (v3.5.0) | Scheduled and event-based triggers |
+| **DeepResearchFlow** | Staged research pipeline: plan → search → analyze → synthesize → report, with human-approval gates |
+| **Real Web Search** | DuckDuckGo live retrieval wired into the mainline (mock mode available via `--mock`) |
+| **Claim Verification** | Every claim passes a verifier; verdicts (support/refute/insufficient) ship with the report |
+| **Evidence Gates** | Four enforced gates — source credibility, cross-validation, bias detection, citation integrity — fail-closed |
+| **Evidence Block** | Reports embed the full evidence chain: resolved source URLs, per-claim citations, gate & verifier verdicts |
+| **Benchmark Harness** | Reproducible scoring (factuality / completeness / citation / reasoning) with committed baseline reports |
+| **GA Acceptance Suite** | Fixture + live end-to-end research tasks asserting the five-point evidence chain (`npm run test:ga`) |
+| **REST API** | Express-based API server (experimental) |
+| **Core Module** | Built-in search / extraction / validation / LLM engine (merged in v4.0.0) |
 
 ### Key Advantages
 
-- ⚡ **Fast Research**: Parallel processing with async support
-- 🎯 **TypeScript**: Full type safety and modern tooling
-- 🌍 **English Only**: 100% English codebase (v3.5.0)
-- 🌐 **REST API**: Express-based API server
-- 🚪 **Gate System**: Enforced quality checkpoints (v3.5.0)
-- 📊 **Monitoring**: Real-time metrics and alerts (v3.5.0)
-
----
+- ⚡ **Real, wired research**: live retrieval → claims → verifier → gates → report, runnable in one command
+- 🚪 **Fail-closed gates**: quality checkpoints that block report conclusions, not decorate them
+- 🔎 **Evidence you can inspect**: citations, verdicts and gate results embedded in every report
+- 🧪 **Machine-checked claims**: an acceptance suite and benchmark baseline guard the "verifiable" property itself
+- 🎯 **TypeScript**: full type safety, ESM, Node 22+
 
 ## 📦 Installation
 
 ### Prerequisites
 
-- **Node.js**: 18.0 or higher
-- **npm**: Latest version recommended
-
-```bash
-# Check Node.js version
-node --version
-```
+- **Node.js**: 22.x (family dependencies require ≥ 22.22.3)
+- **npm**: latest recommended
+- The three sibling repos `claw-cog`, `claw-ctx`, `claw-mem` (declared as `file:` dependencies)
 
 ### Method 1: From Source (Recommended)
 
 ```bash
-# Clone repository
+# Clone repository and its sibling dependencies
 git clone https://github.com/opensourceclaw/sciclaw.git
+git clone https://github.com/opensourceclaw/claw-cog.git
+git clone https://github.com/opensourceclaw/claw-ctx.git
+git clone https://github.com/opensourceclaw/claw-mem.git
+
+# Sibling repos must sit next to the sciclaw checkout
 cd sciclaw
 
-# Install dependencies
+# Install (siblings need install+build first — or use the CI recipe in .github/workflows/ci.yml)
+(cd ../claw-cog && npm install && npm run build)
+(cd ../claw-ctx && npm install && npm run build)
+(cd ../claw-mem && npm install && npm run build)
 npm install
 
 # Build
@@ -114,38 +113,44 @@ npm install -g sciclaw
 ### CLI Usage
 
 ```bash
-# Basic search
-node dist/cli/index.js search "artificial intelligence trends 2026"
+# Deep research on a topic (live web retrieval + evidence gates)
+node dist/cli/index.js research "CRISPR base editing efficiency" --mode deep
 
-# Deep research on a topic
-node dist/cli/index.js research "quantum computing" --depth deep
+# Autonomous mode (evolving)
+node dist/cli/index.js research "research topic" --mode auto
 
-# Generate report
-node dist/cli/index.js report <report-id>
+# Synthetic demo without network
+node dist/cli/index.js research "any topic" --mock
 
-# Start API server
-node dist/cli/index.js serve
+# Research pipeline management
+node dist/cli/index.js pipeline --help
+
+# Show version
+node dist/cli/index.js --version   # 4.0.0
+```
+
+Example output (real run):
+
+```
+Found 15 results across 3 queries
+Analysis: 29 claims, confidence 0.31
+Synthesis (extractive): 5 insights
+Report: 4 sections, 10 references
+Evidence: 10 sources, 29 claims, 29 verifier verdicts
+Gates: source-credibility:pass, cross-validation:pass, bias-detection:pass, citation-integrity:pass
 ```
 
 ### TypeScript API
 
+SciClaw's public surface is re-exported from `src/index.ts` (`src/core` + research + knowledge + agents + benchmark + synthesis + orchestrator). Version constant:
+
 ```typescript
-import { search, conductResearch, generateReport } from 'sciclaw';
-
-// Search
-const results = await search({ query: 'AI trends 2026', maxResults: 20 });
-
-// Research
-const research = await conductResearch({
-  topic: 'quantum computing',
-  depth: 'deep',
-});
-
-// Generate report
-const report = await generateReport(research.id, { format: 'markdown' });
+import { VERSION } from 'sciclaw'; // "4.0.0"
 ```
 
-### REST API Server
+Programmatic research is available through the flow layer (see `src/flows/deep_research_flow.ts`) and the benchmark runner (`src/benchmark/run.ts`).
+
+### REST API Server (experimental)
 
 ```bash
 # Start API server
@@ -153,6 +158,9 @@ npm run serve
 
 # Access API at http://localhost:3000
 ```
+
+> The REST surface is **experimental** in v4.0.0-ga: it is not covered by the GA
+> acceptance suite and its endpoints may change. The CLI is the supported entry point.
 
 **API Endpoints:**
 
@@ -172,18 +180,21 @@ npm run serve
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `--depth` | string | `medium` | Research depth (shallow/medium/deep) |
-| `--engine` | string | `duckduckgo` | Search engine |
-| `--format` | string | `markdown` | Output format |
-| `--output` | string | - | Output file path |
-| `--max-results` | number | `20` | Maximum results |
+| `--mode` | string | `deep` | Research mode (deep/auto) |
+| `--max-depth` | number | `5` | Maximum research depth |
+| `--timeout` | number | `300` | Research timeout (seconds) |
+| `--mock` | boolean | `false` | Synthetic data, no network (demos/tests) |
 
 ### Environment Variables
 
 ```bash
-# Optional LLM configuration
+# Optional LLM configuration (provider used for synthesis; without a key the
+# deterministic extractive path is used)
 DEEPCLAW_LLM_PROVIDER=deepseek
-DEEEPCLAW_LLM_API_KEY=your-api-key
+DEEPCLAW_LLM_API_KEY=your-api-key
+
+# Note: the DEEPCLAW_* namespace is a retained runtime contract from the
+# project's DeepClaw era; migration to SCICLAW_* is planned for v4.1.
 
 # Server configuration
 PORT=3000
@@ -194,14 +205,14 @@ HOST=localhost
 
 ## 🔌 OpenClaw Plugin Integration
 
-SciClaw v2.0.0+ is designed as an OpenClaw plugin.
+SciClaw ships with an OpenClaw plugin manifest.
 
 ### Plugin Configuration
 
 The `openclaw.plugin.json` file defines:
 
 - Plugin metadata (name, version, description)
-- CLI commands (search, research, report, serve)
+- CLI commands (research, pipeline)
 - API endpoints
 - Default configuration
 
@@ -211,7 +222,7 @@ The `openclaw.plugin.json` file defines:
 
 ```
 ┌─────────────────────────────────────────┐
-│           SciClaw v2.0.0               │
+│           SciClaw v4.0.0-ga            │
 ├─────────────────────────────────────────┤
 │  ┌─────────────────────────────────┐   │
 │  │     CLI (Commander)             │   │  ← Command Line Interface
@@ -257,20 +268,17 @@ npm run test:watch
 npm run test:coverage
 ```
 
-### Current Coverage
+### Current Suite
 
-| Module | Coverage |
-|--------|----------|
-| Overall | **71.53%** |
-| search | 74.28% |
-| research | 96.92% |
-| report | 100% |
-| extractor | 96.29% |
-| dedup | 96% |
-| tools | 91.13% |
-| llm | 75.6% |
+```bash
+npm test        # 959 passed | 4 skipped (76 files)
+npm run test:ga # GA acceptance suite: 26/26 (fixture; CI-blocking)
+npm run benchmark
+```
 
----
+Statement coverage: 54% overall — deliberately strongest on the evidence-critical
+modules (`gate/`, `core/validation`, benchmark) with the GA suite asserting the
+end-to-end evidence chain; per-module numbers in `coverage/`.
 
 ## 🗺️ Roadmap
 
@@ -289,22 +297,8 @@ Both flows live in one codebase (unified in v3.8); AutoResearchFlow is the direc
 
 ## 📝 Changelog
 
-### v2.0.0-beta.1 (2026-06-14)
-
-- ✅ **TypeScript Migration**: Complete Python → TypeScript migration
-- ✅ **New Architecture**: Express API, Commander CLI
-- ✅ **Dependencies**: axios, cheerio, zod, turndown
-- ✅ **Test Coverage**: 71.53% with vitest
-- ✅ **OpenClaw Plugin**: Standard plugin configuration
-
-### v1.0.0 (2026-05-07)
-
-- ✅ Python-based research framework
-- ✅ Multi-engine search
-- ✅ Multi-provider LLM
-- ✅ Source validation
-
----
+See [CHANGELOG.md](CHANGELOG.md) and the [releases page](https://github.com/opensourceclaw/sciclaw/releases).
+Current milestone: **v4.0.0-ga** — identity integration (DeepClaw → SciClaw), core merged in-repo, evidence-gated research line GA'd.
 
 ## 🔄 Comparison with Other Systems
 
