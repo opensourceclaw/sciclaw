@@ -5,7 +5,7 @@
  * Licensed under the Apache License, Version 2.0
  */
 
-import { search } from "@sciclaw/core";
+import { search } from "../core/index.js";
 import { ResearchPlanner } from "./planner.js";
 import { ResearchSynthesizer, ReportFormatter } from "./synthesizer.js";
 import type {

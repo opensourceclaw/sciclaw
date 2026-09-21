@@ -1,6 +1,6 @@
 import crypto from "crypto";
-import type { Entity } from "@sciclaw/core";
-import type { Relation } from "@sciclaw/core";
+import type { Entity } from "../core/index.js";
+import type { Relation } from "../core/index.js";
 import type { GraphNode, GraphEdge, KnowledgeGraph } from "./types.js";
 
 function hash(input: string): string {

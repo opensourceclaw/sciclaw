@@ -35,7 +35,6 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@sciclaw/core": "file:../deepclaw-core",
     "claw-cog": "file:../claw-cog",
     "claw-mem": "file:../claw-mem",
     "claw-ctx": "file:../claw-ctx",

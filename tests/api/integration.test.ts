@@ -3,7 +3,7 @@ import express from 'express';
 import { createServer } from '../../src/api/index.js';
 
 // Mock all dependencies
-vi.mock('@sciclaw/core', () => ({
+vi.mock('../../src/core/index.js', () => ({
   search: vi.fn().mockResolvedValue([
     { title: 'Test', url: 'https://example.com', snippet: 'Test', source: 'duckduckgo' },
   ]),
@@ -56,7 +56,7 @@ describe('API Integration Tests', () => {
       app.use(express.json());
 
       // Import and setup routes
-      const { search } = await import('@sciclaw/core');
+      const { search } = await import('../../src/core/index.js');
       const { conductResearch } = await import('../../src/research/index.js');
       const { generateReport } = await import('../../src/report/index.js');
 

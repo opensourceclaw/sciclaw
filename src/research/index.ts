@@ -6,15 +6,15 @@
  */
 
 import { v4 as uuidv4 } from "uuid";
-import { search, extractContent, OpenClawModelAdapter } from "@sciclaw/core";
+import { search, extractContent, OpenClawModelAdapter } from "../core/index.js";
 import type {
   ResearchOptions,
   ResearchResult,
   ResearchSection,
   SourceCitation,
-} from "@sciclaw/core";
+} from "../core/index.js";
 
-// Export types (excluding conflicting ones - LLMEngine is in @sciclaw/core)
+// Export types (excluding conflicting ones - LLMEngine is in the core module)
 export type {
   ResearchPlan,
   ResearchFinding,

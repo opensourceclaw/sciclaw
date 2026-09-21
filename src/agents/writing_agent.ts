@@ -1,7 +1,7 @@
 import { BaseAgent } from "./base_agent.js";
 import type { AgentConfig, AgentTask, AgentResult } from "./types.js";
 import { AgentRole } from "./types.js";
-import { CitationStyle } from "@sciclaw/core";
+import { CitationStyle } from "../core/index.js";
 
 export class WritingAgent extends BaseAgent {
   constructor(config?: Partial<AgentConfig> & { role: AgentRole }) {

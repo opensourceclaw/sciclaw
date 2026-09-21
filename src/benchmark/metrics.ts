@@ -1,5 +1,5 @@
-import type { VerificationResult } from "@sciclaw/core";
-import { VerificationStatus } from "@sciclaw/core";
+import type { VerificationResult } from "../core/index.js";
+import { VerificationStatus } from "../core/index.js";
 import type { BenchmarkScore } from "./types.js";
 
 function overlapRatio(a: string, b: string): number {

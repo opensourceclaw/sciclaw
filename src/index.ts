@@ -5,14 +5,14 @@
 
 export const VERSION = '3.7.0';
 
-// Core exports from @sciclaw/core
-export * from '@sciclaw/core';
+// Core module exports (src/core, merged 2026-09-21)
+export * from './core/index.js';
 
 // Deep Research specific modules
 export * from './research/index.js';
 
 // v2.0.0-rc.2 — Validation + Knowledge Graph
-// Validation moved to @sciclaw/core
+// Validation moved to the core module
 export * from './knowledge/index.js';
 
 // v2.0.0-rc.3 — Multi-Agent System + Benchmark

@@ -5,8 +5,8 @@
  * Licensed under the Apache License, Version 2.0
  */
 
-import { search } from "@sciclaw/core";
-import type { SearchResult } from "@sciclaw/core";
+import { search } from "../core/index.js";
+import type { SearchResult } from "../core/index.js";
 import type { ResearchSearchResult } from "./types.js";
 
 /**

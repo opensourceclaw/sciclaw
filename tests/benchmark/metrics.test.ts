@@ -6,7 +6,7 @@ import {
   computeReasoningDepth,
   computeOverall,
 } from '../../src/benchmark/metrics.js';
-import { VerificationStatus } from '@sciclaw/core';
+import { VerificationStatus } from '../../src/core/index.js';
 
 describe('Benchmark Metrics', () => {
   describe('computeFactuality', () => {
