@@ -73,6 +73,8 @@ export class InternalVerifyGate {
       version: submission.version,
       warnings: validation.warnings,
       summary: validation.summary,
+      // GA-A6: real baseline for the next run's regression check.
+      testCount: submission.tests.total,
     });
   }
 
