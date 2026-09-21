@@ -6,11 +6,19 @@
  */
 import type { ResearchSearchResult } from "./types.js";
 /**
- * Research search engine with caching and quality annotation
+ * Research search engine with caching and quality annotation.
+ *
+ * GA-A2: failures are OBSERVABLE — the previous silent mock fallback is gone.
+ * Synthetic results are produced only when `allowMock` is explicitly set
+ * (mock mode / tests); otherwise a failed search throws with the cause.
  */
 export declare class ResearchSearchEngine {
     private resultsCache;
     private providerName;
+    private allowMock;
+    constructor(opts?: {
+        allowMock?: boolean;
+    });
     /**
      * Search for results
      */
@@ -20,7 +28,8 @@ export declare class ResearchSearchEngine {
      */
     private convertResult;
     /**
-     * Mock search implementation
+     * Mock search implementation — explicit mock mode only, clearly labeled
+     * (reserved `.invalid` URLs, source "mock").
      */
     private mockSearch;
     /**
@@ -47,5 +56,7 @@ export declare class ResearchSearchEngine {
 /**
  * Search for results (convenience function)
  */
-export declare function researchSearch(query: string, limit?: number): Promise<ResearchSearchResult[]>;
+export declare function researchSearch(query: string, limit?: number, opts?: {
+    allowMock?: boolean;
+}): Promise<ResearchSearchResult[]>;
 //# sourceMappingURL=search.d.ts.map

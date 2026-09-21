@@ -1,11 +1,11 @@
 /**
  * LLM Providers - Provider implementations
  */
-import "./deepseek";
-import "./glm";
-import "./minimax";
-import "./kimi";
-import "./qwen";
+import "./deepseek.js";
+import "./glm.js";
+import "./minimax.js";
+import "./kimi.js";
+import "./qwen.js";
 export { DeepSeekProvider } from "./deepseek.js";
 export { GLMProvider } from "./glm.js";
 export { MiniMaxProvider } from "./minimax.js";

@@ -20,8 +20,8 @@ export { MessageRole, ChatMessageUtil, ChatCompletionUtil, ChatCompletionStreamC
 export { LLMProvider, LLMProviderRegistry, registerLLMProvider, } from "./base.js";
 // Engine
 export { LLMEngine } from "./engine.js";
-// Import providers to register them
-import "./providers";
+// Import providers to register them (explicit index.js — Node ESM has no directory resolution)
+import "./providers/index.js";
 // Re-export provider classes
 export { DeepSeekProvider, GLMProvider, MiniMaxProvider, KimiProvider, QwenProvider, } from "./providers/index.js";
 //# sourceMappingURL=index.js.map

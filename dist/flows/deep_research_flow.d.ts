@@ -14,11 +14,58 @@
 import { ResearchStrategy, type ResearchContext, type SubQuery, type ResearchSearchResult, type BlindSpot } from "../orchestrator/types.js";
 import { ResearchStateMachine } from "../orchestrator/research-state-machine.js";
 import type { ValidationResult } from "../stages/validate.js";
+import { type FlowLLMConfig } from "./wiring.js";
+import type { GateResult } from "../gate/research/types.js";
+/**
+ * Evidence chain (GA-A1/A4): the four research gates run over the run's real
+ * data in report(), and the machine-readable block below is embedded in the
+ * report so claims/citations/verdicts are user-visible and auditable.
+ */
+export interface EvidenceSource {
+    id: string;
+    title: string;
+    url: string;
+    domain: string;
+    accessedAt: string;
+    contentSha256: string;
+}
+export interface EvidenceClaim {
+    id: string;
+    text: string;
+    type: string;
+    citations: string[];
+}
+export interface EvidenceVerification {
+    claimId: string;
+    status: string;
+    confidence: number;
+    supportingSources: number;
+}
+export interface EvidenceGate {
+    name: string;
+    passed: boolean;
+    score: number;
+    threshold: number;
+}
+export interface EvidenceBlock {
+    taskId: string;
+    asOf: string;
+    sources: EvidenceSource[];
+    claims: EvidenceClaim[];
+    verifications: EvidenceVerification[];
+    gates: EvidenceGate[];
+    blocked: boolean;
+    verdictOverall: "pass" | "blocked" | "partial";
+}
 export type ResearchStage = "plan" | "search" | "analyze" | "synthesize" | "report";
 export interface DeepResearchConfig {
     maxDepth?: number;
     timeout?: number;
     approvalRequired?: boolean;
+    /** Mock mode: synthetic, explicitly labeled results — CLI `--mock` / tests only. */
+    mock?: boolean;
+    /** Optional LLM synthesis settings; unresolved settings fall back to extractive synthesis. */
+    llm?: FlowLLMConfig;
 }
 export interface ResearchPlan {
     originalQuery: string;
@@ -40,6 +87,8 @@ export interface SynthesisResult {
     summary: string;
     keyInsights: string[];
     openQuestions: string[];
+    /** Provenance: how this synthesis was produced (GA-A2 honesty label). */
+    synthesisMode?: "llm" | "extractive";
 }
 export interface ResearchReport {
     title: string;
@@ -49,6 +98,10 @@ export interface ResearchReport {
         content: string;
     }>;
     references: string[];
+    /** Machine-readable evidence chain (GA-A1/A4) — additive. */
+    evidence?: EvidenceBlock;
+    /** True when any research gate failed: conclusions must not be emitted (fail-closed). */
+    blocked?: boolean;
 }
 export type ApprovalCallback = (step: string, details: string) => Promise<boolean>;
 /**
@@ -64,6 +117,10 @@ export declare class DeepResearchFlow {
     private stageDurations;
     private stageStartTime;
     private paused;
+    private verifications;
+    private gateResultsRich;
+    private lastSynthesis;
+    private evidenceClaims;
     constructor(approvalCallback?: ApprovalCallback, config?: DeepResearchConfig);
     getCurrentStage(): ResearchStage;
     getProgress(): number;
@@ -85,6 +142,10 @@ export declare class DeepResearchFlow {
     /**
      * Initialize state machine with context
      */
+    /** Build the machine-readable evidence chain and run the four research gates. */
+    private buildEvidence;
+    /** Rich gate results of the last report() run (EvidenceBlock is the machine-readable mirror). */
+    getEvidenceGateResults(): Map<string, GateResult>;
     initStateMachine(initialContext?: Record<string, unknown>): ResearchStateMachine;
     /**
      * Get current stage from state machine

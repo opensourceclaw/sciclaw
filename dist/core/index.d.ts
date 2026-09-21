@@ -12,7 +12,7 @@ export { LLMEngine, LLMEngineOptions, ModelInfo, } from './llm/index.js';
 export { OpenClawModelAdapter, ModelRouter, FallbackHandler, CostOptimizer, } from './model/index.js';
 export { SearchCache, CacheAnalytics, InvalidationManager, CacheCompressor, CacheWarmer, DistributedCache, getCache, clearCache, setGlobalCache, } from './cache/index.js';
 export * from './tools/index.js';
-export { ClaimType, RiskLevel, CitationStyle, VerificationStatus, RiskScorer, assessRisk, FactCheckService, verifyClaim, verifySource, } from './validation/index.js';
+export { ClaimType, RiskLevel, CitationStyle, VerificationStatus, RiskScorer, assessRisk, FactCheckService, verifyClaim, verifySource, ClaimExtractor, extractClaims, } from './validation/index.js';
 export type { NumericClaim, Claim, DomainScore, FreshnessScore, SourceScore, AuthorityScore, RiskAssessment, Citation, VerificationResult, SourceVerificationSummary, } from './validation/index.js';
 export * from './nlp/index.js';
 export { extractContent } from './extractor/index.js';

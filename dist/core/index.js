@@ -17,7 +17,7 @@ export { SearchCache, CacheAnalytics, InvalidationManager, CacheCompressor, Cach
 // Tools - 通用工具
 export * from './tools/index.js';
 // Validation - 验证框架
-export { ClaimType, RiskLevel, CitationStyle, VerificationStatus, RiskScorer, assessRisk, FactCheckService, verifyClaim, verifySource, } from './validation/index.js';
+export { ClaimType, RiskLevel, CitationStyle, VerificationStatus, RiskScorer, assessRisk, FactCheckService, verifyClaim, verifySource, ClaimExtractor, extractClaims, } from './validation/index.js';
 // NLP - NLP 基础
 export * from './nlp/index.js';
 // Extractor - 内容提取

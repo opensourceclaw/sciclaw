@@ -17,6 +17,7 @@ import { GateRegistry } from "../../gate/GateRegistry.js";
 import { InternalVerifyGate } from "../../gate/gates/InternalVerifyGate.js";
 import { PipelineCoordinator } from "../pipeline-coordinator.js";
 import { PipelineStage } from "../types.js";
+import { collectVerifySubmission } from "./verify-artifacts.js";
 /**
  * Run verification gate on pipeline.
  */
@@ -31,22 +32,16 @@ export async function verifyPipeline(pipelineId) {
         console.error(`Pipeline is not in verify stage. Current stage: ${state.currentStage}`);
         process.exit(1);
     }
+    // GA-A6: collect REAL artifacts — typecheck/build/test run live; version,
+    // regression baseline and quality checks come from real sources (no literals).
+    console.log("Collecting real check artifacts (typecheck / build / test)…");
+    const submission = collectVerifySubmission(state.id);
+    const t = submission.tests;
+    console.log(`   typecheck: ${submission.typeCheck.passed ? "passed" : "FAILED"} (${submission.typeCheck.errors} errors)`);
+    console.log(`   build: ${submission.build.passed ? "passed" : "FAILED"}`);
+    console.log(`   tests: ${t.passed}/${t.total} passed${t.failed ? `, ${t.failed} failed` : ""}${t.skipped ? `, ${t.skipped} skipped` : ""}`);
+    console.log(`   quality: chineseChars=${submission.qualityChecks.hasChineseChars} hardcodedPaths=${submission.qualityChecks.hasHardcodedPaths} missingHeaders=${submission.qualityChecks.hasMissingApacheHeaders}`);
     console.log("Running internal verification...");
-    // Create submission from current state
-    const submission = {
-        pipelineId: state.id,
-        version: "v3.5.0",
-        typeCheck: { passed: true, errors: 0 },
-        build: { passed: true },
-        tests: { total: 0, passed: 0, failed: 0, skipped: 0 },
-        regression: { passed: true, previousTotal: 0, currentTotal: 0 },
-        qualityChecks: {
-            hasChineseChars: false,
-            hasHardcodedPaths: false,
-            hasMissingApacheHeaders: false,
-        },
-        configValid: true,
-    };
     const registry = new GateRegistry();
     const gate = new InternalVerifyGate(registry);
     try {

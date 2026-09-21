@@ -6,7 +6,6 @@
  */
 export * from './retry.js';
 export * from './user_agent.js';
-export * from './web_search.js';
 export * from './source_validation.js';
 export * from './content_extraction.js';
 export * from './report_formatter.js';

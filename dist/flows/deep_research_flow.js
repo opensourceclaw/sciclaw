@@ -14,9 +14,19 @@
 // Copyright 2026 Peter Cheng
 // SciClaw v3.9.0 — Deep Research Flow (Interactive, Depth-First)
 import { ResearchStrategy, } from "../orchestrator/types.js";
+import { createHash } from "node:crypto";
 import { ResearchStateMachine } from "../orchestrator/research-state-machine.js";
 import { observeStage } from "../stages/observe.js";
 import { validateStage } from "../stages/validate.js";
+import { searchSubQueries, synthesizeResults } from "./wiring.js";
+import { extractClaims, verifyClaim, VerificationStatus } from "../core/index.js";
+import { researchGateRegistry } from "../gate/research/research-gate-registry.js";
+const EVIDENCE_GATE_NAMES = [
+    "source-credibility",
+    "cross-validation",
+    "bias-detection",
+    "citation-integrity",
+];
 const STAGE_ORDER = ["plan", "search", "analyze", "synthesize", "report"];
 /**
  * Interactive deep research flow.
@@ -31,6 +41,10 @@ export class DeepResearchFlow {
     stageDurations = new Map();
     stageStartTime = 0;
     paused = false;
+    verifications = [];
+    gateResultsRich = new Map();
+    lastSynthesis = null;
+    evidenceClaims = [];
     constructor(approvalCallback, config) {
         this.onApprove = approvalCallback ?? (async () => true);
         this.config = { maxDepth: 5, timeout: 300000, approvalRequired: true, ...config };
@@ -113,16 +127,17 @@ export class DeepResearchFlow {
         if (this.config.approvalRequired) {
             await this.requestApproval("SEARCH", `Queries: ${this.context.subQueries.map(q => q.query).join(", ")}`);
         }
-        const resultSets = [];
-        for (const sq of this.context.subQueries.slice(0, 3)) {
-            const results = [
-                { title: `${sq.query} — Source 1`, url: `https://example.com/1`, snippet: "Relevant content found...", source: "duckduckgo" },
-                { title: `${sq.query} — Source 2`, url: `https://example.com/2`, snippet: "Additional context...", source: "duckduckgo" },
-            ];
-            this.searchResults.push(...results);
-            resultSets.push({ query: sq.query, results, timestamp: Date.now() });
-        }
+        const resultSets = await searchSubQueries(this.context.subQueries, {
+            maxQueries: 3,
+            maxResults: 5,
+            mock: this.config.mock,
+        });
+        this.searchResults.push(...resultSets.flatMap((s) => s.results));
         this.context.results = this.searchResults;
+        // Evidence chain: deterministic claim extraction over what was actually retrieved.
+        this.evidenceClaims = this.searchResults
+            .filter((r) => Boolean(r.snippet))
+            .flatMap((r) => extractClaims(r.snippet, r.url, r.title));
         this.endStage();
         return resultSets;
     }
@@ -134,16 +149,22 @@ export class DeepResearchFlow {
         if (this.config.approvalRequired) {
             await this.requestApproval("ANALYZE", "Validating claims and detecting blind spots...");
         }
-        const blindSpots = [
-            { id: "bs-1", aspect: "recent publications", reason: "uncovered", priority: 2, suggestedQueries: ["latest research"] },
-            { id: "bs-2", aspect: "methodology", reason: "shallow", priority: 1, suggestedQueries: ["detailed methodology"] },
-        ];
+        // Evidence chain: verify every extracted claim against the collected corpus
+        // (the retrieved source texts — FactCheckService compares claims to source
+        // TEXTS). Confidence = the real verifier coverage ratio — no invented
+        // constants. No blind-spot engine yet, so the list is honestly empty.
+        const corpus = [...new Set(this.searchResults.map((r) => r.snippet).filter((s) => Boolean(s)))];
+        this.verifications = await Promise.all(this.evidenceClaims.map((c) => verifyClaim(c, corpus)));
+        const total = this.verifications.length;
+        const verified = this.verifications.filter((v) => v.status === VerificationStatus.VERIFIED).length;
+        const confidence = total > 0 ? verified / total : 0;
+        const blindSpots = [];
         this.context.blindSpots = blindSpots;
         this.context.iteration++;
         this.endStage();
         return {
-            claimsCount: this.context.claims.length,
-            confidence: 0.75,
+            claimsCount: this.evidenceClaims.length,
+            confidence,
             blindSpots,
         };
     }
@@ -155,12 +176,10 @@ export class DeepResearchFlow {
         if (this.config.approvalRequired) {
             await this.requestApproval("SYNTHESIZE", "Generating synthesis...");
         }
+        const synthesis = await synthesizeResults(this.context.originalQuery, this.searchResults, this.config.llm);
+        this.lastSynthesis = synthesis;
         this.endStage();
-        return {
-            summary: `Research synthesis for: ${this.context.originalQuery}`,
-            keyInsights: ["Key insight 1", "Key insight 2", "Key insight 3"],
-            openQuestions: ["Open question A", "Open question B"],
-        };
+        return synthesis;
     }
     async report() {
         await this.assertNotPaused();
@@ -170,18 +189,38 @@ export class DeepResearchFlow {
         if (this.config.approvalRequired) {
             await this.requestApproval("REPORT", "Final report generation");
         }
+        const asOf = new Date().toISOString();
+        const evidence = await this.buildEvidence(asOf);
         this.endStage();
         this.currentStage = "report";
+        const findings = this.evidenceClaims.length
+            ? this.evidenceClaims.slice(0, 5).map((c) => c.text).join("\n")
+            : "No factual claims were extracted from the collected sources.";
+        const conclusions = this.lastSynthesis?.keyInsights.join("\n") ?? "";
+        const sections = [
+            { heading: "Introduction", content: `Research topic: ${this.context.originalQuery}` },
+            { heading: "Methodology", content: "Depth-first research strategy; claims extracted deterministically and verified against the collected corpus." },
+            { heading: "Findings", content: findings },
+        ];
+        if (evidence.blocked) {
+            const failed = evidence.gates.filter((g) => !g.passed).map((g) => g.name).join(", ");
+            sections.push({
+                heading: "Evidence Status",
+                content: `BLOCKED — gate check(s) failed: ${failed}. Conclusions are withheld (fail-closed): the evidence does not support emitting conclusions.`,
+            });
+        }
+        else {
+            sections.push({ heading: "Conclusions", content: conclusions });
+        }
         return {
             title: `Deep Research: ${this.context.originalQuery}`,
-            abstract: `An in-depth research report on ${this.context.originalQuery}.`,
-            sections: [
-                { heading: "Introduction", content: "..." },
-                { heading: "Methodology", content: "Depth-first research strategy." },
-                { heading: "Findings", content: "..." },
-                { heading: "Conclusions", content: "..." },
-            ],
-            references: ["https://example.com/ref1", "https://example.com/ref2"],
+            abstract: evidence.blocked
+                ? `Research on ${this.context.originalQuery} was blocked by gate checks — see Evidence Status.`
+                : `An in-depth research report on ${this.context.originalQuery}.`,
+            sections,
+            references: evidence.sources.map((s) => s.url),
+            evidence,
+            blocked: evidence.blocked,
         };
     }
     async requestApproval(step, details) {
@@ -196,6 +235,103 @@ export class DeepResearchFlow {
     /**
      * Initialize state machine with context
      */
+    /** Build the machine-readable evidence chain and run the four research gates. */
+    async buildEvidence(asOf) {
+        const sources = [];
+        const urlToSourceId = new Map();
+        for (const r of this.searchResults) {
+            if (!r.url || urlToSourceId.has(r.url))
+                continue;
+            const id = `S${sources.length + 1}`;
+            urlToSourceId.set(r.url, id);
+            sources.push({
+                id,
+                title: r.title,
+                url: r.url,
+                domain: (() => {
+                    try {
+                        return new URL(r.url).hostname;
+                    }
+                    catch {
+                        return "";
+                    }
+                })(),
+                accessedAt: r.timestamp ?? asOf,
+                contentSha256: createHash("sha256").update(r.snippet ?? "", "utf8").digest("hex"),
+            });
+        }
+        const claimsList = this.evidenceClaims;
+        const claims = claimsList.map((c) => ({
+            id: c.id,
+            text: c.text,
+            type: String(c.type),
+            citations: c.sourceUrl && urlToSourceId.has(c.sourceUrl) ? [urlToSourceId.get(c.sourceUrl)] : [],
+        }));
+        const verifications = this.verifications.map((v) => ({
+            claimId: v.claim.id,
+            status: String(v.status),
+            confidence: v.confidence,
+            supportingSources: v.supportingSources,
+        }));
+        // Gate context per context/ResearchContext contract; relevanceScore is derived
+        // from retrieval rank (core/search exposes no relevance score — same positional
+        // convention as research/search.ts convertResult).
+        const gateContext = {
+            topic: this.context?.originalQuery ?? "",
+            questions: this.context?.subQueries.map((q) => q.query) ?? [],
+            searchResults: this.searchResults.map((r, i) => ({
+                url: r.url,
+                title: r.title,
+                snippet: r.snippet,
+                source: r.source,
+                timestamp: r.timestamp ?? asOf,
+                relevanceScore: Math.max(0.1, 1 - i * 0.1),
+            })),
+            extractions: [],
+            synthesis: this.lastSynthesis
+                ? {
+                    summary: this.lastSynthesis.summary,
+                    arguments: claimsList.map((c) => ({
+                        claim: c.text,
+                        evidence: c.sourceUrl ? [c.sourceUrl] : [],
+                    })),
+                    conclusions: this.lastSynthesis.keyInsights,
+                    citations: sources.map((s) => ({
+                        id: s.id,
+                        source: s.title || s.domain,
+                        url: s.url,
+                        accessedAt: s.accessedAt,
+                    })),
+                }
+                : undefined,
+            stage: "validate",
+        };
+        this.gateResultsRich = new Map();
+        const gates = [];
+        for (const name of EVIDENCE_GATE_NAMES) {
+            const gate = researchGateRegistry.get(name);
+            if (!gate)
+                continue;
+            const result = await gate.check(gateContext);
+            this.gateResultsRich.set(name, result);
+            gates.push({ name, passed: result.passed, score: result.score, threshold: result.threshold });
+        }
+        const blocked = gates.length > 0 && gates.some((g) => !g.passed);
+        return {
+            taskId: this.context?.sessionId ?? "unknown",
+            asOf,
+            sources,
+            claims,
+            verifications,
+            gates,
+            blocked,
+            verdictOverall: blocked ? "blocked" : sources.length > 0 ? "pass" : "partial",
+        };
+    }
+    /** Rich gate results of the last report() run (EvidenceBlock is the machine-readable mirror). */
+    getEvidenceGateResults() {
+        return new Map(this.gateResultsRich);
+    }
     initStateMachine(initialContext = {}) {
         this.stateMachine = new ResearchStateMachine(initialContext);
         return this.stateMachine;
