@@ -1,0 +1,59 @@
+name: Research output problem
+description: A report is wrong, unsupported, or its evidence chain is incomplete
+labels: ["research-quality"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when the pipeline ran but the **output** is not
+        trustworthy: a claim without support, a missing/unreachable citation, a
+        gate result that does not match the report, or a verifier verdict that is
+        absent or inconsistent.
+  - type: input
+    id: topic
+    attributes:
+      label: Research topic / query
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: The problematic claim or section
+      description: Quote the report text and point at the claim you dispute.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong
+      options:
+        - Unsupported claim (no citation)
+        - Citation does not exist / is unreachable
+        - Citation does not support the claim
+        - Missing or mismatched gate result
+        - Missing verifier verdict
+        - Contradictory statements within the report
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Links, sources, or reasoning that shows the problem.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit and run mode
+      description: Version (or commit) plus whether the run used live search/LLM or mock mode.
+    validations:
+      required: true
+  - type: textarea
+    id: artifact
+    attributes:
+      label: Run artifact
+      description: If available, attach the report output and the gate/verifier block from the same run.
+    validations:
+      required: false

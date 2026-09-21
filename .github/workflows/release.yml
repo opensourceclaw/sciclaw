@@ -1,0 +1,97 @@
+name: Release guard
+
+# Tag-triggered, fail-closed release guard (v4.0.0-ga B3, slimmed from the
+# claw-eva/claw-rsi guard chain). SciClaw publishes nothing to a registry, so the
+# publish short-circuit and notes-first-as-Release-creator steps of those repos do
+# not apply. What is kept is the part that can silently rot:
+#
+#   1. tag <-> package.json (and plugin manifest) version equality, so a mislabelled
+#      tag cannot ship;
+#   2. the Release must already exist BEFORE the tag is considered released, and its
+#      body must equal the in-repo notes file (a machine-generated body, or a notes
+#      file edited after publication, fails the job instead of passing silently).
+#
+# Ordering note: this guard runs on tag push. It does not create the Release --
+# creating it from the in-repo notes file first, then pushing the tag, is the
+# intended sequence (see docs/roadmaps/releases/ and the v4.0.0 receipt).
+#
+# The `-ga` suffix is a milestone marker on top of the version (devclaw precedent:
+# v9.0.0-ga), so it is stripped before the version comparison.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Tag <-> version files (package.json, plugin manifest)
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          base="${tag#v}"
+          base="${base%-ga}"
+          base="${base%-ga-phase*}"
+          pkg=$(node -p "require('./package.json').version")
+          plugin=$(node -p "require('./openclaw.plugin.json').version")
+          echo "tag=${tag} base=${base} package.json=${pkg} openclaw.plugin.json=${plugin}"
+          if [ "${base}" != "${pkg}" ]; then
+            echo "::error::tag ${tag} implies version ${base} but package.json says ${pkg}"
+            exit 1
+          fi
+          if [ "${base}" != "${plugin}" ]; then
+            echo "::error::tag ${tag} implies version ${base} but openclaw.plugin.json says ${plugin}"
+            exit 1
+          fi
+
+      - name: Release exists and body == in-repo notes (notes-first, fail-closed)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME}"
+          base="${tag#v}"
+          base="${base%-ga}"
+          base="${base%-ga-phase*}"
+
+          notes=""
+          for candidate in "docs/roadmaps/releases/${tag}/${tag}.md" \
+                           "docs/roadmaps/releases/${base}/${base}.md"; do
+            if [ -f "${candidate}" ]; then notes="${candidate}"; break; fi
+          done
+          if [ -z "${notes}" ]; then
+            echo "::error::no in-repo release notes found for ${tag} (looked for docs/roadmaps/releases/${tag}/${tag}.md and docs/roadmaps/releases/${base}/${base}.md). Notes are written first, in-repo, before the tag is pushed."
+            exit 1
+          fi
+          echo "notes file: ${notes}"
+
+          if ! body_err=$(gh release view "${tag}" --json body --jq .body 2>&1 >/tmp/gh-body.md); then
+            echo "::error::gh release view failed for ${tag} (missing Release or auth/network): ${body_err}"
+            echo "::error::Create the Release from ${notes} first, then push the tag."
+            exit 1
+          fi
+
+          node -e '
+            const fs = require("fs");
+            const norm = (s) => s.replace(/\r\n/g, "\n").replace(/\n+$/,"\n").trimEnd();
+            const body = norm(fs.readFileSync("/tmp/gh-body.md", "utf8"));
+            const notes = norm(fs.readFileSync(process.argv[1], "utf8"));
+            if (body === notes) { console.log("body == in-repo notes (" + notes.length + " chars)"); process.exit(0); }
+            const b = body.split("\n"), n = notes.split("\n");
+            console.log("::error::Release body differs from in-repo notes file");
+            console.log("notes lines: " + n.length + " | body lines: " + b.length);
+            for (let i = 0; i < Math.max(b.length, n.length); i++) {
+              if (b[i] !== n[i]) { console.log("first difference at line " + (i + 1)); console.log("  notes: " + JSON.stringify(n[i])); console.log("  body : " + JSON.stringify(b[i])); break; }
+            }
+            process.exit(1);
+          ' "${notes}"

@@ -6,6 +6,18 @@ on:
   pull_request:
     branches: [main, develop]
 
+# Family sibling dependencies are `file:../claw-*` links (see package.json), so every
+# job must materialise them as siblings of the workspace before `npm ci`.
+#
+# Two constraints, both empirical (v4.0.0-ga B2, 2026-09-21):
+#   1. `claw-cog` is a PRIVATE repo -> cloning it needs a token with contents:read.
+#   2. `claw-mem` is public but its own deps (`@opensourceclaw/claw-ctx`,
+#      `@opensourceclaw/claw-gov`) come from GitHub Packages -> its `npm ci` needs a
+#      token with packages:read. This is the same shape as claw-rsi's release.yml,
+#      which exports PACKAGES_TOKEN for exactly this reason.
+# One fine-grained PAT (Contents: Read on claw-cog; Packages: Read on the org) or a
+# classic PAT (`repo` + `read:packages`) satisfies both. Set it as FAMILY_READ_TOKEN.
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -13,6 +25,9 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
+      # A failure in one leg must not cancel the others: cancels hide which
+      # versions actually fail (observed on the v4.0.0 matrix).
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
@@ -22,6 +37,32 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          registry-url: https://npm.pkg.github.com
+
+      - name: Provide family sibling dependencies
+        env:
+          FAMILY_READ_TOKEN: ${{ secrets.FAMILY_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FAMILY_READ_TOKEN}" ]; then
+            echo "::error::secret FAMILY_READ_TOKEN is not set. claw-cog is a private repo and claw-mem depends on GitHub Packages, so the default GITHUB_TOKEN cannot materialise the family siblings. Add a PAT with Contents:Read on opensourceclaw/claw-cog and Packages:Read (classic: repo + read:packages) via: gh secret set FAMILY_READ_TOKEN -R opensourceclaw/sciclaw"
+            exit 1
+          fi
+          auth="https://x-access-token:${FAMILY_READ_TOKEN}@github.com/opensourceclaw"
+          for repo in claw-cog claw-ctx claw-mem; do
+            git clone --depth 1 "${auth}/${repo}.git" "../${repo}"
+          done
+
+      - name: Build family sibling dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.FAMILY_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          for repo in claw-cog claw-ctx claw-mem; do
+            echo "::group::build ../${repo}"
+            (cd "../${repo}" && npm ci && npm run build)
+            echo "::endgroup::"
+          done
 
       - name: Install dependencies
         run: npm ci
@@ -49,6 +90,32 @@ jobs:
         with:
           node-version: 20.x
           cache: 'npm'
+          registry-url: https://npm.pkg.github.com
+
+      - name: Provide family sibling dependencies
+        env:
+          FAMILY_READ_TOKEN: ${{ secrets.FAMILY_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FAMILY_READ_TOKEN}" ]; then
+            echo "::error::secret FAMILY_READ_TOKEN is not set. claw-cog is a private repo and claw-mem depends on GitHub Packages, so the default GITHUB_TOKEN cannot materialise the family siblings. Add a PAT with Contents:Read on opensourceclaw/claw-cog and Packages:Read (classic: repo + read:packages) via: gh secret set FAMILY_READ_TOKEN -R opensourceclaw/sciclaw"
+            exit 1
+          fi
+          auth="https://x-access-token:${FAMILY_READ_TOKEN}@github.com/opensourceclaw"
+          for repo in claw-cog claw-ctx claw-mem; do
+            git clone --depth 1 "${auth}/${repo}.git" "../${repo}"
+          done
+
+      - name: Build family sibling dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.FAMILY_READ_TOKEN }}
+        run: |
+          set -euo pipefail
+          for repo in claw-cog claw-ctx claw-mem; do
+            echo "::group::build ../${repo}"
+            (cd "../${repo}" && npm ci && npm run build)
+            echo "::endgroup::"
+          done
 
       - name: Install dependencies
         run: npm ci

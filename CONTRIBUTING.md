@@ -14,8 +14,8 @@ Thank you for your interest in contributing to SciClaw! This document provides g
 
 ```bash
 # Clone the repository
-git clone https://github.com/peterchengorg/deepclaw.git
-cd deepclaw
+git clone https://github.com/opensourceclaw/sciclaw.git
+cd sciclaw
 
 # Install dependencies
 npm install
@@ -33,7 +33,7 @@ npm run test:coverage
 ## Project Structure
 
 ```
-deepclaw/
+sciclaw/
 ├── src/                 # Source code
 │   ├── agents/          # Multi-agent system
 │   ├── approval/        # Human-in-the-Loop (v3.5.0)

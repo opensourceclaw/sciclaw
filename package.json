@@ -5,9 +5,24 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opensourceclaw/sciclaw.git"
+  },
+  "homepage": "https://github.com/opensourceclaw/sciclaw#readme",
+  "bugs": {
+    "url": "https://github.com/opensourceclaw/sciclaw/issues"
+  },
   "bin": {
     "sciclaw": "dist/cli/index.js"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "openclaw.plugin.json"
+  ],
   "scripts": {
     "build": "tsc",
     "serve": "node dist/api/server.js",
