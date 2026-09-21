@@ -50,8 +50,8 @@ export {
 // Engine
 export { LLMEngine, LLMEngineOptions, ModelInfo } from "./engine.js";
 
-// Import providers to register them
-import "./providers";
+// Import providers to register them (explicit index.js — Node ESM has no directory resolution)
+import "./providers/index.js";
 
 // Re-export provider classes
 export {

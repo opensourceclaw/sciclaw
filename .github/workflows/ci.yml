@@ -70,11 +70,24 @@ jobs:
       - name: Build
         run: npm run build
 
+      # GA-A5: dist runtime smoke — extensionless/directory imports break only at
+      # runtime load, never in tsc, so the built entry must actually import under
+      # Node ESM and the CLI must answer --version. Regression guard for Edith G4.
+      - name: Smoke — dist entry loads + CLI --version
+        run: |
+          node --input-type=module -e "await import('./dist/index.js'); console.log('dist entry OK')"
+          node dist/cli/index.js --version
+
       - name: Type check
         run: npm run typecheck
 
       - name: Run tests
         run: npm test
+
+      # GA-A1: fixture-mode acceptance suite — offline by design (E0 determinism,
+      # whitelisted captured sources), so it is CI-blocking in the main line.
+      - name: GA acceptance suite (fixture)
+        run: npm run test:ga
 
       - name: Coverage
         run: npm run test:coverage

@@ -84,6 +84,8 @@ export {
   FactCheckService,
   verifyClaim,
   verifySource,
+  ClaimExtractor,
+  extractClaims,
 } from './validation/index.js';
 export type {
   NumericClaim,

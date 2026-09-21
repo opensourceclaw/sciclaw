@@ -101,8 +101,17 @@ const BUILTIN_SOURCE_FNS: Record<string, SearchSourceFn> = {
   bing: bingSearch,
 };
 
+let coordinatorInitialized = false;
+
+// GA-A2: builtins are registered ONLY on first creation. Re-registering them on
+// every call used to clobber runtime sources injected via `registerSearchSource`
+// (the documented injection point for tests/fixtures), silently defeating it.
 function ensureCoordinator(): SearchCoordinator {
-  return getCoordinator(BUILTIN_SOURCES, BUILTIN_SOURCE_FNS);
+  if (!coordinatorInitialized) {
+    coordinatorInitialized = true;
+    return getCoordinator(BUILTIN_SOURCES, BUILTIN_SOURCE_FNS);
+  }
+  return getCoordinator();
 }
 
 // ── Public API ────────────────────────────────────────────────────────

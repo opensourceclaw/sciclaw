@@ -17,11 +17,11 @@
  */
 
 // Import all providers to register them
-import "./deepseek";
-import "./glm";
-import "./minimax";
-import "./kimi";
-import "./qwen";
+import "./deepseek.js";
+import "./glm.js";
+import "./minimax.js";
+import "./kimi.js";
+import "./qwen.js";
 
 // Re-export provider classes
 export { DeepSeekProvider } from "./deepseek.js";
